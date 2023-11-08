@@ -7,6 +7,9 @@ Content-Type: application/json
   "description": "Shoes for play your best sports as a professional player",
   "price": 89.99,
   "brand": null,
+  "categories": [
+    "Shoes"
+  ],
   "target": [
     "Kids",
     "Teenagers"
@@ -69,6 +72,9 @@ Content-Type: application/json
   "description": "Shoes for play your best sports as a professional player",
   "price": 89.99,
   "brand": null,
+  "categories": [
+    "Shoes"
+  ],
   "target": [
     "Kids",
     "Teenagers"

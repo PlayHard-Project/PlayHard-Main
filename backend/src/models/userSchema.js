@@ -19,10 +19,23 @@ const userSchema = new Schema({
         required: true
     },
     creditCard: {
-        creditCardNumber: Number,
-        expirationDate: Date,
-        cvc: Number,
-        type: String
+        creditCardNumber: {
+            type: Number,
+            required: true
+        },
+        expirationDate: {
+
+            type: Date,
+            required: true
+        },
+        cvc: {
+            type: Number,
+            required: true
+        },
+        cardType: {
+            type: String,
+            required: true
+        }
     }
 });
 

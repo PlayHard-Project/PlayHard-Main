@@ -34,7 +34,7 @@ export const getElementByID = async (elemenetId, route) => {
 
 export const updateElement = async (elementToUpdate, route) => {
   try {
-    const response = await axios.post(apiURL + route, newProduct);
+    const response = await axios.post(apiURL + route, elementToUpdate);
     return response.data;
   } catch (error) {
     console.error('Error updating the element: ', error);

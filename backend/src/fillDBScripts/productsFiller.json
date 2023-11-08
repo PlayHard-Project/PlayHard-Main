@@ -1,0 +1,428 @@
+[{
+  "name": "Nike Air Force 1 Basketball Shoes",
+  "description": "Iconic high-top basketball shoes loved by pros and streetballers alike",
+  "price": 99.99,
+  "brand": "Nike",
+  "categories":[
+    "Shoes"
+  ],
+  "target": [
+    "Teenagers",
+    "Adults"
+  ],
+  "sport": [
+    "Basketball"
+  ],
+  "size": [
+    "7",
+    "8",
+    "9",
+    "10"
+  ],
+  "colorInformation": [
+    {
+      "color": "White",
+      "hex": "#FFFFFF",
+      "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b7d9211c-26e7-431a-ac24-b0540fb3c00f/air-force-1-07-mens-shoes-jBrhbr.png"
+    },
+    {
+      "color": "Black",
+      "hex": "#000000",
+      "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/fc4622c4-2769-4665-aa6e-42c974a7705e/air-force-1-07-mens-shoes-jBrhbr.png"
+    }
+  ],
+  "imagePath": [
+    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/00375837-849f-4f17-ba24-d201d27be49b/air-force-1-07-mens-shoes-jBrhbr.png",
+    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/33533fe2-1157-4001-896e-1803b30659c8/air-force-1-07-mens-shoes-jBrhbr.png",
+    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/a0a300da-2e16-4483-ba64-9815cf0598ac/air-force-1-07-mens-shoes-jBrhbr.png"
+  ],
+  "inStock": [
+    [5,0],[8,2],[3,10],[6,12]
+  ]
+},
+
+{
+  "name": "Adidas Ultraboost Running Shoes",
+  "description": "World-famous Boost cushioning for elite runners and fitness enthusiasts",
+  "price": 179.99,
+  "brand": "Adidas",
+  "categories":[
+    "Shoes"
+  ],
+  "target": [
+    "Adults"
+  ],
+  "sport": [
+    "Running",
+    "Cross Training"
+  ],
+  "size": [
+    "8","8.5","9","9.5","10","10.5"
+  ],
+  "colorInformation": [
+    {
+      "color": "Black",
+      "hex": "#000000",
+      "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/365391b522604295ab51af1501879e0d_9366/Ultraboost_1.0_Shoes_White_HQ2163_012_hover_standard.jpg"
+    },
+    {
+      "color": "White",
+      "hex": "#FFFFFF",
+      "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ae75e8599c6146e9985faf150187bbac_9366/Ultraboost_1.0_Shoes_White_HQ2163_01_standard.jpg"
+    }
+  ],
+  "imagePath": [
+    "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a481e26a9fd941818e47af15018872c7_9366/Ultraboost_1.0_Shoes_White_HQ2163_02_standard.jpg",
+    "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f31143c368ef4827bf8aaf1501883884_9366/Ultraboost_1.0_Shoes_White_HQ2163_03_standard.jpg"
+  ],
+  "inStock": [
+    [5,2],[8,0],[3,15],[1,2],[3,4],[5,6]
+  ]
+},
+
+  {
+    "name": "Adidas Spain 2022 Warm Up Shirt - MEN'S",
+    "description": "Authentic Adidas soccer jersey worn by the Spanish National Team",
+    "price": 89.99,
+    "brand": "Adidas",
+    "categories":[
+      "Shirt"
+    ],
+    "target": [
+      "Youths",
+      "Men"
+    ],
+    "sport": [
+      "Soccer"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Red",
+        "hex": "#FF0000",
+        "imagePath": "https://store.fifa.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0615%2F4456%2F2874%2Fproducts%2FFIFAYZ0003_4.jpg%3Fv%3D1675268314&w=640&q=50"
+      }
+    ],
+    "imagePath": [
+      "https://store.fifa.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0615%2F4456%2F2874%2Fproducts%2FFIFAYZ0003_1.jpg%3Fv%3D1665484846&w=640&q=50",
+      "https://store.fifa.com/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0615%2F4456%2F2874%2Fproducts%2FFIFAMZ000302_5.jpg%3Fv%3D1673985390&w=640&q=50"
+    ],
+    "inStock": [
+      [12],[8],[4],[10]
+    ]
+  },
+
+  {
+    "name": "Nike Mercurial Vapor XV Elite FG Soccer Cleats",
+    "description": "Lightweight elite soccer cleats worn by Neymar and Mbappé",
+    "price": 229.99,
+    "brand": "Nike",
+    "categories":[
+      "Shoes"
+    ],
+    "target": [
+      "Youths",
+      "Men"
+    ],
+    "sport": [
+      "Soccer"
+    ],
+    "size": [
+      "7",
+      "7.5",
+      "8.5",
+      "9",
+      "10.5",
+      "11"
+    ],
+    "colorInformation": [
+      {
+        "color": "White/Blue",
+        "hex": "#FFFFFF",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/51971fe1-512d-4cb5-8c2b-67c44c19de09/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png"
+      },
+      {
+        "color": "Blue",
+        "hex": "#0000ff",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/59504bf2-68cd-4e8b-99c8-6c9b99e9c8de/zoom-mercurial-vapor-15-elite-km-fg-firm-ground-soccer-cleats-NLZxDR.png"
+      },
+      {
+        "color": "Pink",
+        "hex": "#ffc0cb",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/1ca2b1eb-ec53-42f1-84b6-adc37e488e15/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ad8efc1c-fd2f-4128-9213-6126d366966d/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png"
+      }
+    ],
+    "imagePath": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/21d18203-e0a9-49da-85d4-deb8bf4d4f82/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ccbe701a-9635-4bdf-b0e6-8db30c56bd4b/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/751088e3-bb53-41c1-9929-97929df146ab/mercurial-vapor-15-elite-firm-ground-soccer-cleats-NLZxDR.png"
+    ],
+    "inStock": [
+      [5,0,5,1],[8,2,6,7],[3,10,12,3],[3,10,12,3],[3,10,12,3],[3,10,12,3]
+    ]
+  },
+
+  {
+    "name": "Under Armour Women's Rival Fleece Hoodie",
+    "description": "Soft fleece hoodie for outdoor winter workouts",
+    "price": 59.99,
+    "brand": "Under Armour",
+    "categories":[
+      "Hoodies"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Running",
+      "Yoga",
+      "Cross Training"
+    ],
+    "size": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Wine Red",
+        "hex": "#990012",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1379500-600_FC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      }
+    ],
+    "imagePath": [
+      "https://underarmour.scene7.com/is/image/Underarmour/PS1379500-600_HF?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708",
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1379500-600_BC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+    ],
+    "inStock": [
+      [5],[8],[3],[10],[23]
+    ]
+  },
+
+  {
+    "name": "Nike Pro Combat Hyperstrong Compression Shorts",
+    "description": "High-performance compression shorts for intense training",
+    "price": 49.99,
+    "brand": "Nike",
+    "categories":[
+      "Shorts", "Underwear"
+    ],
+    "target": [
+      "Men"
+    ],
+    "sport": [
+      "Training",
+      "Basketball",
+      "Soccer"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c09578d0-17f1-40cc-9dc0-f4ac4ce92d14/pro-dri-fit-mens-shorts-m2ZgQg.png"
+      },
+      {
+        "color": "White",
+        "hex": "#ffffff",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/781002d3-ad31-43bc-b852-68bf7ae74404/pro-dri-fit-mens-shorts-m2ZgQg.png"
+      }
+    ],
+    "imagePath": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/765d7eb9-47db-4855-afb0-46177de5f257/pro-dri-fit-mens-shorts-m2ZgQg.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2111c292-9941-4ce5-8adb-82814db0a598/pro-dri-fit-mens-shorts-m2ZgQg.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/eed7c3b1-ec69-4d18-b613-9c51a3a52db0/pro-dri-fit-mens-shorts-m2ZgQg.png"
+    ],
+    "inStock": [
+      [5,0],[8,2],[3,10],[3,10]
+    ]
+  },
+
+  {
+    "name": "Nike Pro Hyperwarm Tight Tights",
+    "description": "Ultra-warm tights for winter running and outdoor training",
+    "price": 79.99,
+    "brand": "Nike",
+    "categories":[
+      "Tights"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Running",
+      "Cross Training"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7d5b3419-83d9-44c2-8a46-e7bbf8736cbe/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png"
+      },
+      {
+        "color": "White",
+        "hex": "#ffffff",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5aa4b32d-70bc-4bef-8ffe-30e77c2d5511/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png"
+      },
+      {
+        "color": "Dark Red",
+        "hex": "#850101",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/280a7890-b4aa-4a1c-9a90-317ec6143ae9/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png"
+      }
+    ],
+    "imagePath": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/243633c3-9db6-44ff-a753-b96781b16cf5/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/20b3badf-2118-409e-8434-79b8da569160/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/27fcc0b3-e112-40cf-9a4d-e9dbc249363c/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/63ce0f8c-baa5-4c6f-a0ea-95fe2f870e51/pro-se-womens-high-waisted-full-length-leggings-with-pockets-DrK6TR.png"
+    ],
+    "inStock": [
+      [5,30,5],[8,2,7],[3,10,12],[32,1,12]
+    ]
+  },
+
+  {
+    "name": "Adidas Women's Cloudfoam Pure Running Shoe",
+    "description": "Comfortable everyday running shoe with CLOUDFOAM cushioning",
+    "price": 69.99,
+    "brand": "Adidas",
+    "categories":[
+      "Shoes"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Running"
+    ],
+    "size": [
+      "5",
+      "5.5",
+      "6",
+      "6.5",
+      "7"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b184e1b8f5654355952e970fa8b2848d_9366/Cloudfoam_Pure_Shoes_White_IG2529_01_standard.jpg"
+      },
+      {
+        "color": "White",
+        "hex": "#FFFFFF",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/278ca10b7a3f40b2802d3ea0e0f4c56c_9366/Cloudfoam_Pure_Shoes_Black_ID5636_01_standard.jpg"
+      },
+      {
+        "color": "Grey",
+        "hex": "#808080",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/624437a985a34c3980179d1923be4a60_9366/Cloudfoam_Pure_Shoes_Grey_IF5580_01_standard.jpg"
+      }
+    ],
+    "imagePath": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b184e1b8f5654355952e970fa8b2848d_9366/Cloudfoam_Pure_Shoes_White_IG2529_01_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ade17d4904124bafb5287dedaf1719e8_9366/Cloudfoam_Pure_Shoes_White_IG2529_02_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09a424c6110e43ae8723b8cc74ab73be_9366/Cloudfoam_Pure_Shoes_White_IG2529_03_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/119eeaa94cb14f8d85c1eb66fae5a743_9366/Cloudfoam_Pure_Shoes_White_IG2529_04_standard.jpg"
+    ],
+    "inStock": [
+      [5,7,2],[8,2,7],[3,10,9],[8,2,7],[3,10,9]
+    ]
+  },
+
+  {
+    "name": "Under Armour Men's Rival Fleece Pants",
+    "description": "Soft fleece sweatpants for relaxing or low-impact workouts",
+    "price": 49.99,
+    "brand": "Under Armour",
+    "categories": [
+      "Pants"
+    ],
+    "target": [
+      "Men"
+    ],
+    "sport": [
+      "Training",
+      "Recovery"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Heather Grey",
+        "hex": "#808A87",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1357129-012_FC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      }
+    ],
+    "imagePath": [
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1357129-012_FC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+    ],
+    "inStock": [[5],[10],[5],[10]]
+  },
+
+  {
+    "name": "Wilson NFL Football",
+    "description": "Official game ball of the National Football League",
+    "price": 49.99,
+    "brand": "Wilson",
+    "categories": [
+      "Equipment", "Accessories", "Balloons"
+    ],
+    "target": [
+      "Adults"
+    ],
+    "sport": [
+      "American Football"
+    ],
+    "size": "Professional Size",
+    "colorInformation": [
+      {
+        "color": "Atlanta Falcons",
+        "hex": "#A52A2A",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDAT_/WTF11IDAT__46824e85c95f750226e843bf6eb84769.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      },
+      {
+        "color": "Los Angeles Rams",
+        "hex": "#0000ff",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDLR_/WTF11IDLR__85bb9a9b09082e2ff5b5df6c1a8db551.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      },
+      {
+        "color": "Philadelphia Eagles",
+        "hex": "#A52A2A",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDPH_/WTF11IDPH__ec8a6d694ea292859bf15afe5122d046.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      }
+    ],
+    "imagePath": [
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDAT_/WTF11IDAT__dd2b8592bb55018e5d9d58e224432852.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=778&height=950&canvas=778%2C950&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDPH_/WTF11IDPH__00b49ffc267fc261b4670633384f0072.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+    ],
+    "inStock": [[50,42,63]]
+  }
+]

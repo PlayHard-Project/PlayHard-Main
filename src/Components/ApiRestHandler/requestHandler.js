@@ -41,3 +41,13 @@ export const updateElement = async (elementToUpdate, route) => {
     throw error; 
   }
 };
+
+export const removeElement = async (productId, route) => {
+  try {
+    const response = await axios.delete(apiURL + route + '/' + productId);
+    return response.data;
+  } catch (error) {
+    console.error('Error removing product:', error);
+    throw error; 
+  }
+};

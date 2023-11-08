@@ -37,6 +37,10 @@ const productSchema = new Schema({
                 type: String,
                 required: true
             },
+            hex: {
+                type: String,
+                required: true
+            },
             imagePath: {
                 type: String,
                 required: true

@@ -1,0 +1,32 @@
+###
+POST http://localhost:9000/api/brands HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Nike",
+  "imagePath": "https://i.postimg.cc/SKJwcWjX/Nike.png"
+}
+
+###
+POST http://localhost:9000/api/brands HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Adidas",
+"imagePath": "https://i.postimg.cc/90d3rC0J/Adidas.png"
+}
+
+###
+GET http://localhost:9000/api/brands HTTP/1.1
+
+###
+PUT http://localhost:9000/api/brands/654b90cfb4182ff7f5a419fa HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Nike",
+  "imagePath": "https://i.postimg.cc/SKJwcWjX/Nike.png"
+}
+
+###
+DELETE http://localhost:9000/api/brands/654b9143b4182ff7f5a41a04 HTTP/1.1

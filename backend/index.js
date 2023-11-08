@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const productsRoutes = require('./src/routes/productRoute');
 const usersRoutes = require('./src/routes/userRoute');
+const brandsRoutes = require('./src/routes/brandRoute');
+const ordersRoutes = require('./src/routes/orderRoute');
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -14,6 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', productsRoutes);
 app.use('/api', usersRoutes);
+app.use('/api', brandsRoutes);
+app.use('/api', ordersRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to Full API Rest Playhard E-commerce");

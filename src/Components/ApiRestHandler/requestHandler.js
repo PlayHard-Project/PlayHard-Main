@@ -12,3 +12,23 @@ export const addElement = async (newElement, route) => {
   }
 };
 
+export const getElements = async (route) => {
+  try {
+    const response = await axios.get(apiURL + route);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting all elements: ', error);
+    throw error; 
+  }
+};
+
+export const getElementByID = async (elemenetId, route) => {
+  try {
+    const response = await axios.get(apiURL + route + '/' + elemenetId);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting the specified element: ', error);
+    throw error; 
+  }
+};
+

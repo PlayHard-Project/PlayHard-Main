@@ -1,11 +1,18 @@
 ### 
 POST http://localhost:9000/api/users HTTP/1.1
-Content-Type: application/json 
+Content-Type: application/json
 
 {
-    "name": "Maria",
-    "age": 33,
-    "email": "Maria@gmail.com"
+  "firstName": "Maria",
+  "lastName": "Galindo",
+  "address": "Calle los molinos, Cochabamba, Sacaba",
+  "email": "maria@gmail.com",
+  "creditCard": {
+    "creditCardNumber": 153264578683,
+    "expirationDate": "2028-04-01",
+    "cvc": 753,
+    "cardType": "Debit Card"
+  }
 }
 
 ### 
@@ -13,9 +20,16 @@ POST http://localhost:9000/api/users HTTP/1.1
 Content-Type: application/json 
 
 {
-    "name": "Miranda",
-    "age": 18,
-    "email": "Miranda.Pe.aaaa@gmail.com"
+  "firstName": "Juan",
+  "lastName": "Pa",
+  "address": "Chuquisaca, Bolivia",
+  "email": "Juan@gmail.com",
+  "creditCard": {
+    "creditCardNumber": 168305321421,
+    "expirationDate": "2025-04-01",
+    "cvc": 123,
+    "cardType": "PayPal"
+  }
 }
 
 ### 
@@ -23,9 +37,16 @@ POST http://localhost:9000/api/users HTTP/1.1
 Content-Type: application/json 
 
 {
-    "name": "Pedro",
-    "age": 32,
-    "email": "PedroTu@gmail.com"
+  "firstName": "Tyrone",
+  "lastName": "Gonzales",
+  "address": "Caracas, Venezuela",
+  "email": "can@gmail.com",
+  "creditCard": {
+    "creditCardNumber": 253231244424,
+    "expirationDate": "2023-12-01",
+    "cvc": 696,
+    "cardType": "Credit Card"
+  }
 }
 
 ### 
@@ -33,18 +54,25 @@ GET http://localhost:9000/api/users HTTP/1.1
 
 
 ###
-GET http://localhost:9000/api/users/6549b191a492f8177bb94e5d HTTP/1.1 
+GET http://localhost:9000/api/users/654aff711988ebedb79f48c4 HTTP/1.1
 
 
 ### 
-PUT http://localhost:9000/api/users/6549b191a492f8177bb94e5d HTTP/1.1
+PUT http://localhost:9000/api/users/654aff711988ebedb79f48c4 HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Maria Miranda",
-    "age": 33,
-    "email": "MariaMls@gmail.com"
+  "firstName": "Maria",
+  "lastName": "Galindo",
+  "address": "Cochabamba, Sacaba",
+  "email": "MariaLaGalindo@gmail.com",
+  "creditCard": {
+    "creditCardNumber": 153264578683,
+    "expirationDate": "2025-04-01",
+    "cvc": 752,
+    "cardType": "Debit Card"
+  }
 }
 
 ### 
-DELETE http://localhost:9000/api/users/6540990ca81626c8078467e3 HTTP/1.1 
+DELETE http://localhost:9000/api/users/654b00f91988ebedb79f48ce HTTP/1.1

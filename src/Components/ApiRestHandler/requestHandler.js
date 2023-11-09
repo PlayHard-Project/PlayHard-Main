@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiURL = 'http://localhost:9000/api'; 
+const apiURL = 'http://localhost:9000/api/';
 
 export const addElement = async (newElement, route) => {
   try {

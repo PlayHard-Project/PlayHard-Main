@@ -6,17 +6,27 @@ import "./BuyNowSection.css";
 import { data } from "../Components/Objects/CoverBuyNowSection";
 
 export default function BuyNowSection() {
+  const sliderRef = useRef();
+
   const sliderSettings = {
-    dots: true,
+    dots: false, // Configuración para ocultar los puntos de navegación
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
 
+  const handlePrevClick = () => {
+    sliderRef.current.slickPrev();
+  };
+
+  const handleNextClick = () => {
+    sliderRef.current.slickNext();
+  };
+
   return (
     <section className="slider-container">
-      <Slider {...sliderSettings}>
+      <Slider ref={sliderRef} {...sliderSettings}>
         {data.map((item) => (
           <div key={item.id} className="container-image">
             <img
@@ -27,6 +37,14 @@ export default function BuyNowSection() {
           </div>
         ))}
       </Slider>
+      <div className="navigation-buttons">
+        <button className="navigation-button prev" onClick={handlePrevClick}>
+          Prev
+        </button>
+        <button className="navigation-button next" onClick={handleNextClick}>
+          Next
+        </button>
+      </div>
       <button className="buy-now">Buy Now</button>
     </section>
   );

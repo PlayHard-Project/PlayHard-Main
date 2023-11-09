@@ -66,6 +66,19 @@
     text-align: center;
 }
 
+.footer-column img {
+    width: 44px;
+    height: 44px;
+}
+
+.social-networks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+
 .footer-links li a:hover {
     text-decoration: underline;
 }

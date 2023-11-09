@@ -2,15 +2,27 @@
   position: relative;
 }
 
-.navigation-button {
-  position: absolute;
+.image-container {
+    margin: 30px;
+}
+
+
+.navigation-button-next {
+    position: absolute;
   left: 42%;
   transform: -50% 0;
   top: 75%;
   width: 10%;
   height: auto;
-  border: none;
-  cursor: pointer;
+}
+
+.navigation-button-prev {
+    position: absolute;
+  left: 42%;
+  transform: -50% 0;
+  top: 75%;
+  width: 10%;
+  height: auto;
 }
 
 .hidden {
@@ -30,4 +42,8 @@
 .responsive {
   width: 100%;
   height: auto;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1); 
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
 }
+

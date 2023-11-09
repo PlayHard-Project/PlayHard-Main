@@ -4,15 +4,15 @@ import {getElementByID} from "./ApiRestHandler/requestHandler";
 function ProductInformation({productID}) {
     const [product, setProduct] = useState(null);
     const [activeImg, setActiveImg] = useState(null);
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectSize, setSelectedSize] = useState('');
+    const [selectedColor, setSelectedColor] = useState('---');
+    const [selectSize, setSelectedSize] = useState('---');
     const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         getElementByID(productID, 'products')
             .then(data => {
                 setProduct(data)
-                setActiveImg(data.imagePath[0]);})
+                setActiveImg(data.imagePath[0])})
             .catch(err => console.error(err));
     }, [productID]);
 
@@ -48,7 +48,7 @@ function ProductInformation({productID}) {
                 <h5 className={'text-2xl font-semibold mb-10'}>Bs {product.price}</h5>
 
                 <div className={'gap-5'}>
-                    <span className={'text-gray-700'}>Talla: {selectSize}</span>
+                    <span className={'text-gray-700'}><span className={'font-bold text-blue-800'}>Talla:</span> {selectSize}</span>
                     <div className={'flex flex-row gap-3 '}>
 
                         {product.size.map((size) => (
@@ -62,13 +62,17 @@ function ProductInformation({productID}) {
                     </div>
                 </div>
                 <div className={'gap-5'}>
-                    <span className={'text-gray-700'}>Color: {selectedColor}</span>
+                    <span className={'text-gray-700'}><span className={'font-bold text-blue-800'}>Color:</span> {selectedColor}</span>
                     <div className={'flex flex-row gap-3 '}>
 
                         {product.colorInformation.map((color) => (
                             <button
-                                className={`bg-[${color.hex}] rounded-full px-3 py-2 border-2 w-10 h-10 `}
-                                onClick={() => setSelectedColor(color.color)}>
+                                style={{ backgroundColor: color.hex }}
+                                className="border-2 rounded-full px-3 py-2 w-10 h-10"
+                                onClick={() => {
+                                    setSelectedColor(color.color)
+                                    setActiveImg(color.imagePath)
+                                }}>
                             </button>
                         ))}
 
@@ -80,14 +84,14 @@ function ProductInformation({productID}) {
                     <div className={'flex flex-row items-center'}>
                         <button
                             className={'bg-gray-200 py-2 px-5 rounded-lg text-blue-800 text-3xl text-center'}
-                            onClick={() => setQuantity(prevQuantity => Math.max(prevQuantity - 1, 0))} // No permite que la cantidad sea menor que 0
+                            onClick={() => setQuantity(prevQuantity => Math.max(prevQuantity - 1, 0))}
                         >
                             -
                         </button>
                         <span className={'py4 px-6 rounded-lg'}>{quantity}</span>
                         <button
                             className={'bg-gray-200 py-2 px-4 rounded-lg text-blue-800 text-3xl text-center'}
-                            onClick={() => setQuantity(prevQuantity => Math.min(prevQuantity + 1, 5))} // No permite que la cantidad sea mayor que 5
+                            onClick={() => setQuantity(prevQuantity => Math.min(prevQuantity + 1, 5))}
                         >
                             +
                         </button>

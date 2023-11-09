@@ -8,15 +8,15 @@ export function ProductSection() {
 
     return (
         <>
-            {/*header*/}
-            <div className={'w-screen h-screen flex items-center justify-center'}>
-                <div className={'flex items-center justify-center max-w-7xl '}>
+            {/*header-kari*/}
+            <div className={'flex flex-col items-center justify-center min-h-screen'}>
+                <div className={'flex items-center justify-center max-w-7xl w-full px-4'}>
                     <ProductInformation
                         productID={id}
                     />
                 </div>
             </div>
-            {/*footer*/}
+            {/*footer-juanpa*/}
         </>
     )
 }

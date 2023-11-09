@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { getElements } from './Components/ApiRestHandler/requestHandler';
 import BuyNowSection from './Views/BuyNowSection';

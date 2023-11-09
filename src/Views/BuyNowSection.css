@@ -1,0 +1,33 @@
+.slider-container {
+  position: relative;
+}
+
+.navigation-button {
+  position: absolute;
+  left: 42%;
+  transform: -50% 0;
+  top: 75%;
+  width: 10%;
+  height: auto;
+  border: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.buy-now {
+  background-color: red;
+  position: absolute;
+  left: 42%;
+  transform: -50% 0;
+  top: 75%;
+  width: 10%;
+  height: auto;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}

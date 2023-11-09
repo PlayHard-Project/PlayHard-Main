@@ -24,41 +24,39 @@ const Header = () => {
     };
 
     return (
-        <header className="p-4 text-white header">
+        <header className=" text-white header">
             <div className="flex justify-between items-center">
-                <div className="flex items-center space-x-4">
-                    <img src={headerIcon} alt="Icon Main" className="text-2xl font-bold background-shape" />
-                    <div className="md:flex space-x-4 hidden ">
-                        <Link to="/home"> <div className="text" style={{ marginLeft: '30px' }}>Home</div> </Link>
-                        <Link to="/shop"> <div className="text" style={{ marginLeft: '10px' }}>Shop</div> </Link>
-                        <Link to="/about"> <div className="text" style={{ marginLeft: '10px' }}>About</div> </Link>
-                        <Link to="/pages"> <div className="text" style={{ marginLeft: '10px' }}>Pages</div> </Link>
-                        <Link to="/contact"> <div className="text" style={{ marginLeft: '10px' }}>Contact</div> </Link>
+                <div className="md:flex items-center ">
+                    <img src={headerIcon} alt="Icon Main" className="background-shape" />
+                    <div className="lg:flex space-x-4 hidden">
+                        <Link to="/home"> <div className="text" >Home</div> </Link>
+                        <Link to="/shop"> <div className="text" >Shop</div> </Link>
+                        <Link to="/about"> <div className="text" >About</div> </Link>
+                        <Link to="/pages"> <div className="text" >Pages</div> </Link>
+                        <Link to="/contact"> <div className="text" >Contact</div> </Link>
                     </div>
                 </div>
-                <div className="md:flex hidden space-x-4 items-center">
+                <div className="lg:flex hidden space-x-4 items-center">
                     <div className="flex items-center search-container">
                         <input type="text" className="search-input" placeholder="Search" />
                         <button>
                             <img src={searchIcon} alt="Close Icon" className="w-6 h-6 rounded-full" />
                         </button>
                     </div>
-                    <div className="md:flex hidden">
+                    <div className="lg:flex hidden">
                         <img src={personIcon} alt="Person Icon" className="w-10 h-10 rounded-full" />
                     </div>
-                    <button className="text md:flex hidden">Login</button>
-                    <div className="text-black md:flex hidden">/</div>
-                    <button className="text md:flex hidden">Register</button>
-                    <div className="relative md:flex hidden">
+                    <button className="text lg:flex hidden">Login/Register</button>
+                    <div className="relative lg:flex hidden">
                         <img src={cartIcon} alt="Cart Icon" className="style-icon" />
                         <span className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex
                         items-center justify-center rounded-full"> 0 </span>
                     </div>
-                    <div className="md:flex hidden">
+                    <div className="lg:flex hidden">
                         <img src={settingsIcon} alt="Settings Icon" className="style-icon" />
                     </div>
                 </div>
-                <div className="md:hidden space-x-4 relative">
+                <div className="lg:hidden space-x-4 relative">
                     <div className="flex items-center space-x-4">
                         <div onClick={toggleSearchPopup}>
                             <img src={searchIcon} alt="Search Icon" className="style-icon" />
@@ -68,7 +66,7 @@ const Header = () => {
                         </button>
                     </div>
                     {showSearchPopup && (
-                        <div className="absolute shadow-lg popup right-0 search-container-little">
+                        <div className="absolute shadow-lg popup right-4 search-container-little">
                             <input type="text" className="search-input-little" placeholder="Search" />
                             <button onClick={toggleSearchPopup}>
                                 <img src={closeIcon} alt="Close Icon" className="w-7 h-6 rounded-full" />
@@ -76,21 +74,15 @@ const Header = () => {
                         </div>
                     )}
                     {showMenuPopup && (
-                        <div className="absolute p-2 shadow-lg popup right-0">
-                            <Link to="/home"> <div className="text">Home</div> </Link>
-                            <Link to="/shop"> <div className="text">Shop</div> </Link>
-                            <Link to="/about"> <div className="text">About</div> </Link>
-                            <Link to="/pages"> <div className="text">Pages</div> </Link>
-                            <Link to="/contact"> <div className="text">Contact</div> </Link>
-                            <div className="text">Login / Register</div>
-                            <div className="relative flex items-center">
-                                <img src={cartIcon} alt="Cart Icon" className="style-icon" />
-                                <div className="text">Shop Cart</div>
-                            </div>
-                            <div className="relative flex items-center">
-                                <img src={settingsIcon} alt="Settings Icon" className="style-icon" />
-                                <div className="text">Settings</div>
-                            </div>
+                        <div className="absolute p-2 shadow-lg popup right-4 space-y-1">
+                            <Link to="/home"> <div className="text-link">Home</div> </Link>
+                            <Link to="/shop"> <div className="text-link">Shop</div> </Link>
+                            <Link to="/about"> <div className="text-link">About</div> </Link>
+                            <Link to="/pages"> <div className="text-link">Pages</div> </Link>
+                            <Link to="/contact"> <div className="text-link">Contact</div> </Link>
+                            <div className="relative flex items-center text-link">Login / Register</div>
+                            <div className="relative flex items-center text-link">Shop Cart</div>
+                            <div className="relative flex items-center text-link">Settings</div>
                         </div>
                     )}
                 </div>

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { getElements } from './Components/ApiRestHandler/requestHandler';
-import BuyNowSection from './Views/BuyNowSection';
 import Footer from './Views/Footer/Footer';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { ProductSection } from "./Pages/ProductSection";

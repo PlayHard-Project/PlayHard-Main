@@ -1,5 +1,5 @@
 [{
-  "name": "Nike Air Force 1 Basketball Shoes",
+  "name": "Air Force 1 Basketball Shoes",
   "description": "Iconic high-top basketball shoes loved by pros and streetballers alike",
   "price": 99.99,
   "brand": "Nike",
@@ -42,7 +42,7 @@
 },
 
 {
-  "name": "Adidas Ultraboost Running Shoes",
+  "name": "Ultraboost Running Shoes",
   "description": "World-famous Boost cushioning for elite runners and fitness enthusiasts",
   "price": 179.99,
   "brand": "Adidas",
@@ -81,7 +81,7 @@
 },
 
   {
-    "name": "Adidas Spain 2022 Warm Up Shirt - MEN'S",
+    "name": "Spain 2022 Warm Up Shirt - MEN'S",
     "description": "Authentic Adidas soccer jersey worn by the Spanish National Team",
     "price": 89.99,
     "brand": "Adidas",
@@ -118,7 +118,7 @@
   },
 
   {
-    "name": "Nike Mercurial Vapor XV Elite FG Soccer Cleats",
+    "name": "Mercurial Vapor XV Elite FG Soccer Cleats",
     "description": "Lightweight elite soccer cleats worn by Neymar and Mbappé",
     "price": 229.99,
     "brand": "Nike",
@@ -173,7 +173,7 @@
   },
 
   {
-    "name": "Under Armour Women's Rival Fleece Hoodie",
+    "name": "Women's Rival Fleece Hoodie",
     "description": "Soft fleece hoodie for outdoor winter workouts",
     "price": 59.99,
     "brand": "Under Armour",
@@ -212,7 +212,7 @@
   },
 
   {
-    "name": "Nike Pro Combat Hyperstrong Compression Shorts",
+    "name": "Pro Combat Hyperstrong Compression Shorts",
     "description": "High-performance compression shorts for intense training",
     "price": 49.99,
     "brand": "Nike",
@@ -256,12 +256,12 @@
   },
 
   {
-    "name": "Nike Pro Hyperwarm Tight Tights",
+    "name": "Pro Hyperwarm Tight Tights",
     "description": "Ultra-warm tights for winter running and outdoor training",
     "price": 79.99,
     "brand": "Nike",
     "categories":[
-      "Tights"
+      "Tights", "Leggings"
     ],
     "target": [
       "Women"
@@ -305,7 +305,7 @@
   },
 
   {
-    "name": "Adidas Women's Cloudfoam Pure Running Shoe",
+    "name": "Women's Cloudfoam Pure Running Shoe",
     "description": "Comfortable everyday running shoe with CLOUDFOAM cushioning",
     "price": 69.99,
     "brand": "Adidas",
@@ -354,7 +354,7 @@
   },
 
   {
-    "name": "Under Armour Men's Rival Fleece Pants",
+    "name": "Men's Rival Fleece Pants",
     "description": "Soft fleece sweatpants for relaxing or low-impact workouts",
     "price": 49.99,
     "brand": "Under Armour",
@@ -388,7 +388,7 @@
   },
 
   {
-    "name": "Wilson NFL Football",
+    "name": "NFL Football Balloon",
     "description": "Official game ball of the National Football League",
     "price": 49.99,
     "brand": "Wilson",
@@ -424,5 +424,800 @@
       "https://www.wilson.com/en-us/media/catalog/product/article_images/WTF11IDPH_/WTF11IDPH__00b49ffc267fc261b4670633384f0072.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
     ],
     "inStock": [[50,42,63]]
+  },
+
+  {
+    "name": "Women's FuelCore Nergize V1 Sneaker",
+    "description": "Lightweight running sneaker with energizing colorways",
+    "price": 79.99,
+    "brand": "New Balance",
+    "categories": [
+      "Shoes"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Running"
+    ],
+    "size": [
+      "6",
+      "7",
+      "7.5",
+      "8.5",
+      "9.5",
+      "10"
+    ],
+    "colorInformation": [
+      {
+        "color": "Sea salt",
+        "hex": "#SW6204",
+        "imagePath": "https://nb.scene7.com/is/image/NB/wanrgow1_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://nb.scene7.com/is/image/NB/wanrgob1_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      }
+    ],
+    "imagePath": [
+      "https://nb.scene7.com/is/image/NB/wanrgow1_nb_05_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/wanrgow1_nb_04_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/wanrgow1_nb_06_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+    ],
+    "inStock": [[5,3],[8,0],[3,7],[5,3],[8,0],[3,7]]
+  },
+
+  {
+    "name": "Women's Carina Legging",
+    "description": "Ultra-soft leggings for yoga and training",
+    "price": 39.99,
+    "brand": "Puma",
+    "categories": [
+      "Apparel",
+      "Leggings",
+      "Tights"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Yoga",
+      "Training"
+    ],
+    "size": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/01/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings"
+      },
+      {
+        "color": "Sand Dune",
+        "hex": "#967117",
+        "imagePath": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/84/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings"
+      }
+    ],
+    "imagePath": [
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/01/mod01/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings",
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/01/mod02/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings",
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/01/mod03/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings",
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/621463/01/mod05/fnd/PNA/fmt/png/T7-Women's-High-Waist-Leggings"
+    ],
+    "inStock": [[5,2],[8,10],[3,5],[8,20],[3,5]]
+  },
+
+  {
+    "name": "Project Rock Training Gloves",
+    "description": "Lightweight performance gloves for intense gym sessions",
+    "price": 29.99,
+    "brand": "Under Armour",
+    "categories": [
+      "Accessories"
+    ],
+    "target": [
+      "Men",
+      "Women",
+      "Adults"
+    ],
+    "sport": [
+      "Weight Training",
+      "CrossFit"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/1353074-003_SLF_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      }
+    ],
+    "imagePath": [
+      "https://underarmour.scene7.com/is/image/Underarmour/1353074-003_SLB_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708",
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1353074-003_FC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+    ],
+    "inStock": [[5],[8],[2],[5]]
+  },
+
+  {
+    "name": "Sport Bra",
+    "description": "Basic low-impact sports bra for workouts and activities",
+    "price": 19.99,
+    "brand": "Champion",
+    "categories": [
+      "Apparel"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Yoga",
+      "Pilates",
+      "Cross Training"
+    ],
+    "size": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Flight Blue",
+        "hex": "#2969dd",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_FlightBlue_Front.jpg"
+      },
+      {
+        "color": "White",
+        "hex": "#ffffff",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_White_Front.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_Black_Front.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Fantastic Fuchsia",
+        "hex": "#CA2C92",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_FantasticFuchsia_Detail03.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Rockin Teal",
+        "hex": "#80ffff",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_RockinTeal_Front.jpg?width=700&quality=100&bg-color=255,255,255"
+      }
+    ],
+    "imagePath": [
+      "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_FlightBlue_Side.jpg",
+      "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_FlightBlue_Detail01.jpg",
+      "https://www-cdn.champion.com/catalog/product/H/N/HNS_B2618/HNS_B2618_FlightBlue_Detail02.jpg"
+    ],
+    "inStock": [[5,0],[8,2],[3,10]]
+  },
+
+  {
+    "name": "Climachill Quarter-Zip Running Top",
+    "description": "Breathable quarter-zip top with CLIMACHILL heat and moisture elimination",
+    "price": 59.99,
+    "brand": "Adidas",
+    "categories": [
+      "Apparel"
+    ],
+    "target": [
+      "Women"
+    ],
+    "sport": [
+      "Running"
+    ],
+    "size": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Bright Red",
+        "hex": "#FF000D",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f429b8e52b8b40a4b45a476c247fe34f_9366/Adizero_Running_Tank_Top_Red_IQ4925_21_model.jpg"
+      },
+      {
+        "color": "Wonder Blue",
+        "hex": "#28afbb",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0f8464149eb348aca55af641b5e72085_9366/Adizero_Running_Tank_Top_Blue_IK3994_HM1.jpg"
+      },
+      {
+        "color": "White",
+        "hex": "#FFFFFF",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b14d26a879464e568182a92799e83150_9366/Adizero_Running_Tank_Top_White_IK3996_21_model.jpg"
+      }
+    ],
+    "imagePath": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/66a8ec4af88e4cf58478786e3d158a3b_9366/Adizero_Running_Tank_Top_Red_IQ4925_01_laydown.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1aa4c9e24cc1498b8d9b0ac53398b445_9366/Adizero_Running_Tank_Top_Red_IQ4925_25_model.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/539c2f3957164370b5e80b1be919621f_9366/Adizero_Running_Tank_Top_Red_IQ4925_23_hover_model.jpg"
+    ],
+    "inStock": [[5,8,4],[8,2,7],[3,10,2],[3,10,2]]
+  },
+
+  {
+    "name": "Us Open Clash 100 V2 Tennis Racquet",
+    "description": "Premium graphite tennis racquet for power and control",
+    "price": 119.99,
+    "brand": "Wilson",
+    "categories": [
+      "Equipment"
+    ],
+    "target": [
+      "Adults"
+    ],
+    "sport": [
+      "Tennis"
+    ],
+    "size": ["4 inch", "4-1/4 inch", "4-1/2 inch"],
+    "colorInformation": [
+      {
+        "color": "Black/Blue",
+        "hex": "#FFFFFF",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WR133411U_/WR133411U__7770ee8cef1ea47508a29658da131c70.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      }
+    ],
+    "imagePath": [
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WR133411U_/WR133411U__9751aa12e6d764d0e6aec238f1945783.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=778&height=950&canvas=778%2C950&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WR133411U_/WR133411U__4760d8d52658476aa059e887ae7adb49.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WR133411U_/WR133411U__3e539e39088c4d4ce483c743cd83e7c9.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+    ],
+    "inStock": [[15],[10],[20]]
+  },
+
+  {
+    "name": "Ultraboost 1.0 X MARVEL Shoes Kids",
+    "description": "From walks around town to running through the city, there’s an Ultraboost for everyone—and we’ve made it easy to pick the pair that will feel right on your first step.",
+    "price": 159.99,
+    "brand": "Adidas",
+    "categories": [
+      "Shoes"
+    ],
+    "target": [
+      "Kids", "Boys"
+    ],
+    "sport": [
+      "Running"
+    ],
+    "size": [
+      "3.5",
+      "4",
+      "4.5",
+      "5",
+      "6",
+      "7"
+    ],
+    "colorInformation": [
+      {
+        "color": "Vivid Red",
+        "hex": "#F70D1A",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6f31825da2fc4cbeb89a6e4b58174015_9366/Ultraboost_1.0_x_Marvel_Shoes_Kids_Red_IF0341_04_standard.jpg"
+      }
+    ],
+    "imagePath": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ab295ef290574d199c0f7cce2069a7c3_9366/Ultraboost_1.0_x_Marvel_Shoes_Kids_Red_IF0341_01_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ba5c2ddb2f1f4822a7860968648b07e0_9366/Ultraboost_1.0_x_Marvel_Shoes_Kids_Red_IF0341_02_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/162ab8b4145e4ee5aa2b6197d8031ccf_9366/Ultraboost_1.0_x_Marvel_Shoes_Kids_Red_IF0341_03_standard.jpg"
+    ],
+    "inStock": [[10],[10],[10],[10],[10],[10]]
+  },
+
+  {
+    "name": "Steel Straw Metal Bottle 600 ML",
+    "description": "This bottle likes a challenge. Whether you want access to cold water all day long on your hike to the summit or just need to keep coffee hot during your kid's hockey tournament this Saturday, the double-walled insulation does the trick. The straw top makes for easy sipping, no matter the beverage.",
+    "price": 29.99,
+    "brand": "Adidas",
+    "categories": [
+      "Accessories"
+    ],
+    "target": [
+      "Adults", "Man", "Women"
+    ],
+    "sport": [
+      "All"
+    ],
+    "size": [
+      "600 ML"
+    ],
+    "colorInformation": [
+      {
+        "color": "White",
+        "hex": "#ffffff",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e2664805cd2a44358dc1af66013d2090_9366/Steel_Straw_Metal_Bottle_600_ML_White_GC3517_42_detail.jpg"
+      }
+    ],
+    "imagePath": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8aafc5e924d848cdbf05af66013caefb_9366/Steel_Straw_Metal_Bottle_600_ML_White_GC3517_01_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9f5aa7ce15214d7a9995af66013cd534_9366/Steel_Straw_Metal_Bottle_600_ML_White_GC3517_41_detail_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1d9f9a7a2a654c42abe2af66013d85a8_9366/Steel_Straw_Metal_Bottle_600_ML_White_GC3517_43_detail.jpg"
+    ],
+    "inStock": [[24]]
+  },
+
+  {
+    "name": "Little Girls' UA Fairway Solid Skort",
+    "description": "We took the materials from our go-to performance gear and made clothes for the youngest members of your team. Why? Because they're at least as active as the big kids.",
+    "price": 28.0,
+    "brand": "Under Armour",
+    "categories": [
+      "Skirt", "Skort", "Apparel"
+    ],
+    "target": [
+      "Kids", "Girls"
+    ],
+    "sport": [
+      "All"
+    ],
+    "size": [
+      "4", "5", "6", "6X"
+    ],
+    "colorInformation": [
+      {
+        "color": "Pink Sugar",
+        "hex": "#e6a7ff",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/PS5119179-659_F?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      }
+    ],
+    "imagePath": [
+      "https://underarmour.scene7.com/is/image/Underarmour/PS5119179-659_F?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708",
+      "https://underarmour.scene7.com/is/image/Underarmour/PS5119179-659_F1?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+    ],
+    "inStock": [[1],[10],[3],[4]]
+  },
+
+  {
+    "name": "AVP OPTX Game Volleyball Balloon",
+    "description": "The best players on the beach are always one step ahead. When you can read and react to where the game is going, you can be too. The breakthrough design of the OPTX AVP Tour Game Volleyball brings a whole new visual approach to the beach.",
+    "price": 79.95,
+    "brand": "Wilson",
+    "categories": [
+      "Accessories", "Equipment"
+    ],
+    "target": [
+      "Adults", "Kids"
+    ],
+    "sport": [
+      "Volleyball"
+    ],
+    "size": [
+      "Official Size"
+    ],
+    "colorInformation": [
+      {
+        "color": "Yellow/Black",
+        "hex": "#FFFF00",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WTH00020XB_/WTH00020XB__3132f44c6338ad35e33758677e6e1bc1.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      }
+    ],
+    "imagePath": [
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTH00020XB_/WTH00020XB__0fbd826c0b72827cd81e5c5a3c63cf8f.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=778&height=950&canvas=778%2C950&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTH00020XB_/WTH00020XB__2b44630f1eeb52c860dc6c4e9c329838.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTH00020XB_/WTH00020XB__9d188c6176d0038b8ab1652c291c81e8.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+    ],
+    "inStock": [[24]]
+  },
+
+  {
+    "name": "Pro Stock Titanium Umpire Helmet",
+    "description": "Wilson gear gets you in the same equipment as the Pros, with an unsurpassed level of protection. Wilson gear keeps you safer, cooler and more comfortable than anything else on the market today. The Wilson Pro Stock® Umpire Helmet features a low profile, high tensile steel wire cage design which minimizes obstruction and provides better sight lines. A strategic ventilation system maximizes airflow to keep your head cool. Comfortable, moisture wicking pads are removable for easy cleaning.",
+    "price": 329.99,
+    "brand": "Wilson",
+    "categories": [
+      "Accessories", "Equipment", "Protective Gear"
+    ],
+    "target": [
+      "Adults"
+    ],
+    "sport": [
+      "Baseball"
+    ],
+    "size": [
+      "L", "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WTA5800BL_/WTA5800BL__ca5671b4a87d74f40b39882bd541879a.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      }
+    ],
+    "imagePath": [
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTA5800BL_/WTA5800BL__454a9734bc305b4316bfe53bbe74c660.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=778&height=950&canvas=778%2C950&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTA5800BL_/WTA5800BL__a635b2d8051f368bf62290c4073585c4.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WTA5800BL_/WTA5800BL__ceafac6b416be632050595fd40087414.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+    ],
+    "inStock": [[10],[5]]
+  },
+
+  {
+    "name": "NB Numeric 480 Shoes",
+    "description": "Performance meets everyday style in the New Balance NB Numeric 480 skate shoe. Featuring a reinforced toe cap and a full-length FuelCell midsole that delivers a high energy return, these shoes are built to endure the stresses of skateboarding. Made from a mix of suede, leather, synthetic, and mesh materials, this shoe has a next-level style you'll love on and off your board.",
+    "price": 99.99,
+    "brand": "New Balance",
+    "categories": [
+      "Shoes"
+    ],
+    "target": [
+      "Youths", "Men"
+    ],
+    "sport": [
+      "All", "Skateboarding"
+    ],
+    "size": [
+      "6", "7", "8", "9", "9.5"
+    ],
+    "colorInformation": [
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://nb.scene7.com/is/image/NB/nm480wgw_nb_04_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      },
+      {
+        "color": "Orange",
+        "hex": "#Ffa500",
+        "imagePath": "https://nb.scene7.com/is/image/NB/nm480phx_nb_04_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      }
+    ],
+    "imagePath": [
+      "https://nb.scene7.com/is/image/NB/nm480wgw_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/nm480wgw_nb_05_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/nm480wgw_nb_07_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/nm480wgw_nb_06_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+    ],
+    "inStock": [[10,3],[12,4],[1,32],[4,2],[4,3]]
+  },
+
+  {
+    "name": "NB 550",
+    "description": "The original 550 debuted in 1989 and made its mark on basketball courts from coast to coast. After its initial run, the 550 was filed away in the archives, before being reintroduced in limited-edition releases in late 2020, and returned to the full-time lineup in 2021, quickly becoming a global fashion favorite. The 550’s low top, streamlined silhouette offers a clean take on the heavy-duty designs of the late ‘80s, while the dependable leather upper construction is a classic look in any era.",
+    "price": 99.99,
+    "brand": "New Balance",
+    "categories": [
+      "Shoes"
+    ],
+    "target": [
+      "Women", "Youths"
+    ],
+    "sport": [
+      "All", "Skateboarding"
+    ],
+    "size": [
+      "5", "5.5", "6", "6.5", "7", "8"
+    ],
+    "colorInformation": [
+      {
+        "color": "Sea salt/Timberwolf",
+        "hex": "#Dbd7d2",
+        "imagePath": "https://nb.scene7.com/is/image/NB/bbw550sg_nb_03_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      },
+      {
+        "color": "Sea salt/Orange",
+        "hex": "#Ffa500",
+        "imagePath": "https://nb.scene7.com/is/image/NB/bbw550st_nb_04_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+      }
+    ],
+    "imagePath": [
+      "https://nb.scene7.com/is/image/NB/bbw550st_nb_02_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/bbw550st_nb_05_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/bbw550st_nb_07_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440",
+      "https://nb.scene7.com/is/image/NB/bbw550st_nb_06_i?$pdpflexf2$&qlt=80&fmt=webp&wid=440&hei=440"
+    ],
+    "inStock": [[10,21],[10,10],[10,10],[5,6],[5,6],[10,10]]
+  },
+
+  {
+    "name": "PUMA x SPONGEBOB Bucket Hat",
+    "description": "Who lives in a pineapple under the sea? PUMA x SPONGEBOB! Show your love for the world's most lovable undersea sponge with this",
+    "price": 23.00,
+    "brand": "Puma",
+    "categories": [
+      "Hats & Caps", "Apparel"
+    ],
+    "target": [
+      "Boys","Girls","Kids", "Youths"
+    ],
+    "sport": [
+      "All"
+    ],
+    "size": [
+      "Unique Size"
+    ],
+    "colorInformation": [
+      {
+        "color": "Hero Blue",
+        "hex": "#3836FD",
+        "imagePath": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/024546/01/bv/fnd/PNA/fmt/png/PUMA-x-SPONGEBOB-Bucket-Hat"
+      },
+      {
+        "color": "Rose Dust",
+        "hex": "#CDB2A5",
+        "imagePath": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/024546/02/fnd/PNA/fmt/png/PUMA-x-SPONGEBOB-Bucket-Hat"
+      }
+    ],
+    "imagePath": [
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/024546/01/fnd/PNA/fmt/png/PUMA-x-SPONGEBOB-Bucket-Hat",
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/024546/01/mod03/fnd/PNA/fmt/png/PUMA-x-SPONGEBOB-Bucket-Hat",
+      "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/024546/01/mod01/fnd/PNA/fmt/png/PUMA-x-SPONGEBOB-Bucket-Hat"
+    ],
+    "inStock": [[10,12]]
+  },
+
+  {
+    "name": "Men's UA Unstoppable Jacket",
+    "description": "If you're looking for a jacket you can actually train in on cold, wet days—you found it. Super-light and stretchy, rain rolls right off, and it keeps you warm but not hot.",
+    "price": 110.00,
+    "brand": "Under Armour",
+    "categories": [
+      "Jackets", "Apparel"
+    ],
+    "target": [
+      "Men", "Adults", "Youths"
+    ],
+    "sport": [
+      "All"
+    ],
+    "size": [
+      "XS","S","M","L","XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Halo Gray",
+        "hex": "#81BE83",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-014_STORM_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-001_STORM_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=512%2C640"
+      },
+      {
+        "color": "Downpour Gray",
+        "hex": "#41708a",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-044_STORM_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+      },
+      {
+        "color": "Marine OD Green",
+        "hex": "#40a48e",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-390_STORM_SL?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=512%2C640"
+      },
+      {
+        "color": "Varsity Blue",
+        "hex": "#226977",
+        "imagePath": "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-426_FSFADD?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=512&hei=640&size=512%2C640"
+      }
+    ],
+    "imagePath": [
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-014_FC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708",
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-014_BC?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708",
+      "https://underarmour.scene7.com/is/image/Underarmour/V5-1370494-014_COLLAR?rp=standard-0pad%7CpdpMainDesktop&scl=1&fmt=jpg&qlt=75&resMode=sharp2&cache=on%2Con&bgc=F0F0F0&wid=566&hei=708&size=566%2C708"
+    ],
+    "inStock": [[10,21,3,4,5],[1,2,3,4,5],[6,7,8,9,10],[1,2,3,4,5],[6,7,8,9,10]]
+  },
+
+  {
+    "name": "Reverse Weave Hoodie, Naughty by Nature",
+    "description": "Hip-Hop heritage in every stitch, our Naughty by Nature men’s hoodie is a tribute to the 50th Anniversary of Hip-Hop. Iconic graphics are paired with our iconic Reverse Weave® fabric, a heavyweight style that’s made to be a longtime favorite. Cut on the cross-grain to reduce lengthwise shrinkage, this high-quality men's sweatshirt always reports for duty.",
+    "price": 80.0,
+    "brand": "Champion",
+    "categories": [
+      "Apparel", "Hoodies"
+    ],
+    "target": [
+      "Women", "Youths"
+    ],
+    "sport": [
+      "All"
+    ],
+    "size": [
+      "S", "M", "L", "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Maroon",
+        "hex": "#800000",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_Maroon_Detail01.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Dark Green",
+        "hex": "#013220",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_DarkGreen_Detail01.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_Black_Detail01.jpg?width=700&quality=100&bg-color=255,255,255"
+      },
+      {
+        "color": "Navy",
+        "hex": "#000080",
+        "imagePath": "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_Navy_Detail01.jpg?width=700&quality=100&bg-color=255,255,255"
+      }
+    ],
+    "imagePath": [
+      "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_Maroon_Front.jpg?width=700&quality=100&bg-color=255,255,255",
+      "https://www-cdn.champion.com/catalog/product/H/N/HNS_CS305158651B/HNS_CS305158651B_Maroon_Back.jpg?width=700&quality=100&bg-color=255,255,255"
+    ],
+    "inStock": [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+  },
+
+  {
+    "name": "Oceaunz Competition Soccer Ball",
+    "description": "A SEAMLESS MATCH BALL INSPIRED BY THE NATURAL WORLD.\nCreated for flowing soccer. Reflecting the natural beauty of Australia and New Zealand, the graphics on this adidas Oceaunz match ball take their lead from the FIFA Women's World Cup™ official match ball.",
+    "price": 60.00,
+    "brand": "Adidas",
+    "categories": [
+      "Accessories", "Equipment"
+    ],
+    "target": [
+      "Adults", "Kids", "Women", "Men", "Youths", "Boys", "Girls"
+    ],
+    "sport": [
+      "Soccer", "Football"
+    ],
+    "size": [
+      "4", "5"
+    ],
+    "colorInformation": [
+      {
+        "color": "White/Bright Blue",
+        "hex": "#004EFF",
+        "imagePath": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/f11325c54d474b5e94f9af4301137bbc_9366/Oceaunz_Competition_Ball_White_HT9016_42_detail.jpg"
+      }
+    ],
+    "imagePath": [
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/bc73c6330caa447390e0af4301136272_9366/Oceaunz_Competition_Ball_White_HT9016_01_standard.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a9c2f21bed8a4dbea243af430113692e_9366/Oceaunz_Competition_Ball_White_HT9016_02_standard_hover.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/066eb2e4b35a45f9abb5af430113725b_9366/Oceaunz_Competition_Ball_White_HT9016_41_detail.jpg"
+    ],
+    "inStock": [[10],[12]]
+  },
+
+  {
+    "name": "Westside Tennis Skirt Lite",
+    "description": "Pleated perfection. This ultralight tennis skirt pairs high-performance functionality with timeless tennis style.",
+    "price": 88.00,
+    "brand": "Wilson",
+    "categories": [
+      "Skirt"
+    ],
+    "target": [
+      "Women", "Youths", "Girls"
+    ],
+    "sport": [
+      "All", "Tennis"
+    ],
+    "size": [
+      "XS", "S", "M", "L", "XL"
+    ],
+    "colorInformation": [
+      {
+        "color": "Bright White",
+        "hex": "#FFFFFF",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WL1132403_/WL1132403__273ad54775c8c42d38a290edbbc6b7a2.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      },
+      {
+        "color": "Classic Navy",
+        "hex": "#000080",
+        "imagePath": "https://www.wilson.com/en-us/media/catalog/product/article_images/WL1132401_/WL1132401__c231a04f19c6c705f1c6f5ca9686aefb.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+      }
+    ],
+    "imagePath": [
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WL1132403_/WL1132403__9d37b942b0eb72182a8bf779ae4390d3.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=778&height=950&canvas=778%2C950&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WL1132403_/WL1132403__7cbcf79180acb832fd1fafcfb7f8ea74.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5",
+      "https://www.wilson.com/en-us/media/catalog/product/article_images/WL1132403_/WL1132403__13fc6cec704cefb3ab705958b0e4aff1.png?dpr=1&fit=bounds&orient=1&quality=95&optimize=high&format=pjpg&auto=webp&enable=upscale&width=375&height=458&canvas=375%2C458&bg-color=f5f5f5"
+    ],
+    "inStock": [[10,12],[2,12],[12,14],[12,15],[12,21]]
+  },
+
+  {
+    "name": "Jumpman Two Trey",
+    "description": "Like \"Two Trey\" on MJ's license plate, let your presence be known. This new generation of Jordan celebrates Mike's time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey's midsole design references both the AJ11 and the AJ12.",
+    "price": 93.97,
+    "brand": "Nike",
+    "categories": [
+      "Shoes"
+    ],
+    "target": [
+      "Men", "Adults", "Youths"
+    ],
+    "sport": [
+      "Basketball", "Volleyball"
+    ],
+    "size": [
+      "8", "9", "10", "11", "11.5"
+    ],
+    "colorInformation": [
+      {
+        "color": "Sky Blue",
+        "hex": "#87CEEB",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/f497a0b3-0d81-450f-ba56-9d8e25f3487d/jumpman-two-trey-mens-shoes-bGfWN1.png"
+      },
+      {
+        "color": "Power Blue",
+        "hex": "#003399",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/cf788ad9-259c-44d5-83a2-09e9dd923220/jumpman-two-trey-mens-shoes-bGfWN1.png"
+      },
+      {
+        "color": "Green",
+        "hex": "#00ff00",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/152575c8-2d45-48f3-92c1-b713bfdf01f7/jumpman-two-trey-mens-shoes-bGfWN1.png"
+      },
+      {
+        "color": "Red/Black",
+        "hex": "#FF0000",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/ef590d8a-b8e7-468f-974f-7c7a52716249/jumpman-two-trey-mens-shoes-bGfWN1.png"
+      }
+    ],
+    "imagePath": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/f0f08080-83c0-4587-8993-1fa3f7638fd7/jumpman-two-trey-mens-shoes-bGfWN1.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/ff5b8859-0c15-4351-b3f2-a2172c1ae135/jumpman-two-trey-mens-shoes-bGfWN1.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/84d21fb7-a904-4b6a-974f-1ab394c33382/jumpman-two-trey-mens-shoes-bGfWN1.png"
+    ],
+    "inStock": [[1,2,3,4],[5,6,7,8],[9,10,11,12],[1,2,3,4],[5,6,7,8]]
+  },
+
+  {
+    "name": "Men's Cargo Pants",
+    "description": "Made with soft cotton twill in a military-inspired design, these durable pants from our Nike Life collection give you plenty of space to carry everything you need. Built for the long haul, the roomy fit offers easy movement through the seat and thighs for steady comfort along the way.",
+    "price": 85.97,
+    "brand": "Nike",
+    "categories": [
+      "Pants"
+    ],
+    "target": [
+      "Men", "Youths", "Adults"
+    ],
+    "sport": [
+      "StyleLife", "All"
+    ],
+    "size": [
+      "28", "30", "32", "34", "36"
+    ],
+    "colorInformation": [
+      {
+        "color": "Dark Green",
+        "hex": "#013220",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/df5b63fe-53d5-4900-9865-397b710c7da8/life-mens-cargo-pants-rxNP0t.png"
+      },
+      {
+        "color": "Cream",
+        "hex": "#FFFDD0",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/794faa26-368c-4f26-8397-9aa523781d6d/life-mens-cargo-pants-rxNP0t.png"
+      },
+      {
+        "color": "White",
+        "hex": "#FFFFFF",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/28fe7f28-5a41-4d59-ac40-ea595fd10c35/life-mens-cargo-pants-rxNP0t.png"
+      },
+      {
+        "color": "Black",
+        "hex": "#000000",
+        "imagePath": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/640bf503-5b04-4911-9930-ceaaac070436/life-mens-cargo-pants-rxNP0t.png"
+      }
+    ],
+    "imagePath": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6569ecbf-2aff-450f-ac54-34d819bc854f/life-mens-cargo-pants-rxNP0t.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6569ecbf-2aff-450f-ac54-34d819bc854f/life-mens-cargo-pants-rxNP0t.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/76365a12-2834-4599-a6e2-e03dbb181395/life-mens-cargo-pants-rxNP0t.png"
+    ],
+    "inStock": [[1,2,3,4],[7,8,9,10],[1,3,4,5],[7,8,9,10],[2,3,4,5]]
   }
 ]

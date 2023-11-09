@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getElements } from './Components/ApiRestHandler/requestHandler';
 import BuyNowSection from './Views/BuyNowSection';
+import Footer from './Views/Footer/Footer';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -48,6 +49,7 @@ export default function App() {
           </ul>
         )}
       </header>
+      <Footer />
     </div>
   );
 }

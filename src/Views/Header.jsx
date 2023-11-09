@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import '../css/headerStyle.css';
-import headerIcon from "../Images/header-icon.png";
-import cartIcon from "../Images/cart-icon.svg";
-import menuIcon from "../Images/menu-icon.svg";
-import personIcon from "../Images/person-icon.svg";
-import searchIcon from "../Images/search-icon.svg";
-import settingsIcon from "../Images/settings-icon.svg";
-import closeIcon from "../Images/close-icon.svg"
 import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [showSearchPopup, setShowSearchPopup] = useState(false);
     const [showMenuPopup, setShowMenuPopup] = useState(false);
+    const headerIcon = "https://i.postimg.cc/6qytfd9p/header-icon.png";
+    const cartIcon = "https://i.postimg.cc/bYKhs8LX/cart-icon.png";
+    const menuIcon = "https://i.postimg.cc/1RgSm4Gc/menu-icon.png";
+    const personIcon = "https://i.postimg.cc/vZywtzp3/person-icon.png";
+    const searchIcon = "https://i.postimg.cc/0jKcLTJD/search-icon.png";
+    const settingsIcon = "https://i.postimg.cc/SNCp95tn/settings-icon.png";
+    const closeIcon = "https://i.postimg.cc/gr9Ndgv5/close-icon.png";
 
     const toggleSearchPopup = () => {
         setShowSearchPopup(!showSearchPopup);

@@ -1,0 +1,124 @@
+### 
+POST http://localhost:9000/api/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Running Shoes AAA",
+  "description": "Shoes for play your best sports as a professional player",
+  "price": 89.99,
+  "brand": null,
+  "categories": [
+    "Shoes"
+  ],
+  "target": [
+    "Kids",
+    "Teenagers"
+  ],
+  "sport": [
+    "Football",
+    "Volleyball",
+    "BasketBall"
+  ],
+  "size": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colorInformation": [
+    {
+      "color": "Red",
+      "hex": "#FF0000",
+      "imagePath": "https://res.cloudinary.com/tenis1red.jpg"
+    },
+    {
+      "color": "Yellow",
+      "hex": "#FFFF00",
+      "imagePath": "https://res.cloudinary.com/tenis1Yellow.jpg"
+    }
+  ],
+  "imagePath": [
+    "https://res.cloudinary.com/scrubsandbeyond/image/upload/q_auto:best/fly_black-cloudysky.jpg"
+  ],
+  "inStock": [
+    [
+      10,
+      24
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      13,
+      54
+    ]
+  ]
+}
+
+### 
+GET http://localhost:9000/api/products HTTP/1.1 
+
+
+###
+GET http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1
+
+
+### 
+PUT http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Running Shoes",
+  "description": "Shoes for play your best sports as a professional player",
+  "price": 89.99,
+  "brand": null,
+  "categories": [
+    "Shoes"
+  ],
+  "target": [
+    "Kids",
+    "Teenagers"
+  ],
+  "sport": [
+    "Football",
+    "Volleyball",
+    "BasketBall"
+  ],
+  "size": [
+    "S",
+    "M",
+    "L"
+  ],
+  "colorInformation": [
+    {
+      "color": "Red",
+      "hex": "#FF0000",
+      "imagePath": "https://res.cloudinary.com/tenis1red.jpg"
+    },
+    {
+      "color": "Yellow",
+      "hex": "#FFFF00",
+      "imagePath": "https://res.cloudinary.com/tenis1Yellow.jpg"
+    }
+  ],
+  "imagePath": [
+    "https://res.cloudinary.com/scrubsandbeyond/image/upload/q_auto:best/fly_black-cloudysky.jpg"
+  ],
+  "inStock": [
+    [
+      40,
+      24
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      60,
+      54
+    ]
+  ]
+}
+
+### 
+DELETE http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1

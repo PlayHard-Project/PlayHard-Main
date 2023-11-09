@@ -103,7 +103,6 @@ function ProductInformation({productID}) {
             </div>
         </div>
     )
-
 }
 
 export default ProductInformation

@@ -2,7 +2,7 @@
   "name": "Air Force 1 Basketball Shoes",
   "description": "Iconic high-top basketball shoes loved by pros and streetballers alike",
   "price": 99.99,
-  "brand": "Nike",
+  "brand": "654c3e2460c78adccb61fbca",
   "categories":[
     "Shoes"
   ],
@@ -45,7 +45,7 @@
   "name": "Ultraboost Running Shoes",
   "description": "World-famous Boost cushioning for elite runners and fitness enthusiasts",
   "price": 179.99,
-  "brand": "Adidas",
+  "brand": "654c3e2460c78adccb61fbc4",
   "categories":[
     "Shoes"
   ],
@@ -84,7 +84,7 @@
     "name": "Spain 2022 Warm Up Shirt - MEN'S",
     "description": "Authentic Adidas soccer jersey worn by the Spanish National Team",
     "price": 89.99,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories":[
       "Shirt"
     ],
@@ -121,7 +121,7 @@
     "name": "Mercurial Vapor XV Elite FG Soccer Cleats",
     "description": "Lightweight elite soccer cleats worn by Neymar and Mbappé",
     "price": 229.99,
-    "brand": "Nike",
+    "brand": "654c3e2460c78adccb61fbca",
     "categories":[
       "Shoes"
     ],
@@ -176,7 +176,7 @@
     "name": "Women's Rival Fleece Hoodie",
     "description": "Soft fleece hoodie for outdoor winter workouts",
     "price": 59.99,
-    "brand": "Under Armour",
+    "brand": "654c3e2460c78adccb61fbce",
     "categories":[
       "Hoodies"
     ],
@@ -215,7 +215,7 @@
     "name": "Pro Combat Hyperstrong Compression Shorts",
     "description": "High-performance compression shorts for intense training",
     "price": 49.99,
-    "brand": "Nike",
+    "brand": "654c3e2460c78adccb61fbca",
     "categories":[
       "Shorts", "Underwear"
     ],
@@ -259,7 +259,7 @@
     "name": "Pro Hyperwarm Tight Tights",
     "description": "Ultra-warm tights for winter running and outdoor training",
     "price": 79.99,
-    "brand": "Nike",
+    "brand": "654c3e2460c78adccb61fbca",
     "categories":[
       "Tights", "Leggings"
     ],
@@ -308,7 +308,7 @@
     "name": "Women's Cloudfoam Pure Running Shoe",
     "description": "Comfortable everyday running shoe with CLOUDFOAM cushioning",
     "price": 69.99,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories":[
       "Shoes"
     ],
@@ -357,7 +357,7 @@
     "name": "Men's Rival Fleece Pants",
     "description": "Soft fleece sweatpants for relaxing or low-impact workouts",
     "price": 49.99,
-    "brand": "Under Armour",
+    "brand": "654c3e2460c78adccb61fbce",
     "categories": [
       "Pants"
     ],
@@ -391,7 +391,7 @@
     "name": "NFL Football Balloon",
     "description": "Official game ball of the National Football League",
     "price": 49.99,
-    "brand": "Wilson",
+    "brand": "654c41ca1754c5a319281642",
     "categories": [
       "Equipment", "Accessories", "Balloons"
     ],
@@ -430,7 +430,7 @@
     "name": "Women's FuelCore Nergize V1 Sneaker",
     "description": "Lightweight running sneaker with energizing colorways",
     "price": 79.99,
-    "brand": "New Balance",
+    "brand": "654c3e2460c78adccb61fbc8",
     "categories": [
       "Shoes"
     ],
@@ -472,7 +472,7 @@
     "name": "Women's Carina Legging",
     "description": "Ultra-soft leggings for yoga and training",
     "price": 39.99,
-    "brand": "Puma",
+    "brand": "654c3e2460c78adccb61fbcc",
     "categories": [
       "Apparel",
       "Leggings",
@@ -517,7 +517,7 @@
     "name": "Project Rock Training Gloves",
     "description": "Lightweight performance gloves for intense gym sessions",
     "price": 29.99,
-    "brand": "Under Armour",
+    "brand": "654c3e2460c78adccb61fbce",
     "categories": [
       "Accessories"
     ],
@@ -554,7 +554,7 @@
     "name": "Sport Bra",
     "description": "Basic low-impact sports bra for workouts and activities",
     "price": 19.99,
-    "brand": "Champion",
+    "brand": "654c3e2460c78adccb61fbd2",
     "categories": [
       "Apparel"
     ],
@@ -612,7 +612,7 @@
     "name": "Climachill Quarter-Zip Running Top",
     "description": "Breathable quarter-zip top with CLIMACHILL heat and moisture elimination",
     "price": 59.99,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories": [
       "Apparel"
     ],
@@ -657,7 +657,7 @@
     "name": "Us Open Clash 100 V2 Tennis Racquet",
     "description": "Premium graphite tennis racquet for power and control",
     "price": 119.99,
-    "brand": "Wilson",
+    "brand": "654c41ca1754c5a319281642",
     "categories": [
       "Equipment"
     ],
@@ -687,7 +687,7 @@
     "name": "Ultraboost 1.0 X MARVEL Shoes Kids",
     "description": "From walks around town to running through the city, there’s an Ultraboost for everyone—and we’ve made it easy to pick the pair that will feel right on your first step.",
     "price": 159.99,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories": [
       "Shoes"
     ],
@@ -724,7 +724,7 @@
     "name": "Steel Straw Metal Bottle 600 ML",
     "description": "This bottle likes a challenge. Whether you want access to cold water all day long on your hike to the summit or just need to keep coffee hot during your kid's hockey tournament this Saturday, the double-walled insulation does the trick. The straw top makes for easy sipping, no matter the beverage.",
     "price": 29.99,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories": [
       "Accessories"
     ],
@@ -756,7 +756,7 @@
     "name": "Little Girls' UA Fairway Solid Skort",
     "description": "We took the materials from our go-to performance gear and made clothes for the youngest members of your team. Why? Because they're at least as active as the big kids.",
     "price": 28.0,
-    "brand": "Under Armour",
+    "brand": "654c3e2460c78adccb61fbce",
     "categories": [
       "Skirt", "Skort", "Apparel"
     ],
@@ -787,7 +787,7 @@
     "name": "AVP OPTX Game Volleyball Balloon",
     "description": "The best players on the beach are always one step ahead. When you can read and react to where the game is going, you can be too. The breakthrough design of the OPTX AVP Tour Game Volleyball brings a whole new visual approach to the beach.",
     "price": 79.95,
-    "brand": "Wilson",
+    "brand": "654c41ca1754c5a319281642",
     "categories": [
       "Accessories", "Equipment"
     ],
@@ -819,7 +819,7 @@
     "name": "Pro Stock Titanium Umpire Helmet",
     "description": "Wilson gear gets you in the same equipment as the Pros, with an unsurpassed level of protection. Wilson gear keeps you safer, cooler and more comfortable than anything else on the market today. The Wilson Pro Stock® Umpire Helmet features a low profile, high tensile steel wire cage design which minimizes obstruction and provides better sight lines. A strategic ventilation system maximizes airflow to keep your head cool. Comfortable, moisture wicking pads are removable for easy cleaning.",
     "price": 329.99,
-    "brand": "Wilson",
+    "brand": "654c41ca1754c5a319281642",
     "categories": [
       "Accessories", "Equipment", "Protective Gear"
     ],
@@ -851,7 +851,7 @@
     "name": "NB Numeric 480 Shoes",
     "description": "Performance meets everyday style in the New Balance NB Numeric 480 skate shoe. Featuring a reinforced toe cap and a full-length FuelCell midsole that delivers a high energy return, these shoes are built to endure the stresses of skateboarding. Made from a mix of suede, leather, synthetic, and mesh materials, this shoe has a next-level style you'll love on and off your board.",
     "price": 99.99,
-    "brand": "New Balance",
+    "brand": "654c3e2460c78adccb61fbc8",
     "categories": [
       "Shoes"
     ],
@@ -889,7 +889,7 @@
     "name": "NB 550",
     "description": "The original 550 debuted in 1989 and made its mark on basketball courts from coast to coast. After its initial run, the 550 was filed away in the archives, before being reintroduced in limited-edition releases in late 2020, and returned to the full-time lineup in 2021, quickly becoming a global fashion favorite. The 550’s low top, streamlined silhouette offers a clean take on the heavy-duty designs of the late ‘80s, while the dependable leather upper construction is a classic look in any era.",
     "price": 99.99,
-    "brand": "New Balance",
+    "brand": "654c3e2460c78adccb61fbc8",
     "categories": [
       "Shoes"
     ],
@@ -927,7 +927,7 @@
     "name": "PUMA x SPONGEBOB Bucket Hat",
     "description": "Who lives in a pineapple under the sea? PUMA x SPONGEBOB! Show your love for the world's most lovable undersea sponge with this",
     "price": 23.00,
-    "brand": "Puma",
+    "brand": "654c3e2460c78adccb61fbcc",
     "categories": [
       "Hats & Caps", "Apparel"
     ],
@@ -964,7 +964,7 @@
     "name": "Men's UA Unstoppable Jacket",
     "description": "If you're looking for a jacket you can actually train in on cold, wet days—you found it. Super-light and stretchy, rain rolls right off, and it keeps you warm but not hot.",
     "price": 110.00,
-    "brand": "Under Armour",
+    "brand": "654c3e2460c78adccb61fbce",
     "categories": [
       "Jackets", "Apparel"
     ],
@@ -1016,7 +1016,7 @@
     "name": "Reverse Weave Hoodie, Naughty by Nature",
     "description": "Hip-Hop heritage in every stitch, our Naughty by Nature men’s hoodie is a tribute to the 50th Anniversary of Hip-Hop. Iconic graphics are paired with our iconic Reverse Weave® fabric, a heavyweight style that’s made to be a longtime favorite. Cut on the cross-grain to reduce lengthwise shrinkage, this high-quality men's sweatshirt always reports for duty.",
     "price": 80.0,
-    "brand": "Champion",
+    "brand": "654c3e2460c78adccb61fbd2",
     "categories": [
       "Apparel", "Hoodies"
     ],
@@ -1062,7 +1062,7 @@
     "name": "Oceaunz Competition Soccer Ball",
     "description": "A SEAMLESS MATCH BALL INSPIRED BY THE NATURAL WORLD.\nCreated for flowing soccer. Reflecting the natural beauty of Australia and New Zealand, the graphics on this adidas Oceaunz match ball take their lead from the FIFA Women's World Cup™ official match ball.",
     "price": 60.00,
-    "brand": "Adidas",
+    "brand": "654c3e2460c78adccb61fbc4",
     "categories": [
       "Accessories", "Equipment"
     ],
@@ -1094,7 +1094,7 @@
     "name": "Westside Tennis Skirt Lite",
     "description": "Pleated perfection. This ultralight tennis skirt pairs high-performance functionality with timeless tennis style.",
     "price": 88.00,
-    "brand": "Wilson",
+    "brand": "654c41ca1754c5a319281642",
     "categories": [
       "Skirt"
     ],
@@ -1131,7 +1131,7 @@
     "name": "Jumpman Two Trey",
     "description": "Like \"Two Trey\" on MJ's license plate, let your presence be known. This new generation of Jordan celebrates Mike's time in Chicago, complete with high-quality leather uppers and Air cushioned soles. Made as an homage to the on-court styles worn during his championship years, the Two Trey's midsole design references both the AJ11 and the AJ12.",
     "price": 93.97,
-    "brand": "Nike",
+    "brand": "654c3e2460c78adccb61fbca",
     "categories": [
       "Shoes"
     ],
@@ -1178,7 +1178,7 @@
     "name": "Men's Cargo Pants",
     "description": "Made with soft cotton twill in a military-inspired design, these durable pants from our Nike Life collection give you plenty of space to carry everything you need. Built for the long haul, the roomy fit offers easy movement through the seat and thighs for steady comfort along the way.",
     "price": 85.97,
-    "brand": "Nike",
+    "brand": "654c3e2460c78adccb61fbca",
     "categories": [
       "Pants"
     ],

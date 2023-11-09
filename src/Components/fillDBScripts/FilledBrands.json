@@ -47,5 +47,10 @@
   {
     "name": "Champion",
     "imagePath": "https://i.postimg.cc/pXrqC5nK/Champion.png"
+  },
+
+  {
+    "name" : "Wilson",
+    "imagePath": "https://i.postimg.cc/cC0ST0dj/Wilson.png"
   }
 ]

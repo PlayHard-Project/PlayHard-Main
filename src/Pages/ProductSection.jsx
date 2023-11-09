@@ -1,5 +1,6 @@
 import ProductInformation from "../Components/productInformation";
 import { useParams } from 'react-router-dom';
+import Footer from '../Views/Footer/Footer';
 
 export function ProductSection() {
 
@@ -15,8 +16,9 @@ export function ProductSection() {
                         productID={id}
                     />
                 </div>
+                <Footer />
             </div>
-            {/*footer-juanpa*/}
+            
         </>
     )
 }

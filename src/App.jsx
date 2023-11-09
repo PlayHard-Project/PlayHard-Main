@@ -29,6 +29,7 @@ export default function App() {
                 <Route path="/" element={<ProductButtons />} />
                 <Route path="/product/:id" element={<ProductSection />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }

@@ -16,7 +16,6 @@ export function ProductSection() {
                         productID={id}
                     />
                 </div>
-                <Footer />
             </div>
             
         </>

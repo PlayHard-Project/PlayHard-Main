@@ -14,7 +14,7 @@ export function ProductSection() {
                         productID={id}
                     />
                 </div>
-                <div className="w-full h-280 mx-auto">
+                <div className="w-full h-250 mx-auto">
                     <Recommendations/>
                 </div>
             </div>

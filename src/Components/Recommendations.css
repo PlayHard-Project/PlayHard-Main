@@ -3,8 +3,13 @@
 }
 
 .image-container {
-  margin: 20px;
+  margin: 120px;
+
 }
+/*
+.slick-slider {
+  background-color: aquamarine;
+}*/
 
 .navigation-button-next {
   position: absolute;
@@ -44,27 +49,6 @@
 
 .hidden {
   display: none;
-}
-
-.buy-now {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 70%;
-  width: 20%;
-  height: 10%;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  display: inline-block;
-  font-size: 1vw;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  transition: background-color 0.3s ease;
 }
 
 .responsive {

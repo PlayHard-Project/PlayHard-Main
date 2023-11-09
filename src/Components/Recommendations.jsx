@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Recommendations.css";
-import { data } from "../Components/Objects/CoverBuyNowSection";
+import BasicCard from "../Components/Objects/Card";
 
 export default function Recommendations() {
   const sliderRef = useRef();
@@ -13,7 +13,7 @@ export default function Recommendations() {
     dots: false,
     infinite: true,
     speed: 800,
-    slidesToShow: 1,
+    slidesToShow: 4,
     slidesToScroll: 1,
     beforeChange: () => {
       setTransitioning(true);
@@ -43,19 +43,12 @@ export default function Recommendations() {
     <section className="slider-container">
       <section className="image-container">
         <Slider ref={sliderRef} {...sliderSettings}>
-          {data.map((item) => (
-            <div key={item.id} className="container-image">
-              <img
-                src={item.imgUrl}
-                alt={`CoverImg-${item.id}`}
-                className="responsive"
-              />
-            </div>
-          ))}
+          {products?.map((item, index) => {
+            return <BasicCard item={item} />;
+          })}
         </Slider>
       </section>
-      {!isTransitioning && (
-        <button className={`buy-now ${isTransitioning ? "hidden" : ""}`}> Buy Now </button>)}
+      {!isTransitioning}
       <button className="navigation-button-prev" onClick={handlePrevClick}>
         <img
           className="arrow-icon"
@@ -73,3 +66,37 @@ export default function Recommendations() {
     </section>
   );
 }
+
+const products = [
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+  {
+    name: "zapatito zapatote",
+    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
+    price: "Bs. 140",
+  },
+];

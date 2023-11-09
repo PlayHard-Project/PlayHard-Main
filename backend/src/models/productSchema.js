@@ -19,6 +19,10 @@ const productSchema = new Schema({
         ref: 'Brand',
         required: false
     },
+    categories: [
+        {type: String,
+        required: true}
+    ],
     target: [ //Tags to add the kind of people that the product is focused. (Man, women, kids, teenager, etc)
         {type: String,
         required: true}

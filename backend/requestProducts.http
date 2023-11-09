@@ -7,6 +7,9 @@ Content-Type: application/json
   "description": "Shoes for play your best sports as a professional player",
   "price": 89.99,
   "brand": null,
+  "categories": [
+    "Shoes"
+  ],
   "target": [
     "Kids",
     "Teenagers"
@@ -57,11 +60,11 @@ GET http://localhost:9000/api/products HTTP/1.1
 
 
 ###
-GET http://localhost:9000/api/products/654b904eb4182ff7f5a419ec HTTP/1.1
+GET http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1
 
 
 ### 
-PUT http://localhost:9000/api/products/654b904eb4182ff7f5a419ec HTTP/1.1
+PUT http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -69,6 +72,9 @@ Content-Type: application/json
   "description": "Shoes for play your best sports as a professional player",
   "price": 89.99,
   "brand": null,
+  "categories": [
+    "Shoes"
+  ],
   "target": [
     "Kids",
     "Teenagers"
@@ -115,4 +121,4 @@ Content-Type: application/json
 }
 
 ### 
-DELETE http://localhost:9000/api/products/654b904eb4182ff7f5a419ec HTTP/1.1
+DELETE http://localhost:9000/api/products/654baeb784450023d11546f1 HTTP/1.1

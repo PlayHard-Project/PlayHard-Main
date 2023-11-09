@@ -1,5 +1,8 @@
+import React, { useState } from 'react';
+import Footer from './Views/Footer/Footer';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { ProductSection } from "./Pages/ProductSection";
+
 
 
 {/* BORRAR ESTE COMPONENTE, SOLO ESTA PARA EL TESTEO*/}
@@ -24,6 +27,7 @@ export default function App() {
                 <Route path="/" element={<ProductButtons />} />
                 <Route path="/product/:id" element={<ProductSection />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }

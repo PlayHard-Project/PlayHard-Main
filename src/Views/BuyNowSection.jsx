@@ -12,7 +12,7 @@ export default function BuyNowSection() {
   const sliderSettings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange: () => {
@@ -34,7 +34,7 @@ export default function BuyNowSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 4000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
@@ -54,6 +54,8 @@ export default function BuyNowSection() {
           ))}
         </Slider>
       </section>
+      {!isTransitioning && (
+        <button className={`buy-now ${isTransitioning ? "hidden" : ""}`}> Buy Now </button>)}
       <button className="navigation-button-prev" onClick={handlePrevClick}>
         <img
           className="arrow-icon"
@@ -67,10 +69,6 @@ export default function BuyNowSection() {
           src="https://i.postimg.cc/mgZQ01m2/iconmonstr-arrow-63-240.png"
           alt="Previous"
         />
-      </button>
-
-      <button className={`buy-now ${isTransitioning ? "hidden" : ""}`}>
-        Buy Now
       </button>
     </section>
   );

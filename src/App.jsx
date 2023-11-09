@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getElements } from './Components/ApiRestHandler/requestHandler';
+import BuyNowSection from './Views/BuyNowSection';
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -21,6 +22,9 @@ export default function App() {
 
   return (
     <div className="App">
+      <section>
+        <BuyNowSection className="main-container"/>
+      </section>
       <header className="App-header">
         <p>DEVELOPMENT environment</p>
         <div>

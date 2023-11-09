@@ -8,7 +8,7 @@
 
 .navigation-button-next {
   position: absolute;
-  right: 5%;
+  right: 3%;
   transform: translate(50%, -50%);
   top: 50%;
   width: 5vw;
@@ -26,7 +26,7 @@
 
 .navigation-button-prev {
   position: absolute;
-  left: 5.7%;
+  left: 3%;
   transform: translate(-50%, -50%);
   top: 50%;
   width: 5vw;

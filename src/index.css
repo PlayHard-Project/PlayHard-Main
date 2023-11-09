@@ -4,25 +4,32 @@
 
 .container{
     max-width: 100%;
-    padding-left: 75px;
-    padding-right: 75px;
+    padding-left: 58px;
+    padding-right: 58px;
 }
 @media (max-width: 1208px) {
     .container{
-        padding-left: 70px;
-        padding-right: 70px;
+        padding-left: 58px;
+        padding-right: 58px;
     }
 }
 @media (max-width: 992px) {
     .container{
-        padding-left: 60px;
-        padding-right: 60px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }
 
 @media (max-width: 867px) {
     .container{
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 700px) {
+    .container{
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

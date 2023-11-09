@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Adidas",
+    "imagePath": "https://i.postimg.cc/90d3rC0J/Adidas.png"
+  },
+
+  {
+    "name": "Asics",
+    "imagePath": "https://i.postimg.cc/ZKmtXBsg/Asics.png"
+  },
+
+  {
+    "name": "Fila",
+    "imagePath": "https://i.postimg.cc/pVzM0YCz/Fila.png"
+  },
+
+  {
+    "name": "Givenchy",
+    "imagePath": "https://i.postimg.cc/jdh0TxGj/Givenchy.png"
+  },
+
+  {
+    "name": "New Balance",
+    "imagePath": "https://i.postimg.cc/FHstHt4V/New-Balance.png"
+  },
+
+  {
+    "name": "Nike",
+    "imagePath": "https://i.postimg.cc/SKJwcWjX/Nike.png"
+  },
+
+  {
+    "name": "Puma",
+    "imagePath": "https://i.postimg.cc/s2qbmvZT/Puma.png"
+  },
+
+  {
+    "name": "Under Armour",
+    "imagePath": "https://i.postimg.cc/8zy2FykQ/Under-Armour.png"
+  },
+
+  {
+    "name": "Vans",
+    "imagePath": "https://i.postimg.cc/hvq6F6sx/Vans.png"
+  },
+
+  {
+    "name": "Champion",
+    "imagePath": "https://i.postimg.cc/pXrqC5nK/Champion.png"
+  },
+
+  {
+    "name" : "Wilson",
+    "imagePath": "https://i.postimg.cc/cC0ST0dj/Wilson.png"
+  }
+]

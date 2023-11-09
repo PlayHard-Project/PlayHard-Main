@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -25,3 +21,33 @@
     transform: rotate(360deg);
   }
 }
+
+.slick-slider {
+  /*background-color: aquamarine;*/
+  padding-left: 20px;
+}
+
+.slick-prev {
+  z-index: 1;
+  /* background-color: red !important; */
+}
+.slick-next {
+  z-index: 1;
+  /* background-color: red !important; */
+}
+
+.slick-dots li button:before {
+  color: rgb(112, 112, 112) !important;
+  font-size: 10px !important;
+  margin-top: 10px;
+}
+/*
+.slick-dots button {
+   background-color: blue !important; 
+}*/
+
+.slick-dots li.slick-active button:before {
+  color: black !important;
+  /* font-size: 12px !important; */
+}
+

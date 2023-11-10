@@ -1,62 +1,29 @@
-import React, { useState } from 'react';
-import { getElements } from './Components/ApiRestHandler/requestHandler';
-import BuyNowSection from './Views/BuyNowSection';
-import BrandsSection from "./Views/BrandsSection";
-import {Route, Routes} from "react-router-dom";
+import React from 'react';
+import Footer from './Views/BaseViews/Footer.jsx';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
+import Home from "./Views/Pages/Home.jsx";
+import Header from './Views/BaseViews/Header.jsx';
+import Shop from './Views/Pages/Shop.jsx';
+import About from './Views/Pages/About.jsx';
+import Pages from './Views/Pages/Pages.jsx';
+import Contact from './Views/Pages/Contact.jsx';
+
 
 export default function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleGetProductsClick = () => {
-    setLoading(true);
-
-    getElements('/products')
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error al obtener los productos:', error);
-        setLoading(false);
-      });
-  };
-
-  return (
-      <Routes>
-          <Route path="/" element={
-              <div className="App">
-                  <section>
-                      <BuyNowSection className="main-container"/>
-                  </section>
-                  <section>
-                      <BrandsSection/>
-                  </section>
-                  <header className="App-header">
-                      <p>DEVELOPMENT environment</p>
-                      <div>
-                          <h1>Tu Aplicación</h1>
-                          <h2>Obtener los Productos</h2>
-                          <button onClick={handleGetProductsClick} disabled={loading}>
-                              Get All Products
-                          </button>
-                      </div>
-                      {loading ? (
-                          <p>Cargando productos...</p>
-                      ) : (
-                          <ul>
-                              {products.map((product) => (
-                                  <li key={product.name}>
-                                      <h3>{product.name}</h3>
-                                      <p>{product.description}</p>
-                                      <p>Precio: {product.price} {product.currency}</p>
-                                  </li>
-                              ))}
-                          </ul>
-                      )}
-                  </header>
-              </div>
-          }/>
-      </Routes>
-  );
+    return (
+        <Router>
+            <Header/>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/product/:id" element={<ProductSection />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/pages" element={<Pages />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
+            <Footer />
+        </Router>
+    );
 }

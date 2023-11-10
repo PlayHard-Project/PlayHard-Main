@@ -1,19 +1,15 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getElements } from "../Components/ApiRestHandler/requestHandler";
+import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 import {useEffect, useRef, useState} from "react";
-import "./BrandsSection.css";
+import "../../css/BrandsSection.css";
 import {Link, Route, Routes} from "react-router-dom";
 
 export default function BrandsSection() {
     const sliderRef = useRef();
     const [data, setData] = useState([]);
     const dataPromise = getElements('/brands');
-
-    const goBrandProduct = () => {
-        console.log("Change to products of the brand")
-    }
 
     const sliderSettings = {
         dots: false,
@@ -28,8 +24,19 @@ export default function BrandsSection() {
         dataPromise.then(data => {
             setData(data)
         })
+
+        const interval = setInterval(() => {
+            sliderRef.current.slickNext();
+        }, 10000);
+
+        return () => clearInterval(interval);
     }, []);
 
+    const handleDoubleClick = () => {
+        // Perform any additional logic if needed
+        console.log('Double clicked! Redirecting...');
+        // Add your redirection logic here
+    };
 
     return (
       <section className="brands-container">
@@ -40,7 +47,10 @@ export default function BrandsSection() {
               {
                   data.map((item) => (
                       <div key={item._id} className="logo-container">
-                          <img src={item.imagePath} className="brand-logo" alt={item.name + " logo"}/>
+                          <Link to={"brands/" + item.name} onDoubleClick={handleDoubleClick}>
+                              <img src={item.imagePath} className="brand-logo" alt={item.name + " logo"}/>
+                          </Link>
+                          <label>{item.name}</label>
                       </div>
                   ))
               }

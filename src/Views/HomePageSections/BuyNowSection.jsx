@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./BuyNowSection.css";
-import { data } from "../Components/Objects/CoverBuyNowSection";
-import {ProductButtons} from "../Components/DeleteThisButton";
+import "../../css/BuyNowSection.css";
+import { data } from "../../Components/Objects/CoverBuyNowSection";
+import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 
 export default function BuyNowSection() {
   const sliderRef = useRef();
@@ -56,7 +56,7 @@ export default function BuyNowSection() {
         </Slider>
       </section>
       {!isTransitioning && (
-        <button className={`buy-now ${isTransitioning ? "hidden" : ""}`}> Buy Now </button>)}
+        <button className={`buy-now ${isTransitioning ? "hidden-button" : ""}`}> Buy Now </button>)}
       <button className="navigation-button-prev" onClick={handlePrevClick}>
         <img
           className="arrow-icon"

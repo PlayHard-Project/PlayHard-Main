@@ -1,8 +1,5 @@
 import React from "react";
 import "../css/Footer.css";
-import facebookLogo from "../../Images/facebook-logo.png";
-import instagramLogo from "../../Images/instagram-logo.png";
-import xLogo from "../../Images/x-logo.png";
 
 const Footer = () => {
   return (
@@ -47,9 +44,9 @@ const Footer = () => {
             <h4 className="footer-title">Follow us </h4>
           </h4>
           <div className="social-networks">
-            <img src={facebookLogo} alt="Facebook logo" />
-            <img src={instagramLogo} alt="Instagram logo" />
-            <img src={xLogo} alt="X logo" />
+            <img src="https://i.postimg.cc/d3wGtdg4/facebook-logo.png" alt="Facebook logo" />
+            <img src="https://i.postimg.cc/050pXWJ3/instagram-logo.png" alt="Instagram logo" />
+            <img src="https://i.postimg.cc/j2cPW2bK/x-logo.png" alt="X logo" />
           </div>
         </div>
       </div>

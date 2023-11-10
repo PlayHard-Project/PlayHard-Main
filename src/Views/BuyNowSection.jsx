@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/BuyNowSection.css";
 import { data } from "../Components/Objects/CoverBuyNowSection";
+import {ProductButtons} from "../Components/DeleteThisButton";
 
 export default function BuyNowSection() {
   const sliderRef = useRef();

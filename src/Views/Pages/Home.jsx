@@ -23,8 +23,7 @@ export default function Home() {
     };
 
     return (
-        <div className="App">
-            <h1>Hola </h1>
+        <div className="App container">
             <section>
                 <BuyNowSection className="main-container"/>
             </section>

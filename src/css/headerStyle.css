@@ -250,6 +250,9 @@
 }
 
 @media only screen and (max-width: 1039px) {
+    .search-container{
+        width: 220px;
+    }
     .header .background-shape {
         height: 66px;
     }

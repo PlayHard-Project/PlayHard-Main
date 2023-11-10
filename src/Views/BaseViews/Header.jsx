@@ -88,7 +88,7 @@ const Header = () => {
             />
           </button>
         </div>
-        <div className="lg:hidden space-x-4 relative mr-10">
+        <div className="lg:hidden space-x-4 relative mr-3">
           <div className="flex items-center space-x-4">
             <div onClick={toggleSearchPopup}>
               <img src={searchIcon} alt="Search Icon" className="style-icon" />

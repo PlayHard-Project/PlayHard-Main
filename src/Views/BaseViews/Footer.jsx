@@ -3,7 +3,7 @@ import "../../css/Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer container">
       <div className="footer-right">
         <div className="footer-column">
           <h4 className="footer-title">Get Started</h4>
@@ -41,7 +41,7 @@ const Footer = () => {
             </li>
           </ul>
           <h4 className="footer-column">
-            <h4 className="footer-title">Follow us </h4>
+            <h4 className="footer-title">Follow Us </h4>
           </h4>
           <div className="social-networks">
             <img src="https://i.postimg.cc/d3wGtdg4/facebook-logo.png" alt="Facebook logo" />

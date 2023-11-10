@@ -1,8 +1,8 @@
+import '../../css/HomeStyle.css'
 import React, { useState } from 'react';
 import { getElements } from '../../Components/ApiRestHandler/requestHandler';
-import BuyNowSection from "../../Views/BuyNowSection";
-import './HomeStyle.css'
-import {ProductButtons} from "../../Components/DeleteThisButton";
+import BuyNowSection from "../HomePageSections/BuyNowSection";
+import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -23,7 +23,7 @@ export default function Home() {
     };
 
     return (
-        <div className="App">
+        <div className="App container">
             <section>
                 <BuyNowSection className="main-container"/>
             </section>

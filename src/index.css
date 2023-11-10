@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container{
+    max-width: 100%;
+    padding-left: 58px;
+    padding-right: 58px;
+}
+@media (max-width: 1208px) {
+    .container{
+        padding-left: 58px;
+        padding-right: 58px;
+    }
+}
+@media (max-width: 992px) {
+    .container{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 867px) {
+    .container{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 700px) {
+    .container{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

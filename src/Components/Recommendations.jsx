@@ -3,7 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Recommendations.css";
-import BasicCard from "../Components/Objects/Card";
+import BasicCard from "./Card";
+import { data } from "../Components/Objects/RecommendationsContent";
 
 export default function Recommendations() {
   const sliderRef = useRef();
@@ -71,7 +72,7 @@ export default function Recommendations() {
       <section className="image-container">
         <h1 className="main-title"> RECOMMENDED </h1>
         <Slider ref={sliderRef} {...sliderSettings}>
-          {products?.map((item, index) => {
+          {data?.map((item, index) => {
             return <BasicCard item={item} />;
           })}
         </Slider>
@@ -97,37 +98,3 @@ export default function Recommendations() {
     </section>
   );
 }
-
-const products = [
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-  {
-    name: "zapatito zapatote",
-    image: "https://cdn.pixabay.com/photo/2023/10/27/09/24/mountains-8344601_1280.jpg",
-    price: "Bs. 140",
-  },
-];

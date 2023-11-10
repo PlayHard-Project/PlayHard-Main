@@ -3,8 +3,8 @@
 }
 
 .image-container {
-  margin: 120px;
-
+  position: center;
+  margin: 130px;
 }
 
 .main-title {
@@ -54,7 +54,4 @@
   display: none;
 }
 
-.responsive {
-  width: 100%;
-  height: auto;
-}
+

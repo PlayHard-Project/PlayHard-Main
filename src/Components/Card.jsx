@@ -10,6 +10,7 @@ function BasicCard({ item }) {
         border: "1px solid rgb(49, 54, 61)",
         backgroundColor: "#fff",
         color: "#000",
+        textIndent: "10px",
       }}
     >
       <Card.Img variant="top" src={item?.image} />

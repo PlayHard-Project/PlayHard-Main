@@ -14,12 +14,10 @@ export function ProductSection() {
                         productID={id}
                     />
                 </div>
-                <div className="w-full h-250 mx-auto">
+                <div className="flex flex-col justify-center w-full mx-auto">
                     <Recommendations/>
                 </div>
             </div>
-            {/* Include Recommendations component below */}
-            
         </>
     )
 }

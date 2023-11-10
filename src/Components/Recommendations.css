@@ -3,8 +3,10 @@
 }
 
 .image-container {
-  position: center;
-  margin: 130px;
+    align-items: center;
+    height: 100%;
+    margin-top: 50px;
+    margin-left: 200px;
 }
 
 .main-title {
@@ -53,5 +55,3 @@
 .hidden {
   display: none;
 }
-
-

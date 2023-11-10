@@ -1,3 +1,4 @@
+import React from 'react';
 import Footer from './Views/BaseViews/Footer.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";

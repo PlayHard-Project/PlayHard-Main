@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../css/BuyNowSection.css";
-import { data } from "../Components/Objects/CoverBuyNowSection";
+import "../../css/BuyNowSection.css";
+import { data } from "../../Components/Objects/CoverBuyNowSection";
+import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 
 export default function BuyNowSection() {
   const sliderRef = useRef();

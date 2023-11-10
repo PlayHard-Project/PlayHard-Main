@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from './Views/BaseViews/Footer.jsx';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
 import Home from "./Views/Pages/Home.jsx";
 import Header from './Views/BaseViews/Header.jsx';

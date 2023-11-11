@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Recommendations.css";
 import BasicCard from "./Card";
-import { data } from "../Components/Objects/RecommendationsContent";
+import { data } from "../../Components/Objects/RecommendationsContent";
 
 export default function Recommendations() {
   const sliderRef = useRef();

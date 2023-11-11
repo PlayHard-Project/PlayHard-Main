@@ -1,0 +1,24 @@
+.brands-container {
+    width: 100%;
+    height: 100%;
+}
+
+.brand-logo {
+    border: 3px solid #000000;
+    border-radius: 50%;
+}
+
+.section-title {
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    text-align: left;
+}
+
+.title-container {
+    margin-bottom: 20px;
+}
+
+.logo-container {
+    padding: 10px;
+}

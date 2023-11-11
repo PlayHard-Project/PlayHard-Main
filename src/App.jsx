@@ -1,29 +1,29 @@
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import { ProductSection } from "./Pages/ProductSection";
+import React from 'react';
+import Footer from './Views/BaseViews/Footer.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
+import Home from "./Views/Pages/Home.jsx";
+import Header from './Views/BaseViews/Header.jsx';
+import Shop from './Views/Pages/Shop.jsx';
+import About from './Views/Pages/About.jsx';
+import Pages from './Views/Pages/Pages.jsx';
+import Contact from './Views/Pages/Contact.jsx';
 
-
-{/* BORRAR ESTE COMPONENTE, SOLO ESTA PARA EL TESTEO*/}
-function ProductButtons() {
-    const productIds = ['654c436360c78adccb61fc21', '654c436360c78adccb61fc42', '654c436360c78adccb61fbec'];
-
-    return (
-        <div className={'flex flex-col items-center text-center justify-center max-w-7xl'}>
-            {productIds.map(id => (
-                <Link key={id} to={`/product/${id}`}>
-                    <button>Ir a producto {id}</button>
-                </Link>
-            ))}
-        </div>
-    );
-}
 
 export default function App() {
     return (
         <Router>
+            <Header/>
             <Routes>
-                <Route path="/" element={<ProductButtons />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductSection />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/pages" element={<Pages />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }

@@ -24,7 +24,7 @@ function CustomCard({ item }) {
           borderTopRightRadius: '4px',
         }}
       />
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '5%', textAlign: "left" }}>
         <h3 style={{ marginBottom: '8px' }}>{item.name}</h3>
         <p>{item.price}</p>
       </div>

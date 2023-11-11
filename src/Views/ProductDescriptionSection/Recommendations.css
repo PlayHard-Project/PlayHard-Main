@@ -5,10 +5,9 @@
 }
 
 .image-container {
-    align-items: center;
-    margin: auto;
-    height: 100%;
-    /*margin-left: 10%;*/
+  align-items: center;
+  margin: auto;
+  height: 100%;
 }
 
 .main-title {

@@ -4,6 +4,7 @@ import { getElements } from '../../Components/ApiRestHandler/requestHandler';
 import BuyNowSection from "../HomePageSections/BuyNowSection";
 import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 import BrandsSection from "../HomePageSections/BrandsSection";
+import ForCategorySection from "../HomePageSections/ForCategorySection";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -31,6 +32,10 @@ export default function Home() {
             <section>
                 <BrandsSection>
                 </BrandsSection>
+            </section>
+            <section>
+                <ForCategorySection>
+                </ForCategorySection>
             </section>
             <header className="App-header">
                 <p>DEVELOPMENT environment</p>

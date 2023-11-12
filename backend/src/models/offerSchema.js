@@ -21,4 +21,4 @@ const offerSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Offer", brandSchema);
+module.exports = mongoose.model("Offer", offerSchema);

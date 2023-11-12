@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Ping Pong Paddles Offer",
+        "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699764351/Offers/wk66kf1lehyzb185p9mz.png",
+        "reactRoute": "",
+        "idProduct": ""
+        
+    },
+    {
+        "name": "Adidas Sneakers Offer",
+        "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699764351/Offers/hz3valsi7tvqnywba5rj.png",
+        "reactRoute": "",
+        "idProduct": ""
+    },
+    {
+        "name": "Sports Set Offer",
+        "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699764351/Offers/wl99mk2ujttx2uam8pjf.png",
+        "reactRoute": "",
+        "idProduct": ""
+    }
+]

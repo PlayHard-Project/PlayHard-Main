@@ -6,12 +6,12 @@ import data from "../../Components/fillDBScripts/FilledOffers.json";
 
 export default function OffersSection() {
   return (
-    <section className="slider-container1">
-      <h1 className="title">Offers</h1>
-      <section className="image-container1">
-        {data.map((item, index) => (
+    <section className="section-container">
+      <h1 className="title-section">Offers</h1>
+      <section className="covers-container">
+        {data.map((item) => (
           <div key={item.id}>
-            <img src={item.imagePath} alt={`CoverImg-${item.id}`} className="responsive1" />
+            <img src={item.imagePath} alt={`offerImg-${item.id}`} className="img-responsive" />
           </div>
         ))}
       </section>

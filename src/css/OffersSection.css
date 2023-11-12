@@ -1,15 +1,15 @@
-.slider-container1 {
+.section-container {
   position: relative;
 }
 
-.title {
+.title-section {
   margin-bottom: 15px;
   font-family: "Montserrat", sans-serif;
   font-size: 32px;
   text-align: right;
 }
 
-.image-container1 {
+.covers-container {
   padding-left: 0.2rem;
   padding-right: 0.1rem;
   padding-bottom: 0.3rem;
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.responsive1 {
+.img-responsive {
   width: 100%;
   height: auto;
   max-width: calc(100% - 10px);

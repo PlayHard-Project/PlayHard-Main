@@ -8,7 +8,7 @@ export function ProductButtons() {
         <div className={'flex flex-col gap-6 items-center text-center justify-center max-w-7xl'}>
             {productIds.map(id => (
                 <Link key={id} to={`/product/${id}`}>
-                    <button className={'bg-blue-900 p-5'}>Ir a producto {id}</button>
+                    <button className={'bg-blue-500 p-5'}>Ir a producto {id}</button>
                 </Link>
             ))}
         </div>

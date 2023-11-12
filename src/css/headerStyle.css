@@ -1,7 +1,11 @@
 /* headerStyle.css */
-
 .header {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    background: #ffffff;
+    width: 100vw;
+    margin-top: -6px;
+    z-index: 10000;
 }
 
 .header .background-shape {
@@ -14,14 +18,24 @@
     font-family: "Montserrat", cursive;
     transition: color 0.3s, text-decoration 0.3s;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 15px;
     margin-left: 10px;
     font-size: 18px;
 }
+
+.header .text-active{
+    color: #72a3ff;
+}
+
+.header .text:last-child{
+    margin-right: 10px;
+}
+
 .header .text:hover {
     font-weight: bold;
     text-decoration: underline;
     transform: scale(1.1);
+    color: #72a3ff;
 }
 
 .header .text:active {
@@ -39,9 +53,13 @@
     padding-bottom: 2px;
     font-size: 14px;
 }
+.header .text-link-active{
+    color: #72a3ff;
+}
 
 .header .text-link:hover {
     font-weight: bold;
+    color: #72a3ff;
     text-decoration: underline;
     transform: scale(1.1);
 }

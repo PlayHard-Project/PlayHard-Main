@@ -59,14 +59,14 @@ export default function BuyNowSection() {
       <button className="navigation-button-prev" onClick={handlePrevClick}>
         <img
           className="arrow-icon"
-          src="https://i.postimg.cc/sD4Y649N/iconmonstr-arrow-64-240.png"
+          src="https://res.cloudinary.com/playhardimages/image/upload/v1699733290/Icons/iconmonstr-arrow-64-240.png"
           alt="Previous"
         />
       </button>
       <button className="navigation-button-next" onClick={handleNextClick}>
         <img
           className="arrow-icon"
-          src="https://i.postimg.cc/mgZQ01m2/iconmonstr-arrow-63-240.png"
+          src="https://res.cloudinary.com/playhardimages/image/upload/v1699733290/Icons/iconmonstr-arrow-63-240.png"
           alt="Previous"
         />
       </button>

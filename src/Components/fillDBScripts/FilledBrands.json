@@ -1,56 +1,56 @@
 [
   {
     "name": "Adidas",
-    "imagePath": "https://i.postimg.cc/90d3rC0J/Adidas.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Adidas.png"
   },
 
   {
     "name": "Asics",
-    "imagePath": "https://i.postimg.cc/ZKmtXBsg/Asics.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Asics.png"
   },
 
   {
     "name": "Fila",
-    "imagePath": "https://i.postimg.cc/pVzM0YCz/Fila.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Fila.png"
   },
 
   {
     "name": "Givenchy",
-    "imagePath": "https://i.postimg.cc/jdh0TxGj/Givenchy.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Givenchy.png"
   },
 
   {
     "name": "New Balance",
-    "imagePath": "https://i.postimg.cc/FHstHt4V/New-Balance.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/New-Balance.png"
   },
 
   {
     "name": "Nike",
-    "imagePath": "https://i.postimg.cc/SKJwcWjX/Nike.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Nike.png"
   },
 
   {
     "name": "Puma",
-    "imagePath": "https://i.postimg.cc/s2qbmvZT/Puma.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Puma.png"
   },
 
   {
     "name": "Under Armour",
-    "imagePath": "https://i.postimg.cc/8zy2FykQ/Under-Armour.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/UnderArmour.png"
   },
 
   {
     "name": "Vans",
-    "imagePath": "https://i.postimg.cc/hvq6F6sx/Vans.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Vans.png"
   },
 
   {
     "name": "Champion",
-    "imagePath": "https://i.postimg.cc/pXrqC5nK/Champion.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Champion.png"
   },
 
   {
     "name" : "Wilson",
-    "imagePath": "https://i.postimg.cc/cC0ST0dj/Wilson.png"
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Wilson.png"
   }
 ]

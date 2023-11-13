@@ -1,8 +1,12 @@
 import '../../css/HomeStyle.css'
 import React, { useState } from 'react';
 import { getElements } from '../../Components/ApiRestHandler/requestHandler';
-import BuyNowSection from "../HomePageSections/BuyNowSection";
 import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
+import BuyNowSection from "../HomePageSections/BuyNowSection";
+import BrandsSection from "../HomePageSections/BrandsSection";
+import ForCategorySection from "../HomePageSections/ForCategorySection";
+import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
+import OffersSection from '../HomePageSections/OffersSection';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -27,17 +31,29 @@ export default function Home() {
             <section>
                 <BuyNowSection className="main-container"/>
             </section>
+            <section>
+                <BrandsSection/>
+            </section>
+            <section>
+                <OffersSection/>
+            </section>
+            <section>
+                <ForCategorySection>
+                </ForCategorySection>
+            </section>
+            <section>
+                <CategoryHomeSection>
+                </CategoryHomeSection>
+            </section>
             <header className="App-header">
                 <p>DEVELOPMENT environment</p>
                 <div>
-                    <h1>Tu Aplicación</h1>
-                    <h2>Obtener los Productos</h2>
                     <button onClick={handleGetProductsClick} disabled={loading}>
                         Get All Products
                     </button>
                 </div>
                 {loading ? (
-                    <p>Cargando productos...</p>
+                    <p>Loading...</p>
                 ) : (
                     <ul>
                         {products.map((product) => (

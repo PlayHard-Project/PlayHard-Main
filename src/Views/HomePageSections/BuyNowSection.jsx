@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../css/BuyNowSection.css";
 import { data } from "../../Components/Objects/CoverBuyNowSection";
-import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 
 export default function BuyNowSection() {
   const sliderRef = useRef();
@@ -41,8 +40,8 @@ export default function BuyNowSection() {
   }, []);
 
   return (
-    <section className="slider-container">
-      <section className="image-container">
+    <section className="slider-container-buy-now">
+      <section className="image-container-buy-now">
         <Slider ref={sliderRef} {...sliderSettings}>
           {data.map((item) => (
             <div key={item.id} className="container-image">
@@ -60,14 +59,14 @@ export default function BuyNowSection() {
       <button className="navigation-button-prev" onClick={handlePrevClick}>
         <img
           className="arrow-icon"
-          src="https://i.postimg.cc/sD4Y649N/iconmonstr-arrow-64-240.png"
+          src="https://res.cloudinary.com/playhardimages/image/upload/v1699733290/Icons/iconmonstr-arrow-64-240.png"
           alt="Previous"
         />
       </button>
       <button className="navigation-button-next" onClick={handleNextClick}>
         <img
           className="arrow-icon"
-          src="https://i.postimg.cc/mgZQ01m2/iconmonstr-arrow-63-240.png"
+          src="https://res.cloudinary.com/playhardimages/image/upload/v1699733290/Icons/iconmonstr-arrow-63-240.png"
           alt="Previous"
         />
       </button>

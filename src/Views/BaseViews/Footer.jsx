@@ -44,9 +44,12 @@ const Footer = () => {
             <h4 className="footer-title">Follow Us </h4>
           </h4>
           <div className="social-networks">
-            <img src="https://i.postimg.cc/d3wGtdg4/facebook-logo.png" alt="Facebook logo" />
-            <img src="https://i.postimg.cc/050pXWJ3/instagram-logo.png" alt="Instagram logo" />
-            <img src="https://i.postimg.cc/j2cPW2bK/x-logo.png" alt="X logo" />
+            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734518/SocialNetworks/facebook-logo.png"
+                 alt="Facebook logo" />
+            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/instagram-logo.png"
+                 alt="Instagram logo" />
+            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/x-logo.png"
+                 alt="X logo" />
           </div>
         </div>
       </div>

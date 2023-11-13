@@ -23,5 +23,10 @@
   height: auto;
   max-width: calc(100% - 10px);
   max-height: 520px; 
-  margin-right: 10px;
+  margin-right: 15px;
+  transition: box-shadow 0.2s;
+}
+
+.img-responsive:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); 
 }

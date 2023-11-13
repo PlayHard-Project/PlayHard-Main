@@ -1,0 +1,28 @@
+.crud-container {
+    margin: 20px;
+    justify-items: center;
+    align-content: center;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.response-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crud-button {
+    background-color: #52a0ef;
+    padding: 5px;
+    font-family: Monospaced, Arial, Symbol, serif;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.textfield {
+    padding: 5px;
+}

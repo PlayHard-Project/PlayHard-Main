@@ -5,6 +5,7 @@ import BuyNowSection from "../HomePageSections/BuyNowSection";
 import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
 import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
+import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -37,11 +38,13 @@ export default function Home() {
                 <ForCategorySection>
                 </ForCategorySection>
             </section>
+            <section>
+                <CategoryHomeSection>
+                </CategoryHomeSection>
+            </section>
             <header className="App-header">
                 <p>DEVELOPMENT environment</p>
                 <div>
-                    <h1>Tu Aplicación</h1>
-                    <h2>Obtener los Productos</h2>
                     <button onClick={handleGetProductsClick} disabled={loading}>
                         Get All Products
                     </button>

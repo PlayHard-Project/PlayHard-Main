@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../css/Recommendations.css";
@@ -34,7 +33,7 @@ export default function Recommendations() {
     swipeToSlide: true,
     responsive: [
       {
-        breakpoint: 1450,
+        breakpoint: 1500,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -44,7 +43,7 @@ export default function Recommendations() {
       },
 
       {
-        breakpoint: 1300,
+        breakpoint: 1250,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -53,7 +52,7 @@ export default function Recommendations() {
         },
       },
       {
-        breakpoint: 650,
+        breakpoint: 770,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -79,9 +78,7 @@ export default function Recommendations() {
         <Slider ref={sliderRef} {...sliderSettings}>
           {products.slice(indexZero, lastIndex).map((item) => {
             return (
-              <Link key={item._id} to={`/product/${item._id}`}>
                 <BasicCard item={item} />
-              </Link>
             );
           })}
         </Slider>

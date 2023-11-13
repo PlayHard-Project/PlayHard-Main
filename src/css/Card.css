@@ -15,11 +15,14 @@
 
 .card-content {
   padding: 3%;
-  text-align: left;
   margin-left: 2%;
   margin-right: 2%;
 }
 
 .card-title {
   margin-bottom: 8px;
+}
+
+.card-title:hover {
+  color: #72a3ff;
 }

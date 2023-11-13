@@ -1,19 +1,22 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import '../../css/Card.css';
 
 function CustomCard({ item }) {
   return (
-    <button className="custom-card">
+    <div className="custom-card">
       <img
         src={item?.imagePath[0]}
         alt={item?.name}
         className="card-image"
       />
       <div className="card-content">
-        <h3 className="card-title">{item.name}</h3>
+        <Link key={item._id} to={`/product/${item._id}`}>
+          <button className="card-title">{item.name}</button>
+        </Link>
         <p className="card-price">Bs. {item.price}</p>
       </div>
-    </button>
+    </div>
   );
 }
 

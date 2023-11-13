@@ -40,8 +40,8 @@ export default function BuyNowSection() {
   }, []);
 
   return (
-    <section className="slider-container">
-      <section className="image-container">
+    <section className="slider-container-buy-now">
+      <section className="image-container-buy-now">
         <Slider ref={sliderRef} {...sliderSettings}>
           {data.map((item) => (
             <div key={item.id} className="container-image">

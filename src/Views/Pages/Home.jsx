@@ -1,11 +1,12 @@
 import '../../css/HomeStyle.css'
 import React, { useState } from 'react';
 import { getElements } from '../../Components/ApiRestHandler/requestHandler';
-import BuyNowSection from "../HomePageSections/BuyNowSection";
 import {ProductButtons} from "../ProductDescriptionSection/DeleteThisButton";
+import BuyNowSection from "../HomePageSections/BuyNowSection";
 import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
 import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
+import OffersSection from '../HomePageSections/OffersSection';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -31,8 +32,10 @@ export default function Home() {
                 <BuyNowSection className="main-container"/>
             </section>
             <section>
-                <BrandsSection>
-                </BrandsSection>
+                <BrandsSection/>
+            </section>
+            <section>
+                <OffersSection/>
             </section>
             <section>
                 <ForCategorySection>
@@ -50,7 +53,7 @@ export default function Home() {
                     </button>
                 </div>
                 {loading ? (
-                    <p>Cargando productos...</p>
+                    <p>Loading...</p>
                 ) : (
                     <ul>
                         {products.map((product) => (

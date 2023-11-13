@@ -8,6 +8,8 @@ const productsRoutes = require('./src/routes/productRoute');
 const usersRoutes = require('./src/routes/userRoute');
 const brandsRoutes = require('./src/routes/brandRoute');
 const ordersRoutes = require('./src/routes/orderRoute');
+const offersRoutes = require('./src/routes/offerRoute');
+
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -18,6 +20,7 @@ app.use('/api', productsRoutes);
 app.use('/api', usersRoutes);
 app.use('/api', brandsRoutes);
 app.use('/api', ordersRoutes);
+app.use('/api', offersRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to Full API Rest Playhard E-commerce");

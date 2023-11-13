@@ -24,7 +24,7 @@ function ProductInformation({ productID }) {
   return (
     <div
       className={
-        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center "
+        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
       }
     >
       <div

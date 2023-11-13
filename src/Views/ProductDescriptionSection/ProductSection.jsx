@@ -13,7 +13,7 @@ export function ProductSection() {
       </div>
       
       <div className="flex flex-col justify-center w-full mx-auto">
-        <Recommendations/>
+        <Recommendations />
       </div>
     </div>
   );

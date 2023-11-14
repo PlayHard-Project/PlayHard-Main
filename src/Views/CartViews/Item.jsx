@@ -3,27 +3,37 @@ import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
 
 const Item = ( props ) => {
+    const [activeItem, setActiveItem] = useState(true);
     const { productID, size, color, quantity } = props;
     /*const data = getElementByID(productID, '/products');*/
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
     const [productName, setProductName] = useState("Product Name");
     const [productPrice, setProductPrice] = useState("69.69");
+    const [productSize, setProductSize] = useState("A size")
+    const [productColor, setProductColor] = useState("A color")
+
+    const [itemsOnStock, setItemsOnStock] = useState(1);
+
     dataPromise.then(
         (product) => {
-            setProductImg(product.imagePath[0]);
+            setProductImg(product.colorInformation[color].imagePath);
             setProductName(product.name);
             setProductPrice(product.price);
+            setProductSize(product.size[size]);
+            setProductColor(product.colorInformation[color].color)
+            setItemsOnStock(product.inStock[size][color])
         }
     );
-
-    const productSize = size;
-    const productColor = color;
     let [productQuantity, setProductQuantity] = useState(quantity);
     const currency = "$";
 
     const incrementQuantity = () => {
-        setProductQuantity(productQuantity + 1);
+        if (productQuantity + 1 <= itemsOnStock) {
+            setProductQuantity(productQuantity + 1);
+        } else {
+            alert("We don't have more on stock")
+        }
     }
 
     const decrementQuantity = () => {
@@ -34,6 +44,11 @@ const Item = ( props ) => {
 
     const deleteItem = () => {
         console.log("deleting item")
+        setActiveItem(false);
+    }
+
+    if (!activeItem) {
+        return null;
     }
 
     return (

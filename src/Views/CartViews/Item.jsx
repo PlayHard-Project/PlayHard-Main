@@ -1,13 +1,25 @@
 import {useState} from "react";
+import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
 
-const Item = () => {
-    const productImg = "https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1"
-    const productName = "Product Name";
-    const productSize = "XL";
-    const productColor = "Yellow";
-    const productPrice = "99.99";
-    let [productQuantity, setProductQuantity] = useState(1);
+const Item = ( props ) => {
+    const { productID, size, color, quantity } = props;
+    /*const data = getElementByID(productID, '/products');*/
+    const dataPromise = getElementByID(productID, "/products");
+    const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
+    const [productName, setProductName] = useState("Product Name");
+    const [productPrice, setProductPrice] = useState("69.69");
+    dataPromise.then(
+        (product) => {
+            setProductImg(product.imagePath[0]);
+            setProductName(product.name);
+            setProductPrice(product.price);
+        }
+    );
+
+    const productSize = size;
+    const productColor = color;
+    let [productQuantity, setProductQuantity] = useState(quantity);
     const currency = "$";
 
     const incrementQuantity = () => {

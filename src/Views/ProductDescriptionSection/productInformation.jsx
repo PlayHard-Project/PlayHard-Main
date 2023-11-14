@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
+import BuyCartManagement from '../../Utilities/BuyCartManagement'
 
 function ProductInformation({ productID }) {
   const [product, setProduct] = useState(null);
@@ -7,6 +8,9 @@ function ProductInformation({ productID }) {
   const [selectedColor, setSelectedColor] = useState("---");
   const [selectSize, setSelectedSize] = useState("---");
   const [quantity, setQuantity] = useState(0);
+
+  const [buyCart, setBuyCart] = useState([]);
+  const buyCartManagement = new BuyCartManagement();
 
   useEffect(() => {
     getElementByID(productID, "products")
@@ -16,6 +20,17 @@ function ProductInformation({ productID }) {
       })
       .catch((err) => console.error(err));
   }, [productID]);
+
+  useEffect(() => {
+    setBuyCart(buyCartManagement.getProducts())
+  }, []);
+
+  useEffect(() => {
+    if (product && product.colorInformation.length === 0) {
+      setSelectedColor('default');
+    }
+  }, [product]);
+
 
   if (product === null) {
     return <div>Loading...</div>;
@@ -36,9 +51,10 @@ function ProductInformation({ productID }) {
           alt={"imagen del producto"}
         />
         <div className={"flex flex-row justify-between h-16 md:h-24"}>
-          {product.imagePath.map((images) => (
+          {product.imagePath.map((images, index) => (
             <img
               src={images}
+              key={index}
               className={
                 "h-16 w-16 md:h-24 md:w-24  rounded-md object-cover cursor-pointer"
               }
@@ -76,24 +92,27 @@ function ProductInformation({ productID }) {
             ))}
           </div>
         </div>
-        <div className={"gap-5"}>
-          <span className={"text-gray-700"}>
-            <span className={"font-bold text-blue-800"}>Color:</span>{" "}
-            {selectedColor}
-          </span>
-          <div className={"flex flex-row gap-3 "}>
-            {product.colorInformation.map((color) => (
-              <button
-                style={{ backgroundColor: color.hex }}
-                className="border-2 rounded-full px-3 py-2 w-10 h-10"
-                onClick={() => {
-                  setSelectedColor(color.color);
-                  setActiveImg(color.imagePath);
-                }}
-              ></button>
-            ))}
-          </div>
-        </div>
+        {product.colorInformation.length > 0 && (
+            <div className={"gap-5"}>
+              <span className={"text-gray-700"}>
+                <span className={"font-bold text-blue-800"}>Color:</span>{" "}
+                {selectedColor}
+              </span>
+              <div className={"flex flex-row gap-3 "}>
+                {product.colorInformation.map((color, index) => (
+                    <button
+                        key={index}
+                        style={{ backgroundColor: color.hex }}
+                        className="border-2 rounded-full px-3 py-2 w-10 h-10"
+                        onClick={() => {
+                          setSelectedColor(color.color);
+                          setActiveImg(color.imagePath);
+                        }}
+                    ></button>
+                ))}
+              </div>
+            </div>
+        )}
 
         <div className={"flex flex-row gap-5 items-center"}>
           <div className={"flex flex-row items-center"}>
@@ -120,14 +139,22 @@ function ProductInformation({ productID }) {
             </button>
           </div>
 
-          <a
+          <button
             className={
               "bg-blue-800 text-white font-semibold py-3 px-6 block flex-grow" +
               " text-center hover:bg-blue-900"
             }
+            onClick={() => {
+              if (quantity !== "---" && selectedColor !== "---" && selectSize !== "---") {
+                buyCartManagement.addProduct(productID, quantity, selectSize, selectedColor);
+                const updatedCart = buyCartManagement.getProducts();
+                setBuyCart(updatedCart);
+                console.log(updatedCart); //TODO: ELIMINAR ESTA LINEA, EXISTE SOLO PARA EL TESTEO
+              }
+            }}
           >
             Add to cart
-          </a>
+          </button>
         </div>
       </div>
     </div>

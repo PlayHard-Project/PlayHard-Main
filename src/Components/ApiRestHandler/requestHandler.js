@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const { execSync } = require('child_process');
 const currentBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-
 const apiURL = currentBranch === 'test' ? 'https://backend-fullapirest-test.onrender.com' : 'https://backend-fullapirest.onrender.com/api/';
 
 export const addElement = async (newElement, route) => {

@@ -2,9 +2,6 @@ import axios from 'axios';
 
 const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com' : 'https://backend-fullapirest.onrender.com/api/';
 
-console.log(process.env.REACT_APP_BRANCH);
-console.log(apiURL);
-
 export const addElement = async (newElement, route) => {
   try {
     const response = await axios.post(apiURL + route, newElement);

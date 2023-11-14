@@ -9,7 +9,8 @@ const usersRoutes = require('./src/routes/userRoute');
 const brandsRoutes = require('./src/routes/brandRoute');
 const ordersRoutes = require('./src/routes/orderRoute');
 const offersRoutes = require('./src/routes/offerRoute');
-
+const { execSync } = require('child_process');
+const currentBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -26,8 +27,11 @@ app.get('/', (req, res) => {
     res.send("Welcome to Full API Rest Playhard E-commerce");
 });
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log("-> Sucesfully connection to MongoDB Atlas."))
-.catch((error) => console.error(error));
+const mongodbURI = currentBranch === 'test' ? process.env.MONGODB_URI_QA : process.env.MONGODB_URI;
+console.log(currentBranch);
+
+mongoose.connect(mongodbURI)
+    .then(() => console.log("-> Successfully connected to MongoDB Atlas."))
+    .catch((error) => console.error(error));
 
 app.listen(port, () => console.log("-> Server is listening on port ", port));

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 import BuyCartManagement from '../../Utilities/BuyCartManagement'
 
-function ProductInformation({ productID }) {
+function ProductInformation({ productID, setCartItemsQuantity }) {
   const [product, setProduct] = useState(null);
   const [activeImg, setActiveImg] = useState(null);
   const [selectedColor, setSelectedColor] = useState("---");
@@ -145,11 +145,15 @@ function ProductInformation({ productID }) {
               " text-center hover:bg-blue-900"
             }
             onClick={() => {
-              if (quantity !== "---" && selectedColor !== "---" && selectSize !== "---") {
+              if (quantity !== 0 && selectedColor !== "---" && selectSize !== "---") {
                 buyCartManagement.addProduct(productID, quantity, selectSize, selectedColor);
                 const updatedCart = buyCartManagement.getProducts();
                 setBuyCart(updatedCart);
                 console.log(updatedCart); //TODO: ELIMINAR ESTA LINEA, EXISTE SOLO PARA EL TESTEO
+                setCartItemsQuantity(buyCartManagement.getProducts().length)
+                setQuantity(0)
+                setSelectedColor('---')
+                setSelectedSize('---')
               }
             }}
           >

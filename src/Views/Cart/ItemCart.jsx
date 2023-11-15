@@ -4,8 +4,7 @@ import '../../css/ItemCard.css'
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const ItemCart = ( props ) => {
-    const { productID, size, color, quantity } = props;
-    const [activeItem, setActiveItem] = useState(true);
+    const { productID, size, color, quantity, setCartItemsQuantity } = props;
     /*const data = getElementByID(productID, '/products');*/
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
@@ -19,8 +18,6 @@ const ItemCart = ( props ) => {
 
     dataPromise.then(
         (product) => {
-            console.log("Color: " + color)
-            console.log("Size: " + size)
             setProductImg(product.colorInformation[color].imagePath);
             setProductName(product.name);
             setProductPrice(product.price);
@@ -35,6 +32,7 @@ const ItemCart = ( props ) => {
     const incrementQuantity = () => {
         if (productQuantity + 1 <= itemsOnStock) {
             setProductQuantity(productQuantity + 1);
+            buyCartManagement.incrementQuantity(productID, size, color);
         } else {
             alert("We don't have more on stock")
         }
@@ -43,17 +41,13 @@ const ItemCart = ( props ) => {
     const decrementQuantity = () => {
         if (productQuantity - 1 >= 1) {
             setProductQuantity(productQuantity - 1);
+            buyCartManagement.decreaseQuantity(productID, size, color);
         }
     }
 
     const deleteItem = () => {
-        console.log("deleting item")
         buyCartManagement.deleteProduct(productID, size, color)
-        setActiveItem(false);
-    }
-
-    if (!activeItem) {
-        return null;
+        setCartItemsQuantity(buyCartManagement.getProducts().length)
     }
 
     return (

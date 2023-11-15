@@ -27,7 +27,7 @@ export default function App() {
 
     return (
         <Router>
-            <Header cartItemsQuantity={cartItemsQuantity}/>
+            <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity}/>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductSection setCartItemsQuantity={setCartItemsQuantity}/>} />

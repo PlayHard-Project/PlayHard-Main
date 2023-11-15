@@ -10,6 +10,8 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
   const [quantity, setQuantity] = useState(0);
   const [colorIndex, setColorIndex] = useState(0);
   const [sizeIndex, setSizeIndex] = useState(0);
+  const currency = "$"
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [buyCart, setBuyCart] = useState([]);
   const buyCartManagement = new BuyCartManagement();
@@ -76,7 +78,7 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
         </div>
         <p className={"text-gray-700"}>{product.description}</p>
 
-        <h5 className={"text-2xl font-semibold mb-10"}>Bs {product.price}</h5>
+        <h5 className={"text-2xl font-semibold mb-10"}>{currency} {product.price}</h5>
 
         <div className={"gap-5"}>
           <span className={"text-gray-700"}>
@@ -90,6 +92,8 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
                 onClick={() => {
                   setSelectedSize(size);
                   setSizeIndex(index);
+                  setQuantity(0);
+                  setErrorMessage("")
                 }}
               >
                 {size}
@@ -113,6 +117,8 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
                           setSelectedColor(color.color);
                           setColorIndex(index);
                           setActiveImg(color.imagePath);
+                          setQuantity(0);
+                          setErrorMessage("")
                         }}
                     ></button>
                 ))}
@@ -126,9 +132,10 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
               className={
                 "bg-gray-200 py-2 px-5 rounded-lg text-blue-800 text-3xl text-center"
               }
-              onClick={() =>
+              onClick={() => {
                 setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-              }
+                setErrorMessage("")
+              }}
             >
               -
             </button>
@@ -137,9 +144,22 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
               className={
                 "bg-gray-200 py-2 px-4 rounded-lg text-blue-800 text-3xl text-center"
               }
-              onClick={() =>
-                setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 5))
-              }
+              onClick={() => {
+                if (selectedColor !== "---" && selectSize !== "---") {
+                  setQuantity((prevQuantity) => {
+                    if (prevQuantity + 1 <= product.inStock[sizeIndex][colorIndex]) {
+                      prevQuantity += 1;
+                      setErrorMessage("");
+                      return prevQuantity;
+                    } else {
+                      setErrorMessage("That's all we have in stock")
+                      return prevQuantity;
+                    }
+                  })
+                  setErrorMessage("")
+                } else {
+                  setErrorMessage("Please first select size and color.")
+              }}}
             >
               +
             </button>
@@ -160,12 +180,14 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
                 setQuantity(0)
                 setSelectedColor('---')
                 setSelectedSize('---')
+                setErrorMessage("")
               }
             }}
           >
             Add to cart
           </button>
         </div>
+        <label id="quantityErrorLabel" className="px-0 py-0 font-light text-red-800">{errorMessage}</label>
       </div>
     </div>
   );

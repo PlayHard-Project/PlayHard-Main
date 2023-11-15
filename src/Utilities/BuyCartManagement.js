@@ -28,6 +28,14 @@ export default class BuyCartManagement {
         localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
+    updateQuantityOnCart(id, size, color, quantity) {
+        console.log("SET TO: " + quantity);
+        let products = this.getProducts();
+        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        existingProduct.quantity = quantity;
+        localStorage.setItem('buyCart', JSON.stringify(products));
+    }
+
     decreaseQuantity(id, size, color) {
         const products = this.getProducts();
         const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
@@ -40,6 +48,16 @@ export default class BuyCartManagement {
             } else {
                 localStorage.setItem('buyCart', JSON.stringify(products));
             }
+        }
+    }
+
+    incrementQuantity(id, size, color) {
+        const products = this.getProducts();
+        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+            localStorage.setItem('buyCart', JSON.stringify(products));
         }
     }
 

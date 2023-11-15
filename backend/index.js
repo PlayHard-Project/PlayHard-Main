@@ -1,31 +1,15 @@
-require('dotenv').config();
-
 const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+const configureAppImplementingMongoDBServer = require('./src/serverBDMongo');
+const configureAppImplementingStrypeServer = require('./src/serverStripe');
 
-const productsRoutes = require('./src/routes/productRoute');
-const usersRoutes = require('./src/routes/userRoute');
-const brandsRoutes = require('./src/routes/brandRoute');
-const ordersRoutes = require('./src/routes/orderRoute');
-const offersRoutes = require('./src/routes/offerRoute');
 const app = express();
-const port = process.env.PORT || 9000;
 
-app.use(cors());
-app.use(express.json());
-app.use('/api', productsRoutes);
-app.use('/api', usersRoutes);
-app.use('/api', brandsRoutes);
-app.use('/api', ordersRoutes);
-app.use('/api', offersRoutes);
+/** MongoDB Server Implementation */
+configureAppImplementingMongoDBServer(app);
 
-app.get('/', (req, res) => {
-    res.send("Welcome to Full API Rest Playhard E-commerce");
+/** Stripe Server Implementation */
+configureAppImplementingStrypeServer(app);
+
+app.listen(app.get('port'), () => {
+    console.log(`Server is running on port ${app.get('port')}`);
 });
-
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("-> Successfully connected to MongoDB Atlas."))
-    .catch((error) => console.error(error));
-
-app.listen(port, () => console.log("-> Server is listening on port ", port));

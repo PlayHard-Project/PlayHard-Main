@@ -2,7 +2,7 @@ import {useState} from "react";
 import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
 
-const Item = ( props ) => {
+const ItemCart = (props ) => {
     const [activeItem, setActiveItem] = useState(true);
     const { productID, size, color, quantity } = props;
     /*const data = getElementByID(productID, '/products');*/
@@ -21,8 +21,8 @@ const Item = ( props ) => {
             setProductName(product.name);
             setProductPrice(product.price);
             setProductSize(product.size[size]);
-            setProductColor(product.colorInformation[color].color)
-            setItemsOnStock(product.inStock[size][color])
+            setProductColor(product.colorInformation[color].color);
+            setItemsOnStock(product.inStock[size][color]);
         }
     );
     let [productQuantity, setProductQuantity] = useState(quantity);
@@ -58,11 +58,11 @@ const Item = ( props ) => {
                 <label className="product-name">{productName}</label>
                 <div className="size-part">
                     <label className="label">Size: </label>
-                    <label>{productSize}</label>
+                    <label className="information-label">{productSize}</label>
                 </div>
                 <div className="color-part">
                     <label className="label">Color: </label>
-                    <label>{productColor}</label>
+                    <label className="information-label">{productColor}</label>
                 </div>
                 <div className="price-part">
                     <label className="label">{currency}</label>
@@ -83,4 +83,4 @@ const Item = ( props ) => {
     );
 };
 
-export default Item;
+export default ItemCart;

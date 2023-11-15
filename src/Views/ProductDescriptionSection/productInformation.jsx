@@ -8,6 +8,8 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
   const [selectedColor, setSelectedColor] = useState("---");
   const [selectSize, setSelectedSize] = useState("---");
   const [quantity, setQuantity] = useState(0);
+  const [colorIndex, setColorIndex] = useState(0);
+  const [sizeIndex, setSizeIndex] = useState(0);
 
   const [buyCart, setBuyCart] = useState([]);
   const buyCartManagement = new BuyCartManagement();
@@ -82,10 +84,13 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
             {selectSize}
           </span>
           <div className={"flex flex-row gap-3 "}>
-            {product.size.map((size) => (
+            {product.size.map((size, index) => (
               <button
                 className={"bg-white px-3 py-2 border-2 border-blue-100"}
-                onClick={() => setSelectedSize(size)}
+                onClick={() => {
+                  setSelectedSize(size);
+                  setSizeIndex(index);
+                }}
               >
                 {size}
               </button>
@@ -106,6 +111,7 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
                         className="border-2 rounded-full px-3 py-2 w-10 h-10"
                         onClick={() => {
                           setSelectedColor(color.color);
+                          setColorIndex(index);
                           setActiveImg(color.imagePath);
                         }}
                     ></button>
@@ -146,7 +152,7 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
             }
             onClick={() => {
               if (quantity !== 0 && selectedColor !== "---" && selectSize !== "---") {
-                buyCartManagement.addProduct(productID, quantity, selectSize, selectedColor);
+                buyCartManagement.addProduct(productID, quantity, sizeIndex, colorIndex);
                 const updatedCart = buyCartManagement.getProducts();
                 setBuyCart(updatedCart);
                 console.log(updatedCart); //TODO: ELIMINAR ESTA LINEA, EXISTE SOLO PARA EL TESTEO

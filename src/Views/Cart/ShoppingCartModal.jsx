@@ -93,9 +93,6 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                 <div>
                     <div className="modal-header">
                         <div className="title-cart">My Cart</div>
-                        <button className="close-button" onClick={onRequestClose}>
-                            X
-                        </button>
                     </div>
                     <div className="scrollable-section">
                         {rectangles.length === 0 ? (

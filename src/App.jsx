@@ -8,15 +8,29 @@ import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
 import Pages from './Views/Pages/Pages.jsx';
 import Contact from './Views/Pages/Contact.jsx';
+import BuyCartManagement from "./Utilities/BuyCartManagement";
+import { useState, useEffect } from "react";
+
 
 
 export default function App() {
+
+    const [cartItemsQuantity, setCartItemsQuantity] = useState([]);
+    const buyCartManagement = new BuyCartManagement();
+
+    useEffect(() => {
+        const savedCartItems = buyCartManagement.getProducts();
+        if (savedCartItems) {
+            setCartItemsQuantity(savedCartItems.length);
+        }
+    }, []);
+
     return (
         <Router>
-            <Header/>
+            <Header cartItemsQuantity={cartItemsQuantity}/>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/product/:id" element={<ProductSection />} />
+                <Route path="/product/:id" element={<ProductSection setCartItemsQuantity={setCartItemsQuantity}/>} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />

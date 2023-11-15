@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MdSearch, MdPerson, MdShoppingCart, MdSettings, MdClose, MdMenu} from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import "../../css/headerStyle.css";
 
-const Header = () => {
+
+
+const Header = ({cartItemsQuantity}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
@@ -78,7 +80,7 @@ const Header = () => {
             <button className="relative lg:flex hidden">
               <MdShoppingCart size={30} color="#72a3ff" className="style-icon" />
               <span className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex
-                      items-center justify-center rounded-full">0
+                      items-center justify-center rounded-full">{cartItemsQuantity}
             </span>
             </button>
             <button className="lg:flex hidden">

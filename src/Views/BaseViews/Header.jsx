@@ -5,7 +5,9 @@ import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
 
-const Header = () => {
+
+
+const Header = ({cartItemsQuantity}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
@@ -55,7 +57,7 @@ const Header = () => {
     { link: "/contact", title: "Contact" },
   ];
 
-  const [clickedOnButton, setClickedOnButton] = useState(false);
+  const modalRef = useRef();
 
   return (
       <header className="text-white header container">
@@ -93,22 +95,15 @@ const Header = () => {
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
               <label>Login/Register</label>
             </button>
-            <ShoppingCartModal
-                isOpen={isCartModalOpen}
-                onRequestClose={handleOpenCartModal}
-                excludedButtonRef={shoppingButtonRef}
-            />
-            <button
-                id="shoppingButton"
-                ref={shoppingButtonRef}
-                className="relative lg:flex hidden transform scale-100 hover:scale-110 transition-transform duration-300"
-                onClick={() => setCartModalOpen((prevOpen) => !prevOpen)}
-            >
-              <MdShoppingCart size={30} color="#72a3ff" className="style-icon" />
-              <span className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex items-center justify-center rounded-full">
-                  0
-              </span>
-            </button>
+            <div ref={modalRef}>
+              <ShoppingCartModal
+                  onRequestOpen={handleOpenCartModal}
+                  isOpen={isCartModalOpen}
+                  onRequestClose={handleCloseModal}
+                  modalRef={modalRef}
+                  cartItemsQuantity={cartItemsQuantity}
+              />
+            </div>
             <button className="lg:flex hidden">
               <MdSettings size={30} color="#72a3ff" className="style-icon" />
             </button>

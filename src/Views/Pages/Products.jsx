@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardsContainer from "../Products/CardsContainer";
-import Card from "../Products/Card";
+import ShoppingCard from "../Products/ShoppingCard";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 import Sidebar from "../Products/Sidebar/Sidebar";
 
@@ -19,7 +19,7 @@ const Products = () => {
 
   const content = products.map(
     ({ _id, imagePath, name, price, colorInformation, size }) => (
-      <Card
+      <ShoppingCard
         _id={_id}
         img={imagePath[0]}
         title={name}
@@ -29,9 +29,6 @@ const Products = () => {
       />
     )
   );
-
-  console.log("products")
-  console.log(products)
 
   return (
     <div className="container">

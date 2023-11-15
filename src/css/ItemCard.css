@@ -57,12 +57,11 @@
 .delete-icon {
     width: 15px;
     height: 15px;
-    position: relative;
     align-self: end;
     justify-self: end;
     margin-bottom: 10px;
 }
 
 .product-information {
-    max-width: 150px;
+    max-width: 130px;
 }

@@ -1,10 +1,11 @@
 import {useState} from "react";
 import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
-const ItemCart = (props ) => {
-    const [activeItem, setActiveItem] = useState(true);
+const ItemCart = ( props ) => {
     const { productID, size, color, quantity } = props;
+    const [activeItem, setActiveItem] = useState(true);
     /*const data = getElementByID(productID, '/products');*/
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
@@ -14,9 +15,12 @@ const ItemCart = (props ) => {
     const [productColor, setProductColor] = useState("A color")
 
     const [itemsOnStock, setItemsOnStock] = useState(1);
+    const buyCartManagement = new BuyCartManagement();
 
     dataPromise.then(
         (product) => {
+            console.log("Color: " + color)
+            console.log("Size: " + size)
             setProductImg(product.colorInformation[color].imagePath);
             setProductName(product.name);
             setProductPrice(product.price);
@@ -44,6 +48,7 @@ const ItemCart = (props ) => {
 
     const deleteItem = () => {
         console.log("deleting item")
+        buyCartManagement.deleteProduct(productID, size, color)
         setActiveItem(false);
     }
 

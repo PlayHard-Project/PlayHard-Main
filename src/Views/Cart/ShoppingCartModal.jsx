@@ -14,18 +14,6 @@ const ShoppingCartModal = ({ isOpen, onRequestClose }) => {
     const buyCartManagement = new BuyCartManagement();
     const items = buyCartManagement.getProducts();
 
-
-    useEffect(() => {
-        if (items) {
-            for (let i = 0, size = items.length; i < size; i++) {
-                setRectangles((item) => {
-                    return [...item,
-                        <ItemCart productID={items[i].id} size={items[i].size} color={items[i].color} quantity={items[i].quantity}></ItemCart>]
-                })
-            }
-        }
-    }, []);
-
     useEffect(() => {
         const handleOutsideClick = (e) => {
             if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -56,14 +44,19 @@ const ShoppingCartModal = ({ isOpen, onRequestClose }) => {
                     </button>
                 </div>
                 <div className="scrollable-section">
-                    {rectangles.length === 0 ? (
+                    {items.map((item) => (
+                        <ItemCart productID={item.id} size={item.size} color={item.color} quantity={item.quantity}/>
+                    ))}
+                    {/*items.length === 0 ? (
                         <p className="mr-4 mt-14 font-extrabold">The cart is empty</p>
                     ) : (
                         <>
-                            {rectangles}
+                            {items.map((item) => {
+                                <ItemCart productID={item.id} size={items.size} color={items.color} quantity={items.quantity}></ItemCart>
+                            })}
                             {isLoading && <div className="loader"></div>}
                         </>
-                    )}
+                    )*/}
                 </div>
 
                 <div className="cart-details">

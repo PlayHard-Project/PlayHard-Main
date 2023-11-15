@@ -2,7 +2,7 @@
 .modal-overlay {
     background: white;
     position: fixed;
-    top: 10%;
+    top: 12%;
     left: 73%;
     width: 400px;
     height: 620px;
@@ -96,12 +96,13 @@
 @media (max-width: 1444px) {
     .modal-overlay {
         left: 65%;
+        top: 11%;
     }
 }
 
 @media (max-width: 1343px) {
     .modal-overlay {
-        top: 8%;
+        top: 10%;
         left: 63%;
     }
 }

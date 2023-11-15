@@ -4,7 +4,7 @@ import "../../css/CartDropdownStyle.css";
 
 Modal.setAppElement("#root");
 
-const ShoppingCartModal = ({ isOpen, onRequestClose }) => {
+const ShoppingCartModal = ({ isOpen, onRequestClose, excludedButtonRef }) => {
     const [rectangles, setRectangles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const maxRectangles = 10;
@@ -36,7 +36,13 @@ const ShoppingCartModal = ({ isOpen, onRequestClose }) => {
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
-            if (modalRef.current && !modalRef.current.contains(e.target)) {
+            console.log(e.target);
+            console.log( excludedButtonRef.current)
+            if (
+                modalRef.current &&
+                !modalRef.current.contains(e.target) &&
+                !modalRef.current.contains(excludedButtonRef.current)
+            ) {
                 onRequestClose();
             }
         };
@@ -46,7 +52,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose }) => {
         return () => {
             document.removeEventListener("mousedown", handleOutsideClick);
         };
-    }, [onRequestClose]);
+    }, [onRequestClose, excludedButtonRef]);
 
     return (
         <Modal

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MdSearch, MdPerson, MdShoppingCart, MdSettings, MdClose, MdMenu } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
@@ -13,8 +13,13 @@ const Header = () => {
   const [isCartModalOpen, setCartModalOpen] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 888 });
+  const shoppingButtonRef = useRef();
 
   const handleOpenCartModal = () => {
+    if(isCartModalOpen){
+      setCartModalOpen(false)
+      return;
+    }
     setCartModalOpen((prevOpen) => !prevOpen);
     setShowSearchPopup(false);
     setShowMenuPopup(false);
@@ -36,6 +41,12 @@ const Header = () => {
     handleCloseModal();
   };
 
+  useEffect(() => {
+    if (isMobile) {
+      handleCloseModal();
+    }
+  }, [isMobile]);
+
   const paths = [
     { link: "/home", title: "Home" },
     { link: "/shop", title: "Shop" },
@@ -44,15 +55,12 @@ const Header = () => {
     { link: "/contact", title: "Contact" },
   ];
 
-  useEffect(() => {
-    if (isMobile) {
-      handleCloseModal();
-    }
-  }, [isMobile]);
+  const [clickedOnButton, setClickedOnButton] = useState(false);
 
   return (
-      <header className="text-white header">
+      <header className="text-white header container">
         <div className="flex justify-between items-center">
+          <div className="custom-rectangle"> </div>
           <div className="md:flex items-center">
             <Link to="/home">
               <img src={headerIcon} alt="Icon Main" className="background-shape" />
@@ -69,7 +77,7 @@ const Header = () => {
               ))}
             </div>
           </div>
-          <div className="lg:flex hidden space-x-4 items-center mr-3">
+          <div className="lg:flex hidden space-x-4 items-center">
             <div className="flex items-center search-container">
               <input
                   type="text"
@@ -85,13 +93,21 @@ const Header = () => {
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
               <label>Login/Register</label>
             </button>
-            <ShoppingCartModal isOpen={isCartModalOpen} onRequestClose={handleOpenCartModal} />
+            <ShoppingCartModal
+                isOpen={isCartModalOpen}
+                onRequestClose={handleOpenCartModal}
+                excludedButtonRef={shoppingButtonRef}
+            />
             <button
+                id="shoppingButton"
+                ref={shoppingButtonRef}
                 className="relative lg:flex hidden transform scale-100 hover:scale-110 transition-transform duration-300"
-                onClick={handleOpenCartModal}
+                onClick={() => setCartModalOpen((prevOpen) => !prevOpen)}
             >
               <MdShoppingCart size={30} color="#72a3ff" className="style-icon" />
-              <span className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex items-center justify-center rounded-full">0</span>
+              <span className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex items-center justify-center rounded-full">
+                  0
+              </span>
             </button>
             <button className="lg:flex hidden">
               <MdSettings size={30} color="#72a3ff" className="style-icon" />

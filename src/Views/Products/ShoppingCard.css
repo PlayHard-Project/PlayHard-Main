@@ -2,12 +2,13 @@
   width: 250px;
   height: 300px;
   margin: 20px;
-  background-color: #72a3ff;
+  background-color: #70a2ff;
   overflow: hidden;
-  border-bottom-right-radius: 90px;
+  position: relative;
 }
 
 .shopping-card:hover {
+  box-shadow: 4px 4px 30px rgba(112, 162, 255);
   .shopping-card-title{
     animation: slideLeft linear infinite;
   }
@@ -39,11 +40,26 @@
 }
 
 .shopping-card-price {
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
   margin-left: 5px;
+}
+
+.shopping-card-price > * {
+  position: relative;
+  z-index: 2;
+}
+
+.shopping-card-price:after{
+  content: "";
+  position: absolute;
+  right: 0;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  border-width: 0 0 100px 100px;
 }
 
 .shopping-bag {

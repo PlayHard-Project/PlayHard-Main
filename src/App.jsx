@@ -6,7 +6,7 @@ import Home from "./Views/Pages/Home.jsx";
 import Header from './Views/BaseViews/Header.jsx';
 import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
-import Pages from './Views/Pages/Pages.jsx';
+import Products from './Views/Pages/Products.jsx';
 import Contact from './Views/Pages/Contact.jsx';
 
 
@@ -20,7 +20,7 @@ export default function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/pages" element={<Pages />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer />

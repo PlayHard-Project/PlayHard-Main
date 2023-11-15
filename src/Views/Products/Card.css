@@ -1,0 +1,56 @@
+.card {
+  width: 250px;
+  height: 300px;
+  margin: 20px;
+  background-color: #72A3FF;
+  /*border: 2px solid #ededed; /*BORRAR*/
+/*  overflow: hidden;*/
+  border-bottom-right-radius: 110px;
+}
+
+.card-img {
+  margin: auto;
+  width: 100%;
+  height: 75%;
+  /*margin-bottom: 1rem;*/
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card-title {
+  /*margin-bottom: 1rem;*/
+  color: white;
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: larger;
+  white-space: nowrap;
+  /*overflow: hidden*/
+}
+
+.card-title.overflow-animation {
+  animation: slideLeft linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100%));
+  }
+}
+
+
+.card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-left: 5px;
+}
+
+.bag {
+  width: 35px; /* Adjust as needed */
+  height: 35px; /* Adjust as needed */
+}

@@ -4,7 +4,7 @@ import '../../css/ItemCard.css'
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const ItemCart = ( props ) => {
-    const { productID, size, color, quantity, setCartItemsQuantity } = props;
+    const { productID, size, color, quantity, setCartItemsQuantity} = props;
     /*const data = getElementByID(productID, '/products');*/
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
@@ -15,6 +15,7 @@ const ItemCart = ( props ) => {
 
     const [itemsOnStock, setItemsOnStock] = useState(1);
     const buyCartManagement = new BuyCartManagement();
+    const [errorMessage, setErrorMessage] = useState("");
 
     dataPromise.then(
         (product) => {
@@ -33,8 +34,9 @@ const ItemCart = ( props ) => {
         if (productQuantity + 1 <= itemsOnStock) {
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
+            setErrorMessage("");
         } else {
-            alert("We don't have more on stock")
+            setErrorMessage("No more in stock");
         }
     }
 
@@ -42,6 +44,7 @@ const ItemCart = ( props ) => {
         if (productQuantity - 1 >= 1) {
             setProductQuantity(productQuantity - 1);
             buyCartManagement.decreaseQuantity(productID, size, color);
+            setErrorMessage("");
         }
     }
 
@@ -76,6 +79,7 @@ const ItemCart = ( props ) => {
                         <img src="https://cdn-icons-png.flaticon.com/512/3524/3524388.png" alt="less icon"/>
                     </button>
                 </div>
+                <label className="text-xs font-light text-red-800">{errorMessage}</label>
             </div>
             <img className="delete-icon" src="https://cdn-icons-png.flaticon.com/512/657/657059.png" alt="delete icon" onClick={deleteItem}/>
         </section>

@@ -187,7 +187,7 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
             Add to cart
           </button>
         </div>
-        <label id="quantityErrorLabel" className="px-0 py-0 font-light text-red-800">{errorMessage}</label>
+        <label className="px-0 py-0 font-light text-red-800">{errorMessage}</label>
       </div>
     </div>
   );

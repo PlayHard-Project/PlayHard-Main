@@ -1,17 +1,22 @@
-.CategoriesHeaderConteiner {
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(114, 163, 255, 0.5));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .CategoriesHeaderConteiner h1 {
-    margin: 0;
-    padding: 0;
+    color: black;
     display: inline-block;
+    padding: 1%;
+    border-right: 1px solid #000;
+    width: 10%;
+    margin-left: 1%;
+    text-align: center;
 }
 
-.CategoriesHeaderConteiner h1:not(:last-child) {
-    border-right: 1px solid black;
-    padding-right: 50px;
+.CategoriesHeaderConteiner {
+    background-image: linear-gradient(to top, white, #DCE8FF);
+    width: 100%;
+}
+
+.CategoriesHeaderConteiner h1:first-child {
+    margin-left: 15%;
+}
+
+.CategoriesHeaderConteiner h1:last-child {
+    border-right: none;
 }

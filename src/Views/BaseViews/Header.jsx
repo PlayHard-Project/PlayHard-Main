@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdSearch, MdPerson, MdShoppingCart, MdSettings, MdClose, MdMenu} from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
+import CategoryHeaderSection from '../HomePageSections/CategoriesHeaderSection';
 import "../../css/headerStyle.css";
 
 const Header = () => {
@@ -130,6 +131,9 @@ const Header = () => {
                 </div>
             )}
           </div>
+        </div>
+        <div>
+        <CategoryHeaderSection className="CategoriesHeaderConteiner"/>
         </div>
       </header>
   );

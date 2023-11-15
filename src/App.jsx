@@ -9,6 +9,8 @@ import About from './Views/Pages/About.jsx';
 import Pages from './Views/Pages/Pages.jsx';
 import Contact from './Views/Pages/Contact.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
+import FailedPayment from './Views/Pages/FailedPayment.jsx';
+import SuccesfullPayment from './Views/Pages/SuccesfulPayment.jsx'
 import { useState, useEffect } from "react";
 
 
@@ -35,6 +37,7 @@ export default function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/pages" element={<Pages />} />
+                <Route path="/PaymentStatus" element={<FailedPayment/>}/>
                 <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer />

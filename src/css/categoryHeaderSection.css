@@ -1,0 +1,17 @@
+.CategoriesHeaderConteiner {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(114, 163, 255, 0.5));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CategoriesHeaderConteiner h1 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.CategoriesHeaderConteiner h1:not(:last-child) {
+    border-right: 1px solid black;
+    padding-right: 50px;
+}

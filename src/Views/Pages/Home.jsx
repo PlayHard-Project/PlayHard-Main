@@ -7,6 +7,7 @@ import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
 import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
 import OffersSection from '../HomePageSections/OffersSection';
+import CategoryHeaderSection from '../HomePageSections/CategoriesHeaderSection';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -28,6 +29,9 @@ export default function Home() {
 
     return (
         <div className="App container">
+            <section>
+                <CategoryHeaderSection className="CategoriesHeaderConteiner"/>
+            </section>
             <section>
                 <BuyNowSection className="main-container"/>
             </section>

@@ -9,25 +9,27 @@ const usersRoutes = require('./routes/userRoute');
 const brandsRoutes = require('./routes/brandRoute');
 const ordersRoutes = require('./routes/orderRoute');
 const offersRoutes = require('./routes/offerRoute');
-const app = express();
-const port = process.env.PORT || 9000;
 
-app.set('port', port);
+const createMongoDBServer = (app) => {
+    const port = process.env.PORT || 9000;
 
-app.use(cors());
-app.use(express.json());
-app.use('/api', productsRoutes);
-app.use('/api', usersRoutes);
-app.use('/api', brandsRoutes);
-app.use('/api', ordersRoutes);
-app.use('/api', offersRoutes);
+    app.set('port', port);
 
-app.get('/', (req, res) => {
-    res.send("Welcome to Full API Rest Playhard E-commerce");
-});
+    app.use(cors());
+    app.use(express.json());
+    app.use('/api', productsRoutes);
+    app.use('/api', usersRoutes);
+    app.use('/api', brandsRoutes);
+    app.use('/api', ordersRoutes);
+    app.use('/api', offersRoutes);
 
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("-> Successfully connected to MongoDB Atlas."))
-    .catch((error) => console.error(error));
+    app.get('/', (req, res) => {
+        res.send("Welcome to Full API Rest Playhard E-commerce");
+    });
 
-module.exports = app;
+    mongoose.connect(process.env.MONGODB_URI)
+        .then(() => console.log("-> Successfully connected to MongoDB Atlas."))
+        .catch((error) => console.error(error));
+};
+
+module.exports = createMongoDBServer;

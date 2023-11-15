@@ -10,7 +10,7 @@ const brandsRoutes = require('./routes/brandRoute');
 const ordersRoutes = require('./routes/orderRoute');
 const offersRoutes = require('./routes/offerRoute');
 
-const createMongoDBServer = (app) => {
+const configureAppImplementingMongoDBServer = (app) => {
     const port = process.env.PORT || 9000;
 
     app.set('port', port);
@@ -32,4 +32,4 @@ const createMongoDBServer = (app) => {
         .catch((error) => console.error(error));
 };
 
-module.exports = createMongoDBServer;
+module.exports = configureAppImplementingMongoDBServer;

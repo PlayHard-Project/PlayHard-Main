@@ -1,10 +1,14 @@
 const express = require('express');
-const createMongoDBServer = require('./src/serverBDMongo');
+const configureAppImplementingMongoDBServer = require('./src/serverBDMongo');
+const configureAppImplementingStrypeServer = require('./src/serverStripe');
 
 const app = express();
 
 /** MongoDB Server Implementation */
-createMongoDBServer(app);
+configureAppImplementingMongoDBServer(app);
+
+/** Stripe Server Implementation */
+configureAppImplementingStrypeServer(app);
 
 app.listen(app.get('port'), () => {
     console.log(`Server is running on port ${app.get('port')}`);

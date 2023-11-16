@@ -47,7 +47,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   }, [isMobile]);
 
   const paths = [
-    { link: "/home", title: "Home" },
+    { link: "/", title: "Home" },
     { link: "/shop", title: "Shop" },
     { link: "/about", title: "About" },
     { link: "/pages", title: "Pages" },

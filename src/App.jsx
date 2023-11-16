@@ -39,7 +39,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductSection setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/pages" element={<Pages />} />

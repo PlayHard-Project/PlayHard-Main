@@ -16,8 +16,8 @@ const configureAppImplementingStripeServer = (app) => {
     app.post('/stripe-api/intent-payment', async (req, res) => {
         const { products } = req.body;
         console.log(products);
-    
-        const lineItems = products.map((product) => ({
+
+        const lineItems = products.map((product) => ({        
             price_data: {
                 currency: "usd",
                 product_data: {
@@ -25,7 +25,7 @@ const configureAppImplementingStripeServer = (app) => {
                     description: product.description,
                     images: product.imagePath
                 },
-                unit_amount: product.price * 100,
+                unit_amount: Math.round((product.price * 10)/100) + product.price,
             },
             quantity: product.quantity,
         }));

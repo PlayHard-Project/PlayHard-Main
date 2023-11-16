@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getElementByID } from "./requestHandler";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
+import '../../css/CartShop.css';
 
 export default function GoToCheckout() {
   const [products, setProducts] = useState([]);
@@ -65,5 +66,5 @@ export default function GoToCheckout() {
     }
   };
 
-  return <button onClick={makePayment}>Checkout</button>;
+  return <button className="checkout-button" onClick={makePayment}>Checkout</button>;
 }

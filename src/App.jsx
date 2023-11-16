@@ -9,8 +9,8 @@ import About from './Views/Pages/About.jsx';
 import Pages from './Views/Pages/Pages.jsx';
 import Contact from './Views/Pages/Contact.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
-import FailedPayment from './Views/Pages/FailedPayment.jsx';
-import SuccesfullPayment from './Views/Pages/SuccesfulPayment.jsx'
+import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
+import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 
 

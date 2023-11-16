@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../css/StatusPayment.css";
 
-const PaymentStatus = ({ title, description, imageSrc, altText }) => {
+const PaymentStatus = ({ title, description, imageSrc, altText, isSuccess }) => {
+  const buttonColor = isSuccess ? "green" : "red";
+
   return (
     <div className="container">
       <div className="sc-container">
@@ -16,7 +18,12 @@ const PaymentStatus = ({ title, description, imageSrc, altText }) => {
             </a>
           </p>
           <Link to={"/home"}>
-            <button className="sc-btn">Back to HomePage</button>
+            <button
+              className="sc-btn"
+              style={{ background: buttonColor }}
+            >
+              Back to HomePage
+            </button>
           </Link>{" "}
         </div>
         <img src={imageSrc} alt={altText} />

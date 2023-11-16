@@ -51,13 +51,13 @@
   left: 50%;
   transform: translateX(-50%);
   top: 70%;
-  width: 25%;
-  height: 15%;
+  width: 20%;
+  height: 10%;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   display: inline-block;
-  font-size: 2vw;
+  font-size: 1vw;
   font-weight: bold;
   text-align: center;
   border: none;

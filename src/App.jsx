@@ -6,7 +6,7 @@ import Home from "./Views/Pages/Home.jsx";
 import Header from './Views/BaseViews/Header.jsx';
 import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
-import Pages from './Views/Pages/Pages.jsx';
+import Products from './Views/Pages/Products.jsx';
 import Contact from './Views/Pages/Contact.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
 import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
@@ -45,6 +45,7 @@ export default function App() {
                 <Route path="/pages" element={<Pages />} />
                 <Route path="/fail-payment-status" element={<FailedPayment/>}/>
                 <Route path="/succes-payment-status" element={<SuccesfullPayment/>}/>
+                <Route path="/products" element={<Products />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>

@@ -1,5 +1,6 @@
 
 import ProductEntity from '../Entities/ProductEntity'
+import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
 
 export default class BuyCartManagement {
 
@@ -20,6 +21,10 @@ export default class BuyCartManagement {
         }
 
         localStorage.setItem('buyCart', JSON.stringify(products));
+    }
+
+    clearCard() {
+        localStorage.clear();
     }
 
     deleteProduct(id, size, color) {
@@ -43,4 +48,35 @@ export default class BuyCartManagement {
         }
     }
 
+    incrementQuantity(id, size, color) {
+        const products = this.getProducts();
+        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+            localStorage.setItem('buyCart', JSON.stringify(products));
+        }
+    }
+
+    getSubTotal() {
+        const products = this.getProducts();
+        let subTotal = 0;
+        let promises = [];
+
+        products.forEach(product => {
+            const elementPromise = getElementByID(product.id, "/products");
+            promises.push(elementPromise);
+
+            elementPromise.then((item) => {
+                subTotal += item.price * product.quantity;
+            });
+        });
+
+        return Promise.all(promises)
+            .then(() => subTotal)
+            .catch(error => {
+                console.error("Error fetching product details:", error);
+                throw error; // You may want to handle the error accordingly
+            });
+    }
 }

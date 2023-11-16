@@ -53,3 +53,17 @@ export const removeElement = async (productId, route) => {
     throw error; 
   }
 };
+
+export const getElementsLazyLoading = async (route, page = 1) => {
+  try {
+    const response = await axios.get(apiURL + route, {
+      params: {
+        page: page,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error getting all elements: ', error);
+    throw error;
+  }
+};

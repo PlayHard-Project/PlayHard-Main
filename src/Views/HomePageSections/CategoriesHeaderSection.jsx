@@ -1,44 +1,49 @@
-import React from "react";
-import "../../css/categoryHeaderSection.css"
-import { IoIosArrowDown } from "react-icons/io";
+import React, { useState } from "react";
+import "../../css/categoryHeaderSection.css";
+import Dropdown from "./Dropdown";
 
-const CategoriesHeaderSection = () => {
+const CategoryButton = ({ label, onClick }) => {
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    const handleMouseEnter = () => {
+        setDropdownVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+        setDropdownVisible(false);
+    };
 
     return (
-        <div className="CategoriesHeaderConteiner"> 
-            <div>
-                <h1>
-                    <button>
-                    <span> CLOTHES</span>
-                    <i class="fas fa-star">
-                        <IoIosArrowDown></IoIosArrowDown>
-                    </i>
-                    </button>
-                </h1>
-                <h1>SHOES</h1>
-                <h1>EQUIPMENT</h1>
-                <h1>ACCESSORIES</h1>
-                <h1>
-                <button>
-                    <span> BRANDS</span>
-                    <i class="fas fa-star">
-                        <IoIosArrowDown></IoIosArrowDown>
-                    </i>
-                    </button>
-                </h1>
-                <h1>OFFERS</h1>
-                <h1>
-                <button>
-                    <span> CLOTHES</span>
-                    <i class="fas fa-star">
-                        <IoIosArrowDown></IoIosArrowDown>
-                    </i>
-                    </button>
-                </h1>
-            </div>
+        <div
+            className="CategoryButtonContainer"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+            <button className="CategoryButton" onClick={onClick}>
+                <span>{label}</span>
+            </button>
+            {isDropdownVisible && <Dropdown />}
         </div>
-    )
+    );
+};
 
-}
+const CategoriesHeaderSection = () => {
+    const handleDropdownClick = () => {
+        // Implementa la lógica que necesitas para el click aquí
+    };
+
+    return (
+        <div className="CategoriesHeaderContainer">
+            &nbsp;
+            <CategoryButton label="CLOTHES" onClick={handleDropdownClick} />
+            <button>SHOES</button>
+            <button>EQUIPMENT</button>
+            <button>ACCESSORIES</button>
+            <CategoryButton label="BRANDS" />
+            <button>OFFERS</button>
+            <CategoryButton label="SPORTS" />
+        </div>
+    );
+};
 
 export default CategoriesHeaderSection;

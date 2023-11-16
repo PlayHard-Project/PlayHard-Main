@@ -28,6 +28,14 @@
     align-items: center;
 }
 
+#cartRedIcon {
+    padding: 14px;
+    position: relative;
+    margin-bottom: 10px;
+    border-radius: 100%;
+    background-color: red;
+}
+
 .scrollable-section {
     min-height: 360px;
     max-height: 365px;

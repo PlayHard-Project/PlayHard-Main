@@ -46,7 +46,7 @@ const Products = () => {
   console.log("Products:",{products})
 
   return (
-    <div className="container">
+    <div className="container-product container" >
       <Sidebar />
       <CardsContainer content={content} />
     </div>

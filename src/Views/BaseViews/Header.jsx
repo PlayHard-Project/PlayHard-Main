@@ -61,7 +61,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
         <div className="flex justify-between items-center">
           <div className="custom-rectangle"> </div>
           <div className="md:flex items-center">
-            <Link to="/home">
+            <Link to="/">
               <img src={headerIcon} alt="Icon Main" className="background-shape" />
             </Link>
             <div className="lg:flex space-x-4 hidden">

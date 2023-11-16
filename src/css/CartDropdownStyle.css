@@ -1,4 +1,8 @@
 /* Cart Dropdown Styles */
+*{
+    outline: none !important;
+}
+
 .modal-overlay {
     background: white;
     position: fixed;

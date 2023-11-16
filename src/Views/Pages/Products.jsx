@@ -3,6 +3,7 @@ import CardsContainer from "../Products/CardsContainer";
 import ShoppingCard from "../Products/ShoppingCard";
 import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
 import Sidebar from "../Products/Sidebar";
+import '../../css/Products.css'
 
 const Products = () => {
   const [products, setProducts] = useState([]);

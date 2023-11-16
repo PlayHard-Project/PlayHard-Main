@@ -66,3 +66,32 @@
   width: 30px;
   height: 30px;
 }
+
+.popUpColorSizeSelector {
+  position: initial;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  overflow: visible;
+}
+
+.size-button {
+  background-color: white;
+  padding: 5px;
+  margin: 5px;
+  color: black;
+}
+
+.color-button {
+  width: 35px;
+  height: auto;
+  margin: 2px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.separator {
+  border-top: 2px solid #000000; /* Adjust the color and styles as needed */
+  margin: 10px 0; /* Adjust the margin as needed */
+}

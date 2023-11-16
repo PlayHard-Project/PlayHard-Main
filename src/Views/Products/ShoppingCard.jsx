@@ -1,9 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import "../../css/ShoppingCard.css";
+import {getElementByID} from "../../Components/ApiRestHandler/requestHandler";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
-const Card = ({ _id, img, title, price }) => {
+const Card = ({ _id, img, title, price, setCartItemsQuantity }) => {
   const titleRef = useRef();
+  const currency = "$"
+  const [product, setProduct] = useState(null);
+  const [colorIndex, setColorIndex] = useState(0);
+  const [sizeIndex, setSizeIndex] = useState(0);
+  const buyCartManagement = new BuyCartManagement();
+
+  const selectDefaultProduct = (event) => {
+    buyCartManagement.addProduct(_id, 1, 0, 0)
+    setCartItemsQuantity(buyCartManagement.getProducts().length)
+  }
+
   useEffect(() => {
     const titleElement = titleRef.current;
     const titleLength = title.length;
@@ -17,20 +30,27 @@ const Card = ({ _id, img, title, price }) => {
     }
   }, []);
 
+  useEffect(() => {
+    getElementByID(_id, "/products")
+        .then((data) => {
+          setProduct(data);
+        })
+        .catch((err) => console.error(err));
+  }, []);
+
   return (
     <>
       <div className="shopping-card">
-      <Link key={_id} to={`/product/${_id}`}>
+      <Link key={_id} to={`/product/${_id}`} >
         <img src={img} alt={title} className="shopping-card-img" />
           <div ref={titleRef} className={`shopping-card-title ${title.length > 21 ? "overflow-animation" : ""}`}>
             {title.toUpperCase()}
           </div>
       </Link>
-        
         <div>
           <section className="shopping-card-price">
-            <div className="price">Bs. {price}</div>
-            <img src={"https://res.cloudinary.com/playhardimages/image/upload/v1700025053/cart-icon_b2wqdz.png"} className="bag"></img>
+            <div className="price">{currency}. {price}</div>
+            <img onClick={selectDefaultProduct} src={"https://res.cloudinary.com/playhardimages/image/upload/v1700025053/cart-icon_b2wqdz.png"} className="bag"></img>
           </section>
         </div>
       </div>

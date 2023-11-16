@@ -5,7 +5,7 @@ import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestH
 import Sidebar from "../Products/Sidebar";
 import '../../css/Products.css'
 
-const Products = () => {
+const Products = ({ setCartItemsQuantity }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -37,6 +37,7 @@ const Products = () => {
         price={price}
         colorInformation={colorInformation}
         size={size}
+        setCartItemsQuantity={setCartItemsQuantity}
       />
     )
   );

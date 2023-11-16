@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from './Views/BaseViews/Footer.jsx';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
 import Home from "./Views/Pages/Home.jsx";
 import Header from './Views/BaseViews/Header.jsx';
@@ -22,6 +22,16 @@ export default function App() {
     const [subTotal, setSubTotal] = useState(0);
     const buyCartManagement = new BuyCartManagement();
 
+    function ScrollToTop() {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
+        return null;
+    }
+
     useEffect(() => {
         const savedCartItems = buyCartManagement.getProducts();
         if (savedCartItems) {
@@ -35,6 +45,7 @@ export default function App() {
 
     return (
         <Router>
+            <ScrollToTop />
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />

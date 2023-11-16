@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../css/CartShop.css";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import GoToCheckout  from "../../Components/ApiRestHandler/stripeApiHandler";
 import ItemCart from "./ItemCart";
 
 const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => {
@@ -48,7 +49,8 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
                   <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
               </div>
           </div>
-        <button className="checkout-button">Checkout</button>
+
+        <GoToCheckout/>
       </div>
   );
 };

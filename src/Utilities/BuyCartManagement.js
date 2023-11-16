@@ -23,6 +23,10 @@ export default class BuyCartManagement {
         localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
+    clearCard() {
+        localStorage.clear();
+    }
+
     deleteProduct(id, size, color) {
         let products = this.getProducts();
         products = products.filter(product => !(product.id === id && product.size === size && product.color === color));

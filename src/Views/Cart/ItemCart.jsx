@@ -8,7 +8,7 @@ const ItemCart = ( props ) => {
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
     const [productName, setProductName] = useState("Product Name");
-    const [productPrice, setProductPrice] = useState("00.00");
+    const [productPrice, setProductPrice] = useState(0.0);
     const [productSize, setProductSize] = useState("---")
     const [productColor, setProductColor] = useState("---")
 
@@ -79,7 +79,7 @@ const ItemCart = ( props ) => {
                 </div>
                 <div className="price-part">
                     <label className="label">{currency}</label>
-                    <label className="label">{productPrice}</label>
+                    <label className="label">{(productPrice).toFixed(2)}</label>
                 </div>
                 <div className="quantity-picker">
                     <button onClick={decrementQuantity} className="picker-button">

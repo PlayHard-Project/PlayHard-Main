@@ -5,8 +5,6 @@ import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
 
-
-
 const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
@@ -15,7 +13,6 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const [isCartModalOpen, setCartModalOpen] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 888 });
-  const shoppingButtonRef = useRef();
 
   const handleOpenCartModal = () => {
     if(isCartModalOpen){
@@ -104,7 +101,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                   cartItemsQuantity={cartItemsQuantity}
                   setCartItemsQuantity={setCartItemsQuantity}
                   setSubTotal={setSubTotal}
-                  subtotal={subTotal}
+                  subTotal={subTotal}
               />
             </div>
             <button className="lg:flex hidden">
@@ -147,7 +144,13 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                   <div className="relative flex items-center text-link">
                     Login / Register
                   </div>
-                  <div className="relative flex items-center text-link">Shop Cart</div>
+                  <Link
+                      to="/shopcart"
+                      className="relative flex items-center text-link"
+                      onClick={toggleMenu}
+                  >
+                    Shop Cart
+                  </Link>
                   <div className="relative flex items-center text-link">Settings</div>
                 </div>
             )}

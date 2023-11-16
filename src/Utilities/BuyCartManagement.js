@@ -1,7 +1,6 @@
 
 import ProductEntity from '../Entities/ProductEntity'
 import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
-import {useState} from "react";
 
 export default class BuyCartManagement {
 
@@ -57,7 +56,7 @@ export default class BuyCartManagement {
 
     getSubTotal() {
         const products = this.getProducts();
-        let subtotal = 0;
+        let subTotal = 0;
         let promises = [];
 
         products.forEach(product => {
@@ -65,12 +64,12 @@ export default class BuyCartManagement {
             promises.push(elementPromise);
 
             elementPromise.then((item) => {
-                subtotal += item.price * product.quantity;
+                subTotal += item.price * product.quantity;
             });
         });
 
         return Promise.all(promises)
-            .then(() => subtotal)
+            .then(() => subTotal)
             .catch(error => {
                 console.error("Error fetching product details:", error);
                 throw error; // You may want to handle the error accordingly

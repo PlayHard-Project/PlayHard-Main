@@ -15,6 +15,7 @@ export default function BuyNowSection() {
     speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
     beforeChange: () => {
       setTransitioning(true);
     },

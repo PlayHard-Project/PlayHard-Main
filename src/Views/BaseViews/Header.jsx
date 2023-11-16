@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { MdSearch, MdPerson, MdShoppingCart, MdSettings, MdClose, MdMenu } from "react-icons/md";
+import { MdSearch, MdPerson, MdSettings, MdClose, MdMenu } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
 
-const Header = ({cartItemsQuantity}) => {
+const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
@@ -99,6 +99,9 @@ const Header = ({cartItemsQuantity}) => {
                   onRequestClose={handleCloseModal}
                   modalRef={modalRef}
                   cartItemsQuantity={cartItemsQuantity}
+                  setCartItemsQuantity={setCartItemsQuantity}
+                  setSubTotal={setSubTotal}
+                  subTotal={subTotal}
               />
             </div>
             <button className="lg:flex hidden">

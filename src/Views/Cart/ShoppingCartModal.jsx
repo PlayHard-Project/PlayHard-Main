@@ -1,38 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import "../../css/CartDropdownStyle.css";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import ItemCart from "./ItemCart";
 import {MdShoppingCart} from "react-icons/md";
 
 Modal.setAppElement("#root");
 
-const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, cartItemsQuantity }) => {
-    const [rectangles, setRectangles] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const maxRectangles = 10;
+const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
+    const currency = "$"
 
-    useEffect(() => {
-        const addRectangle = () => {
-            setRectangles((prevRectangles) => {
-                if (prevRectangles.length < maxRectangles) {
-                    return [
-                        ...prevRectangles,
-                        <div key={prevRectangles.length} className="blue-rectangle"></div>,
-                    ];
-                }
-                return prevRectangles;
-            });
-        };
-
-        const intervalId = setInterval(() => {
-            setIsLoading(true);
-            addRectangle();
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 5000);
-        }, 5000);
-
-        return () => clearInterval(intervalId);
-    }, []);
+    const buyCartManagement = new BuyCartManagement();
+    const items = buyCartManagement.getProducts();
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -95,12 +74,20 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                         <div className="title-cart">My Cart</div>
                     </div>
                     <div className="scrollable-section">
-                        {rectangles.length === 0 ? (
+                        {items.length === 0 ? (
                             <p className="mr-4 mt-14 font-extrabold justify-center align-middle">The cart is empty</p>
                         ) : (
                             <>
-                                {rectangles}
-                                {isLoading && <div className="loader"></div>}
+                                {items.map((item) => (
+                                    <ItemCart
+                                        productID={item.id}
+                                        size={item.size}
+                                        color={item.color}
+                                        quantity={item.quantity}
+                                        setCartItemsQuantity={setCartItemsQuantity}
+                                        setSubTotal={setSubTotal}
+                                    />
+                                ))}
                             </>
                         )}
                     </div>
@@ -108,16 +95,16 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                     <div className="cart-details">
                         <div className="cart-detail-row">
                             <span>Subtotal</span>
-                            <span>$1111</span>
+                            <span>{currency + (subTotal).toFixed(2)}</span>
                         </div>
                         <div className="cart-detail-row">
                             <span>Shipping Cost</span>
-                            <span>$1</span>
+                            <span>{currency + ((subTotal * 10)/100).toFixed(2)}</span>
                         </div>
                         <hr />
                         <div className="cart-detail-row total">
                             <span>Total</span>
-                            <span>$1112</span>
+                            <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
 

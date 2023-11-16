@@ -19,21 +19,26 @@ import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
 export default function App() {
 
     const [cartItemsQuantity, setCartItemsQuantity] = useState([]);
+    const [subTotal, setSubTotal] = useState(0);
     const buyCartManagement = new BuyCartManagement();
 
     useEffect(() => {
         const savedCartItems = buyCartManagement.getProducts();
         if (savedCartItems) {
             setCartItemsQuantity(savedCartItems.length);
+            const subTotalPromise = buyCartManagement.getSubTotal();
+            subTotalPromise.then((element) => {
+                setSubTotal(element);
+            })
         }
     }, []);
 
     return (
         <Router>
-            <Header cartItemsQuantity={cartItemsQuantity}/>
+            <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/product/:id" element={<ProductSection setCartItemsQuantity={setCartItemsQuantity}/>} />
+                <Route path="/product/:id" element={<ProductSection setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
@@ -41,7 +46,7 @@ export default function App() {
                 <Route path="/PaymentStatus1" element={<FailedPayment/>}/>
                 <Route path="/PaymentStatus2" element={<SuccesfullPayment/>}/>
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/shopcart" element={<ShoppingCartScreen/>}/>
+                <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>
             <Footer />
         </Router>

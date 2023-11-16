@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import CardsContainer from "../Products/CardsContainer";
 import ShoppingCard from "../Products/ShoppingCard";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
-import Sidebar from "../Products/Sidebar/Sidebar";
+import Sidebar from "../Products/Sidebar";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [databaseProducts, setProducts] = useState([]);
 
   useEffect(() => {
     getElements("/products")
@@ -17,7 +17,7 @@ const Products = () => {
       });
   }, []);
 
-  const content = products.map(
+  const content = databaseProducts.map(
     ({ _id, imagePath, name, price, colorInformation, size }) => (
       <ShoppingCard
         _id={_id}
@@ -32,9 +32,8 @@ const Products = () => {
 
   return (
     <div className="container">
-      {/*<Sidebar />*/}
+      <Sidebar />
       <CardsContainer content={content} />
-      {/* Filters and all products */}
     </div>
   );
 };

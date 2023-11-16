@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import "./ShoppingCard.css";
+import { Link } from "react-router-dom";
+import "../../css/ShoppingCard.css";
 
-const Card = ({ img, title, price }) => {
+const Card = ({ _id, img, title, price }) => {
   const titleRef = useRef();
   useEffect(() => {
     const titleElement = titleRef.current;
@@ -19,10 +20,13 @@ const Card = ({ img, title, price }) => {
   return (
     <>
       <div className="shopping-card">
+      <Link key={_id} to={`/product/${_id}`}>
         <img src={img} alt={title} className="shopping-card-img" />
-        <div ref={titleRef} className={`shopping-card-title ${title.length > 21 ? "overflow-animation" : ""}`}>
-          {title.toUpperCase()}
-        </div>
+          <div ref={titleRef} className={`shopping-card-title ${title.length > 21 ? "overflow-animation" : ""}`}>
+            {title.toUpperCase()}
+          </div>
+      </Link>
+        
         <div>
           <section className="shopping-card-price">
             <div className="price">Bs. {price}</div>

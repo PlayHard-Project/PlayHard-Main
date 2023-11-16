@@ -40,12 +40,12 @@
 }
 
 .shopping-card-price {
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
   margin-left: 5px;
+  font-size: large;
 }
 
 .shopping-card-price > * {

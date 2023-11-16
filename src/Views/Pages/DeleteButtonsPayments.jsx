@@ -2,24 +2,19 @@ import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 
 {
   /* BORRAR ESTE COMPONENTE, SOLO ESTA PARA EL TESTEO*/
 }
 export function ProductButtonsD() {
-  const manager = new BuyCartManagement();
-
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    setProducts(manager.getProductsForStrype);
-    console.log(products);
-  }, []);
+  const manager = [getElementByID("654c436360c78adccb61fbec", "products")];
 
   const makePayment = async () => {
     const stripe = await loadStripe("pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX");
 
     const body = {
-        products: products,
+        products: manager,
     };
 
     const headers = {

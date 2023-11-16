@@ -1,0 +1,160 @@
+/* Estilos para pantallas más grandes (por defecto) */
+.sc-container {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  padding-left: 58px;
+  padding-right: 58px;
+  padding-top: 20px;
+}
+
+.sc-container img {
+  width: 700px;
+  margin-left: 200px;
+}
+
+.title {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 2.8rem;
+  margin-bottom: 20px; /* Reduje el margen para evitar un espacio en blanco excesivo */
+}
+
+.sc-container p {
+  text-align: left;
+  max-width: 600px;
+  font-size: 1rem;
+  margin: 2rem 0;
+}
+
+.sc-btn {
+  padding: 12px 20px;
+  border-radius: 2rem;
+  background: red;
+  color: azure;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+p a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #0070cc;
+}
+
+@media (max-width: 1040px) {
+  .title {
+    text-align: center;
+    font-size: 2.1rem;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .sc-container img {
+    width: 600px;
+    margin-left: 0px;
+  }
+
+  .sc-container,
+  .text-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sc-container {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sc-container p,
+  .sc-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1550px) {
+  .title {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .sc-container img {
+    width: 600px;
+    margin-left: 0px;
+  }
+
+  .sc-container,
+  .text-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sc-container p,
+  .sc-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1215px) {
+  .title {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .sc-container img {
+    width: 600px;
+    margin-left: 0px;
+  }
+
+  .sc-container,
+  .text-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sc-container p,
+  .sc-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 878px) {
+  .title {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .sc-container {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sc-container img {
+    margin: 10px 0;
+  }
+
+  .sc-container,
+  .sc-container img,
+  .text-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sc-container p,
+  .sc-btn {
+    text-align: center;
+  }
+}

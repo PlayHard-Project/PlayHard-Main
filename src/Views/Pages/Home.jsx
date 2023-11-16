@@ -7,6 +7,7 @@ import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
 import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
 import OffersSection from '../HomePageSections/OffersSection';
+import {ProductButtonsD} from '../Pages/DeleteButtonsPayments';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -69,6 +70,8 @@ export default function Home() {
                 <div className={'mt-20 flex flex-col gap-6'}>
                     <p>ESTOS BOTONES SOLO SIRVEN PARA EL TESTEO, LLEVARA A LA PAGINA DE 3 PRODUCTOS DIFERENTES</p>
                     <ProductButtons />
+                    <p>ESTOS BOTONES SOLO SIRVEN PARA EL TESTEO, LLEVARA A LA PAGINA DE PAGO FALLIDO O PAGO REALIZADO CON EXITO</p>
+                    <ProductButtonsD />
                 </div>
             </header>
         </div>

@@ -2,6 +2,20 @@ import React from "react";
 import "../../css/Footer.css";
 
 const Footer = () => {
+  const redirectToFacebook = () => {
+    window.location.href =
+      "https://www.facebook.com/profile.php?id=61553708216693&mibextid=ZbWKwL";
+  };
+
+  const redirectToInstagram = () => {
+    window.location.href = "https://www.instagram.com/playhard_store_isc4/";
+  };
+
+  const redirectToX = () => {
+    window.location.href =
+      "https://x.com/JalaPlayhard?t=5I1od4ItcbSm6jxte-DWdQ&s=09";
+  };
+
   return (
     <footer className="footer container">
       <div className="footer-right">
@@ -44,12 +58,24 @@ const Footer = () => {
             <h4 className="footer-title">Follow Us </h4>
           </h4>
           <div className="social-networks">
-            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734518/SocialNetworks/facebook-logo.png"
-                 alt="Facebook logo" />
-            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/instagram-logo.png"
-                 alt="Instagram logo" />
-            <img src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/x-logo.png"
-                 alt="X logo" />
+            <img
+              className="social-icon"
+              src="https://res.cloudinary.com/playhardimages/image/upload/v1699734518/SocialNetworks/facebook-logo.png"
+              alt="Facebook logo"
+              onClick={redirectToFacebook}
+            />
+            <img
+              className="social-icon"
+              src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/instagram-logo.png"
+              alt="Instagram logo"
+              onClick={redirectToInstagram}
+            />
+            <img
+              className="social-icon"
+              src="https://res.cloudinary.com/playhardimages/image/upload/v1699734567/SocialNetworks/x-logo.png"
+              alt="X logo"
+              onClick={redirectToX}
+            />
           </div>
         </div>
       </div>

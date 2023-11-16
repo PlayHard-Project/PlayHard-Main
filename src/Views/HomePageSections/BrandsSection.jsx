@@ -46,6 +46,7 @@ export default function BrandsSection() {
         slidesToScroll: 1,
         style: {float:  100, paddingRight: 5},
         swipeToSlide: true,
+        arrows: false,
     };
 
     useEffect(() => {

@@ -50,7 +50,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
     { link: "/home", title: "Home" },
     { link: "/shop", title: "Shop" },
     { link: "/about", title: "About" },
-    { link: "/pages", title: "Pages" },
+    { link: "/products", title: "Products" },
     { link: "/contact", title: "Contact" },
   ];
 

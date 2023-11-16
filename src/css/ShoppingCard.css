@@ -1,0 +1,68 @@
+.shopping-card {
+  width: 250px;
+  height: 300px;
+  margin: 20px;
+  background-color: #70a2ff;
+  overflow: hidden;
+  position: relative;
+}
+
+.shopping-card:hover {
+  box-shadow: 4px 4px 30px rgba(112, 162, 255);
+  .shopping-card-title{
+    animation: slideLeft linear infinite;
+  }
+}
+
+.shopping-card-img {
+  margin: auto;
+  width: 100%;
+  height: 75%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.shopping-card-title {
+  color: white;
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: larger;
+  white-space: nowrap;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(calc(-100%));
+  }
+}
+
+.shopping-card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-left: 5px;
+  font-size: large;
+}
+
+.shopping-card-price > * {
+  position: relative;
+  z-index: 2;
+}
+
+.shopping-card-price:after{
+  content: "";
+  position: absolute;
+  right: 0;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  border-width: 0 0 100px 100px;
+}
+
+.shopping-bag {
+  width: 30px;
+  height: 30px;
+}

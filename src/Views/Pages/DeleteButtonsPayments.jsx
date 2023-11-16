@@ -11,10 +11,10 @@ export function ProductButtonsD() {
       }
     >
       <Link to={"/PaymentStatus1"}>
-        <button className={"bg-blue-500 p-5"}>Ir al estado de pago </button>
+        <button className={"bg-blue-500 p-5"}>Ir al estado de pago Fail</button>
       </Link>
       <Link to={"/PaymentStatus2"}>
-        <button className={"bg-blue-500 p-5"}>Ir al estado de pago </button>
+        <button className={"bg-blue-500 p-5"}>Ir al estado de pago Successful</button>
       </Link>
     </div>
   );

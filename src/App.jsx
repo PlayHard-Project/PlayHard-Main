@@ -43,8 +43,8 @@ export default function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/pages" element={<Pages />} />
-                <Route path="/PaymentStatus1" element={<FailedPayment/>}/>
-                <Route path="/PaymentStatus2" element={<SuccesfullPayment/>}/>
+                <Route path="/fail-payment-status" element={<FailedPayment/>}/>
+                <Route path="/succes-payment-status" element={<SuccesfullPayment/>}/>
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>

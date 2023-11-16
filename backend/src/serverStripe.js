@@ -5,7 +5,7 @@ const cors = require('cors');
 const configureAppImplementingStripeServer = (app) => {
     app.use(express.static('public'));
     app.use(express.json());
-    app.use(cors()); // Fix: Invoke cors as a function
+    app.use(cors()); 
 
     const stripeGateway = stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' });
 
@@ -35,8 +35,8 @@ const configureAppImplementingStripeServer = (app) => {
                 payment_method_types: ['card'],
                 mode: 'payment',
                 line_items: lineItems,
-                success_url: 'http://localhost:3001/PaymentStatus2',
-                cancel_url: 'http://localhost:3001/PaymentStatus1',
+                success_url: 'http://localhost:3001/succes-payment-status',
+                cancel_url: 'http://localhost:3001/fail-payment-status',
                 billing_address_collection: 'required'
             });
     
@@ -48,9 +48,7 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     app.post('/stripe-api/confirm-payment', async (req, res) => {
-        // Implement the logic to confirm the payment
         try {
-            // Your implementation goes here
             res.send("Payment confirmed");
         } catch (error) {
             console.error('Error confirming payment:', error);
@@ -59,9 +57,7 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     app.post('/stripe-api/failure-payment', (req, res) => {
-        // Implement the logic for handling failed payments
         try {
-            // Your implementation goes here
             res.send("Payment failed");
         } catch (error) {
             console.error('Error handling failed payment:', error);

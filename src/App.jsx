@@ -12,6 +12,7 @@ import BuyCartManagement from "./Utilities/BuyCartManagement";
 import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
+import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
 
 
 
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="/PaymentStatus1" element={<FailedPayment/>}/>
                 <Route path="/PaymentStatus2" element={<SuccesfullPayment/>}/>
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/shopcart" element={<ShoppingCartScreen/>}/>
             </Routes>
             <Footer />
         </Router>

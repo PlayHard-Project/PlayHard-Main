@@ -134,7 +134,7 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
               }
               onClick={() => {
                 setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-                setErrorMessage("")
+                //setErrorMessage("") TODO: QUANTITY VALIDATION
               }}
             >
               -
@@ -147,16 +147,19 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
               onClick={() => {
                 if (selectedColor !== "---" && selectSize !== "---") {
                   setQuantity((prevQuantity) => {
-                    if (prevQuantity + 1 <= product.inStock[sizeIndex][colorIndex]) {
+                    prevQuantity += 1;
+                    setErrorMessage("");
+                    return prevQuantity;
+                    /*if (prevQuantity + 1 <= product.inStock[sizeIndex][colorIndex]) { TODO: QUANTITY VALIDATION
                       prevQuantity += 1;
                       setErrorMessage("");
                       return prevQuantity;
                     } else {
                       setErrorMessage("That's all we have in stock")
                       return prevQuantity;
-                    }
+                    }*/
                   })
-                  setErrorMessage("")
+                  //setErrorMessage("");
                 } else {
                   setErrorMessage("Please first select size and color.")
               }}}
@@ -180,7 +183,7 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
                 setQuantity(0)
                 setSelectedColor('---')
                 setSelectedSize('---')
-                setErrorMessage("")
+                //(setErrorMessage("") TODO: QUANTITY VALIDATION
                 const subTotalPromise = buyCartManagement.getSubTotal();
                 subTotalPromise.then((element) => {
                   setSubTotal(element);

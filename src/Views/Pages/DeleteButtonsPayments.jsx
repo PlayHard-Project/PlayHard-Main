@@ -1,12 +1,42 @@
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
+import { useEffect, useState } from "react";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
 
 {
   /* BORRAR ESTE COMPONENTE, SOLO ESTA PARA EL TESTEO*/
 }
 export function ProductButtonsD() {
-  const manager = [getElementByID("654c436360c78adccb61fbec", "products")];
+  const manager = new BuyCartManagement();
+  const productsArray = manager.getProducts();
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const updatedProducts = await Promise.all(
+        productsArray.map(async (product) => {
+          const productFromAPI = await getElementByID(product.id, "products");
+          const productToSendTheServer = new ProductEntityForStripe(
+            product.id,
+            productFromAPI.name,
+            Math.round(productFromAPI.price * 100),
+            product.quantity,
+            productFromAPI.description,
+            productFromAPI.imagePath
+          );
+          console.log(productToSendTheServer);
+          return productToSendTheServer;
+        })
+      );
+
+      setProducts(updatedProducts);
+      console.log(updatedProducts + " CDFGERGRGTR");
+    };
+
+    fetchData();
+  }, []);
 
   const makePayment = async () => {
     const stripe = await loadStripe(
@@ -14,7 +44,7 @@ export function ProductButtonsD() {
     );
 
     const body = {
-      products: manager,
+      products: products,
     };
 
     const headers = {

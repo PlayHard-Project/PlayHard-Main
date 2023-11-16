@@ -71,6 +71,10 @@
   gap: 15px;
 }
 
+.social-icon {
+  cursor: pointer;
+}
+
 .footer-links li a:hover {
   text-decoration: underline;
 }

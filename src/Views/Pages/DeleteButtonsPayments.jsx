@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect, useState } from "react";
-import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 
 {
@@ -11,44 +9,48 @@ export function ProductButtonsD() {
   const manager = [getElementByID("654c436360c78adccb61fbec", "products")];
 
   const makePayment = async () => {
-    const stripe = await loadStripe("pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX");
+    const stripe = await loadStripe(
+      "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
+    );
 
     const body = {
-        products: manager,
+      products: manager,
     };
 
     const headers = {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
     };
 
     try {
-        const response = await fetch("http://localhost:9000/stripe-api/intent-payment", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Server returned status ${response.status}`);
+      const response = await fetch(
+        "http://localhost:9000/stripe-api/intent-payment",
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body),
         }
+      );
 
-        const session = await response.json();
+      if (!response.ok) {
+        throw new Error(`Server returned status ${response.status}`);
+      }
 
-        console.log("Session ID:", session.id);
+      const session = await response.json();
 
-        const result = stripe.redirectToCheckout({
-            sessionId: session.id,
-        });
+      console.log("Session ID:", session.id);
 
-        if (result.error) {
-            console.log(result.error);
-        }
+      const result = stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.log(result.error);
+      }
     } catch (error) {
-        console.error("Error making payment:", error);
+      console.error("Error making payment:", error);
     }
-};
+  };
 
-    
   return (
     <div
       className={

@@ -13,7 +13,7 @@ const PaymentStatus = ({ title, description, imageSrc, altText, isSuccess }) => 
           <p>{description}</p>
           <p>
             For Any Support Email:{" "}
-            <a href="mailto:playhard.jala.support@gmail.com">
+            <a className="link" href="mailto:playhard.jala.support@gmail.com">
               playhard.jala.support@gmail.com
             </a>
           </p>

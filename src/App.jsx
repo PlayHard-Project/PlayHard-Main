@@ -37,7 +37,8 @@ export default function App() {
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/pages" element={<Pages />} />
-                <Route path="/PaymentStatus" element={<FailedPayment/>}/>
+                <Route path="/PaymentStatus1" element={<FailedPayment/>}/>
+                <Route path="/PaymentStatus2" element={<SuccesfullPayment/>}/>
                 <Route path="/contact" element={<Contact />} />
             </Routes>
             <Footer />

@@ -10,10 +10,10 @@ export function ProductButtonsD() {
         "flex flex-col gap-6 items-center text-center justify-center max-w-7xl"
       }
     >
-      <Link to={"/PaymentStatus"}>
+      <Link to={"/PaymentStatus1"}>
         <button className={"bg-blue-500 p-5"}>Ir al estado de pago </button>
       </Link>
-      <Link to={"/PaymentStatus"}>
+      <Link to={"/PaymentStatus2"}>
         <button className={"bg-blue-500 p-5"}>Ir al estado de pago </button>
       </Link>
     </div>

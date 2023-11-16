@@ -36,7 +36,18 @@
   color: azure;
   font-size: 1rem;
   font-weight: 500;
-  margin-top: 20px; /* Añadido margen superior para centrar el botón */
+  margin-top: 20px;
+}
+
+p a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+p a:hover {
+  color: #0070cc;
 }
 
 @media (max-width: 1040px) {
@@ -44,7 +55,7 @@
     text-align: center;
     font-size: 2.1rem;
     font-family: "Poppins", sans-serif;
-    margin-bottom: 20px; /* Reduje el margen para evitar un espacio en blanco excesivo */
+    margin-bottom: 20px;
   }
 
   .sc-container img {
@@ -61,7 +72,7 @@
   .sc-container {
     justify-content: center;
     flex-direction: column;
-    align-items: center; /* Alinea los elementos al centro en pantallas más pequeñas */
+    align-items: center;
   }
 
   .sc-container p,
@@ -74,7 +85,7 @@
   .title {
     text-align: center;
     font-family: "Poppins", sans-serif;
-    margin-bottom: 20px; /* Reduje el margen para evitar un espacio en blanco excesivo */
+    margin-bottom: 20px;
   }
 
   .sc-container img {
@@ -98,7 +109,7 @@
   .title {
     text-align: center;
     font-family: "Poppins", sans-serif;
-    margin-bottom: 20px; /* Reduje el margen para evitar un espacio en blanco excesivo */
+    margin-bottom: 20px;
   }
 
   .sc-container img {
@@ -118,18 +129,17 @@
   }
 }
 
-/* Estilos para pantallas más pequeñas (responsive) */
 @media (max-width: 878px) {
   .title {
     text-align: center;
     font-family: "Poppins", sans-serif;
     font-size: 2rem;
-    margin-bottom: 20px; /* Reduje el margen para evitar un espacio en blanco excesivo */
+    margin-bottom: 20px;
   }
   .sc-container {
     justify-content: center;
     flex-direction: column;
-    align-items: center; /* Alinea los elementos al centro en pantallas más pequeñas */
+    align-items: center;
   }
 
   .sc-container img {

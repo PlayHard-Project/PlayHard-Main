@@ -1,7 +1,11 @@
 import React from "react";
 import PaymentStatus from "./PaymentStatus";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const PaymentSuccessful = () => {
+  const manager = new BuyCartManagement();
+  manager.clearCard();
+  
   return (
     <PaymentStatus
       title="Payment Successful!"

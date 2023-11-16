@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Modal from "react-modal";
 import "../../css/CartDropdownStyle.css";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import GoToCheckout  from "../../Components/ApiRestHandler/stripeApiHandler";
 import ItemCart from "./ItemCart";
 import {MdShoppingCart} from "react-icons/md";
 
@@ -107,8 +108,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
-
-                    <button className="checkout-button">Checkout</button>
+                    <GoToCheckout />
                 </div>
             </Modal>
         </div>

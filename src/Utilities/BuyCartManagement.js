@@ -1,5 +1,7 @@
 
 import ProductEntity from '../Entities/ProductEntity'
+import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
+import {useState} from "react";
 
 export default class BuyCartManagement {
 
@@ -28,14 +30,6 @@ export default class BuyCartManagement {
         localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
-    updateQuantityOnCart(id, size, color, quantity) {
-        console.log("SET TO: " + quantity);
-        let products = this.getProducts();
-        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
-        existingProduct.quantity = quantity;
-        localStorage.setItem('buyCart', JSON.stringify(products));
-    }
-
     decreaseQuantity(id, size, color) {
         const products = this.getProducts();
         const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
@@ -61,4 +55,25 @@ export default class BuyCartManagement {
         }
     }
 
+    getSubTotal() {
+        const products = this.getProducts();
+        let subtotal = 0;
+        let promises = [];
+
+        products.forEach(product => {
+            const elementPromise = getElementByID(product.id, "/products");
+            promises.push(elementPromise);
+
+            elementPromise.then((item) => {
+                subtotal += item.price * product.quantity;
+            });
+        });
+
+        return Promise.all(promises)
+            .then(() => subtotal)
+            .catch(error => {
+                console.error("Error fetching product details:", error);
+                throw error; // You may want to handle the error accordingly
+            });
+    }
 }

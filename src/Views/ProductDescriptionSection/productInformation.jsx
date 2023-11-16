@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 import BuyCartManagement from '../../Utilities/BuyCartManagement'
 
-function ProductInformation({ productID, setCartItemsQuantity }) {
+function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
   const [product, setProduct] = useState(null);
   const [activeImg, setActiveImg] = useState(null);
   const [selectedColor, setSelectedColor] = useState("---");
@@ -17,7 +17,7 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
   const buyCartManagement = new BuyCartManagement();
 
   useEffect(() => {
-    getElementByID(productID, "products")
+    getElementByID(productID, "/products")
       .then((data) => {
         setProduct(data);
         setActiveImg(data.imagePath[0]);
@@ -181,6 +181,10 @@ function ProductInformation({ productID, setCartItemsQuantity }) {
                 setSelectedColor('---')
                 setSelectedSize('---')
                 setErrorMessage("")
+                const subTotalPromise = buyCartManagement.getSubTotal();
+                subTotalPromise.then((element) => {
+                  setSubTotal(element);
+                })
               }
             }}
           >

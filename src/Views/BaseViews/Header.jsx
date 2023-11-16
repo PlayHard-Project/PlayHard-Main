@@ -7,7 +7,7 @@ import ShoppingCartModal from "../Cart/ShoppingCartModal";
 
 
 
-const Header = ({cartItemsQuantity, setCartItemsQuantity}) => {
+const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
@@ -103,6 +103,8 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity}) => {
                   modalRef={modalRef}
                   cartItemsQuantity={cartItemsQuantity}
                   setCartItemsQuantity={setCartItemsQuantity}
+                  setSubTotal={setSubTotal}
+                  subtotal={subTotal}
               />
             </div>
             <button className="lg:flex hidden">

@@ -4,14 +4,13 @@ import '../../css/ItemCard.css'
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const ItemCart = ( props ) => {
-    const { productID, size, color, quantity, setCartItemsQuantity} = props;
-    /*const data = getElementByID(productID, '/products');*/
+    const { productID, size, color, quantity, setCartItemsQuantity, setSubTotal } = props;
     const dataPromise = getElementByID(productID, "/products");
     const [productImg, setProductImg] = useState("https://th.bing.com/th/id/OIP.xaADddZHWRoU3TbjEVGssQHaFj?pid=ImgDet&rs=1")
     const [productName, setProductName] = useState("Product Name");
-    const [productPrice, setProductPrice] = useState("69.69");
-    const [productSize, setProductSize] = useState("A size")
-    const [productColor, setProductColor] = useState("A color")
+    const [productPrice, setProductPrice] = useState("00.00");
+    const [productSize, setProductSize] = useState("---")
+    const [productColor, setProductColor] = useState("---")
 
     const [itemsOnStock, setItemsOnStock] = useState(1);
     const buyCartManagement = new BuyCartManagement();
@@ -21,7 +20,7 @@ const ItemCart = ( props ) => {
         (product) => {
             setProductImg(product.colorInformation[color].imagePath);
             setProductName(product.name);
-            setProductPrice(product.price);
+            setProductPrice(product.price * productQuantity);
             setProductSize(product.size[size]);
             setProductColor(product.colorInformation[color].color);
             setItemsOnStock(product.inStock[size][color]);
@@ -35,6 +34,10 @@ const ItemCart = ( props ) => {
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
             setErrorMessage("");
+            const subTotalPromise = buyCartManagement.getSubTotal();
+            subTotalPromise.then((element) => {
+                setSubTotal(element);
+            })
         } else {
             setErrorMessage("No more in stock");
         }
@@ -45,12 +48,20 @@ const ItemCart = ( props ) => {
             setProductQuantity(productQuantity - 1);
             buyCartManagement.decreaseQuantity(productID, size, color);
             setErrorMessage("");
+            const subTotalPromise = buyCartManagement.getSubTotal();
+            subTotalPromise.then((element) => {
+                setSubTotal(element);
+            })
         }
     }
 
     const deleteItem = () => {
         buyCartManagement.deleteProduct(productID, size, color)
         setCartItemsQuantity(buyCartManagement.getProducts().length)
+        const subTotalPromise = buyCartManagement.getSubTotal();
+        subTotalPromise.then((element) => {
+            setSubTotal(element);
+        });
     }
 
     return (

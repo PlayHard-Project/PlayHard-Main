@@ -3,7 +3,9 @@ import "../../css/CardsContainer.css";
 
 const CardsContainer = ({ content }) => {
     return (
-        <section className="card-container">{content}</section>
+        <section className="card-container">
+            {content}
+        </section>
     );
 };
 

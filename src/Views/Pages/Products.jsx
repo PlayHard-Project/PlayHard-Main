@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from "react";
 import CardsContainer from "../Products/CardsContainer";
 import ShoppingCard from "../Products/ShoppingCard";
-import { getElements } from "../../Components/ApiRestHandler/requestHandler";
+import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
 import Sidebar from "../Products/Sidebar";
 
 const Products = () => {
-  const [databaseProducts, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getElements("/products")
-      .then((data) => {
-        setProducts(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los productos:", error);
-      });
-  }, []);
+    if (page > 0) {
+      fetchProducts();
+    }
+  }, [page]);
 
-  const content = databaseProducts.map(
+  const fetchProducts = async () => {
+    try {
+      const newProducts = await getElementsLazyLoading('/products', page);
+      setProducts(newProducts);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  const loadMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const content = products.map(
     ({ _id, imagePath, name, price, colorInformation, size }) => (
       <ShoppingCard
         _id={_id}
@@ -29,6 +39,10 @@ const Products = () => {
       />
     )
   );
+
+  console.log("Page ",{page})
+  console.log("Content:",{content})
+  console.log("Products:",{products})
 
   return (
     <div className="container">

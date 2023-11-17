@@ -35,8 +35,8 @@ const configureAppImplementingStripeServer = (app) => {
                 payment_method_types: ['card'],
                 mode: 'payment',
                 line_items: lineItems,
-                success_url: 'https://play-hard-testv2.vercel.app/success-payment-status',
-                cancel_url: 'https://play-hard-testv2.vercel.app/fail-payment-status',
+                success_url: 'https://play-hard-main.vercel.app/success-payment-status',
+                cancel_url: 'https://play-hard-main.vercel.app/fail-payment-status',
                 billing_address_collection: 'required'
             });
     

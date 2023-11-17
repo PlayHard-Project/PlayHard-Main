@@ -3,6 +3,7 @@ import Footer from './Views/BaseViews/Footer.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
 import Home from "./Views/Pages/Home.jsx";
+import NotImplementedYet from "./Views/Pages/NotImplementedYet.jsx";
 import Header from './Views/BaseViews/Header.jsx';
 import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
@@ -44,6 +45,7 @@ export default function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/fail-payment-status" element={<FailedPayment/>}/>
                 <Route path="/success-payment-status" element={<SuccesfullPayment/>}/>
+                <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>

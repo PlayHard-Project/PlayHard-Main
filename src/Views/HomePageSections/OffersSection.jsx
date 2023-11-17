@@ -22,7 +22,7 @@ export default function OffersSection() {
       <h1 className="title-section">Offers</h1>
       <section className="covers-container">
         {products.map((item) => (
-          <Link key={item.name} to={`/${item.reactRoute}`}>
+          <Link key={item.name} to={`${item.reactRoute}`}>
             <div key={item.id}>
               <img
                 src={item.imagePath}

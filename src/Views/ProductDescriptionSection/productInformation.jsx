@@ -82,7 +82,7 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
 
         <div className={"gap-5"}>
           <span className={"text-gray-700"}>
-            <span className={"font-bold text-blue-800"}>Talla:</span>{" "}
+            <span className={"font-bold text-blue-800"}>Size:</span>{" "}
             {selectSize}
           </span>
           <div className={"flex flex-row gap-3 "}>

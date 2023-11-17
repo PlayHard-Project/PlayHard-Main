@@ -1,0 +1,7 @@
+POST http://localhost:9000/stripe-api/intent-payment
+Content-Type: application/json
+
+{
+  "amount": 1000,
+  "currency": "usd"
+}

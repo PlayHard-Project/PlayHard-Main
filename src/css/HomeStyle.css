@@ -1,0 +1,33 @@
+.App {
+    text-align: center;
+    margin: 0px;
+}
+.main-container{
+    width: 100%;
+    height: 280px;
+    margin: 0 auto;
+}
+
+.App-header {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: black;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

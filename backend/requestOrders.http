@@ -1,0 +1,40 @@
+###
+POST https://backend-fullapirest.onrender.com/api/orders HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": "654b93f5b4182ff7f5a41a06",
+  "isDelivered": true,
+  "date": "2023-05-22",
+  "shippingAddress": "JalaSoft, Cochabamba, Bolivia",
+  "boughtProducts": [
+    "654b904eb4182ff7f5a419ec",
+    "654b9486b4182ff7f5a41a08"
+  ],
+  "total": null
+}
+
+###
+GET https://backend-fullapirest.onrender.com/api/orders HTTP/1.1
+
+###
+GET https://backend-fullapirest.onrender.com/api/orders/654b94b8b4182ff7f5a41a0d HTTP/1.1
+
+###
+PUT https://backend-fullapirest.onrender.com/api/orders/654b94b8b4182ff7f5a41a0d HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": "654b93f5b4182ff7f5a41a06",
+  "isDelivered": true,
+  "date": "2023-05-22",
+  "shippingAddress": "JalaSoft, Cochabamba, Bolivia",
+  "boughtProducts": [
+    "654b904eb4182ff7f5a419ec",
+    "654b9486b4182ff7f5a41a08"
+  ],
+  "total": 1000
+}
+
+###
+DELETE https://backend-fullapirest.onrender.com/api/orders/654b94b8b4182ff7f5a41a0d HTTP/1.1

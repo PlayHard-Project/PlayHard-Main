@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Adidas",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Adidas.png"
+  },
+
+  {
+    "name": "Asics",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Asics.png"
+  },
+
+  {
+    "name": "Fila",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Fila.png"
+  },
+
+  {
+    "name": "Givenchy",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Givenchy.png"
+  },
+
+  {
+    "name": "New Balance",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/New-Balance.png"
+  },
+
+  {
+    "name": "Nike",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Nike.png"
+  },
+
+  {
+    "name": "Puma",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Puma.png"
+  },
+
+  {
+    "name": "Under Armour",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/UnderArmour.png"
+  },
+
+  {
+    "name": "Vans",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Vans.png"
+  },
+
+  {
+    "name": "Champion",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810111/Brands/Champion.png"
+  },
+
+  {
+    "name" : "Wilson",
+    "imagePath": "https://res.cloudinary.com/playhardimages/image/upload/v1699810112/Brands/Wilson.png"
+  }
+]

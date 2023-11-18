@@ -1,25 +1,25 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
+const express = require("express");
+const nodemailer = require("nodemailer");
+const cors = require("cors");
 
 function sendMail(emailPassed) {
-    const myEmail = process.env.MY_EMAIL;
-    const myPassword = process.env.MY_PASSWORD;
-    
-    return new Promise((resolve, reject) => {
-        let transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: myEmail,
-                pass: myPassword,
-            }
-        });
+  const myEmail = process.env.MY_EMAIL;
+  const myPassword = process.env.MY_PASSWORD;
 
-        const mailConfigs = {
-            from: myEmail,
-            to: emailPassed,
-            subject: "Testing Koding 101 Email",
-            html: `
+  return new Promise((resolve, reject) => {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: myEmail,
+        pass: myPassword,
+      },
+    });
+
+    const mailConfigs = {
+      from: myEmail,
+      to: emailPassed,
+      subject: "Testing Koding 101 Email",
+      html: `
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -32,30 +32,31 @@ function sendMail(emailPassed) {
                 </body>
                 </html>
             `,
-        };
+    };
 
-        transporter.sendMail(mailConfigs, function (error, info) {
-            if(error) {
-                console.log(error);
-                return reject(new Error('An error has occurred'));
-            } return resolve(new Error('Email sent successfully'));
-        });
+    transporter.sendMail(mailConfigs, function (error, info) {
+      if (error) {
+        console.log(error);
+        return reject(new Error("An error has occurred"));
+      }
+      return resolve(new Error("Email sent successfully"));
     });
+  });
 }
 const configureAppImplementingStripeServer = (app) => {
-    app.use(express.static('public'));
-    app.use(express.json());
-    app.use(cors()); 
+  app.use(express.static("public"));
+  app.use(express.json());
+  app.use(cors());
 
-    const emailPassed = "jefersoncoronel700@gmail.com";
+  const emailPassed = "playhard.jala.managment@gmail.com";
 
-    app.get("/sendEmail", (req, res) => {
-        sendMail(emailPassed)
-        .then((response) => res.send(response.message))
-        .catch((error) => res.status(500).send(error.message));
-    });
+  app.get("/sendEmail", (req, res) => {
+    sendMail(emailPassed)
+      .then((response) => res.send(response.message))
+      .catch((error) => res.status(500).send(error.message));
+  });
 
-    console.log("-> Successfully connected to Email server.");
+  console.log("-> Successfully connected to Email server.");
 };
 
 module.exports = configureAppImplementingStripeServer;

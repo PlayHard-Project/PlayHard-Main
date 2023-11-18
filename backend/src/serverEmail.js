@@ -1,3 +1,7 @@
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+
 /**
  * Sends an email using the configured email credentials.
  * @param {string} emailPassed - The recipient's email address.
@@ -5,31 +9,31 @@
  * @throws {Error} - Throws an error if an issue occurs during the email sending process.
  */
 function sendMail(emailPassed) {
-    const myEmail = process.env.MY_EMAIL;
-    const myPassword = process.env.MY_PASSWORD;
-  
-    return new Promise((resolve, reject) => {
-      /**
-       * Create a transporter for sending emails using nodemailer.
-       * @type {Object}
-       */
-      let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: myEmail,
-          pass: myPassword,
-        },
-      });
-  
-      /**
-       * Configuration for the email to be sent.
-       * @type {Object}
-       */
-      const mailConfigs = {
-        from: myEmail,
-        to: emailPassed,
-        subject: "Testing Koding 101 Email",
-        html: `
+  const myEmail = process.env.MY_EMAIL;
+  const myPassword = process.env.MY_PASSWORD;
+
+  return new Promise((resolve, reject) => {
+    /**
+     * Create a transporter for sending emails using nodemailer.
+     * @type {Object}
+     */
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: myEmail,
+        pass: myPassword,
+      },
+    });
+
+    /**
+     * Configuration for the email to be sent.
+     * @type {Object}
+     */
+    const mailConfigs = {
+      from: myEmail,
+      to: emailPassed,
+      subject: "Testing Koding 101 Email",
+      html: `
               <!DOCTYPE html>
               <html lang="en">
               <head>
@@ -42,55 +46,54 @@ function sendMail(emailPassed) {
               </body>
               </html>
           `,
-      };
-  
-      /**
-       * Send the email using the transporter.
-       * @param {Error} error - An error object if the email sending fails.
-       * @param {Object} info - Information about the sent email.
-       */
-      transporter.sendMail(mailConfigs, function (error, info) {
-        if (error) {
-          console.log(error);
-          return reject(new Error("An error has occurred"));
-        }
-        return resolve(new Error("Email sent successfully"));
-      });
+    };
+
+    /**
+     * Send the email using the transporter.
+     * @param {Error} error - An error object if the email sending fails.
+     * @param {Object} info - Information about the sent email.
+     */
+    transporter.sendMail(mailConfigs, function (error, info) {
+      if (error) {
+        console.log(error);
+        return reject(new Error("An error has occurred"));
+      }
+      return resolve(new Error("Email sent successfully"));
     });
-  }
-  
+  });
+}
+
+/**
+ * Configures an Express application implementing a email integration.
+ * @param {Object} app - Express application instance.
+ * @returns {void}
+ */
+const configureAppImplementingEmailApi = (app) => {
+  app.use(express.static("public"));
+  app.use(express.json());
+  app.use(cors());
+
+  const emailPassed = "playhard.jala.managment@gmail.com";
+
   /**
-   * Configures an Express application implementing a Stripe server.
-   * @param {Object} app - Express application instance.
+   * Endpoint to trigger the sending of a test email.
+   * @name GET/sendEmail
+   * @function
+   * @param {Object} req - Express request object.
+   * @param {Object} res - Express response object.
    * @returns {void}
    */
-  const configureAppImplementingStripeServer = (app) => {
-    app.use(express.static("public"));
-    app.use(express.json());
-    app.use(cors());
-  
-    const emailPassed = "playhard.jala.managment@gmail.com";
-  
-    /**
-     * Endpoint to trigger the sending of a test email.
-     * @name GET/sendEmail
-     * @function
-     * @param {Object} req - Express request object.
-     * @param {Object} res - Express response object.
-     * @returns {void}
-     */
-    app.get("/sendEmail", (req, res) => {
-      sendMail(emailPassed)
-        .then((response) => res.send(response.message))
-        .catch((error) => res.status(500).send(error.message));
-    });
-  
-    console.log("-> Successfully connected to Email server.");
-  };
-  
-  /**
-   * Module for configuring an application implementing a Stripe server.
-   * @module configureAppImplementingStripeServer
-   */
-  module.exports = configureAppImplementingStripeServer;
-  
+  app.get("/sendEmail", (req, res) => {
+    sendMail(emailPassed)
+      .then((response) => res.send(response.message))
+      .catch((error) => res.status(500).send(error.message));
+  });
+
+  console.log("-> Successfully connected to Email server.");
+};
+
+/**
+ * Module for configuring an application implementing a email sending.
+ * @module configureAppImplementingEmailApi
+ */
+module.exports = configureAppImplementingEmailApi;

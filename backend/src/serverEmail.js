@@ -69,10 +69,6 @@ function sendMail(emailPassed) {
     app.use(express.json());
     app.use(cors());
   
-    /**
-     * The recipient's email address to which the test email will be sent.
-     * @type {string}
-     */
     const emailPassed = "playhard.jala.managment@gmail.com";
   
     /**

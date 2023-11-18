@@ -2,7 +2,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 
-function sendMail(myEmail, myPassword, emailPassed) {
+function sendMail(emailPassed) {
+    const myEmail = process.env.MY_EMAIL;
+    const myPassword = process.env.MY_PASSWORD;
+    
     return new Promise((resolve, reject) => {
         let transporter = nodemailer.createTransport({
             service: "gmail",
@@ -44,12 +47,10 @@ const configureAppImplementingStripeServer = (app) => {
     app.use(express.json());
     app.use(cors()); 
 
-    const myEmail = "playhard.jala.managment@gmail.com";
-    const myPassword = "playhardProyectoDS4";
     const emailPassed = "jefersoncoronel700@gmail.com";
 
     app.get("/sendEmail", (req, res) => {
-        sendMail(myEmail, myPassword, emailPassed)
+        sendMail(emailPassed)
         .then((response) => res.send(response.message))
         .catch((error) => res.status(500).send(error.message));
     });

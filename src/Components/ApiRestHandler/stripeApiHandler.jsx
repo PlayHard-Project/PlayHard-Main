@@ -28,7 +28,6 @@ export default function GoToCheckout() {
       );
 
       setProducts(updatedProducts);
-      console.log(updatedProducts + " CDFGERGRGTR");
     };
     fetchData();
   }, []);

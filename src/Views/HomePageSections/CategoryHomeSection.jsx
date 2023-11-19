@@ -53,7 +53,7 @@ const CategoryHomeSection = () => {
 
     return (
         <section>
-            <div className="title-container-2 mt-14">
+            <div className="title-container-2 mt-2">
                 <h1 className="section-title-2">Categories</h1>
             </div>
             <Slider ref={sliderRef} {...settings}>

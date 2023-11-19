@@ -7,6 +7,7 @@ import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
 import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
 import OffersSection from '../HomePageSections/OffersSection';
+import {ProductButtonsD} from '../Pages/DeleteButtonsPayments';
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -45,32 +46,6 @@ export default function Home() {
                 <CategoryHomeSection>
                 </CategoryHomeSection>
             </section>
-            <header className="App-header">
-                <p>DEVELOPMENT environment</p>
-                <div>
-                    <button onClick={handleGetProductsClick} disabled={loading}>
-                        Get All Products
-                    </button>
-                </div>
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <ul>
-                        {products.map((product) => (
-                            <li key={product.name}>
-                                <h3>{product.name}</h3>
-                                <p>{product.description}</p>
-                                <p>Precio: {product.price} {product.currency}</p>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-
-                <div className={'mt-20 flex flex-col gap-6'}>
-                    <p>ESTOS BOTONES SOLO SIRVEN PARA EL TESTEO, LLEVARA A LA PAGINA DE 3 PRODUCTOS DIFERENTES</p>
-                    <ProductButtons />
-                </div>
-            </header>
         </div>
     );
 }

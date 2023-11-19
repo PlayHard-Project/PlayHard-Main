@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../css/categoryHeaderSection.css";
-import Dropdown from "./Dropdown";
+import Dropdown from "../HomePageSections/Dropdown";
 
 const CategoryButton = ({ label, onClick }) => {
     const [isDropdownVisible, setDropdownVisible] = useState(false);

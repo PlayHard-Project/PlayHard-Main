@@ -53,18 +53,18 @@ const CategoryHomeSection = () => {
 
     return (
         <section>
-            <div className="title-container-2 mt-14">
+            <div className="title-container-2 mt-2">
                 <h1 className="section-title-2">Categories</h1>
             </div>
             <Slider ref={sliderRef} {...settings}>
                 {data.map((category) => (
                     <div key={category.id} className="slick-slide">
                         <Link to={`/${category.name}`} key={category.id}>
-                            <button className="m-4 relative overflow-hidden group">
+                            <button className="relative overflow-hidden group">
                                 <img
                                     src={category.imgUrl}
                                     alt={category.name}
-                                    className="object-cover mb-14 transition-opacity duration-300 group-hover:opacity-70 p-2"
+                                    className="object-cover mb-14 transition-opacity duration-300 group-hover:opacity-70"
                                 />
                             </button>
                         </Link>

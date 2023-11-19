@@ -1,21 +1,40 @@
 import { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
+import BuyCartManagement from '../../Utilities/BuyCartManagement'
 
-function ProductInformation({ productID }) {
+function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
   const [product, setProduct] = useState(null);
   const [activeImg, setActiveImg] = useState(null);
   const [selectedColor, setSelectedColor] = useState("---");
   const [selectSize, setSelectedSize] = useState("---");
   const [quantity, setQuantity] = useState(0);
+  const [colorIndex, setColorIndex] = useState(0);
+  const [sizeIndex, setSizeIndex] = useState(0);
+  const currency = "$"
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [buyCart, setBuyCart] = useState([]);
+  const buyCartManagement = new BuyCartManagement();
 
   useEffect(() => {
-    getElementByID(productID, "products")
+    getElementByID(productID, "/products")
       .then((data) => {
         setProduct(data);
         setActiveImg(data.imagePath[0]);
       })
       .catch((err) => console.error(err));
   }, [productID]);
+
+  useEffect(() => {
+    setBuyCart(buyCartManagement.getProducts())
+  }, []);
+
+  useEffect(() => {
+    if (product && product.colorInformation.length === 0) {
+      setSelectedColor('default');
+    }
+  }, [product]);
+
 
   if (product === null) {
     return <div>Loading...</div>;
@@ -36,9 +55,10 @@ function ProductInformation({ productID }) {
           alt={"imagen del producto"}
         />
         <div className={"flex flex-row justify-between h-16 md:h-24"}>
-          {product.imagePath.map((images) => (
+          {product.imagePath.map((images, index) => (
             <img
               src={images}
+              key={index}
               className={
                 "h-16 w-16 md:h-24 md:w-24  rounded-md object-cover cursor-pointer"
               }
@@ -58,42 +78,53 @@ function ProductInformation({ productID }) {
         </div>
         <p className={"text-gray-700"}>{product.description}</p>
 
-        <h5 className={"text-2xl font-semibold mb-10"}>Bs {product.price}</h5>
+        <h5 className={"text-2xl font-semibold mb-10"}>{currency} {product.price}</h5>
 
         <div className={"gap-5"}>
           <span className={"text-gray-700"}>
-            <span className={"font-bold text-blue-800"}>Talla:</span>{" "}
+            <span className={"font-bold text-blue-800"}>Size:</span>{" "}
             {selectSize}
           </span>
           <div className={"flex flex-row gap-3 "}>
-            {product.size.map((size) => (
+            {product.size.map((size, index) => (
               <button
                 className={"bg-white px-3 py-2 border-2 border-blue-100"}
-                onClick={() => setSelectedSize(size)}
+                onClick={() => {
+                  setSelectedSize(size);
+                  setSizeIndex(index);
+                  setQuantity(0);
+                  setErrorMessage("")
+                }}
               >
                 {size}
               </button>
             ))}
           </div>
         </div>
-        <div className={"gap-5"}>
-          <span className={"text-gray-700"}>
-            <span className={"font-bold text-blue-800"}>Color:</span>{" "}
-            {selectedColor}
-          </span>
-          <div className={"flex flex-row gap-3 "}>
-            {product.colorInformation.map((color) => (
-              <button
-                style={{ backgroundColor: color.hex }}
-                className="border-2 rounded-full px-3 py-2 w-10 h-10"
-                onClick={() => {
-                  setSelectedColor(color.color);
-                  setActiveImg(color.imagePath);
-                }}
-              ></button>
-            ))}
-          </div>
-        </div>
+        {product.colorInformation.length > 0 && (
+            <div className={"gap-5"}>
+              <span className={"text-gray-700"}>
+                <span className={"font-bold text-blue-800"}>Color:</span>{" "}
+                {selectedColor}
+              </span>
+              <div className={"flex flex-row gap-3 "}>
+                {product.colorInformation.map((color, index) => (
+                    <button
+                        key={index}
+                        style={{ backgroundColor: color.hex }}
+                        className="border-2 rounded-full px-3 py-2 w-10 h-10"
+                        onClick={() => {
+                          setSelectedColor(color.color);
+                          setColorIndex(index);
+                          setActiveImg(color.imagePath);
+                          setQuantity(0);
+                          setErrorMessage("")
+                        }}
+                    ></button>
+                ))}
+              </div>
+            </div>
+        )}
 
         <div className={"flex flex-row gap-5 items-center"}>
           <div className={"flex flex-row items-center"}>
@@ -101,9 +132,10 @@ function ProductInformation({ productID }) {
               className={
                 "bg-gray-200 py-2 px-5 rounded-lg text-blue-800 text-3xl text-center"
               }
-              onClick={() =>
+              onClick={() => {
                 setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0))
-              }
+                //setErrorMessage("") TODO: QUANTITY VALIDATION
+              }}
             >
               -
             </button>
@@ -112,23 +144,57 @@ function ProductInformation({ productID }) {
               className={
                 "bg-gray-200 py-2 px-4 rounded-lg text-blue-800 text-3xl text-center"
               }
-              onClick={() =>
-                setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 5))
-              }
+              onClick={() => {
+                if (selectedColor !== "---" && selectSize !== "---") {
+                  setQuantity((prevQuantity) => {
+                    prevQuantity += 1;
+                    setErrorMessage("");
+                    return prevQuantity;
+                    /*if (prevQuantity + 1 <= product.inStock[sizeIndex][colorIndex]) { TODO: QUANTITY VALIDATION
+                      prevQuantity += 1;
+                      setErrorMessage("");
+                      return prevQuantity;
+                    } else {
+                      setErrorMessage("That's all we have in stock")
+                      return prevQuantity;
+                    }*/
+                  })
+                  //setErrorMessage("");
+                } else {
+                  setErrorMessage("Please first select size and color.")
+              }}}
             >
               +
             </button>
           </div>
 
-          <a
+          <button
             className={
               "bg-blue-800 text-white font-semibold py-3 px-6 block flex-grow" +
               " text-center hover:bg-blue-900"
             }
+            onClick={() => {
+              if (quantity !== 0 && selectedColor !== "---" && selectSize !== "---") {
+                buyCartManagement.addProduct(productID, quantity, sizeIndex, colorIndex);
+                const updatedCart = buyCartManagement.getProducts();
+                setBuyCart(updatedCart);
+                console.log(updatedCart); //TODO: ELIMINAR ESTA LINEA, EXISTE SOLO PARA EL TESTEO
+                setCartItemsQuantity(buyCartManagement.getProducts().length)
+                setQuantity(0)
+                setSelectedColor('---')
+                setSelectedSize('---')
+                //(setErrorMessage("") TODO: QUANTITY VALIDATION
+                const subTotalPromise = buyCartManagement.getSubTotal();
+                subTotalPromise.then((element) => {
+                  setSubTotal(element);
+                })
+              }
+            }}
           >
             Add to cart
-          </a>
+          </button>
         </div>
+        <label className="px-0 py-0 font-light text-red-800">{errorMessage}</label>
       </div>
     </div>
   );

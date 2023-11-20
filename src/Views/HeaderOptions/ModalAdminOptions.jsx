@@ -25,7 +25,6 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
     const [selectedOption, setSelectedOption] = useState(null);
     const isMobile = useMediaQuery({ maxWidth: 888 });
 
-    // Handle option click to toggle selection.
     const handleOptionClick = (option) => {
         setSelectedOption((prevOption) => (prevOption === option ? null : option));
     };
@@ -95,16 +94,20 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                     {options.map((option, index) => (
                         <div
                             key={index}
-                            style={{ flex: `0 0 ${containerWidth}`, cursor: 'pointer' }}
-                            onClick={() => handleOptionClick(option)}
+                            style={{ flex: `0 0 ${containerWidth}`, cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
+                            onClick={() => handleOptionClick(option.label)}
                         >
-                            {['Clothes', 'Brands', 'Sports'].includes(option) ? (
-                                <div>{option}</div>
-                            ) : (
-                                <Link to={`/categories/${option}`} style={{ fontSize: '16px', fontFamily: 'Montserrat, cursive' }}>
-                                    {option}
-                                </Link>
-
+                            <div>
+                                {['Clothes', 'Brands', 'Sports'].includes(option.label) ? (
+                                    <div>{option.label}</div>
+                                ) : (
+                                    <Link to={`/categories/${option.label}`} style={{ fontSize: '16px', fontFamily: 'Montserrat, cursive' }}>
+                                        {option.label}
+                                    </Link>
+                                )}
+                            </div>
+                            {option.icon && (
+                                <span style={{ marginLeft: '20px', marginTop:'4px' }}>{option.icon}</span>
                             )}
                         </div>
                     ))}

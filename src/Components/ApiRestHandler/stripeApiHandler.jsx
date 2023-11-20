@@ -5,9 +5,11 @@ import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
 import '../../css/CartShop.css';
 
+// Functional component for the checkout button
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
 
+  // Fetch products and format them when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       const productsArray = await new BuyCartManagement().getProducts();
@@ -32,7 +34,8 @@ export default function GoToCheckout({ disabled }) {
     fetchData();
   }, []);
 
-  const makePayment = async () => {
+    // Function to handle the payment process
+    const makePayment = async () => {
     try {
       const stripe = await loadStripe(
           "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
@@ -65,6 +68,7 @@ export default function GoToCheckout({ disabled }) {
     }
   };
 
+    // Render the checkout button
   return (
       <button
           className={`checkout-button ${disabled ? "disabled" : ""}`}

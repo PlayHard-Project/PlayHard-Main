@@ -18,6 +18,12 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
     const [showBrandsSubCategories, setShowBrandsSubCategories] = useState(false);
     const [showSportsSubCategories, setShowSportsSubCategories] = useState(false);
 
+    const toggleAllMenus = () => {
+        setShowClothesSubCategories(false);
+        setShowBrandsSubCategories(false);
+        setShowSportsSubCategories(false);
+    };
+
     const clothesSubCategories = [
         { label: "T-Shirts" },
         { label: "Jerseys" },
@@ -53,7 +59,13 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
         { label: "Golf" },
     ];
 
+    /**
+     * Handles the toggle of subcategories visibility for a specific category.
+     *
+     * @param {string} category - The category for which subcategories are toggled.
+     */
     const handleToggleSubCategories = (category) => {
+        toggleAllMenus();
         if (category === "Clothes") setShowClothesSubCategories(!showClothesSubCategories);
         else if (category === "Brands") setShowBrandsSubCategories(!showBrandsSubCategories);
         else if (category === "Sports") setShowSportsSubCategories(!showSportsSubCategories);

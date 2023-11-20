@@ -7,6 +7,17 @@ import ShoppingCartModal from "../Cart/ShoppingCartModal";
 import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
+import { SlArrowDown } from "react-icons/sl";
+
+/**
+ * Header component for the website.
+ *
+ * @param {Object} props - The component properties.
+ * @param {number} props.cartItemsQuantity - The quantity of items in the shopping cart.
+ * @param {Function} props.setCartItemsQuantity - Function to set the quantity of items in the shopping cart.
+ * @param {Function} props.setSubTotal - Function to set the subtotal of the shopping cart.
+ * @param {number} props.subTotal - The subtotal of the shopping cart.
+ */
 
 const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
@@ -18,11 +29,18 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
 
+  /**
+   * Function to toggle the menu and categories visibility.
+   * @param {string} category - The category to toggle.
+   */
   const toggleMenuAndCategories = (category) => {
     toggleMenu();
     toggleCategories();
   };
 
+  /**
+   * Function to handle the opening and closing of the options modal.
+   */
   const handleOptionsModal = () => {
     if(isOptionsModalOpen){
       setOptionsModalOpen(false)
@@ -33,9 +51,16 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
     setShowMenuPopup(false);
   };
 
+  /**
+   * Function to handle the closing of the options modal.
+   */
   const handleCloseOptionsModal = () => {
     setOptionsModalOpen(false);
   };
+
+  /**
+   * Function to handle the opening and closing of the cart modal.
+   */
   const handleOpenCartModal = () => {
     if(isCartModalOpen){
       setCartModalOpen(false)
@@ -46,31 +71,57 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
     setShowMenuPopup(false);
   };
 
+  /**
+   * Function to handle the closing of the cart modal.
+   */
   const handleCloseModal = () => {
     setCartModalOpen(false);
   };
+
+  /**
+   * Function to handle the closing of the categories modal.
+   */
   const handleCloseCategoriesModal = () => {
     setShowCategoriesPopup(false);
   };
 
+  /**
+   * Toggles the visibility of the search popup.
+   * Closes other popups and modals.
+   */
   const toggleSearchPopup = () => {
     setShowSearchPopup(!showSearchPopup);
     setShowMenuPopup(false);
     handleCloseModal();
   };
 
+  /**
+   * Toggles the visibility of the main menu.
+   * Closes other popups and modals.
+   * Also, closes the categories modal and options modal.
+   */
   const toggleMenu = () => {
     setShowMenuPopup(!showMenuPopup);
     setShowSearchPopup(false);
     handleCloseModal();
     handleCloseCategoriesModal();
+    handleCloseOptionsModal();
   };
+
+  /**
+   * Toggles the visibility of the categories popup.
+   * Closes other popups and modals.
+   */
   const toggleCategories = () => {
     setShowCategoriesPopup(!setShowCategoriesPopup());
     setShowSearchPopup(false);
     handleCloseModal();
   };
 
+  /**
+   * Effect hook to handle closing modals when in mobile view.
+   * Closes the cart modal and options modal when the screen size is mobile.
+   */
   useEffect(() => {
     if (isMobile) {
       handleCloseModal();
@@ -96,7 +147,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             <Link to="/">
               <img src={headerIcon} alt="Icon Main" className="background-shape" />
             </Link>
-            <div className="lg:flex space-x-4 hidden text-active">
+            <div className="lg:flex space-x-5 hidden text-active pl-5">
               {paths.map((path) => (
                   <Link
                       key={path.link}
@@ -113,9 +164,18 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                     isOpen={isOptionsModalOpen}
                     onRequestClose={handleCloseOptionsModal}
                     modalRef={modalOptionsRef}
-                    options={["Clothes", "Shoes", "Equipment","Accessories","Brands","Offers","Sports"]}
+                    options={[
+                      { label: "Clothes", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Shoes", icon: " " },
+                      { label: "Equipment",  icon: " " },
+                      { label: "Accessories",  icon: " "},
+                      { label: "Brands", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Offers",  icon: " " },
+                      { label: "Sports", icon: <SlArrowDown strokeWidth={100}/> },
+                    ]}
                 />
               </div>
+
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">

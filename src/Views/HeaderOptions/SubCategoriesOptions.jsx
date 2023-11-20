@@ -1,0 +1,42 @@
+// SubCategoriesOptions.jsx
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { MdArrowBack } from "react-icons/md";
+
+const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption }) => {
+    return (
+        <div className="absolute p-2 shadow-lg popup space-y-1 flex flex-col items-start" style={{ marginTop: '-11px', marginLeft: '-10px' }}>
+            <MdArrowBack
+                size={20}
+                color="#72a3ff"
+                className="style-icon"
+                onClick={handleCloseModal}
+            />
+            {options.map((option, index) => (
+                <Link to={`/categories/${option.label}`} key={index} className="text-link">
+                    <div
+                        className="relative flex items-center text-link"
+                        onClick={() => toggleOption(option)}
+                    >
+                        {option.label}
+                    </div>
+                </Link>
+            ))}
+        </div>
+    );
+};
+
+SubCategoriesOptions.propTypes = {
+    handleCloseModal: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            showArrow: PropTypes.bool,
+            arrowMargin: PropTypes.string,
+        })
+    ).isRequired,
+    toggleOption: PropTypes.func.isRequired,
+};
+
+export default SubCategoriesOptions;

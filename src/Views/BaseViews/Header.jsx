@@ -5,7 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
 import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
-import SubOptionsModal from "../HeaderOptions/SubOptionsClothesModal";
+import { SlArrowRight } from "react-icons/sl";
+import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 
 const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
@@ -14,14 +15,14 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const headerIcon = "https://res.cloudinary.com/playhard/image/upload/v1699676459/PlayHardLogo.png";
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
-  const [isSubOptionsModalOpen, setSubOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
+  const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
 
-  const handleSubOptionsModal = () => {
-    setSubOptionsModalOpen((prevOpen) => !prevOpen);
-    setShowSearchPopup(false);
-    setShowMenuPopup(false);
+  const toggleMenuAndCategories = (category) => {
+    toggleMenu();
+    toggleCategories();
   };
+
   const handleOptionsModal = () => {
     if(isOptionsModalOpen){
       setOptionsModalOpen(false)
@@ -48,6 +49,9 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const handleCloseModal = () => {
     setCartModalOpen(false);
   };
+  const handleCloseCategoriesModal = () => {
+    setShowCategoriesPopup(false);
+  };
 
   const toggleSearchPopup = () => {
     setShowSearchPopup(!showSearchPopup);
@@ -57,6 +61,12 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
 
   const toggleMenu = () => {
     setShowMenuPopup(!showMenuPopup);
+    setShowSearchPopup(false);
+    handleCloseModal();
+    handleCloseCategoriesModal();
+  };
+  const toggleCategories = () => {
+    setShowCategoriesPopup(!setShowCategoriesPopup());
     setShowSearchPopup(false);
     handleCloseModal();
   };
@@ -172,6 +182,9 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                         {path.title}
                       </Link>
                   ))}
+                  <div className="relative flex items-center text-link" onClick={toggleCategories}>
+                    Categories <SlArrowRight size={10} color="#72a3ff" strokeWidth={200} style={{ marginLeft: '70px' }} />
+                  </div>
                   <div className="relative flex items-center text-link">
                     Login / Register
                   </div>
@@ -184,6 +197,12 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                   </Link>
                   <div className="relative flex items-center text-link">Settings</div>
                 </div>
+            )}
+            {showCategoriesPopup && (
+                <CategoriesPopup
+                    handleCloseCategoriesModal={handleCloseCategoriesModal}
+                    toggleMenuAndCategories={toggleMenuAndCategories}
+                />
             )}
           </div>
         </div>

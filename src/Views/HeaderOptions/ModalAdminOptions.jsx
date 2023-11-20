@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../../css/ModalHeaderOption.css';
 import '../../css/headerStyle.css';
 import Modal from 'react-modal';
 import SubOptionsClothesModal from "./SubOptionsClothesModal";
 import SubOptionsBrandsModal from "./SubOptionsBrandsModal";
 import SubOptionsSportsModal from "./SubOptionsSportsModal";
+import { useMediaQuery } from "react-responsive";
 
 const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, onRequestOpen, onRequestClose }) => {
     const containerWidth = options.length > 0 ? `${90 / options.length}%` : '100%';
     const [selectedOption, setSelectedOption] = useState(null);
+    const isMobile = useMediaQuery({ maxWidth: 888 });
 
-    const handleOptionClick = (option, e) => {
+    const handleOptionClick = (option) => {
         setSelectedOption((prevOption) => (prevOption === option ? null : option));
     };
+
+    useEffect(() => {
+        if (isMobile) {
+            handleOptionClick();
+        }
+    }, [isMobile]);
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -72,9 +81,16 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                         <div
                             key={index}
                             style={{ flex: `0 0 ${containerWidth}`, cursor: 'pointer' }}
-                            onClick={(e) => handleOptionClick(option, e)}
+                            onClick={() => handleOptionClick(option)}
                         >
-                            <div className="option-text">{option}</div>
+                            {['Clothes', 'Brands', 'Sports'].includes(option) ? (
+                                <div>{option}</div>
+                            ) : (
+                                <Link to={`/categories/${option}`} style={{ fontSize: '16px', fontFamily: 'Montserrat, cursive' }}>
+                                    {option}
+                                </Link>
+
+                            )}
                         </div>
                     ))}
                 </div>
@@ -91,8 +107,7 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                 <SubOptionsBrandsModal
                     isOpen={selectedOption === 'Brands'}
                     onRequestClose={() => setSelectedOption(null)}
-                    options={['Adidas', 'Asics', 'Fila', 'Givenchy', 'New Balance', 'Nike', 'Puma', 'Under Armour'
-                        , 'Vans', 'Champion', 'Wilson']}
+                    options={['Adidas', 'Asics', 'Fila', 'Givenchy', 'New Balance', 'Nike', 'Puma', 'Under Armour', 'Vans', 'Champion', 'Wilson']}
                 />
             )}
             {selectedOption === 'Sports' && (

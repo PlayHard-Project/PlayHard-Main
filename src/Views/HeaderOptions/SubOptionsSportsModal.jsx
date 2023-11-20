@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import "../../css/subOptionSportModal.css"
 
-const SubOptionsClothesModal = ({ isOpen, onRequestClose, options }) => {
+const SubOptionsSportsModal = ({ isOpen, onRequestClose, options }) => {
     return (
         <Modal
             isOpen={isOpen}
@@ -23,4 +23,4 @@ const SubOptionsClothesModal = ({ isOpen, onRequestClose, options }) => {
     );
 };
 
-export default SubOptionsClothesModal;
+export default SubOptionsSportsModal;

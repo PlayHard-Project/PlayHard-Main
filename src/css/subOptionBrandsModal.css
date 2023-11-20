@@ -14,3 +14,25 @@
 .modal-overlay-suboptions-brands {
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media only screen and (max-width: 1342px) {
+    .modal-content-suboptions-brands {
+        top: 41%;
+        left: 62%;
+    }
+}
+@media only screen and (max-width: 1208px) {
+    .modal-content-suboptions-brands {
+        top: 40%;
+    }
+}
+@media only screen and (max-width: 1084px) {
+    .modal-content-suboptions-brands {
+        top: 39%;
+    }
+}
+@media only screen and (max-width: 996px) {
+    .modal-content-suboptions-brands {
+        top: 38%;
+    }
+}

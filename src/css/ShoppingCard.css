@@ -111,11 +111,15 @@
   cursor: pointer;
 }
 
+.selected {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
 /*FLIP FUNCTIONALITY*/
 
 .flip-card {
   perspective: 1000px;
-  position: relative;
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
@@ -134,21 +138,9 @@
 .shopping-card-flip-back {
   width: 100%;
   height: 100%;
-  position: absolute;
   backface-visibility: hidden;
 }
 
 .shopping-card-flip-back {
   transform: rotateX(180deg);
-}
-
-.flip-button {
-  width: 100px;
-  padding: 10px;
-  font-size: 16px;
-  margin-top: 10px;
-  background-color: #f5d9fa;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }

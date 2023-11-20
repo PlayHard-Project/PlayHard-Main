@@ -9,28 +9,29 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
   const [colorIndex, setColorIndex] = useState(-1);
   const [sizeIndex, setSizeIndex] = useState(-1);
   const buyCartManagement = new BuyCartManagement();
-  const [isFlipped, setIsFlipped] = useState(false)
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [selectedColorButton, setSelectedColorButton] = useState(null);
+  const [selectedSizeButton, setSelectedSizeButton] = useState(null);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleColorSelection = (index) => {
-    setColorIndex(index);
-    if (sizeIndex === -1) {
-      console.log("no puedo comprar todavia")
-    } else {
-      console.log(title + " | " + sizeIndex + " | " + colorIndex)
-    }
-  }
+  const handleColorButtonClick = (buttonNumber) => {
+    setSelectedColorButton(buttonNumber === selectedColorButton ? null : buttonNumber);
+  };
 
-  const handleSizeSelection = (index) => {
-    setSizeIndex(index);
-    if (colorIndex === -1) {
-      console.log("no puedo comprar todavia")
-    } else {
-      console.log(title + " | " + sizeIndex + " | " + colorIndex)
-    }
+  const handleSizeButtonClick = (buttonNumber) => {
+    setSelectedSizeButton(buttonNumber === selectedSizeButton ? null : buttonNumber);
+  };
+
+  const addProductFromCart = ( _id, size, color ) => {
+    buyCartManagement.addProduct(_id, 1, size, color);
+    setCartItemsQuantity(buyCartManagement.getProducts().length);
+    const subTotalPromise = buyCartManagement.getSubTotal();
+    subTotalPromise.then((element) => {
+      setSubTotal(element);
+    });
   }
 
   useEffect(() => {
@@ -72,19 +73,18 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
                   <div>
                     <section className="card-colors">
                       {colorInformation.map((item, index) => (
-                          <div style={{ backgroundColor: item.hex }} className="color-button" onClick={() => {
-                            setColorIndex(index);
-                            if (sizeIndex !== -1) {
-                              buyCartManagement.addProduct(_id, 1, sizeIndex, index)
-                              setCartItemsQuantity(buyCartManagement.getProducts().length)
-                              const subTotalPromise = buyCartManagement.getSubTotal();
-                              subTotalPromise.then((element) => {
-                                setSubTotal(element);
-                              })
-                              setIsFlipped(!isFlipped);
-                              console.log(buyCartManagement.getProducts());
-                              setSizeIndex(-1);
-                              setColorIndex(-1);
+                          <div style={{ backgroundColor: item.hex }} className={`color-button ${index === selectedColorButton ? 'selected' : ''}`} onClick={() => {
+                            if (index !== colorIndex) {
+                              setColorIndex(index);
+                              handleColorButtonClick(index);
+                              if (sizeIndex !== -1) {
+                                setIsFlipped(!isFlipped);
+                                addProductFromCart(_id, sizeIndex, index);
+                                setSizeIndex(-1);
+                                setColorIndex(-1);
+                                setSelectedColorButton(null);
+                                setSelectedSizeButton(null);
+                              }
                             }
                           }}>+
                           </div>
@@ -92,18 +92,18 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
                     </section>
                     <section className="card-size">
                       {size.map((item, index) => (
-                          <div className="size-button" onClick={() => {
-                            setSizeIndex(index);
-                            if (colorIndex !== -1) {
-                              buyCartManagement.addProduct(_id, 1, index, colorIndex)
-                              setCartItemsQuantity(buyCartManagement.getProducts().length)
-                              const subTotalPromise = buyCartManagement.getSubTotal();
-                              subTotalPromise.then((element) => {
-                                setSubTotal(element);
-                              })
-                              setIsFlipped(!isFlipped)
-                              setSizeIndex(-1);
-                              setColorIndex(-1);
+                          <div className={`size-button ${index === selectedSizeButton ? 'selected' : ''}`} onClick={() => {
+                            if (index !== sizeIndex) {
+                              setSizeIndex(index);
+                              handleSizeButtonClick(index);
+                              if (colorIndex !== -1) {
+                                setIsFlipped(!isFlipped)
+                                addProductFromCart(_id, index, colorIndex);
+                                setSizeIndex(-1);
+                                setColorIndex(-1);
+                                setSelectedSizeButton(null);
+                                setSelectedColorButton(null);
+                              }
                             }
                           }}>
                             {item}

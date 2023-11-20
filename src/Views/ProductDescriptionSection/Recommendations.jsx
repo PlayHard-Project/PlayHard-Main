@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../../css/Recommendations.css";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 import BasicCard from "./Card";
+import {GridLoader} from "react-spinners";
 
 export default function Recommendations() {
   const [products, setProducts] = useState([]);
@@ -71,6 +72,25 @@ export default function Recommendations() {
 
     return () => clearInterval(interval);
   }, []);
+
+
+  /**
+   * Renders a loading component when there are no products to display.
+   * @param {Array} products - The array of products to be checked for emptiness.
+   * @returns {JSX.Element} - The JSX representing either the loading component or the product content.
+   */
+  if (products.length === 0) {
+    return (
+        <div
+            className={
+              "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
+            }
+        >
+          {/* Display a loading spinner with the specified color */}
+          <GridLoader color="#023fc5" />
+        </div>
+    );
+  }
 
   return (
     <section className="slider-container">

@@ -102,6 +102,11 @@
   justify-content: space-between;
 }
 
+.card-colors,
+.card-content:hover {
+  cursor: pointer;
+}
+
 /*FLIP FUNCTIONALITY*/
 
 .flip-card {
@@ -112,7 +117,7 @@
 }
 
 .flip-card.flipped {
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .flip-card-inner {
@@ -130,7 +135,7 @@
 }
 
 .shopping-card-flip-back {
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .flip-button {

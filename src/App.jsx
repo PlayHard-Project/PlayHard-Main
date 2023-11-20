@@ -1,8 +1,9 @@
 import React from 'react';
 import Footer from './Views/BaseViews/Footer.jsx';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import { ProductSection } from "./Views/ProductDescriptionSection/ProductSection.jsx";
 import Home from "./Views/Pages/Home.jsx";
+import NotImplementedYet from "./Views/Pages/NotImplementedYet.jsx";
 import Header from './Views/BaseViews/Header.jsx';
 import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
@@ -22,6 +23,16 @@ export default function App() {
     const [subTotal, setSubTotal] = useState(0);
     const buyCartManagement = new BuyCartManagement();
 
+    function ScrollToTop() {
+        const { pathname } = useLocation();
+
+        useEffect(() => {
+            window.scrollTo(0, 0);
+        }, [pathname]);
+
+        return null;
+    }
+
     useEffect(() => {
         const savedCartItems = buyCartManagement.getProducts();
         if (savedCartItems) {
@@ -35,6 +46,7 @@ export default function App() {
 
     return (
         <Router>
+            <ScrollToTop />
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -45,6 +57,7 @@ export default function App() {
                 <Route path="/fail-payment-status" element={<FailedPayment/>}/>
                 <Route path="/success-payment-status" element={<SuccesfullPayment/>}/>
                 <Route path="/products" element={<Products setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
+                <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>

@@ -22,15 +22,6 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
     } else {
       console.log(title + " | " + sizeIndex + " | " + colorIndex)
     }
-    /*
-    if (sizeIndex !== -1) {
-      buyCartManagement.addProduct(_id, 1, sizeIndex, colorIndex)
-      setCartItemsQuantity(buyCartManagement.getProducts().length)
-      const subTotalPromise = buyCartManagement.getSubTotal();
-      subTotalPromise.then((element) => {
-        setSubTotal(element);
-      })
-    }*/
   }
 
   const handleSizeSelection = (index) => {
@@ -40,15 +31,6 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
     } else {
       console.log(title + " | " + sizeIndex + " | " + colorIndex)
     }
-    /*
-    if (colorIndex !== -1) {
-      buyCartManagement.addProduct(_id, 1, sizeIndex, colorIndex)
-      setCartItemsQuantity(buyCartManagement.getProducts().length)
-      const subTotalPromise = buyCartManagement.getSubTotal();
-      subTotalPromise.then((element) => {
-        setSubTotal(element);
-      })
-    }*/
   }
 
   useEffect(() => {
@@ -95,13 +77,14 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
                             if (sizeIndex === -1) {
                               console.log("no puedo comprar todavia")
                             } else {
-                              buyCartManagement.addProduct(_id, 1, index, colorIndex)
+                              buyCartManagement.addProduct(_id, 1, sizeIndex, index)
                               setCartItemsQuantity(buyCartManagement.getProducts().length)
                               const subTotalPromise = buyCartManagement.getSubTotal();
                               subTotalPromise.then((element) => {
                                 setSubTotal(element);
                               })
                               setIsFlipped(!isFlipped);
+                              console.log(buyCartManagement.getProducts())
                             }
                           }}>+
                           </div>
@@ -114,13 +97,14 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
                             if (colorIndex === -1) {
                               console.log("no puedo comprar todavia")
                             } else {
-                              buyCartManagement.addProduct(_id, 1, sizeIndex, index)
+                              buyCartManagement.addProduct(_id, 1, index, colorIndex)
                               setCartItemsQuantity(buyCartManagement.getProducts().length)
                               const subTotalPromise = buyCartManagement.getSubTotal();
                               subTotalPromise.then((element) => {
                                 setSubTotal(element);
                               })
                               setIsFlipped(!isFlipped)
+                              console.log(buyCartManagement.getProducts())
                             }
                           }}>
                             {item}

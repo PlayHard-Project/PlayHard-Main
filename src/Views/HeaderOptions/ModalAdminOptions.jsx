@@ -8,21 +8,36 @@ import SubOptionsBrandsModal from "./SubOptionsBrandsModal";
 import SubOptionsSportsModal from "./SubOptionsSportsModal";
 import { useMediaQuery } from "react-responsive";
 
+/**
+ * Component for rendering a modal with admin options.
+ *
+ * @param {Object} props - The component properties.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open.
+ * @param {Array} props.options - Array of options to be displayed in the modal.
+ * @param {Function} props.onClose - Function to close the modal.
+ * @param {React.RefObject} props.modalRef - Reference to the modal container.
+ * @param {string} props.sectionText - Text to display as the section name.
+ * @param {Function} props.onRequestOpen - Function to request opening the modal.
+ * @param {Function} props.onRequestClose - Function to request closing the modal.
+ */
 const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, onRequestOpen, onRequestClose }) => {
     const containerWidth = options.length > 0 ? `${90 / options.length}%` : '100%';
     const [selectedOption, setSelectedOption] = useState(null);
     const isMobile = useMediaQuery({ maxWidth: 888 });
 
+    // Handle option click to toggle selection.
     const handleOptionClick = (option) => {
         setSelectedOption((prevOption) => (prevOption === option ? null : option));
     };
 
+    // Close the modal if the viewport is mobile.
     useEffect(() => {
         if (isMobile) {
             handleOptionClick();
         }
     }, [isMobile]);
 
+    // Close the modal when clicking outside of it.
     useEffect(() => {
         const handleOutsideClick = (e) => {
             if (

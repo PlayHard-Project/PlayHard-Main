@@ -1,7 +1,9 @@
-*{
+/* Remove focus outline for all elements */
+* {
     outline: none !important;
 }
 
+/* Styles for the overlay of the options modal */
 .modal-overlay-options {
     background: none;
     position: fixed;
@@ -9,6 +11,7 @@
     left: 73%;
 }
 
+/* Styles for the content of the options modal */
 .modal-content-options {
     padding: 20px;
     border-radius: 8px;
@@ -16,6 +19,7 @@
     max-height: 100%;
 }
 
+/* Styles for the Brands modal content */
 .brands-modal-content {
     position: absolute;
     top: 1000px;
@@ -29,6 +33,7 @@
     width: 210px;
 }
 
+/* Styles for the main container of options */
 .modal-container-options {
     position: fixed;
     top: 10.1%;
@@ -43,6 +48,7 @@
     clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4.2% 100%);
 }
 
+/* Styles for the individual options in the main container */
 .container-options {
     display: flex;
     align-items: center;
@@ -68,10 +74,12 @@
 
 .container-options > div > div {
     font-size: 16px;
-    font-family: 'Montserrat',cursive;
+    font-family: 'Montserrat', cursive;
 }
+
+/* Media queries for responsiveness */
 @media only screen and (max-width: 1543px) {
-    .modal-container-options{
+    .modal-container-options {
         top: 10.1%;
         width: 87%;
         clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.8% 100%);
@@ -79,56 +87,8 @@
 }
 
 @media only screen and (max-width: 1444px) {
-    .modal-container-options{
+    .modal-container-options {
         width: 85.6%;
         clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.7% 100%);
-    }
-}
-
-@media only screen and (max-width: 1342px) {
-    .modal-container-options{
-        top: 9.1%;
-        width: 87.4%;
-    }
-}
-
-@media only screen and (max-width: 1208px) {
-    .modal-container-options{
-        top: 7.9%;
-        width: 86%;
-    }
-}
-
-@media only screen and (max-width: 1194px) {
-    .modal-container-options{
-        top: 7.3%;
-        width: 85.7%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3% 100%);
-    }
-}
-@media only screen and (max-width: 1088px) {
-    .modal-container-options{
-        top: 6.4%;
-        width: 84.5%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 2% 100%);
-    }
-}
-@media only screen and (max-width: 992px) {
-    .modal-container-options{
-        top: 5.8%;
-        width: 86%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 2.5% 100%);
-    }
-}
-@media only screen and (max-width: 947px) {
-    .modal-container-options{
-        width: 87.5%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 2.5% 100%);
-    }
-}
-@media only screen and (max-width: 923px) {
-    .modal-container-options{
-        width: 89%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 2.5% 100%);
     }
 }

@@ -4,6 +4,14 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 
+/**
+ * Component for rendering subcategories options.
+ *
+ * @param {Object} props - The component properties.
+ * @param {Function} props.handleCloseModal - Function to close the subcategories modal.
+ * @param {Array} props.options - Array of subcategories options.
+ * @param {Function} props.toggleOption - Function to toggle a subcategory option.
+ */
 const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption }) => {
     return (
         <div className="absolute p-2 shadow-lg popup space-y-1 flex flex-col items-start" style={{ marginTop: '-11px', marginLeft: '-10px' }}>
@@ -27,6 +35,7 @@ const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption }) => {
     );
 };
 
+// PropTypes for component validation
 SubCategoriesOptions.propTypes = {
     handleCloseModal: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(

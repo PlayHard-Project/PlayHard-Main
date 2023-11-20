@@ -6,6 +6,13 @@ import { SlArrowRight } from "react-icons/sl";
 import SubCategoriesOptions from "./SubCategoriesOptions";
 import { Link } from "react-router-dom";
 
+/**
+ * Component for rendering a popup with categories and subcategories.
+ *
+ * @param {Object} props - The component properties.
+ * @param {Function} props.handleCloseCategoriesModal - Function to close the categories modal.
+ * @param {Function} props.toggleMenuAndCategories - Function to toggle between menu and categories.
+ */
 const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }) => {
     const [showClothesSubCategories, setShowClothesSubCategories] = useState(false);
     const [showBrandsSubCategories, setShowBrandsSubCategories] = useState(false);
@@ -150,6 +157,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
     );
 };
 
+// PropTypes for component validation
 CategoriesPopup.propTypes = {
     handleCloseCategoriesModal: PropTypes.func.isRequired,
     toggleMenuAndCategories: PropTypes.func.isRequired,

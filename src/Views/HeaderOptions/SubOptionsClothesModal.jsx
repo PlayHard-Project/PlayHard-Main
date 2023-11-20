@@ -3,6 +3,14 @@ import React from 'react';
 import Modal from 'react-modal';
 import "../../css/subOptionClothesModal.css"
 
+/**
+ * Component for rendering suboptions modal for the Clothes category.
+ *
+ * @param {Object} props - The component properties.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open.
+ * @param {Function} props.onRequestClose - Function to request closing the modal.
+ * @param {Array} props.options - Array of suboptions for the Clothes category.
+ */
 const SubOptionsClothesModal = ({ isOpen, onRequestClose, options }) => {
     return (
         <Modal

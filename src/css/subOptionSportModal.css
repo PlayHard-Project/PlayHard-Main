@@ -1,0 +1,16 @@
+.modal-content-suboptions-sport {
+    position: absolute;
+    top: 35.5%;
+    left:87%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 210px;
+}
+
+.modal-overlay-suboptions-sport {
+    background-color: rgba(0, 0, 0, 0.5);
+}

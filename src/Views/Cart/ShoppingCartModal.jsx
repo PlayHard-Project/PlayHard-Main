@@ -13,6 +13,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
 
     const buyCartManagement = new BuyCartManagement();
     const items = buyCartManagement.getProducts();
+    const isCartEmpty = cartItemsQuantity === 0;
 
     useEffect(() => {
         const handleOutsideClick = (e) => {
@@ -111,7 +112,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
-                    <GoToCheckout />
+                    <GoToCheckout disabled={isCartEmpty}/>
                 </div>
             </Modal>
         </div>

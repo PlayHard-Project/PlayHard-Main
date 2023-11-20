@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
 import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
+import SubOptionsModal from "../HeaderOptions/SubOptionsClothesModal";
 
 const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
@@ -13,9 +14,14 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const headerIcon = "https://res.cloudinary.com/playhard/image/upload/v1699676459/PlayHardLogo.png";
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
-
+  const [isSubOptionsModalOpen, setSubOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
 
+  const handleSubOptionsModal = () => {
+    setSubOptionsModalOpen((prevOpen) => !prevOpen);
+    setShowSearchPopup(false);
+    setShowMenuPopup(false);
+  };
   const handleOptionsModal = () => {
     if(isOptionsModalOpen){
       setOptionsModalOpen(false)

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../../css/Recommendations.css";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 import BasicCard from "./Card";
+import {GridLoader} from "react-spinners";
 
 export default function Recommendations() {
   const [products, setProducts] = useState([]);
@@ -71,6 +72,19 @@ export default function Recommendations() {
 
     return () => clearInterval(interval);
   }, []);
+
+
+  if (products.length === 0) {
+    return <div
+        className={
+          "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
+        }
+    >
+
+      <GridLoader color="#023fc5" />
+    </div>
+
+  }
 
   return (
     <section className="slider-container">

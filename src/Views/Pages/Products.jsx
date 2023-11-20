@@ -4,6 +4,7 @@ import ShoppingCard from "../Products/ShoppingCard";
 import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
 import Sidebar from "../Products/Sidebar";
 import '../../css/Products.css'
+import {GridLoader} from "react-spinners";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -44,6 +45,18 @@ const Products = () => {
   console.log("Page ",{page})
   console.log("Content:",{content})
   console.log("Products:",{products})
+
+  if (products.length === 0) {
+    return <div
+        className={
+          "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
+        }
+    >
+
+      <GridLoader color="#023fc5" />
+    </div>
+
+  }
 
   return (
     <div className="container-product container" >

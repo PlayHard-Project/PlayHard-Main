@@ -2,9 +2,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../../css/BrandsSection.css";
 import {Link, useNavigate} from "react-router-dom";
+import {GridLoader} from "react-spinners";
 
 const BrandItem = ({ to, children }) => {
     const navigate = useNavigate();
@@ -80,6 +81,17 @@ export default function BrandsSection() {
             window.removeEventListener('resize', handleWindowSizeChange);
         };
     }, []);
+
+    if (data.length === 0) {
+        return <div
+            className={
+                "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+            }
+        >
+            <GridLoader color="#023fc5" />
+        </div>
+
+    }
 
     return (
         <section className="brands-container">

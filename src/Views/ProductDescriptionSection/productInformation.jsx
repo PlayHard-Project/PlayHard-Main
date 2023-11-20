@@ -46,16 +46,22 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
   let [color, setColor] = useState("#ffffff");
   let [loading, setLoading] = useState(true);
 
+  /**
+   * Renders a loading component while waiting for the product to load.
+   * @param {Object} product - The product being awaited. If null, the loading component is displayed.
+   * @returns {JSX.Element} - The JSX representing either the loading component or the product content.
+   */
   if (product === null) {
-    return <div
-        className={
-          "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
-        }
-    >
-
-      <GridLoader color="#023fc5" />
-    </div>
-
+    return (
+        <div
+            className={
+              "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
+            }
+        >
+          {/* Display a loading spinner with the specified color */}
+          <GridLoader color="#023fc5" />
+        </div>
+    );
   }
 
   return (

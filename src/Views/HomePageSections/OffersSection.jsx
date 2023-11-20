@@ -20,14 +20,26 @@ export default function OffersSection() {
   }, []);
 
 
+    /**
+     * Renders a loading component along with a title when there are no products available.
+     * @param {Array} products - The array of products to be checked for emptiness.
+     * @returns {JSX.Element} - The JSX representing the title and loading component.
+     */
     if (products.length === 0) {
-        return <div
-            className={
-                "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
-            }
-        >
-            <GridLoader color="#023fc5" />
-        </div>
+        return (
+            <>
+                {/* Title section with the "Offers" title */}
+                <h1 className="title-section">Offers</h1>
+                {/* Loading component container with a loading spinner */}
+                <div
+                    className={
+                        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+                    }
+                >
+                    <GridLoader color="#023fc5" />
+                </div>
+            </>
+        );
     }
 
   return (

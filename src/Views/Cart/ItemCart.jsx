@@ -30,16 +30,16 @@ const ItemCart = ( props ) => {
     const currency = "$";
 
     const incrementQuantity = () => {
-        if (productQuantity + 1 <= itemsOnStock) {
+        if (true) { //TODO: QUANTITY VALIDATION
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
-            setErrorMessage("");
+            //setErrorMessage("");
             const subTotalPromise = buyCartManagement.getSubTotal();
             subTotalPromise.then((element) => {
                 setSubTotal(element);
             })
         } else {
-            setErrorMessage("No more in stock");
+            //setErrorMessage("No more in stock");
         }
     }
 

@@ -68,6 +68,10 @@
   align-self: end;
 }
 
+.shopping-bag:hover {
+  cursor: pointer;
+}
+
 .size-button {
   background-color: white;
   padding: 5px;
@@ -102,8 +106,8 @@
   justify-content: space-between;
 }
 
-.card-colors,
-.card-content:hover {
+.color-button,
+.size-button:hover {
   cursor: pointer;
 }
 

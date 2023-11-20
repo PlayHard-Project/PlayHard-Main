@@ -64,7 +64,7 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
                 </Link>
                 <div className="shopping-card-price">
                   <div className="price">{currency}. {price}</div>
-                  <img alt="shopping cart icon" onClick={handleFlip} src={"https://res.cloudinary.com/playhardimages/image/upload/v1700025053/cart-icon_b2wqdz.png"} className="bag"></img>
+                  <img alt="shopping cart icon" onClick={handleFlip} src={"https://res.cloudinary.com/playhardimages/image/upload/v1700025053/cart-icon_b2wqdz.png"} className="shopping-bag"></img>
                 </div>
               </div>
               <div className="shopping-card-flip-back">

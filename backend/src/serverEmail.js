@@ -32,7 +32,7 @@ function sendMail(emailPassed) {
     const mailConfigs = {
       from: myEmail,
       to: emailPassed,
-      subject: "Testing Koding 101 Email",
+      subject: "Email API Prueba De Envio",
       html: `
               <!DOCTYPE html>
               <html lang="en">
@@ -42,7 +42,7 @@ function sendMail(emailPassed) {
                   <title>Document</title>
               </head>
               <body>
-                  <h1>Hello World</h1>
+                  <h1>Test successfully completed!</h1>
               </body>
               </html>
           `,

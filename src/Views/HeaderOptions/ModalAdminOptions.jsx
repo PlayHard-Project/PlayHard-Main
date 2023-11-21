@@ -77,7 +77,7 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                 >
                     <div
                         onClick={onRequestClose}
-                        className="text text-active"
+                        className="text"
                     >
                         {sectionText}
                     </div>

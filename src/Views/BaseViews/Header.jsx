@@ -8,6 +8,7 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
+import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
 
 /**
  * Header component for the website.
@@ -28,6 +29,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
+  const [isAdminModalOpen, setAdminModalOpen] = useState(false);
 
   /**
    * Function to toggle the menu and categories visibility.
@@ -36,6 +38,26 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const toggleMenuAndCategories = (category) => {
     toggleMenu();
     toggleCategories();
+  };
+
+  /**
+   * Function to handle the opening and closing of the admin modal.
+   */
+  const handleAdminModal = () => {
+    if(isAdminModalOpen){
+      setAdminModalOpen(false)
+      return;
+    }
+    setAdminModalOpen((prevOpen) => !prevOpen);
+    setShowSearchPopup(false);
+    setShowMenuPopup(false);
+  };
+
+  /**
+   * Function to handle the closing of the admin modal.
+   */
+  const handleCloseAdminModal = () => {
+    setAdminModalOpen(false);
   };
 
   /**
@@ -138,6 +160,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
 
   const modalRef = useRef();
   const modalOptionsRef = useRef();
+  const modalAdminRef=useRef();
 
   return (
       <header className="text-white header container">
@@ -173,6 +196,15 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                       { label: "Offers",  icon: " " },
                       { label: "Sports", icon: <SlArrowDown strokeWidth={100}/> },
                     ]}
+                />
+              </div>
+              <div ref={modalAdminRef}>
+                <ModalAdminPanel
+                    sectionText={"Admin"}
+                    onRequestOpen={handleAdminModal}
+                    isOpen={isAdminModalOpen}
+                    onRequestClose={handleCloseAdminModal}
+                    modalRef={modalAdminRef}
                 />
               </div>
 
@@ -261,6 +293,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             {showCategoriesPopup && (
                 <CategoriesPopup
                     handleCloseCategoriesModal={handleCloseCategoriesModal}
+                    handleSecondModal={handleCloseOptionsModal}
                     toggleMenuAndCategories={toggleMenuAndCategories}
                 />
             )}

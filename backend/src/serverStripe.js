@@ -1,3 +1,5 @@
+const { Order } = require("./models/orderSchema");
+
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
  * @module configureAppImplementingStripeServer
@@ -53,13 +55,10 @@ const configureAppImplementingStripeServer = (app) => {
       },
     });
 
-    console.log(customer);
-
     try {
       const lineItems = await Promise.all(
         req.body.products.map(async (productFromBody) => {
           const product = await fetchProductDetails(productFromBody.id);
-          console.log(Math.round(product.price + (product.price * 10) / 100));
           return {
             price_data: {
               currency: "usd",
@@ -95,7 +94,32 @@ const configureAppImplementingStripeServer = (app) => {
     }
   });
 
-  // This is your Stripe CLI webhook secret for testing your endpoint locally.
+  const createOrder = async (customer, data) => {
+    const items = JSON.parse(customer.metadata.products);
+    const newOrder = new Order({
+      userId: customer.metadata.userId,
+      customerId: data.customer,
+      paymentIntentId: data.payment_intent,
+      boughtProducts: items,
+      subtotal: data.amount_subtotal,
+      total: data.amount_total,
+      payment_status: data.payment_status,
+      shippingAddress: {
+        avenue1: data.customer_details.address.line1,
+        avenue2: data.customer_details.address.line2,
+        city: data.customer_details.address.city,
+        country: data.customer_details.address.country,
+      },
+    });
+
+    try {
+      const saveOrder = await newOrder.save();
+      console.log("Processed Order: ", saveOrder);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let endpointSecret;
 
   //   endpointSecret =
@@ -105,7 +129,6 @@ const configureAppImplementingStripeServer = (app) => {
     "/stripe-api/webhook",
     express.raw({ type: "application/json" }),
     (request, response) => {
-      console.log("==========================================================================");
       const sig = request.headers["stripe-signature"];
 
       let data;
@@ -143,8 +166,7 @@ const configureAppImplementingStripeServer = (app) => {
           stripeGateway.customers
             .retrieve(customerId)
             .then((customer) => {
-              console.log(customer);
-              console.log("data: ", data);
+              createOrder(customer, data);
             })
             .catch((error) => {
               console.log(error.message);

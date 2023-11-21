@@ -42,6 +42,21 @@ function createRoutes (router, model, baseRoute) {
             console.log(error)
         }
     });
+
+    /**
+   * Endpoint to retrieve all items from the database.
+   * @name router.get
+   * @method
+   * @param {string} `/${baseRoute}` - The path for retrieving all items.
+   * @param {Function} (req, res) - Callback function to handle the route.
+   * @returns {void}
+   */
+  router.get(`/${baseRoute}`, (req, res) => {
+    model
+        .find()
+        .then((data) => res.json(data))
+        .catch((err) => res.json({ message: err }));
+});
 }  
 
 module.exports = {

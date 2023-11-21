@@ -3,7 +3,6 @@ import ProductEntity from '../Entities/ProductEntity'
 import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
 
 export default class BuyCartManagement {
-
     getProducts() {
         const products = localStorage.getItem('buyCart');
         return products ? JSON.parse(products).map(product => new ProductEntity(product.id, product.quantity, product.size, product.color)) : [];

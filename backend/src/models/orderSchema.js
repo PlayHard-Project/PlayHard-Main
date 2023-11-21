@@ -16,14 +16,30 @@ const orderSchema = new Schema({
         required: false
     },
     shippingAddress: {
-        type: String,
-        required: true
+        avenue: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
     },
     boughtProducts: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Product',
-            required: true
+            productId: {
+                type: Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
         }
     ],
     total: {

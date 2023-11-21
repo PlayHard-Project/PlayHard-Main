@@ -53,6 +53,8 @@ const configureAppImplementingStripeServer = (app) => {
       },
     });
 
+    console.log(customer);
+
     try {
       const lineItems = await Promise.all(
         req.body.products.map(async (productFromBody) => {
@@ -74,6 +76,7 @@ const configureAppImplementingStripeServer = (app) => {
         })
       );
 
+      console.log("customer: " + customer.id);
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -84,6 +87,7 @@ const configureAppImplementingStripeServer = (app) => {
         billing_address_collection: "required",
       });
 
+      console.log(customer);
       res.json({ id: session.id });
     } catch (error) {
       console.error("Error creating payment session:", error);
@@ -101,6 +105,7 @@ const configureAppImplementingStripeServer = (app) => {
     "/stripe-api/webhook",
     express.raw({ type: "application/json" }),
     (request, response) => {
+      console.log("==========================================================================");
       const sig = request.headers["stripe-signature"];
 
       let data;

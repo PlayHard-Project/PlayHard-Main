@@ -35,7 +35,6 @@
 
 .header .text-active{
     color: #72a3ff;
-    margin-left: -10px;
 }
 
 .header .text:last-child{
@@ -47,6 +46,11 @@
     text-decoration: underline;
     transform: scale(1.1);
     color: #72a3ff;
+}
+
+.header .text:active {
+    color: #000000;
+    text-decoration: underline;
 }
 
 .header .text-link {
@@ -103,6 +107,7 @@
     width: 30px;
     cursor: pointer;
     border-radius: 25px;
+    margin-left: 15px;
     transition: transform 0.2s;
 
     &:hover {
@@ -161,11 +166,7 @@
         font-size: 17px;
     }
 }
-@media only screen and (max-width: 1359px) {
-    .custom-rectangle{
-        width: 60px;
-    }
-}
+
 @media only screen and (max-width: 1342px) {
     .search-container {
         width: 340px;

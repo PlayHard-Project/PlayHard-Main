@@ -9,9 +9,8 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
 
   const buyCartManagement = new BuyCartManagement();
   const items = buyCartManagement.getProducts();
-  const isCartEmpty = setCartItemsQuantity === 0;
 
-    return (
+  return (
       <div className="CartShopContainer container mb-16">
         <div className="modal-header">
           <div className="title-cart-screen">My Cart</div>
@@ -51,7 +50,7 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
               </div>
           </div>
 
-        <GoToCheckout disabled={isCartEmpty}/>
+        <GoToCheckout/>
       </div>
   );
 };

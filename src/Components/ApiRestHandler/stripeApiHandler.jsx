@@ -22,7 +22,7 @@ export default function GoToCheckout() {
             Math.round(productFromAPI.price * 100),
             product.quantity,
             productFromAPI.description,
-            productFromAPI.imagePath
+            [productFromAPI.imagePath[0]]
           );
           return productToSendTheServer;
         })
@@ -39,7 +39,7 @@ export default function GoToCheckout() {
         "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
       );
 
-      const body = { products: products };
+      const body = { products: products, userId: "123" };
       const headers = { "Content-Type": "application/json" };
 
       const response = await fetch(

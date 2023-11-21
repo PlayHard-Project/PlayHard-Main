@@ -73,7 +73,7 @@ const configureAppImplementingEmailApi = (app) => {
   app.use(express.json());
   app.use(cors());
 
-  const emailPassed = "playhard.jala.managment@gmail.com";
+  const emailPassed = "hermes.map.app@gmail.com";
 
   /**
    * Endpoint to trigger the sending of a test email.

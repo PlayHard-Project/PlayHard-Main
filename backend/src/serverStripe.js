@@ -29,6 +29,22 @@ const configureAppImplementingStripeServer = (app) => {
    * @param {Function} async (req, res) - Async callback function to handle the route.
    * @returns {void}
    */
+  const fetchProductDetails = async (productId) => {
+    try {
+      const response = await fetch(
+        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
+      );
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error(
+        `Error fetching product details for product ID ${productId}:`,
+        error
+      );
+      throw error;
+    }
+  };
+
   app.post("/stripe-api/intent-payment", async (req, res) => {
     const customer = await stripeGateway.customers.create({
       metadata: {
@@ -37,20 +53,27 @@ const configureAppImplementingStripeServer = (app) => {
       },
     });
 
-    const lineItems = req.body.products.map((product) => ({
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: product.name,
-          description: product.description,
-          images: product.imagePath,
-        },
-        unit_amount: Math.round((product.price * 10) / 100) + product.price,
-      },
-      quantity: product.quantity,
-    }));
-
     try {
+      const lineItems = await Promise.all(
+        req.body.products.map(async (productFromBody) => {
+          const product = await fetchProductDetails(productFromBody.id);
+          console.log(Math.round(product.price + (product.price * 10) / 100));
+          return {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: product.name,
+                description: product.description,
+                images: product.imagePath,
+              },
+              unit_amount:
+                (product.price + (product.price * 10) / 100).toFixed(2) * 100,
+            },
+            quantity: productFromBody.quantity,
+          };
+        })
+      );
+
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -60,6 +83,7 @@ const configureAppImplementingStripeServer = (app) => {
         cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
+
       res.json({ id: session.id });
     } catch (error) {
       console.error("Error creating payment session:", error);
@@ -78,13 +102,13 @@ const configureAppImplementingStripeServer = (app) => {
     express.raw({ type: "application/json" }),
     (request, response) => {
       const sig = request.headers["stripe-signature"];
-  
+
       let data;
       let eventType;
-  
+
       if (endpointSecret) {
         let event;
-  
+
         try {
           event = stripe.webhooks.constructEvent(
             request.body,
@@ -97,21 +121,22 @@ const configureAppImplementingStripeServer = (app) => {
           response.status(400).send(`Webhook Error: ${err.message}`);
           return;
         }
-  
+
         data = event.data ? event.data.object : null;
         eventType = event.type;
       } else {
         data = request.body.data ? request.body.data.object : null;
         eventType = request.body.type;
       }
-  
+
       console.log("Webhook data:", data);
       console.log("Webhook eventType:", eventType);
-  
+
       if (eventType === "checkout.session.completed") {
         const customerId = data?.customer;
         if (customerId) {
-          stripeGateway.customers.retrieve(customerId)
+          stripeGateway.customers
+            .retrieve(customerId)
             .then((customer) => {
               console.log(customer);
               console.log("data: ", data);
@@ -125,11 +150,11 @@ const configureAppImplementingStripeServer = (app) => {
       } else {
         console.log(`Unhandled event type: ${eventType}`);
       }
-  
+
       // Return a 200 response to acknowledge receipt of the event
       response.send().end();
     }
-  );  
+  );
 
   /**
    * Endpoint for testing purposes (placeholder for future implementation).

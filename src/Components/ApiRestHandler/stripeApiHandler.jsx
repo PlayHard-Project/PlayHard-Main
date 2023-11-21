@@ -1,34 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { getElementByID } from "./requestHandler";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
-import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
-import '../../css/CartShop.css';
 
 export default function GoToCheckout() {
-  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const productsArray = await new BuyCartManagement().getProducts();
-
-      const updatedProducts = await Promise.all(
-        productsArray.map(async (product) => {
-          const productFromAPI = await getElementByID(product.id, "products");
-          const productToSendTheServer = new ProductEntityForStripe(
-            product.id,
-            productFromAPI.name,
-            Math.round(productFromAPI.price * 100),
-            product.quantity,
-            productFromAPI.description,
-            [productFromAPI.imagePath[0]]
-          );
-          return productToSendTheServer;
-        })
-      );
-
-      setProducts(updatedProducts);
+      setProducts(productsArray);
     };
     fetchData();
   }, []);

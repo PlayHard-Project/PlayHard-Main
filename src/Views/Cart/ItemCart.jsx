@@ -2,6 +2,7 @@ import {useState} from "react";
 import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import toast from "react-hot-toast";
 
 const ItemCart = ( props ) => {
     const { productID, size, color, quantity, setCartItemsQuantity, setSubTotal } = props;
@@ -12,7 +13,7 @@ const ItemCart = ( props ) => {
     const [productSize, setProductSize] = useState("---")
     const [productColor, setProductColor] = useState("---")
 
-    const [itemsOnStock, setItemsOnStock] = useState(1);
+    const [itemsOnStock, setItemsOnStock] = useState(0);
     const buyCartManagement = new BuyCartManagement();
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -30,16 +31,15 @@ const ItemCart = ( props ) => {
     const currency = "$";
 
     const incrementQuantity = () => {
-        if (true) { //TODO: QUANTITY VALIDATION
+        if (productQuantity + 1 <= itemsOnStock) {
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
-            //setErrorMessage("");
             const subTotalPromise = buyCartManagement.getSubTotal();
             subTotalPromise.then((element) => {
                 setSubTotal(element);
             })
         } else {
-            //setErrorMessage("No more in stock");
+            toast("This product is sold out", {icon: '📉'})
         }
     }
 

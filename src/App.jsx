@@ -14,6 +14,7 @@ import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
+import {Toaster} from "react-hot-toast";
 
 
 
@@ -47,6 +48,7 @@ export default function App() {
     return (
         <Router>
             <ScrollToTop />
+            <Toaster position="bottom-center"/>
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />

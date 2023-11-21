@@ -88,8 +88,6 @@ const configureAppImplementingMongoDBServer = (app) => {
      */
     app.use('/api', offersRoutes);
 
-    app.use("/api/Stripe", );
-
     /**
      * Define a route for the root path.
      * @name app.get

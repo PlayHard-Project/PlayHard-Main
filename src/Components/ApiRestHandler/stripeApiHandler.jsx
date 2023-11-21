@@ -6,6 +6,7 @@ import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
 import '../../css/CartShop.css';
 
 export default function GoToCheckout() {
+  
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function GoToCheckout() {
       const headers = { "Content-Type": "application/json" };
 
       const response = await fetch(
-        "https://backend-fullapirest-test.onrender.com/stripe-api/intent-payment",
+        "http://localhost:9000/stripe-api/intent-payment",
         {
           method: "POST",
           headers: headers,
@@ -55,6 +56,7 @@ export default function GoToCheckout() {
       }
 
       const session = await response.json();
+      console.log(session);
       const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
       if (result.error) {

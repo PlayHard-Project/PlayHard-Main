@@ -6,7 +6,7 @@ import Sidebar from "../Products/Sidebar";
 import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
 
-const Products = () => {
+const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -38,6 +38,8 @@ const Products = () => {
         price={price}
         colorInformation={colorInformation}
         size={size}
+        setCartItemsQuantity={setCartItemsQuantity}
+        setSubTotal={setSubTotal}
       />
     )
   );

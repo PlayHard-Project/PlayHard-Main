@@ -30,38 +30,32 @@ const ItemCart = ( props ) => {
     let [productQuantity, setProductQuantity] = useState(quantity);
     const currency = "$";
 
-    const incrementQuantity = () => {
+    const incrementQuantity = async () => {
         if (productQuantity + 1 <= itemsOnStock) {
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
-            const subTotalPromise = buyCartManagement.getSubTotal();
-            subTotalPromise.then((element) => {
-                setSubTotal(element);
-            })
+            const subtotal = await buyCartManagement.getSubTotal();
+            setSubTotal(subtotal);
         } else {
             toast("This product is sold out", {icon: '📉'})
         }
     }
 
-    const decrementQuantity = () => {
+    const decrementQuantity = async () => {
         if (productQuantity - 1 >= 1) {
             setProductQuantity(productQuantity - 1);
             buyCartManagement.decreaseQuantity(productID, size, color);
             setErrorMessage("");
-            const subTotalPromise = buyCartManagement.getSubTotal();
-            subTotalPromise.then((element) => {
-                setSubTotal(element);
-            })
+            const subTotal = await buyCartManagement.getSubTotal();
+            setSubTotal(subTotal);
         }
     }
 
-    const deleteItem = () => {
-        buyCartManagement.deleteProduct(productID, size, color)
-        setCartItemsQuantity(buyCartManagement.getProducts().length)
-        const subTotalPromise = buyCartManagement.getSubTotal();
-        subTotalPromise.then((element) => {
-            setSubTotal(element);
-        });
+    const deleteItem = async () => {
+        buyCartManagement.deleteProduct(productID, size, color);
+        setCartItemsQuantity(buyCartManagement.getProducts().length);
+        const subTotal = await buyCartManagement.getSubTotal();
+        setSubTotal(subTotal);
     }
 
     return (

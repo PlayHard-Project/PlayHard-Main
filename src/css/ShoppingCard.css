@@ -63,6 +63,84 @@
 }
 
 .shopping-bag {
-  width: 30px;
-  height: 30px;
+  width: 39px;
+  height: 39px;
+  align-self: end;
+}
+
+.shopping-bag:hover {
+  cursor: pointer;
+}
+
+.size-button {
+  background-color: white;
+  padding: 5px;
+  margin-right: 5px;
+  color: black;
+  font-size: 12px;
+  border-radius: 5px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.color-button {
+  width: 20px;
+  height: auto;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: 2px solid #fff;
+}
+
+.card-size {
+  display: flex;
+}
+
+.card-colors{
+  display: flex;
+  color: rgba(0,0,0,0);
+  margin-bottom: 5px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-button,
+.size-button:hover {
+  cursor: pointer;
+}
+
+.selected {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/*FLIP FUNCTIONALITY*/
+
+.flip-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flip-card.flipped {
+  transform: rotateX(180deg);
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.shopping-card-flip-front,
+.shopping-card-flip-back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.shopping-card-flip-back {
+  transform: rotateX(180deg);
 }

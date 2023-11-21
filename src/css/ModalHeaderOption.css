@@ -1,0 +1,94 @@
+/* Remove focus outline for all elements */
+* {
+    outline: none !important;
+}
+
+/* Styles for the overlay of the options modal */
+.modal-overlay-options {
+    background: none;
+    position: fixed;
+    top: 12%;
+    left: 73%;
+}
+
+/* Styles for the content of the options modal */
+.modal-content-options {
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Styles for the Brands modal content */
+.brands-modal-content {
+    position: absolute;
+    top: 1000px;
+    left: 100px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 210px;
+}
+
+/* Styles for the main container of options */
+.modal-container-options {
+    position: fixed;
+    top: 10.1%;
+    right: 0;
+    width: 1595px;
+    height: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: linear-gradient(to bottom, rgb(205, 222, 252), rgb(255, 255, 255));
+    clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4.2% 100%);
+}
+
+/* Styles for the individual options in the main container */
+.container-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.container-options > div {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #000;
+    transition: color 0.3s;
+}
+
+.container-options > div:last-child {
+    border-right: none;
+}
+
+.container-options > div:hover {
+    color: #18559b;
+}
+
+.container-options > div > div {
+    font-size: 16px;
+    font-family: 'Montserrat', cursive;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 1543px) {
+    .modal-container-options {
+        top: 10.1%;
+        width: 87%;
+        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.8% 100%);
+    }
+}
+
+@media only screen and (max-width: 1444px) {
+    .modal-container-options {
+        width: 85.6%;
+        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.7% 100%);
+    }
+}

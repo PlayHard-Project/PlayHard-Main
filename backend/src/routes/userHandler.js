@@ -14,17 +14,21 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: 'Error 400 Bad Request: Email is required' });
             }
 
+            if (!email.endsWith('@gmail.com')) {
+                return res.json({ error: ' Error 400 Bad Request: Invalid email format, use @gmail' });
+            }
+
             const exist = await User.findOne({ email });
             if (exist) {
                 return res.json({ error: 'Error 409 Conflicts: Email is already registered' });
             }
 
             if (!password) {
-                return res.json({error: 'Error 400 Bad Request: Password is required'});
+                return res.json({ error: 'Error 400 Bad Request: Password is required' });
             }
 
             if (password.length < 6) {
-                return res.json({error: 'Error 400 Bad Request: Password should be at least 6 characters long'});
+                return res.json({ error: 'Error 400 Bad Request: Password should be at least 6 characters long' });
             }
 
             const passwordHash = await bcrypt.hashSync(password, 8);

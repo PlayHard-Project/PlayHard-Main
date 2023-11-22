@@ -61,51 +61,74 @@ async function createRoutes(router, model, baseRoute) {
     });
 }
 
+/**
+ * Handle all login validations and responses.
+ *
+ * @param {request} req - The request handled by the login api.
+ * @param {response} res - The response after API process the request.
+ * @returns {json} A token if it was succesful or an error if not.
+ */
 const login = async (req, res) => {
     try {
-      const { email, password } = req.body;
-  
-      // Check if user exists
-      const user = await User.findOne({ email });
-  
-      if (!user) {
-        return res.json({
-          error: 'No user found'
-        });
-      }
-  
-      // Check if password matches (without bcrypt for now)
-      const passwordMatch = password === user.password;
-  
-      if (passwordMatch) {
-        jwt.sign({email: user.email, id: user._id, name: user.firstName}, process.env.JWT_SECRET, {}, (err,token) => {
-          if(err) throw err;
-          res.cookie('token', token).json(user)
-        })
-      } else {
-        res.json({
-          error: 'Password does not match'
-        });
-      }
+        const { email, password } = req.body;
+
+        // Validate empty email
+        if (!email) {
+            return res.status(400).json({ error: 'Error 400 Bad Request: Email is required' });
+        }
+
+        // Validate empty password
+        if (!password) {
+            return res.status(400).json({ error: 'Error 400 Bad Request: Password is required' });
+        }
+
+        // Check if user exists
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Error 404 Not Found: User not found' });
+        }
+
+        // Check if password matches (without bcrypt for now)
+        const passwordMatch = password === user.password;
+
+        if (passwordMatch) {
+            jwt.sign({ email: user.email, id: user._id, name: user.firstName }, process.env.JWT_SECRET, {}, (err, token) => {
+                if (err) throw err;
+                res.cookie('token', token).json(user);
+            });
+        } else {
+            res.status(401).json({ error: 'Error 401 Unauthorized: Incorrect password' });
+        }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        error: 'Internal Server Error'
-      });
+        console.log(error);
+        res.status(500).json({ error: 'Error 500 Internal Server Error' });
     }
-  };
-  
-  const getProfile = (req, res) => {
-      const {token} = req.cookies
-      if(token){
-          jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) =>{
-              if(err) throw err;
-              res.json(user)
-          })
-      }else{
-          res.json(null)
-      }
-  }
+};
+
+/**
+ * Get the unique Json Web Token assigned for login sesions.
+ *
+ * @param {request} req - The request handled by the profiles api.
+ * @param {response} res - The response after API process the request.
+ * @returns {json} A token if it was recovered succesfully or an error if not.
+ */
+const getProfile = (req, res) => {
+    try {
+        const { token } = req.cookies;
+        if (token) {
+            jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
+                if (err) throw err;
+                res.json(user);
+            });
+        } else {
+            res.json({ error: 'Error 401 Unauthorized: Token not provided' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Error 500 Internal Server Error' });
+    }
+};
 
 module.exports = {
     createRoutes,

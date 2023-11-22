@@ -34,6 +34,11 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: ' Error 400 Bad Request: Invalid email format, use @gmail' });
             }
 
+            const atIndex = email.indexOf('@');
+            if (atIndex === -1 || atIndex === 0) {
+                return res.json({ error: 'Error 400 Bad Request: Invalid email format, missing text before @gmail.com' });
+            }
+
             const exist = await User.findOne({ email });
             if (exist) {
                 return res.json({ error: 'Error 409 Conflicts: Email is already registered' });
@@ -48,7 +53,7 @@ async function createRoutes(router, model, baseRoute) {
             }
 
             if (!isAdmin) {
-                return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin'})
+                return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin' })
             }
 
             const passwordHash = await bcrypt.hashSync(password, 8);

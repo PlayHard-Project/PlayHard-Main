@@ -1,4 +1,5 @@
 const { Order } = require("./models/orderSchema");
+const { Invoice } = require('./html_templates/invoice.js');
 
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
@@ -119,14 +120,13 @@ const configureAppImplementingStripeServer = (app) => {
     try {
       const saveOrder = await newOrder.save();
       console.log("Processed Order: ", saveOrder);
+
+      const myInvoice = new Invoice();
+      const htmlFile = await myInvoice.generateHTML();
       try {
         await sendMail(
-          saveOrder.userInformation.email,
-          "Confirmación de Orden",
-          htmlFile
-        );
-
-        console.log("Email sent successfully");
+          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
+          console.log("Email sent successfully");
       } catch (error) {
         console.error("Error sending email:", error.message);
       }

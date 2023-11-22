@@ -7,19 +7,24 @@ async function createRoutes(router, model, baseRoute) {
             const { name, email, password } = req.body;
 
             if (!name) {
-                return res.json({ error: 'name is required' });
+                return res.json({ error: 'Error 400 Bad Request: Name is required' });
+            }
+
+            if (!email) {
+                return res.json({ error: 'Error 400 Bad Request: Email is required' });
             }
 
             const exist = await User.findOne({ email });
-
             if (exist) {
-                return res.json({ error: 'Email is already registered' });
+                return res.json({ error: 'Error 409 Conflicts: Email is already registered' });
             }
 
-            if (!password || password.length < 6) {
-                return res.json({
-                    error: 'Password is required and should be at least 6 characters long',
-                });
+            if (!password) {
+                return res.json({error: 'Error 400 Bad Request: Password is required'});
+            }
+
+            if (password.length < 6) {
+                return res.json({error: 'Error 400 Bad Request: Password should be at least 6 characters long'});
             }
 
             const passwordHash = await bcrypt.hashSync(password, 8);
@@ -34,7 +39,7 @@ async function createRoutes(router, model, baseRoute) {
             return res.json(user);
         } catch (error) {
             console.log(error);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Error 500: Internal Server Error' });
         }
     });
 

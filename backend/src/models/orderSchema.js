@@ -14,7 +14,7 @@ const orderSchema = new Schema(
     paymentIntentId: {
       type: String,
     },
-    boughtProducts: [
+    products: [
       {
         id: {
           type: Schema.Types.ObjectId,
@@ -65,6 +65,16 @@ const orderSchema = new Schema(
         required: true,
       },
       country: {
+        type: String,
+        required: true,
+      },
+    },
+    userInformation: {
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
         type: String,
         required: true,
       },

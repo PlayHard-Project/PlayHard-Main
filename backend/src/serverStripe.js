@@ -108,11 +108,16 @@ const configureAppImplementingStripeServer = (app) => {
         city: data.customer_details.address.city,
         country: data.customer_details.address.country,
       },
+      userInformation: {
+        name: data.customer_details.name,
+        email: data.customer_details.email,
+      }
     });
 
     try {
       const saveOrder = await newOrder.save();
       console.log("Processed Order: ", saveOrder);
+      // Send email
     } catch (error) {
       console.log(error);
     }

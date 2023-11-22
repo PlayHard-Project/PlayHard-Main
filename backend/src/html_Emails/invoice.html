@@ -1,47 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./invoice.css" />
     <title>Factura</title>
   </head>
-  <body>
+  <body id="body">
     <div class="invoice">
       <section class="nro-invoice-section">
-        <label>Invoice N°:</label>
+        <label class="text-bold">Invoice ID:<span style="color: transparent;">&nbsp;</span> </label>
         <p id="id_invoice"></p>
       </section>
-      <section>
-        <img
-          src="https://res.cloudinary.com/playhardimages/image/upload/v1700613991/Logosrar/gllnsa72dxlblrn9pt2u.png"
-          alt="logo.png"
-          width="200px"
-        />
-      </section>
-      <section>
-        <p id="name_user"></p>
-        <p>Thank you for making your sports purchases at PlayHard</p>
-      </section>
-      <hr />
-      <section class="purchase-information">
-        <label>Purchase Information: </label>
+      <div class="gratitude">
         <section>
-          <div>
-            <label>Order ID°</label>
-            <p id="order_id"></p>
-            <label>Date</label>
-            <p id="date"></p>
-          </div>
-          <div>
-            <label>Billed to:</label>
-            <p id="order_id"></p>
-            <label>From: </label>
-            <p>PlayHard E-Commerce</p>
-          </div>
+          <img
+                  src="https://res.cloudinary.com/playhardimages/image/upload/v1700613991/Logosrar/gllnsa72dxlblrn9pt2u.png"
+                  alt="logo.png"
+                  width="200px"
+          />
         </section>
         <section>
-          <label>Order</label>
+          <p id="name_user">Hi...</p>
+          <p>Thank you for making your sports purchases at PlayHard</p>
+        </section>
+      </div>
+      <hr />
+      <section class="purchase-information">
+        <label class="blue-title">Purchase Information: </label>
+        <section class="purchase-data">
+          <div class="column">
+            <div class="data-block">
+              <label class="text-bold">Order ID°:</label>
+              <p id="order_id">htw45bv</p>
+            </div>
+            <div class="data-block">
+              <label class="text-bold">Date:</label>
+              <p id="date_id">Nov 22th, 2023</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="data-block">
+              <label class="text-bold">Billed to:</label>
+              <p id="billed_id"></p>
+            </div>
+            <div class="data-block">
+              <label class="text-bold">From: </label>
+              <p>PlayHard E-Commerce</p>
+            </div>
+          </div>
+        </section>
+        <HR></HR>
+        <label class="blue-title">Shipping Information: </label>
+        <section class="purchase-data">
+          <div class="column">
+            <div class="data-block">
+              <label class="text-bold">Street || Avenue :</label>
+              <p id="street_id">Sacaba</p>
+            </div>
+            <div class="data-block">
+              <label class="text-bold">City:</label>
+              <p id="city_id">Cocha</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="data-block">
+              <label class="text-bold">Country: </label>
+              <p id="country_id">BO</p>
+            </div>
+          </div>
+        </section>
+        <hr/>
+        <section>
+        <section>
+          <label class="blue-title">Order:</label>
+          <br>
+          <br>
           <table class="table_products">
             <thead>
               <tr>
@@ -54,30 +86,35 @@
               </tr>
             </thead>
             <tbody id="table_body"></tbody>
-          </table>          
-          <br>
-        </section>
-      </section>
-      <div class="invoice-header">
-        <h1>Factura</h1>
-        <p>Fecha: 20 de noviembre de 2023</p>
-      </div>
-      <div class="invoice-body">
-        <div class="item">
-          <span>Descripción del producto</span>
-          <span>$100.00</span>
-        </div>
-        <div class="item">
-          <span>Otro producto</span>
-          <span>$50.00</span>
-        </div>
+          </table>
+          <br/>
+          <div class="text-bold large-row-title">
+            <span>Shipping Cost</span>
+          </div>
+          <div class="item large-row-item">
+            <span>Amazon Delivery</span>
+            <span>$ 10,00 USD</span>
+          </div>
 
-        <div class="total">
-          <span>Total:</span>
-          <span>$150.00</span>
-        </div>
-      </div>
-    </div>
+          <div class="text-bold large-row-title">
+            <span>Taxes</span>
+          </div>
+          <div class="item large-row-item">
+            <span>IVA</span>
+            <span>$ 15,00 USD</span>
+          </div>
+        </section>
+        <hr />
+        <section class="total">
+          <span class="text-bold">Total:</span>
+          <span id="totalPrice" class="text-bold">$00,00 USD</span>
+        </section>
+        <hr />
+        <section class="contact-information">
+          <p>PlayHard E-Commerce</p>
+          <p>69 Melchor Perez St. Cochabamba, Bolivia</p>
+      </section>
+      </section>
     <script src="invoice.js"></script>
   </body>
 </html>

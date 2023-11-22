@@ -16,11 +16,33 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.post(`/${baseRoute}`, (req, res) => {
-      const newItem = model(req.body);
-      newItem
-          .save()
-          .then((data) => res.json(data))
-          .catch((error) => res.json({ message: error }));
+    const newItem = model(req.body);
+    newItem
+      .save()
+      .then((data) => res.json(data))
+      .catch((error) => res.json({ message: error }));
+  });
+
+  /**
+   * Endpoint to retrieve the last inserted item's ID from the database.
+   * @name router.get
+   * @method
+   * @param {string} `/${baseRoute}/last-id` - The path for retrieving the last inserted item's ID.
+   * @param {Function} (req, res) - Callback function to handle the route.
+   * @returns {void}
+   */
+  router.get(`/${baseRoute}/last-id`, (req, res) => {
+    model
+      .findOne()
+      .sort({ _id: -1 })
+      .then((data) => {
+        if (data) {
+          res.json({ lastId: data._id });
+        } else {
+          res.json({ lastId: null });
+        }
+      })
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -32,10 +54,10 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.get(`/${baseRoute}`, (req, res) => {
-      model
-          .find()
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    model
+      .find()
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -47,11 +69,11 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.get(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      model
-          .findById(id)
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    model
+      .findById(id)
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -63,12 +85,12 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.put(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      const updateData = req.body;
-      model
-          .updateOne({ _id: id }, { $set: updateData })
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    const updateData = req.body;
+    model
+      .updateOne({ _id: id }, { $set: updateData })
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -80,20 +102,20 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.delete(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      model
-          .deleteOne({ _id: id })
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    model
+      .deleteOne({ _id: id })
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 }
 
 /**
-* Export the createRoutes function.
-* @name module.exports
-* @method
-* @type {Function}
-* @param {Object} createRoutes - The createRoutes function.
-* @returns {void}
-*/
+ * Export the createRoutes function.
+ * @name module.exports
+ * @method
+ * @type {Function}
+ * @param {Object} createRoutes - The createRoutes function.
+ * @returns {void}
+ */
 module.exports = createRoutes;

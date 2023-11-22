@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Roboto Light", sans-serif;
     margin: 20px;
     background-color: #f4f4f4;
 }
@@ -7,18 +7,17 @@ body {
 .nro-invoice-section {
     display: flex;
     align-items: center;
-    justify-content: center;
     font-size: 1.2rem;
 }
 
-.nro-invoice-section label{
+.nro-invoice-section .id_invoice{
     font-weight: bold;
 }
 .invoice {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 10px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -41,11 +40,116 @@ body {
 
 .item span {
     color: #555;
+    margin-right: 16px;
 }
 
 .total {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    margin-top: 20px;
+    margin-right: 6px;
+    margin-left: 9px;
+}
+
+.gratitude {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gratitude p {
+    text-align: center;
+}
+
+.blue-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #3970D7;
+}
+
+.purchase-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.data-block {
+    flex-direction: row;
+    margin-bottom: 15px;
+    min-width: 120px;
+}
+
+.data-block p{
+    margin-top: 0;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.column {
+    min-width: 50%;
+}
+
+.table_products {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table_products th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(114, 163, 255, 0.22);
+}
+
+.table_products td{
+    padding-top: 8px;
+}
+
+td:first-child {
+    text-align: left;
+    padding-left: 10px;
+}
+
+td:not(:first-child):not(:last-child) {
+    text-align: center;
+}
+
+td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+th:first-child {
+    text-align: left;
+    padding-left: 10px;
+}
+
+th:not(:first-child):not(:last-child) {
+    text-align: center;
+}
+
+th:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.large-row-title {
+    width: 98.5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(114, 163, 255, 0.22);
+    padding-left: 10px;
+}
+
+.large-row-item {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+.contact-information {
+    text-align: center;
 }

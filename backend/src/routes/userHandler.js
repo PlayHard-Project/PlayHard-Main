@@ -1,50 +1,43 @@
-const User = require('../models/userSchema')
+const User = require('../models/userSchema');
+const bcrypt = require('bcrypt');
 
-
-function createRoutes(router, model, baseRoute) {
-    /**
-     * Endpoint to create a new item in the database.
-     * @name router.post
-     * @method
-     * @param {string} `/${baseRoute}` - The path for creating a new item.
-     * @param {Function} (req, res) - Callback function to handle the route.
-     * @returns {void}
-     */
+async function createRoutes(router, model, baseRoute) {
     router.post(`/${baseRoute}`, async (req, res) => {
         try {
             const { name, email, password } = req.body;
-            // Check name
+
             if (!name) {
-                return res.json({ error: 'name is required' })
-            };
-            // Check email
+                return res.json({ error: 'name is required' });
+            }
+
             const exist = await User.findOne({ email });
+
             if (exist) {
-                return res.json({ error: 'Email is already register' })
-            };
-            // Check password
-            if (!password || password.lenght < 6) {
-                return res.json({ error: 'Password is required and should be at least 6 characters laong' })
-            };
+                return res.json({ error: 'Email is already registered' });
+            }
+
+            if (!password || password.length < 6) {
+                return res.json({
+                    error: 'Password is required and should be at least 6 characters long',
+                });
+            }
+
+            const passwordHash = await bcrypt.hashSync(password, 8);
+            console.log(passwordHash);
 
             const user = await User.create({
-                name, email, password
-            })
+                name,
+                email,
+                password: passwordHash,
+            });
 
-            return res.json(user)
+            return res.json(user);
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            res.status(500).json({ error: 'Internal server error' });
         }
     });
 
-    /**
-   * Endpoint to retrieve all items from the database.
-   * @name router.get
-   * @method
-   * @param {string} `/${baseRoute}` - The path for retrieving all items.
-   * @param {Function} (req, res) - Callback function to handle the route.
-   * @returns {void}
-   */
     router.get(`/${baseRoute}`, (req, res) => {
         model
             .find()
@@ -54,5 +47,5 @@ function createRoutes(router, model, baseRoute) {
 }
 
 module.exports = {
-    createRoutes
-}
+    createRoutes,
+};

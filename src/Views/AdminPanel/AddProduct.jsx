@@ -5,6 +5,7 @@ import SelectWithAddButton from "./SelectWithAddButton";
 import BrandsSelect from "./BrandsSelect";
 import "../../css/AdminPanelStyle/simpleDataComponentStyle.css";
 import "../../css/AdminPanelStyle/addProductStyle.css";
+import RightSide from "./Sides/RightSide";
 
 
 /**
@@ -203,8 +204,9 @@ const AddProduct = () => {
       >
         Add Product
       </div>
-      <div className="data-components-container flex flex-col lg:flex-row">
-        <div className="simple-data-container">
+
+      <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4">
+        <div className="lg:w-1/2">
           <ProductForm
             label="Product Name"
             id="productName"
@@ -274,7 +276,14 @@ const AddProduct = () => {
             placeholder="Select a sport"
           />
         </div>
+
+        <div className={' lg:w-1/2'}>
+          <RightSide />
+        </div>
       </div>
+
+
+
 
       <div className="buttons-container">
         <button className="styleButton button-cancel">Cancel</button>

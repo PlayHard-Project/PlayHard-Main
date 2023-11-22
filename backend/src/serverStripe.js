@@ -81,12 +81,10 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-main.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-test.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-test.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
-
-      console.log(customer);
       res.json({ id: session.id });
     } catch (error) {
       console.error("Error creating payment session:", error);
@@ -101,8 +99,8 @@ const configureAppImplementingStripeServer = (app) => {
       customerId: data.customer,
       paymentIntentId: data.payment_intent,
       boughtProducts: items,
-      subtotal: data.amount_subtotal,
-      total: data.amount_total,
+      subtotal: data.amount_subtotal / 100,
+      total: data.amount_total / 100,
       payment_status: data.payment_status,
       shippingAddress: {
         avenue1: data.customer_details.address.line1,
@@ -121,9 +119,6 @@ const configureAppImplementingStripeServer = (app) => {
   };
 
   let endpointSecret;
-
-  //   endpointSecret =
-  //   "whsec_ee6987fdc0111b98a550260fc1735f36d93d72b56647b3e9593af2b4ac72c71d";
 
   app.post(
     "/stripe-api/webhook",
@@ -182,18 +177,6 @@ const configureAppImplementingStripeServer = (app) => {
       response.send().end();
     }
   );
-
-  /**
-   * Endpoint for testing purposes (placeholder for future implementation).
-   * @name app.get
-   * @method
-   * @param {string} '/stripe-api/intent-payment' - The path for testing intent payment.
-   * @param {Function} (req, res) - Callback function to handle the route.
-   * @returns {void}
-   */
-  app.get("/stripe-api/intent-payment", (req, res) => {
-    res.send("Intent-payment");
-  });
 
   /**
    * Log a success message upon successful connection to the Stripe server.

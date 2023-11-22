@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./invoice.css" />
+    <title>Factura</title>
+  </head>
+  <body>
+    <div class="invoice">
+      <section class="nro-invoice-section">
+        <label>Invoice N°:</label>
+        <p id="id_invoice"></p>
+      </section>
+      <section>
+        <img
+          src="https://res.cloudinary.com/playhardimages/image/upload/v1700613991/Logosrar/gllnsa72dxlblrn9pt2u.png"
+          alt="logo.png"
+          width="200px"
+        />
+      </section>
+      <section>
+        <p id="name_user"></p>
+        <p>Thank you for making your sports purchases at PlayHard</p>
+      </section>
+      <hr />
+      <section class="purchase-information">
+        <label>Purchase Information: </label>
+        <section>
+          <div>
+            <label>Order ID°</label>
+            <p id="order_id"></p>
+            <label>Date</label>
+            <p id="date"></p>
+          </div>
+          <div>
+            <label>Billed to:</label>
+            <p id="order_id"></p>
+            <label>From: </label>
+            <p>PlayHard E-Commerce</p>
+          </div>
+        </section>
+        <section>
+          <label>Order</label>
+          <table class="table_products">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Size</th>
+                <th>Color</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Currency</th>
+              </tr>
+            </thead>
+            <tbody id="table_body"></tbody>
+          </table>          
+          <br>
+        </section>
+      </section>
+      <div class="invoice-header">
+        <h1>Factura</h1>
+        <p>Fecha: 20 de noviembre de 2023</p>
+      </div>
+      <div class="invoice-body">
+        <div class="item">
+          <span>Descripción del producto</span>
+          <span>$100.00</span>
+        </div>
+        <div class="item">
+          <span>Otro producto</span>
+          <span>$50.00</span>
+        </div>
+
+        <div class="total">
+          <span>Total:</span>
+          <span>$150.00</span>
+        </div>
+      </div>
+    </div>
+    <script src="invoice.js"></script>
+  </body>
+</html>

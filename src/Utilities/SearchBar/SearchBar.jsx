@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MdSearch } from 'react-icons/md';
-import SearchResult from "./searchResult";
-import {getElements, getElementsWithSearch} from "../../Components/ApiRestHandler/requestHandler";
+
+
 import GridLoader from 'react-spinners/GridLoader';
+import {searchElements} from "../../Components/ApiRestHandler/requestHandler";
+import SearchResult from "./SearchResult";
 
 
 /**
@@ -10,7 +12,7 @@ import GridLoader from 'react-spinners/GridLoader';
  * @component
  * @returns {JSX.Element} JSX element representing the search bar.
  */
-const SearchBar = () => {
+const SearchBar = ({setProduct, isRedirect}) => {
     /**
      * State representing the current value of the search input.
      * @type {string}
@@ -54,7 +56,7 @@ const SearchBar = () => {
             setIsLoading(true);
             if (input.length > 0) {
                 try {
-                    const response = await getElementsWithSearch('/products', input);
+                    const response = await searchElements('/products', input);
                     setProducts(response);
                     setIsOpen(true);
                 } catch (error) {
@@ -130,7 +132,7 @@ const SearchBar = () => {
                     )}
                 </button>
             </div>
-            {isOpen && <SearchResult products={products} setInput={setInput} />}
+            {isOpen && <SearchResult setProduct={setProduct} products={products} setInput={setInput} isRedirect={isRedirect} se />}
         </div>
     );
 };

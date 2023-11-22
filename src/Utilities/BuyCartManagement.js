@@ -143,4 +143,9 @@ export default class BuyCartManagement {
             return 0;
         }
     }
+
+    async verifyStock(id, size, color, quantityRequired) {
+        const product = await getElementByID(id, "products");
+        return quantityRequired <= product.inStock[size][color];
+    }
 }

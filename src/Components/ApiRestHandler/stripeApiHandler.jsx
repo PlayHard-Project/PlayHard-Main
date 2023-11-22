@@ -4,10 +4,12 @@ import { getElementByID } from "./requestHandler";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import ProductEntityForStripe from "../../Entities/ProductEntityForStripe";
 import '../../css/CartShop.css';
+import toast from "react-hot-toast";
 
 // Functional component for the checkout button
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
+  const buyCartManager = new BuyCartManagement();
 
   // Fetch products and format them when the component mounts
   useEffect(() => {
@@ -37,10 +39,17 @@ export default function GoToCheckout({ disabled }) {
   // Function to handle the payment process
   const makePayment = async () => {
     try {
-      const stripe = await loadStripe(
+        const stripe = await loadStripe(
           "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
-      );
+        );
 
+        products.forEach(item => {
+            let inStock = buyCartManager.verifyStock(item.id, item.size, item.color, item.quantity)
+            if (!inStock) {
+                toast.error(`${item.name} was purchased and now we don't have enough stock.`)
+                throw new Error(`Product ID: ${item.id} insufficient stock` )
+            }
+        })
       const body = { products: products };
       const headers = { "Content-Type": "application/json" };
 

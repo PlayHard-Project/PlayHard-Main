@@ -30,6 +30,10 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: 'Error 400 Bad Request: Name exceeds 20 characters' })
             }
 
+            if (name.length < 6) {
+                return res.json({ error: 'Error 400 Bad Request: Name should be at least 6 characters long' });
+            }
+
             if (/\s/.test(name)) {
                 return res.json({ error: 'Error 400 Bad Request: Name should not contain spaces' });
             }

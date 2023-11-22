@@ -1,7 +1,23 @@
 const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 
+/**
+ * Creates routes for handling user-related operations.
+ * 
+ * @param {Object} router - Express router object.
+ * @param {Object} model - Mongoose model for user data.
+ * @param {string} baseRoute - Base route for user-related operations.
+ */
 async function createRoutes(router, model, baseRoute) {
+
+    /**
+     * Handles the creation of a new user.
+     * @function
+     * @name POST /baseRoute
+     * @param {Object} req - Express request object.
+     * @param {Object} res - Express response object.
+     * @returns {Object} - JSON response containing either user data or an error message.
+     */
     router.post(`/${baseRoute}`, async (req, res) => {
         try {
             const { name, email, password, isAdmin } = req.body;
@@ -52,6 +68,14 @@ async function createRoutes(router, model, baseRoute) {
         }
     });
 
+    /**
+     * Handles the retrieval of all users.
+     * @function
+     * @name GET /baseRoute
+     * @param {Object} req - Express request object.
+     * @param {Object} res - Express response object.
+     * @returns {Object} - JSON response containing either user data or an error message.
+     */
     router.get(`/${baseRoute}`, (req, res) => {
         model
             .find()

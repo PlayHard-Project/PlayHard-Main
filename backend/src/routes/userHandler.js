@@ -26,8 +26,28 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: 'Error 400 Bad Request: Name is required' });
             }
 
+            if (name.length > 20) {
+                return res.json({ error: 'Error 400 Bad Request: Name exceeds 20 characters' })
+            }
+
+            if (/\s/.test(name)) {
+                return res.json({ error: 'Error 400 Bad Request: Name should not contain spaces' });
+            }
+
+            if (!/^[a-zA-Z0-9]+$/.test(name)) {
+                return res.json({ error: 'Error 400 Bad Request: Name should only contain letters and numbers' });
+            }
+
             if (!email) {
                 return res.json({ error: 'Error 400 Bad Request: Email is required' });
+            }
+
+            if (email.length > 60) {
+                return res.json({ error: 'Error 400 Bad Request: Email exceeds 60 characters' })
+            }
+
+            if (/\s/.test(email)) {
+                return res.json({ error: 'Error 400 Bad Request: Email should not contain spaces' });
             }
 
             if (!email.endsWith('@gmail.com')) {
@@ -52,6 +72,22 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: 'Error 400 Bad Request: Password should be at least 6 characters long' });
             }
 
+            if (password.length > 60) {
+                return res.json({ error: 'Error 400 Bad Request: Password exceeds 60 characters' })
+            }
+
+            if (/\s/.test(password)) {
+                return res.json({ error: 'Error 400 Bad Request: Password should not contain spaces' });
+            }
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,}$/;
+
+            if (!passwordRegex.test(password)) {
+                return res.json({
+                    error: 'Error 400 Bad Request: Password should contain at least one lowercase letter, one uppercase letter, one number, and one special character.',
+                });
+            }
+            
             if (!isAdmin) {
                 return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin' })
             }

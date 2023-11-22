@@ -103,7 +103,7 @@ const login = async (req, res) => {
 
         // Validate empty email
         if (!email) {
-            return res.status(400).json({ error: 'Error 400 Bad Request: Email is required' });
+            return res.json({ error: 'Error 400 Bad Request: Email is required' });
         }
 
         // Validate supported email format
@@ -118,7 +118,7 @@ const login = async (req, res) => {
 
         // Validate empty password
         if (!password) {
-            return res.status(400).json({ error: 'Error 400 Bad Request: Password is required' });
+            return res.json({ error: 'Error 400 Bad Request: Password is required' });
         }
 
         // Validate password length
@@ -130,7 +130,7 @@ const login = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(404).json({ error: 'Error 404 Not Found: User not found' });
+            return res.json({ error: 'Error 404 Not Found: Email not registered' });
         }
 
         // Check if password matches (encrypted)
@@ -142,7 +142,7 @@ const login = async (req, res) => {
                 res.cookie('token', token).json(user);
             });
         } else {
-            res.status(401).json({ error: 'Error 401 Unauthorized: Incorrect password' });
+            return res.json({ error: 'Error 401 Unauthorized: Incorrect password' });
         }
     } catch (error) {
         console.log(error);

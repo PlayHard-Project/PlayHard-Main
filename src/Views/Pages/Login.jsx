@@ -14,18 +14,16 @@ export default function Login() {
     e.preventDefault();
     const {email, password} = data
     try{
-      const {data} = await axios.post('/login',{
+      const {data} = await axios.post('http://localhost:9000/api/login',{
         email,
-        password
+        password,
       })
       if (data.error){
-        toast.error(data.error)
+        console.log(data.error)
+        //toast.error(data.error)
       }else{
-        setData({
-          email: "",
-          password: "",
-        });
-        navigate('/home')
+        setData({});
+        navigate('/')
       }
     } catch(error){
         console.log(error)

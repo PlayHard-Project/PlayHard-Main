@@ -15,6 +15,8 @@ import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
+import { UserContextProvider } from './Views/UserContext/UserContext.jsx';
+import Test from './Views/Pages/Test.jsx';
 
 
 
@@ -46,6 +48,7 @@ export default function App() {
     }, []);
 
     return (
+
         <Router>
             <ScrollToTop />
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
@@ -61,9 +64,11 @@ export default function App() {
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>
             <Footer />
         </Router>
+
     );
 }

@@ -77,9 +77,24 @@ const login = async (req, res) => {
             return res.status(400).json({ error: 'Error 400 Bad Request: Email is required' });
         }
 
+        // Validate supported email format
+        if (!email.endsWith('@gmail.com')) {
+            return res.json({ error: ' Error 400 Bad Request: Invalid email format, only @gmail.com supported' });
+        }
+
+        // Validate incomplete email format
+        if (email==('@gmail.com')) {
+            return res.json({ error: ' Error 400 Bad Request: Invalid incomplete email format.' });
+        }
+
         // Validate empty password
         if (!password) {
             return res.status(400).json({ error: 'Error 400 Bad Request: Password is required' });
+        }
+
+        // Validate password length
+        if (password.length < 6) {
+            return res.json({ error: 'Error 400 Bad Request: Password should be at least 6 characters long' });
         }
 
         // Check if user exists
@@ -89,8 +104,8 @@ const login = async (req, res) => {
             return res.status(404).json({ error: 'Error 404 Not Found: User not found' });
         }
 
-        // Check if password matches (without bcrypt for now)
-        const passwordMatch = password === user.password;
+        // Check if password matches (encrypted)
+        const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
             jwt.sign({ email: user.email, id: user._id, name: user.firstName }, process.env.JWT_SECRET, {}, (err, token) => {

@@ -32,9 +32,16 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.get(`/${baseRoute}`, (req, res) => {
+      const search = req.query.search;
+      const normalizedSearch = search.replace(/[^\w\s]/gi, '').toLowerCase();
       model
           .find()
-          .then((data) => res.json(data))
+          .then((data) => {
+              const filteredData = data.filter(product =>
+                  product.name.replace(/[^\w\s]/gi, '').toLowerCase().includes(normalizedSearch)
+              );
+              res.json(filteredData);
+          })
           .catch((err) => res.json({ message: err }));
   });
 

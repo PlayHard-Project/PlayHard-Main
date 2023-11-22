@@ -24,24 +24,6 @@ export const getElements = async (route) => {
   }
 };
 
-/**
- * Asynchronous function to fetch elements based on a search query.
- * @function
- * @async
- * @param {string} route - API route for fetching elements.
- * @param {string} search - Search query to filter elements.
- * @returns {Promise<Array>} Promise resolving to an array of elements based on the search query.
- */
-export const getElementsWithSearch = async (route, search) => {
-  try {
-    const response = await axios.get(`${apiURL}${route}?search=${search}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error getting elements: ', error);
-    throw error;
-  }
-};
-
 export const getElementByID = async (elemenetId, route) => {
   try {
     const response = await axios.get(apiURL + route + '/' + elemenetId);

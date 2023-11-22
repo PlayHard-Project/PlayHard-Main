@@ -112,9 +112,7 @@
 
 .popup {
     position: absolute;
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #72a3ff;
+
     box-shadow: 3px 3px 5px 6px #ccc;
     background-color: white;
     border-radius: 8px;
@@ -318,7 +316,7 @@
         margin-top: -85px;
     }
     .header .background-shape {
-        width: 300px;
+        width: 400px;
         height: 60px;
         margin-left: -20px;
     }
@@ -347,7 +345,7 @@
         width: 50px;
     }
     .search-container {
-        width: 195px;
+        width: 300px;
         padding-right: 5px;
         margin-right: -6px;
     }

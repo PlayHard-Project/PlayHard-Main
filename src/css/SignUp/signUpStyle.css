@@ -46,7 +46,7 @@
     width: 70%;
     height: 40px;
     border-radius: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: auto;
     color: white;
   }
@@ -70,3 +70,29 @@
   .valid {
     color: green;
   }  
+
+  .google-signup-button {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid rgb(158, 158, 158);
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 17px;
+    margin-top: 50px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .google-signup-button:hover {
+    background-color: #357ae8;
+    color: #ffffff;
+  }
+
+  @media only screen and (max-width: 888px) {
+    .image-container-signup {
+        width: 1px;
+    }
+    .container-information{
+        width: 100%;
+    }    
+}

@@ -9,7 +9,9 @@ const { Order } = require("./models/orderSchema");
 const configureAppImplementingStripeServer = (app) => {
   const express = require("express");
   const stripe = require("stripe");
+  const { htmlFile } = require("./html_Emails/invoiceHtml");
   const cors = require("cors");
+  const sendMail = require("./sendEmail");
 
   /**
    * Initialize the Stripe gateway with the provided secret key.
@@ -98,7 +100,7 @@ const configureAppImplementingStripeServer = (app) => {
       userId: customer.metadata.userId,
       customerId: data.customer,
       paymentIntentId: data.payment_intent,
-      boughtProducts: items,
+      products: items,
       subtotal: data.amount_subtotal / 100,
       total: data.amount_total / 100,
       payment_status: data.payment_status,
@@ -111,13 +113,23 @@ const configureAppImplementingStripeServer = (app) => {
       userInformation: {
         name: data.customer_details.name,
         email: data.customer_details.email,
-      }
+      },
     });
 
     try {
       const saveOrder = await newOrder.save();
       console.log("Processed Order: ", saveOrder);
-      // Send email
+      try {
+        await sendMail(
+          saveOrder.userInformation.email,
+          "Confirmación de Orden",
+          htmlFile
+        );
+
+        console.log("Email sent successfully");
+      } catch (error) {
+        console.error("Error sending email:", error.message);
+      }
     } catch (error) {
       console.log(error);
     }

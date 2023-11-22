@@ -43,13 +43,14 @@ async function updateInvoice() {
     for (const productFromOrder of products) {
       const row = document.createElement("tr");
       let product = await fetchProductDetails("products", productFromOrder.id);
+      let subtotalPrice = product.price * productFromOrder.quantity;
       row.innerHTML = `
           <td>${product.name}</td>
-          <td>${productFromOrder.size}</td>
-          <td>${productFromOrder.color}</td>
+          <td>${product.size[productFromOrder.size]}</td>
+          <td>${product.colorInformation[productFromOrder.color].color}</td>
           <td>${productFromOrder.quantity}</td>
           <td>$ ${product.price}</td>
-          <td>USD</td>
+          <td>$ ${subtotalPrice}</td>
         `;
       tableBody.appendChild(row);
     }

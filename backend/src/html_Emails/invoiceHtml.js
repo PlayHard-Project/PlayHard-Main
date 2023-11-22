@@ -1,3 +1,4 @@
+const htmlFile = `
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -118,3 +119,6 @@
     <script src="invoice.js"></script>
   </body>
 </html>
+`;
+
+module.exports = { htmlFile };

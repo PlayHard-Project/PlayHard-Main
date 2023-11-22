@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import signUpImage from "./SignUp-SignInImage.png";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -14,7 +13,8 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
     useState(false);
-
+    const signUpImage =
+    "https://res.cloudinary.com/playhardimages/image/upload/v1700626890/SignUpSignInImage.png";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 

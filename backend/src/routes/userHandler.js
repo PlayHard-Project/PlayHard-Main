@@ -137,7 +137,7 @@ const login = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            jwt.sign({ email: user.email, id: user._id, name: user.firstName }, process.env.JWT_SECRET, {}, (err, token) => {
+            jwt.sign({ email: user.email, id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {}, (err, token) => {
                 if (err) throw err;
                 res.cookie('token', token).json(user);
             });

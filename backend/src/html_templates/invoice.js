@@ -50,6 +50,7 @@ class Invoice {
         dateObject
       );
 
+      const avenue2 = order.shippingAddress.avenue2 === null? " " : ", " + order.shippingAddress.avenue2;
       const productsDetailsPromises = order.products.map((product) =>
         fetchProductDetails("products", product.id)
       );
@@ -299,7 +300,7 @@ class Invoice {
             <div class="column">
               <div class="data-block">
                 <label class="text-bold">Street || Avenue :</label>
-                <p id="street_id">${" " + order.shippingAddress.avenue1}</p>
+                <p id="street_id">${" " + order.shippingAddress.avenue1 + avenue2}</p>
               </div>
               <div class="data-block">
                 <label class="text-bold">City:</label>

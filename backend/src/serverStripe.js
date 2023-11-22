@@ -10,7 +10,6 @@ const { Invoice } = require('./html_templates/invoice.js');
 const configureAppImplementingStripeServer = (app) => {
   const express = require("express");
   const stripe = require("stripe");
-  const { htmlFile } = require("./html_Emails/invoiceHtml");
   const cors = require("cors");
   const sendMail = require("./sendEmail");
 

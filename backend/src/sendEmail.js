@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-async function sendMail(to, subject) {
+async function sendMail(to, subject, html) {
   try {
     const myEmail = process.env.MY_EMAIL;
     const myPassword = process.env.MY_PASSWORD;

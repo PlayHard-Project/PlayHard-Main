@@ -3,12 +3,15 @@ import signUpImage from "./SignUp-SignInImage.png";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { BiSolidHide } from "react-icons/bi";
+import { BiShow } from "react-icons/bi";
 import "../../css/SignUp/signUpStyle.css";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
     useState(false);
 
@@ -16,31 +19,28 @@ const SignUp = () => {
     const { name, value } = e.target;
 
     if (name === "name") {
-    const truncatedValue = value.substring(0, 20);
-    if (value.length > 20) {
-      toast.error("El nombre no puede exceder los 20 caracteres.", {
-        position: "bottom-right",
-      });
-    }
-    if (
-      value === "" ||
-      /^[^\s@#$%^&*()+-={}|<>]+$/i.test(truncatedValue)
-    ) {
-      setName(truncatedValue);
-    } else {
-      toast.error(
-        "El nombre no puede contener caracteres especiales o espacios en el medio o al final.",
-        {
+      const truncatedValue = value.substring(0, 20);
+      if (value.length > 20) {
+        toast.error("The name cannot exceed 20 characters.", {
           position: "bottom-right",
-        }
-      );
-    }
+        });
+      }
+      if (
+        value === "" ||
+        /^[^\s@#$%",ç^&*()+={}|<>]+$/i.test(truncatedValue)
+      ) {
+        setName(truncatedValue);
+      } else {
+        toast.error(
+          "The name cannot contain special characters or spaces.",
+          {
+            position: "bottom-right",
+          }
+        );
+      }
     } else if (name === "email") {
-        if (
-            value === "" ||
-            /^[^\s@#$%^&*()+-={}|<>]+$/i.test(value)
-          ) {
-            setEmail(value);
+      if (!/\s/.test(value)) {
+        setEmail(value);
       } else {
         toast.error("Email address cannot contain spaces.", {
           position: "bottom-right",
@@ -55,7 +55,12 @@ const SignUp = () => {
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-    setShowPasswordRequirements(!!newPassword);
+    const trimmedPassword = newPassword.trim();
+    setShowPasswordRequirements(!!trimmedPassword);
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const validatePassword = () => {
@@ -76,10 +81,14 @@ const SignUp = () => {
       toast.error("Name cannot be empty.", {
         position: "bottom-right",
       });
+    } else if (name.trim() === "") {
+      toast.error("Name cannot be just spaces.", {
+        position: "bottom-right",
+      });
     } else if (name.length < 6) {
-        toast.error("Name must be at least 6 characters long.", {
-          position: "bottom-right",
-        });
+      toast.error("Name must be at least 6 characters long.", {
+        position: "bottom-right",
+      });
     } else if (!email) {
       toast.error("Email cannot be empty.", {
         position: "bottom-right",
@@ -91,18 +100,25 @@ const SignUp = () => {
           position: "bottom-right",
         }
       );
+    } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+      toast.error("Please enter a valid email address.", {
+        position: "bottom-right",
+      });
+    } else if (!/^[a-zA-Z0-9]+$/.test(name)) {
+      toast.error("Please enter a valid name.", {
+        position: "bottom-right",
+      });
     } else if (!password) {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (
-      !passwordRequirements.minLength ||
+    } else if (!passwordRequirements.minLength ||
       !passwordRequirements.hasNumber ||
       !passwordRequirements.hasSpecialChar ||
       !passwordRequirements.hasUpperCase ||
-      !passwordRequirements.hasLowerCase
-    ) {
-      toast.error("Please enter a valid password.", {
+      !passwordRequirements.hasLowerCase ||
+      password.includes(" ")) {
+      toast.error("Please enter a valid password without spaces.", {
         position: "bottom-right",
       });
     } else {
@@ -115,7 +131,9 @@ const SignUp = () => {
   return (
     <div className="container container-sign">
       <div className="container-information">
-        <div className="title-signUp" style={{marginBottom: "50px"}}>Get Started Now</div>
+        <div className="title-signUp" style={{ marginBottom: "50px" }}>
+          Get Started Now
+        </div>
         <div>
           <div>
             <label htmlFor="name">Name*</label>
@@ -139,21 +157,29 @@ const SignUp = () => {
             className="input-add"
             value={email}
             onChange={handleInputChange}
-            onClick={() => setEmail("")}
             placeholder="example@gmail.com"
           />
           <div>
             <label htmlFor="password">Password*</label>
           </div>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="input-add"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <div className="password-input-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              className="input-add"
+              placeholder="Password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? <BiSolidHide style={{marginLeft:"10px" , fontSize:'26px'}}/> : <BiShow style={{marginLeft:"10px" , fontSize:'26px'}}/>}
+            </button>
+          </div>
           {showPasswordRequirements && (
             <div className="password-requirements">
               <ul>
@@ -209,7 +235,7 @@ const SignUp = () => {
           </Link>
         </div>
       </div>
-      <div className="image-container-signup hidden lg:block">
+      <div className="image-container-signup hidden md:block">
         <img src={signUpImage} alt="SignUp" className="image-signUp" />
       </div>
     </div>

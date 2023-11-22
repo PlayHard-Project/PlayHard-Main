@@ -4,6 +4,22 @@ import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
+import SearchBar from "../../Utilities/SearcherBar/searchBar";
+import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
+import { SlArrowRight } from "react-icons/sl";
+import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
+import { SlArrowDown } from "react-icons/sl";
+
+
+/**
+ * Header component for the website.
+ *
+ * @param {Object} props - The component properties.
+ * @param {number} props.cartItemsQuantity - The quantity of items in the shopping cart.
+ * @param {Function} props.setCartItemsQuantity - Function to set the quantity of items in the shopping cart.
+ * @param {Function} props.setSubTotal - Function to set the subtotal of the shopping cart.
+ * @param {number} props.subTotal - The subtotal of the shopping cart.
+ */
 
 const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
   const location = useLocation();
@@ -11,9 +27,42 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const headerIcon = "https://res.cloudinary.com/playhard/image/upload/v1699676459/PlayHardLogo.png";
   const [isCartModalOpen, setCartModalOpen] = useState(false);
-
+  const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
+  const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
 
+  /**
+   * Function to toggle the menu and categories visibility.
+   * @param {string} category - The category to toggle.
+   */
+  const toggleMenuAndCategories = (category) => {
+    toggleMenu();
+    toggleCategories();
+  };
+
+  /**
+   * Function to handle the opening and closing of the options modal.
+   */
+  const handleOptionsModal = () => {
+    if(isOptionsModalOpen){
+      setOptionsModalOpen(false)
+      return;
+    }
+    setOptionsModalOpen((prevOpen) => !prevOpen);
+    setShowSearchPopup(false);
+    setShowMenuPopup(false);
+  };
+
+  /**
+   * Function to handle the closing of the options modal.
+   */
+  const handleCloseOptionsModal = () => {
+    setOptionsModalOpen(false);
+  };
+
+  /**
+   * Function to handle the opening and closing of the cart modal.
+   */
   const handleOpenCartModal = () => {
     if(isCartModalOpen){
       setCartModalOpen(false)
@@ -24,37 +73,73 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
     setShowMenuPopup(false);
   };
 
+  /**
+   * Function to handle the closing of the cart modal.
+   */
   const handleCloseModal = () => {
     setCartModalOpen(false);
   };
 
+  /**
+   * Function to handle the closing of the categories modal.
+   */
+  const handleCloseCategoriesModal = () => {
+    setShowCategoriesPopup(false);
+  };
+
+  /**
+   * Toggles the visibility of the search popup.
+   * Closes other popups and modals.
+   */
   const toggleSearchPopup = () => {
     setShowSearchPopup(!showSearchPopup);
     setShowMenuPopup(false);
     handleCloseModal();
   };
 
+  /**
+   * Toggles the visibility of the main menu.
+   * Closes other popups and modals.
+   * Also, closes the categories modal and options modal.
+   */
   const toggleMenu = () => {
     setShowMenuPopup(!showMenuPopup);
     setShowSearchPopup(false);
     handleCloseModal();
+    handleCloseCategoriesModal();
+    handleCloseOptionsModal();
   };
 
+  /**
+   * Toggles the visibility of the categories popup.
+   * Closes other popups and modals.
+   */
+  const toggleCategories = () => {
+    setShowCategoriesPopup(!setShowCategoriesPopup());
+    setShowSearchPopup(false);
+    handleCloseModal();
+  };
+
+  /**
+   * Effect hook to handle closing modals when in mobile view.
+   * Closes the cart modal and options modal when the screen size is mobile.
+   */
   useEffect(() => {
     if (isMobile) {
       handleCloseModal();
+      handleCloseOptionsModal();
     }
   }, [isMobile]);
 
   const paths = [
     { link: "/", title: "Home" },
-    { link: "/shop", title: "Shop" },
     { link: "/about", title: "About" },
     { link: "/products", title: "Products" },
     { link: "/contact", title: "Contact" },
   ];
 
   const modalRef = useRef();
+  const modalOptionsRef = useRef();
 
   return (
       <header className="text-white header container">
@@ -64,33 +149,41 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             <Link to="/">
               <img src={headerIcon} alt="Icon Main" className="background-shape" />
             </Link>
-            <div className="lg:flex space-x-4 hidden">
+            <div className="lg:flex space-x-5 hidden text-active pl-5">
               {paths.map((path) => (
                   <Link
                       key={path.link}
                       to={path.link}
-                      className={`text ${path.link === location.pathname && "text-active"}`}
+                      className={`text ${path.link === location.pathname && 'text-active'}`}
                   >
                     {path.title}
                   </Link>
               ))}
+              <div ref={modalOptionsRef}>
+                <ModalAdminOptions
+                    sectionText={"Categories"}
+                    onRequestOpen={handleOptionsModal}
+                    isOpen={isOptionsModalOpen}
+                    onRequestClose={handleCloseOptionsModal}
+                    modalRef={modalOptionsRef}
+                    options={[
+                      { label: "Clothes", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Shoes", icon: " " },
+                      { label: "Equipment",  icon: " " },
+                      { label: "Accessories",  icon: " "},
+                      { label: "Brands", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Offers",  icon: " " },
+                      { label: "Sports", icon: <SlArrowDown strokeWidth={100}/> },
+                    ]}
+                />
+              </div>
+
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
-            <div className="flex items-center search-container">
-              <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Search"
-                  maxLength={60}
-              />
-              <button>
-                <MdSearch size={24} color="#72a3ff" />
-              </button>
-            </div>
+            <SearchBar />
             <button className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
-              <label>Login/Register</label>
             </button>
             <div ref={modalRef}>
               <ShoppingCartModal
@@ -118,15 +211,8 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
               </button>
             </div>
             {showSearchPopup && (
-                <div className="absolute shadow-lg popup right-4 search-container-little">
-                  <input
-                      type="text"
-                      className="search-input-little"
-                      placeholder="Search"
-                  />
-                  <button onClick={toggleSearchPopup}>
-                    <MdClose size={24} color="#72a3ff" />
-                  </button>
+                <div className="absolute shadow-lg popup right-4">
+                  <SearchBar />
                 </div>
             )}
             {showMenuPopup && (
@@ -141,6 +227,9 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                         {path.title}
                       </Link>
                   ))}
+                  <div className="relative flex items-center text-link" onClick={toggleCategories}>
+                    Categories <SlArrowRight size={10} color="#72a3ff" strokeWidth={200} style={{ marginLeft: '70px' }} />
+                  </div>
                   <div className="relative flex items-center text-link">
                     Login / Register
                   </div>
@@ -153,6 +242,12 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                   </Link>
                   <div className="relative flex items-center text-link">Settings</div>
                 </div>
+            )}
+            {showCategoriesPopup && (
+                <CategoriesPopup
+                    handleCloseCategoriesModal={handleCloseCategoriesModal}
+                    toggleMenuAndCategories={toggleMenuAndCategories}
+                />
             )}
           </div>
         </div>

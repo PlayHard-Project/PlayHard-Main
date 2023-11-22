@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 async function createRoutes(router, model, baseRoute) {
     router.post(`/${baseRoute}`, async (req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, password, isAdmin } = req.body;
 
             if (!name) {
                 return res.json({ error: 'Error 400 Bad Request: Name is required' });
@@ -31,6 +31,10 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: 'Error 400 Bad Request: Password should be at least 6 characters long' });
             }
 
+            if (!isAdmin) {
+                return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin'})
+            }
+
             const passwordHash = await bcrypt.hashSync(password, 8);
             console.log(passwordHash);
 
@@ -38,6 +42,7 @@ async function createRoutes(router, model, baseRoute) {
                 name,
                 email,
                 password: passwordHash,
+                isAdmin,
             });
 
             return res.json(user);

@@ -4,12 +4,10 @@ import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
 import ShoppingCartModal from "../Cart/ShoppingCartModal";
-import SearchBar from "../../Utilities/SearcherBar/searchBar";
 import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
-
 
 /**
  * Header component for the website.
@@ -181,7 +179,17 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
-            <SearchBar />
+            <div className="flex items-center search-container">
+              <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Search"
+                  maxLength={60}
+              />
+              <button>
+                <MdSearch size={24} color="#72a3ff" />
+              </button>
+            </div>
             <button className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
             </button>
@@ -211,8 +219,15 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
               </button>
             </div>
             {showSearchPopup && (
-                <div className="absolute shadow-lg popup right-4">
-                  <SearchBar />
+                <div className="absolute shadow-lg popup right-4 search-container-little">
+                  <input
+                      type="text"
+                      className="search-input-little"
+                      placeholder="Search"
+                  />
+                  <button onClick={toggleSearchPopup}>
+                    <MdClose size={24} color="#72a3ff" />
+                  </button>
                 </div>
             )}
             {showMenuPopup && (

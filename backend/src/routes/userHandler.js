@@ -2,7 +2,23 @@ const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+/**
+ * Creates routes for handling user-related operations.
+ * 
+ * @param {Object} router - Express router object.
+ * @param {Object} model - Mongoose model for user data.
+ * @param {string} baseRoute - Base route for user-related operations.
+ */
 async function createRoutes(router, model, baseRoute) {
+
+    /**
+     * Handles the creation of a new user.
+     * @function
+     * @name POST /baseRoute
+     * @param {Object} req - Express request object.
+     * @param {Object} res - Express response object.
+     * @returns {Object} - JSON response containing either user data or an error message.
+     */
     router.post(`/${baseRoute}`, async (req, res) => {
         try {
             const { name, email, password, isAdmin } = req.body;
@@ -19,6 +35,11 @@ async function createRoutes(router, model, baseRoute) {
                 return res.json({ error: ' Error 400 Bad Request: Invalid email format, use @gmail' });
             }
 
+            const atIndex = email.indexOf('@');
+            if (atIndex === -1 || atIndex === 0) {
+                return res.json({ error: 'Error 400 Bad Request: Invalid email format, missing text before @gmail.com' });
+            }
+
             const exist = await User.findOne({ email });
             if (exist) {
                 return res.json({ error: 'Error 409 Conflicts: Email is already registered' });
@@ -33,7 +54,7 @@ async function createRoutes(router, model, baseRoute) {
             }
 
             if (!isAdmin) {
-                return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin'})
+                return res.json({ error: 'Error 400 Bad Request: It is required to know if the user is an admin' })
             }
 
             const passwordHash = await bcrypt.hashSync(password, 8);
@@ -53,6 +74,14 @@ async function createRoutes(router, model, baseRoute) {
         }
     });
 
+    /**
+     * Handles the retrieval of all users.
+     * @function
+     * @name GET /baseRoute
+     * @param {Object} req - Express request object.
+     * @param {Object} res - Express response object.
+     * @returns {Object} - JSON response containing either user data or an error message.
+     */
     router.get(`/${baseRoute}`, (req, res) => {
         model
             .find()

@@ -29,6 +29,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
+  const [product, setProduct] = useState();
 
   /**
    * Function to toggle the menu and categories visibility.
@@ -180,7 +181,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
-            <SearchBar />
+            <SearchBar isRedirect={true} setProduct={setProduct}/>
             <button className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
             </button>
@@ -211,7 +212,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             </div>
             {showSearchPopup && (
                 <div className="absolute shadow-lg popup right-4">
-                  <SearchBar />
+                  <SearchBar isRedirect={true} setProduct={setProduct}/>
                 </div>
             )}
             {showMenuPopup && (

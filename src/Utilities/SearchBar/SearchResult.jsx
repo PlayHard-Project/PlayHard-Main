@@ -10,7 +10,7 @@ import SearchResultItem from "./SearchResultItem";
  * @param {Function} props.setInput - Function to update the search input in the parent component.
  * @returns {JSX.Element} JSX element representing the search results.
  */
-const SearchResult = ({ products, setInput }) => {
+const SearchResult = ({ products, setInput, setProduct, isRedirect}) => {
     /**
      * Renders the search results component.
      * @returns {JSX.Element} JSX element representing the search results.
@@ -22,7 +22,7 @@ const SearchResult = ({ products, setInput }) => {
                  * Renders a search result item.
                  * @returns {JSX.Element} JSX element representing a search result item.
                  */
-                <SearchResultItem key={product._id} product={product} setInput={setInput} />
+                <SearchResultItem key={product._id} product={product} setInput={setInput} setProduct={setProduct} isRedirect={isRedirect}/>
             ))}
         </div>
     );

@@ -12,7 +12,7 @@ import SearchResult from "./SearchResult";
  * @component
  * @returns {JSX.Element} JSX element representing the search bar.
  */
-const SearchBar = () => {
+const SearchBar = ({setProduct, isRedirect}) => {
     /**
      * State representing the current value of the search input.
      * @type {string}
@@ -132,7 +132,7 @@ const SearchBar = () => {
                     )}
                 </button>
             </div>
-            {isOpen && <SearchResult products={products} setInput={setInput} />}
+            {isOpen && <SearchResult setProduct={setProduct} products={products} setInput={setInput} isRedirect={isRedirect} se />}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 const fetchProductDetails = async (route, productId) => {
   try {
     const response = await fetch(
-      `http://localhost:9000/api/${route}/${productId}`
+      `https://backend-fullapirest.onrender.com/api/${route}/${productId}`
     );
     const product = await response.json();
     return product;
@@ -16,7 +16,7 @@ const fetchProductDetails = async (route, productId) => {
 
 const fetchLastInsertID = async (route) => {
   try {
-    const response = await fetch(`http://localhost:9000/api/${route}/last-id/`);
+    const response = await fetch(`https://backend-fullapirest.onrender.com/api/${route}/last-id/`);
     const data = await response.json();
 
     if (response.ok) {

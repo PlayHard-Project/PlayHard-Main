@@ -43,7 +43,8 @@ export default function GoToCheckout({ disabled }) {
           "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
         );
 
-        products.forEach(item => {
+        products.map(item => {
+            console.log("AAAAAAAAAAAAAAAAAAA: " + item.size);
             let inStock = buyCartManager.verifyStock(item.id, item.size, item.color, item.quantity)
             if (!inStock) {
                 toast.error(`${item.name} was purchased and now we don't have enough stock.`)
@@ -54,7 +55,7 @@ export default function GoToCheckout({ disabled }) {
       const headers = { "Content-Type": "application/json" };
 
       const response = await fetch(
-          "https://backend-fullapirest-test.onrender.com/stripe-api/intent-payment",
+          "http://localhost:9000/stripe-api/intent-payment",
           {
             method: "POST",
             headers: headers,
@@ -67,11 +68,11 @@ export default function GoToCheckout({ disabled }) {
       }
 
       const session = await response.json();
-      const result = await stripe.redirectToCheckout({ sessionId: session.id });
+      /*const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
       if (result.error) {
         console.log(result.error);
-      }
+      }*/
     } catch (error) {
       console.error("Error making payment:", error);
     }

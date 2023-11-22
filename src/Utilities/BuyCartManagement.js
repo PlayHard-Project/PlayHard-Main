@@ -145,7 +145,13 @@ export default class BuyCartManagement {
     }
 
     async verifyStock(id, size, color, quantityRequired) {
+        console.log(id);
         const product = await getElementByID(id, "products");
-        return quantityRequired <= product.inStock[size][color];
+        const inStock = product.inStock;
+        console.log(size)
+        console.log(color)
+        console.log(inStock[0][0]);
+        return false;
+        //return quantityRequired <= product.inStock[size][color];
     }
 }

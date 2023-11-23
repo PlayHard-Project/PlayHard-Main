@@ -42,7 +42,7 @@ class Invoice {
       const order = await fetchProductDetails("orders", idOrder);
       const total = await this.calculateTotal(order);
 
-      const inputDate = order.updatedAt;
+      const inputDate = order.date;
       const dateObject = new Date(inputDate);
 
       const options = { year: "numeric", month: "short", day: "numeric" };

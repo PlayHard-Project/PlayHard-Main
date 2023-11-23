@@ -120,7 +120,7 @@ const SignUp = () => {
       !passwordRequirements.hasUpperCase ||
       !passwordRequirements.hasLowerCase ||
       password.includes(" ")) {
-      toast.error("Please enter a valid", {
+      toast.error("Please enter a valid password", {
         position: "bottom-right",
       });
     } else {

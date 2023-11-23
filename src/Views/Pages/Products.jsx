@@ -67,7 +67,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   }
 
   return (
-    <div className="container-product container flex flex-col lg:flex-row" >
+    <div className="container-product container flex flex-col lg:flex-row  mt-2 mb-2" >
       <Sidebar />
       <CardsContainer content={content} />
 

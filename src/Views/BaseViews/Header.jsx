@@ -14,6 +14,7 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
+import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
 
 /**
@@ -41,6 +42,7 @@ const Header = ({
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
+  const [isAdminModalOpen, setAdminModalOpen] = useState(false);
   const [product, setProduct] = useState();
 
   /**
@@ -50,6 +52,26 @@ const Header = ({
   const toggleMenuAndCategories = (category) => {
     toggleMenu();
     toggleCategories();
+  };
+
+  /**
+   * Function to handle the opening and closing of the admin modal.
+   */
+  const handleAdminModal = () => {
+    if(isAdminModalOpen){
+      setAdminModalOpen(false)
+      return;
+    }
+    setAdminModalOpen((prevOpen) => !prevOpen);
+    setShowSearchPopup(false);
+    setShowMenuPopup(false);
+  };
+
+  /**
+   * Function to handle the closing of the admin modal.
+   */
+  const handleCloseAdminModal = () => {
+    setAdminModalOpen(false);
   };
 
   /**
@@ -152,6 +174,7 @@ const Header = ({
 
   const modalRef = useRef();
   const modalOptionsRef = useRef();
+  const modalAdminRef=useRef();
 
   return (
       <header className="text-white header container">
@@ -187,6 +210,15 @@ const Header = ({
                       { label: "Offers",  icon: " " },
                       { label: "Sports", icon: <SlArrowDown strokeWidth={100}/> },
                     ]}
+                />
+              </div>
+              <div ref={modalAdminRef}>
+                <ModalAdminPanel
+                    sectionText={"Admin"}
+                    onRequestOpen={handleAdminModal}
+                    isOpen={isAdminModalOpen}
+                    onRequestClose={handleCloseAdminModal}
+                    modalRef={modalAdminRef}
                 />
               </div>
 
@@ -256,6 +288,7 @@ const Header = ({
             {showCategoriesPopup && (
                 <CategoriesPopup
                     handleCloseCategoriesModal={handleCloseCategoriesModal}
+                    handleSecondModal={handleCloseOptionsModal}
                     toggleMenuAndCategories={toggleMenuAndCategories}
                 />
             )}

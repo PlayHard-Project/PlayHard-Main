@@ -14,6 +14,7 @@ import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
+import AddProduct from "./Views/AdminPanel/AddProduct";
 import SignUp from './Views/SignUp/SignUp.jsx';
 import { Toaster } from 'react-hot-toast';
 
@@ -62,6 +63,7 @@ export default function App() {
                 <Route path="/products" element={<Products setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/admin/add-product" element={<AddProduct/>} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>

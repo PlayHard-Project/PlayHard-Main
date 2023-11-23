@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import toast from "react-hot-toast";
 
-function ColorComponent({ id, onDelete, setColorInformation }) {
+function ColorComponent({ id, onDelete, setColorInformation}) {
     const [colorName, setColorName] = useState('');
     const [colorValue, setColorValue] = useState('#ffffff');
     const [image, setImage] = useState('');
@@ -20,6 +20,12 @@ function ColorComponent({ id, onDelete, setColorInformation }) {
     }
 
     const handleAddImage = () => {
+        if (input && !input.startsWith("http://") && !input.startsWith("https://") && !input.startsWith("data:image/")) {
+            toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
+              position: "bottom-right",
+            });
+            return;
+          }
         if (!isDisabled) {
             setImage(input);
             setInput('');
@@ -44,10 +50,10 @@ function ColorComponent({ id, onDelete, setColorInformation }) {
                 <div className="flex items-center gap-3 w-full">
                     <input
                         type="text"
-                        className="w-2/3 block"
-                        placeholder="Nombre del color"
+                        className="w-2/3 block border border-gray-500 rounded p-2 mb-2"
+                        placeholder="Color name"
                         value={colorName}
-                        onChange={(e) => !isDisabled && setColorName(e.target.value)}
+                        onChange={(e) => !isDisabled && setColorName(e.target.value.slice(0, 10))}
                         required
                         disabled={isDisabled}
                     />
@@ -62,8 +68,8 @@ function ColorComponent({ id, onDelete, setColorInformation }) {
                 <div className="flex items-center gap-3 w-full">
                     <input
                         type="text"
-                        className="w-2/3 block"
-                        placeholder="URL de la imagen"
+                        className="w-2/3 block border border-gray-500 rounded p-2"
+                        placeholder="Image URL"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         required

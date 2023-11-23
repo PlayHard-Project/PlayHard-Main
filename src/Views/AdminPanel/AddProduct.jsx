@@ -34,6 +34,8 @@ const AddProduct = () => {
   const [colorInformation, setColorInformation] = useState([]);
   const [stockInformation, setStockInformation] = useState([[]]);
   const navigate  = useNavigate ();
+  const [isProductAdded, setIsProductAdded] = useState(false);
+
 
 
   //Validation for each input.
@@ -65,10 +67,12 @@ const AddProduct = () => {
 
   const handlePriceChange = (e) => {
     const enteredValue = e.target.value;
-    if (/^\d+(\.\d*)?$/.test(enteredValue) || enteredValue === "") {
+  
+    // Verifica si el valor ingresado cumple con el formato requerido (hasta dos dígitos después del punto)
+    if (/^\d+(\.\d{0,2})?$/.test(enteredValue) || enteredValue === "") {
       setPrice(enteredValue);
     } else {
-      toast.error("Please enter a valid positive number.", {
+      toast.error("Please enter a valid positive number with up to two decimal places.", {
         position: "bottom-right",
       });
     }
@@ -180,7 +184,6 @@ const AddProduct = () => {
   const handleAddProductMessages = () => {
     const trimmedProductName = productName.trim();
     const trimmedProductDescription = productDescription.trim();
-
     if (trimmedProductName === "" || !trimmedProductName) {
       toast.error("Product name cannot be empty.", { position: "bottom-right", });
     } else if (trimmedProductDescription === "" || !trimmedProductDescription) {
@@ -205,8 +208,10 @@ const AddProduct = () => {
       toast.error("Please add at stock information.", { position: "bottom-right", });
     } else {
       toast.success("The product was added!",{position: "bottom-right"})
+      navigate("/");
+      setIsProductAdded(true);
+      }
     }
-  };
 
 
   const handleAddProduct = async () => {
@@ -228,10 +233,11 @@ const AddProduct = () => {
       inStock: stockInformation
     };
 
+    //HOLADIABLO
+
     try {
       const response = await addElement(product, '/products');
       console.log(response);
-      navigate("/");
     } catch (error) {
       console.error('Error adding the new product: ', error);
     }
@@ -339,7 +345,7 @@ const AddProduct = () => {
                             handleAddProduct();
                             handleAddProductMessages();
                             
-                        }}>Add Product</button>
+                        }} disabled={isProductAdded}>Add Product</button>
       </div>
     </div>
   );

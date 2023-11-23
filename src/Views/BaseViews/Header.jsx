@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { MdSearch, MdPerson, MdSettings, MdClose, MdMenu } from "react-icons/md";
+import {
+  MdSearch,
+  MdPerson,
+  MdSettings,
+  MdClose,
+  MdMenu,
+} from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
@@ -21,11 +27,17 @@ import SearchBar from "../../Utilities/SearchBar/SearchBar";
  * @param {number} props.subTotal - The subtotal of the shopping cart.
  */
 
-const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}) => {
+const Header = ({
+  cartItemsQuantity,
+  setCartItemsQuantity,
+  setSubTotal,
+  subTotal,
+}) => {
   const location = useLocation();
   const [showSearchPopup, setShowSearchPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
-  const headerIcon = "https://res.cloudinary.com/playhard/image/upload/v1699676459/PlayHardLogo.png";
+  const headerIcon =
+    "https://res.cloudinary.com/playhard/image/upload/v1699676459/PlayHardLogo.png";
   const [isCartModalOpen, setCartModalOpen] = useState(false);
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
@@ -66,8 +78,8 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
    * Function to handle the opening and closing of the options modal.
    */
   const handleOptionsModal = () => {
-    if(isOptionsModalOpen){
-      setOptionsModalOpen(false)
+    if (isOptionsModalOpen) {
+      setOptionsModalOpen(false);
       return;
     }
     setOptionsModalOpen((prevOpen) => !prevOpen);
@@ -86,8 +98,8 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
    * Function to handle the opening and closing of the cart modal.
    */
   const handleOpenCartModal = () => {
-    if(isCartModalOpen){
-      setCartModalOpen(false)
+    if (isCartModalOpen) {
+      setCartModalOpen(false);
       return;
     }
     setCartModalOpen((prevOpen) => !prevOpen);
@@ -214,9 +226,9 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
             <SearchBar isRedirect={true} setProduct={setProduct}/>
-            <button className="text lg:flex hidden items-center">
+            <Link to="/sign-up" className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
-            </button>
+            </Link>
             <div ref={modalRef}>
               <ShoppingCartModal
                   onRequestOpen={handleOpenCartModal}
@@ -262,9 +274,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
                   <div className="relative flex items-center text-link" onClick={toggleCategories}>
                     Categories <SlArrowRight size={10} color="#72a3ff" strokeWidth={200} style={{ marginLeft: '70px' }} />
                   </div>
-                  <div className="relative flex items-center text-link">
-                    Login / Register
-                  </div>
+                  <Link to="/sign-up" className="relative flex items-center text-link" onClick={toggleMenu}>Sign Up</Link>
                   <Link
                       to="/shopcart"
                       className="relative flex items-center text-link"

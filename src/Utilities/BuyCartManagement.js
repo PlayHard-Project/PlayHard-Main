@@ -1,6 +1,7 @@
 
 import ProductEntity from '../Entities/ProductEntity'
-import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
+import {getElementByID, updateElement} from "../Components/ApiRestHandler/requestHandler";
+import toast from "react-hot-toast";
 
 /**
  * This class is in charge of management of the cart items stored in the localStorage.
@@ -12,7 +13,7 @@ export default class BuyCartManagement {
      */
     getProducts() {
         const products = localStorage.getItem('buyCart');
-        return products ? JSON.parse(products).map(product => new ProductEntity(product.id, product.quantity, product.size, product.color)) : [];
+        return products ? JSON.parse(products).map(product => new ProductEntity(product.id, product.quantity, product.size, product.color, product.price)) : [];
     }
 
     /**
@@ -24,14 +25,14 @@ export default class BuyCartManagement {
      * @param {number} size - Index of the size selected.
      * @param {number} color - Index of the color selected.
      */
-    addProduct(id, quantity, size, color) {
+    addProduct(id, quantity, size, color, price) {
         const products = this.getProducts();
-        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color && product.price === price);
 
         if (existingProduct) {
             existingProduct.quantity += quantity;
         } else {
-            existingProduct = new ProductEntity(id, quantity, size, color);
+            existingProduct = new ProductEntity(id, quantity, size, color, price);
             products.push(existingProduct);
         }
 
@@ -52,9 +53,9 @@ export default class BuyCartManagement {
      * @param {number} size - Index of the size selected.
      * @param {number} color - Index of the color selected.
      */
-    deleteProduct(id, size, color) {
+    deleteProduct(id, size, color, price) {
         let products = this.getProducts();
-        products = products.filter(product => !(product.id === id && product.size === size && product.color === color));
+        products = products.filter(product => !(product.id === id && product.size === size && product.color === color && product.price === price));
         localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
@@ -67,18 +68,12 @@ export default class BuyCartManagement {
      * @param {number} color - Index of the color selected.
      */
     decreaseQuantity(id, size, color) {
+        console.log("Updated on the local storage")
         const products = this.getProducts();
         const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
 
-        if (existingProduct) {
-            existingProduct.quantity -= 1;
-
-            if (existingProduct.quantity <= 0) {
-                this.deleteProduct(id, size, color);
-            } else {
-                localStorage.setItem('buyCart', JSON.stringify(products));
-            }
-        }
+        existingProduct.quantity -= 1;
+        localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
     /**
@@ -89,14 +84,13 @@ export default class BuyCartManagement {
      * @param {number} size - Index of the size selected.
      * @param {number} color - Index of the color selected.
      */
-    incrementQuantity(id, size, color) {
+    incrementQuantity(id, size, color, price) {
+        console.log("Updated on the local storage")
         const products = this.getProducts();
-        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color && product.price === price);
 
-        if (existingProduct) {
-            existingProduct.quantity += 1;
-            localStorage.setItem('buyCart', JSON.stringify(products));
-        }
+        existingProduct.quantity += 1;
+        localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
     /**
@@ -145,13 +139,43 @@ export default class BuyCartManagement {
     }
 
     async verifyStock(id, size, color, quantityRequired) {
-        console.log(id);
         const product = await getElementByID(id, "products");
-        const inStock = product.inStock;
-        console.log(size)
-        console.log(color)
-        console.log(inStock[0][0]);
-        return false;
-        //return quantityRequired <= product.inStock[size][color];
+        const inStock = product.inStock[size][color];
+        console.log("In stock: " + inStock);
+        console.log("required: " + quantityRequired);
+        if (quantityRequired === inStock) {
+            return true;
+        } else return quantityRequired < inStock;
+    }
+
+    async verifyGeneralStock() {
+        const promisesCheck = await Promise.all(
+            this.getProducts().map(async product => {
+                const productFromDB = await getElementByID(product.id, "products");
+                const inStock = productFromDB.inStock[product.size][product.color] >= product.quantity;
+                console.log("From DB" + productFromDB.inStock[product.size][product.color]);
+                console.log("STOCK: " + inStock);
+                if (!inStock) toast.error(`${productFromDB.name} out stock.`)
+                return inStock;
+            })
+        );
+
+        return !promisesCheck.includes(false);
+    }
+
+    madePurchase() {
+        this.getProducts().map(async product => {
+            const productFromDB = await getElementByID(product.id, "products");
+            productFromDB.inStock[product.size][product.color] -= product.quantity;
+            await updateElement(productFromDB, "products/");
+        });
+    }
+
+    async revertPurchase() {
+        this.getProducts().map(async product => {
+            const productFromDB = await getElementByID(product.id, "products");
+            productFromDB.inStock[product.size][product.color] += product.quantity;
+            await updateElement(productFromDB, "products/")
+        });
     }
 }

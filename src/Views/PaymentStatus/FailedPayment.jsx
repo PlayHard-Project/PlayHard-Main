@@ -1,7 +1,11 @@
 import React from "react";
 import PaymentStatus from "./PaymentStatus";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const FailedPayment = () => {
+  const buyManager = new BuyCartManagement();
+  buyManager.revertPurchase();
+
   return (
     <PaymentStatus
       title="Something Went Wrong!"

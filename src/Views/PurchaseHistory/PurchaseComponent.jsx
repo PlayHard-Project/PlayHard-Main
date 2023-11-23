@@ -43,20 +43,29 @@ export default function PurchaseComponent({ idOrder }) {
       ) : (
         <section className="purchase-section">
           <div className="text-container1">
-            <h2 className="header-1">Payment ID:&nbsp;</h2>
-            <label className="result-1">{order.paymentIntentId}</label>
+            <div className="header-container">
+              <h2 className="header-1">Payment ID:</h2>
+            </div>
+            <div className="result-container">
+              <label className="result-1">{order._id}</label>
+            </div>
           </div>
           <div className="text-container1">
-            <h2 clasName="header-1">Date: &nbsp;</h2>
+            <h2 className="header-1">Date:</h2>
             <label className="result-1">{date}</label>
           </div>
           <div className="scroll-container">
             {order.products.map((productFromOrder) => (
               <CartComponent
-                key={productFromOrder.id}
+                key={order.paymentIntentId + productFromOrder.color}
                 productFromOrder={productFromOrder}
+                color={productFromOrder.color}
               />
             ))}
+          </div>
+          <div className="text-container1">
+            <h2 className="header-1">Total cost of all purchases:</h2>
+            <label className="result-1">{"$ " + order.total}</label>
           </div>
         </section>
       )}

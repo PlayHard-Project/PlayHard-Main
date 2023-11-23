@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PurchaseComponent from "./PurchaseComponent";
-import '../../css/PurchaseHistory.css'
+import "../../css/PurchaseHistory.css";
 
 export default function ShoppingHistory() {
   const [orders, setOrders] = useState([]);
@@ -22,10 +22,15 @@ export default function ShoppingHistory() {
     <div className="container">
       <section className="header-1">
         <h1>Shopping History</h1>
-        <h2>User ID:<span>{idUser}</span></h2>
+        <h2>
+          User ID:<span>{idUser}</span>
+        </h2>
       </section>
       {orders.map((order) => (
-        <PurchaseComponent key={order._id} idOrder={order._id} />
+        <PurchaseComponent
+          key={order._id + order.paymentIntentId}
+          idOrder={order._id}
+        />
       ))}
     </div>
   );

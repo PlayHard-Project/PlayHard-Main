@@ -9,7 +9,7 @@ export default function ShoppingHistory() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9000/api/orders/user/${idUser}`)
+      .get(`https://backend-fullapirest-test.onrender.com/api/orders/user/${idUser}`)
       .then((response) => {
         setOrders(response.data);
       })

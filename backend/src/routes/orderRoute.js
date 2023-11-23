@@ -14,7 +14,7 @@ createRoutes(router, Order, "orders");
  * @param {Function} (req, res) - Callback function to handle the route.
  * @returns {void}
  */
-router.get(`/${baseRoute}/user/:userId`, (req, res) => {
+router.get('/orders/user/:userId', (req, res) => {
   const { userId } = req.params;
   Order
     .find({ userId })

@@ -85,10 +85,6 @@ function createRoutes(router, model, baseRoute) {
           .catch((err) => res.json({ message: err }));
   });
 
-
-
-
-
   /**
    * Endpoint to retrieve a specific item by ID from the database.
    * @name router.get

@@ -11,34 +11,29 @@ const Contact = () => {
     message: "",
   });
   const [submissionMessage, setSubmissionMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // Nuevo estado para controlar si se está enviando el formulario
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Evitar múltiples envíos mientras se está procesando
     if (isSubmitting) {
       return;
     }
 
-    // Validaciones síncronas
     const nameWarning = (name.length < 5 || name.length > 50) ? "Name should be between 5 and 50 characters." : "";
     const emailWarning = !email.match(/\S+@\S+\.\S+/) ? "Invalid email format. It should be like example@gmail.com" : "";
     const messageWarning = (message.length < 10 || message.length > 250) ? "Message should be between 10 and 250 characters." : "";
 
-    // Establecer advertencias
     setWarnings({
       name: nameWarning,
       email: emailWarning,
       message: messageWarning,
     });
 
-    // Verificar si hay alguna advertencia
     if (nameWarning || emailWarning || messageWarning) {
       return;
     }
 
-    // Iniciar el proceso de envío
     setIsSubmitting(true);
 
     const formData = {

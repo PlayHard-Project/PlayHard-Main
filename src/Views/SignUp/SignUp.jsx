@@ -123,10 +123,6 @@ const SignUp = () => {
       toast.error("Please enter a valid password", {
         position: "bottom-right",
       });
-    } else {
-      toast.success(`Sign Up successful for ${name}!`, {
-        position: "bottom-right",
-      });
     }
 
     //Created POST request 
@@ -151,6 +147,9 @@ const SignUp = () => {
           position: "bottom-right",
         });
       } else {
+        toast.success(`Sign Up successful for ${name}!`, {
+          position: "bottom-right",
+        });
         navigate("/");
       }
     } catch (error) {

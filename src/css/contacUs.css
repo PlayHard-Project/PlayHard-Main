@@ -1,0 +1,61 @@
+/* ContacUs.css */
+.contact-us {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Contenedor blanco */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(10, 10, 0, 0.6); /* Sombra */
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  .contact-us h1 {
+    font-weight: bold;
+    font-size: 1.7rem;
+    text-align: center;
+  }
+  
+  .contact-us form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-us label {
+    margin-top: 10px;
+  }
+  
+  .contact-us input,
+  .contact-us textarea {
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #E6E6E6;
+    width: 100%; /* Make the text fields equal width */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .contact-us button[type='submit'] {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #3970D7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .contact-us button[type='submit']:hover {
+    background-color: #3970D7;
+  }
+  

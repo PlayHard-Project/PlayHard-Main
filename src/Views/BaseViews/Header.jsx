@@ -8,6 +8,7 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
+import SearchBar from "../../Utilities/SearchBar/SearchBar";
 
 /**
  * Header component for the website.
@@ -28,6 +29,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
+  const [product, setProduct] = useState();
 
   /**
    * Function to toggle the menu and categories visibility.
@@ -179,17 +181,7 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
-            <div className="flex items-center search-container">
-              <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Search"
-                  maxLength={60}
-              />
-              <button>
-                <MdSearch size={24} color="#72a3ff" />
-              </button>
-            </div>
+            <SearchBar isRedirect={true} setProduct={setProduct}/>
             <button className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
             </button>
@@ -219,15 +211,8 @@ const Header = ({cartItemsQuantity, setCartItemsQuantity, setSubTotal, subTotal}
               </button>
             </div>
             {showSearchPopup && (
-                <div className="absolute shadow-lg popup right-4 search-container-little">
-                  <input
-                      type="text"
-                      className="search-input-little"
-                      placeholder="Search"
-                  />
-                  <button onClick={toggleSearchPopup}>
-                    <MdClose size={24} color="#72a3ff" />
-                  </button>
+                <div className="absolute shadow-lg popup right-4">
+                  <SearchBar isRedirect={true} setProduct={setProduct}/>
                 </div>
             )}
             {showMenuPopup && (

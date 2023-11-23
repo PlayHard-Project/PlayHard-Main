@@ -1,13 +1,9 @@
 const nodemailer = require('nodemailer');
-const { Invoice } = require('./html_Emails/invoice.js');
 
-async function sendMail(to, subject) {
+async function sendMail(to, subject, html) {
   try {
     const myEmail = process.env.MY_EMAIL;
     const myPassword = process.env.MY_PASSWORD;
-
-    const myInvoice = new Invoice();
-
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -15,8 +11,6 @@ async function sendMail(to, subject) {
         pass: myPassword,
       },
     });
-
-    const html = await myInvoice.generateHTML(); // Call generateHTML to get the invoice HTML
 
     const mailOptions = {
       from: myEmail,

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("intl");
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
@@ -79,6 +80,11 @@ const orderSchema = new Schema(
         required: true,
       },
     },
+    date: {
+      type: Date,
+      default: () => new Date().toLocaleString("en-US", { timeZone: "America/La_Paz" }),
+      required: true,
+    }
   },
   { timestamps: true }
 );

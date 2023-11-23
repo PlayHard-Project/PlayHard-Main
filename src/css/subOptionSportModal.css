@@ -1,5 +1,5 @@
 .modal-content-suboptions-sport {
-    position: absolute;
+    position: fixed;
     top: 35.5%;
     left:87%;
     transform: translate(-50%, -50%);

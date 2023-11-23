@@ -21,12 +21,11 @@ export default function GoToCheckout({ disabled }) {
                 "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
             );
 
-
             const body = { products: products, userId: "123" };
             const headers = { "Content-Type": "application/json" };
 
             const response = await fetch(
-                "http://localhost:9000/stripe-api/intent-payment",
+                "https://backend-fullapirest.onrender.com/stripe-api/intent-payment",
                 {
                     method: "POST",
                     headers: headers,

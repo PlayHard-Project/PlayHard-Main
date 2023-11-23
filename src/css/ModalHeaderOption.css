@@ -92,3 +92,88 @@
         clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.7% 100%);
     }
 }
+@media only screen and (max-width: 1341px) {
+    .modal-container-options {
+        width: 87.5%;
+        top: 9.2%;
+    }
+}
+@media only screen and (max-width: 1296px) {
+    .modal-container-options {
+        width: 86.7%;
+    }
+}
+@media only screen and (max-width: 1208px) {
+    .modal-container-options {
+        top: 8.1%;
+    }
+}
+@media only screen and (max-width: 1194px) {
+    .modal-container-options {
+        width: 87.2%;
+        top: 7.3%;
+        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3% 100%);
+    }
+}
+@media only screen and (max-width: 1148px) {
+    .modal-container-options {
+        width: 85%;
+        top: 7.1%;
+        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3% 100%);
+    }
+}
+@media only screen and (max-width: 1123px) {
+    .modal-container-options {
+        width: 86.5%;
+    }
+}
+@media only screen and (max-width: 1095px) {
+    .modal-container-options {
+        width: 88%;
+    }
+}
+@media only screen and (max-width: 1020px) {
+    .modal-container-options {
+        top: 7%;
+    }
+    .container-options{
+        font-size: 10px;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .modal-container-options {
+        top: 5.9%;
+    }
+    .container-options{
+        font-size: 10px;
+    }
+    .container-options > div > div {
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 966px) {
+    .modal-container-options {
+        width: 89.6%;
+    }
+}
+@media only screen and (max-width: 946px) {
+    .modal-container-options {
+        width: 91.5%;
+    }
+}
+@media only screen and (max-width: 922px) {
+    .modal-container-options {
+        width: 94%;
+    }
+}
+@media only screen and (max-width: 889px) {
+    .modal-container-options {
+        width: 93%;
+    }
+    .container-options{
+        font-size: 9px;
+    }
+    .container-options > div {
+        font-size: 2px;
+    }
+}

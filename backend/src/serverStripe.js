@@ -1,4 +1,5 @@
 const { Order } = require("./models/orderSchema");
+const { Invoice } = require('./html_templates/invoice.js');
 
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
@@ -9,7 +10,6 @@ const { Order } = require("./models/orderSchema");
 const configureAppImplementingStripeServer = (app) => {
   const express = require("express");
   const stripe = require("stripe");
-  const { htmlFile } = require("./html_Emails/invoiceHtml");
   const cors = require("cors");
   const sendMail = require("./sendEmail");
 
@@ -36,7 +36,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:9000/api/products/${productId}`
+        `https://backend-fullapirest.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -83,8 +83,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "http://localhost:46401/success-payment-status",
-        cancel_url: "http://localhost:46401/fail-payment-status",
+        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });
@@ -119,14 +119,13 @@ const configureAppImplementingStripeServer = (app) => {
     try {
       const saveOrder = await newOrder.save();
       console.log("Processed Order: ", saveOrder);
+
+      const myInvoice = new Invoice();
+      const htmlFile = await myInvoice.generateHTML();
       try {
         await sendMail(
-          saveOrder.userInformation.email,
-          "Confirmación de Orden",
-          htmlFile
-        );
-
-        console.log("Email sent successfully");
+          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
+          console.log("Email sent successfully");
       } catch (error) {
         console.error("Error sending email:", error.message);
       }

@@ -45,6 +45,31 @@ function createRoutes(router, model, baseRoute) {
       .catch((err) => res.json({ message: err }));
   });
 
+    /**
+     * Route for performing a search on the model data.
+     *
+     * @param {string} `/${baseRoute}/search` - The route on which to perform the search.
+     * @param {Function} (req, res) - The callback function to handle the route.
+     * @returns {void}
+     */
+  router.get(`/${baseRoute}/search`, (req, res) => {
+      const search = req.query.search;
+      if (search) {
+          const normalizedSearch = search.replace(/[^\w\s]/gi, '').toLowerCase();
+          model
+              .find()
+              .then((data) => {
+                  const filteredData = data.filter(product =>
+                      product.name.replace(/[^\w\s]/gi, '').toLowerCase().includes(normalizedSearch)
+                  );
+                  res.json(filteredData);
+              })
+              .catch((err) => res.json({ message: err }));
+      } else {
+          res.json({ message: 'No search query provided' });
+      }
+  });
+
   /**
    * Endpoint to retrieve all items from the database.
    * @name router.get
@@ -59,6 +84,10 @@ function createRoutes(router, model, baseRoute) {
           .then((data) => res.json(data))
           .catch((err) => res.json({ message: err }));
   });
+
+
+
+
 
   /**
    * Endpoint to retrieve a specific item by ID from the database.

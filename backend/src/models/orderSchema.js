@@ -79,6 +79,11 @@ const orderSchema = new Schema(
         required: true,
       },
     },
+    date: {
+      type: Date,
+      default: Date.now,
+      required: true,
+    }
   },
   { timestamps: true }
 );

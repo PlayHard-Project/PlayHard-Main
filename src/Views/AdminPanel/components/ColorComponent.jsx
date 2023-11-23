@@ -59,7 +59,7 @@ function ColorComponent({ id, onDelete, setColorInformation }) {
                     />
                     <button onClick={handleAddImage} className="text-white bg-blue-500 w-1/3 block rounded-md p-1" disabled={isDisabled}>Add image</button>
                 </div>
-                <button onClick={handleAddColor} className={`text-white w-full block rounded-md p-1 mt-2 ${isDisabled ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isDisabled}>Agregar</button>
+                <button onClick={handleAddColor} className={`text-white w-full block rounded-md p-1 mt-2 ${isDisabled ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isDisabled}>Add</button>
                 <button onClick={onDelete} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isDisabled}>Delete</button>
             </div>
             <div className="w-1/4 flex items-center justify-center">

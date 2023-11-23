@@ -29,7 +29,7 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
                 required
                 disabled={isAdded}
             />
-            <button onClick={handleAddSize} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Agregar</button>
+            <button onClick={handleAddSize} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Add</button>
             <button onClick={() => onDelete(id)} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isAdded}>Delete</button>
         </div>
     );

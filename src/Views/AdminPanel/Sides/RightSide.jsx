@@ -63,19 +63,18 @@ function RightSide({setProductImages, setColorInformation, setSizeInformation, s
         setSizeInformation(prevSizeInformation => prevSizeInformation.filter(sizeInfo => sizeInfo.id !== id));
     };
 
-    const handleQuantityChange = (color, size, quantity) => {
+    const handleQuantityChange = (color, size, quantity, sizeIndex) => {
         setStockInformation(prevStockInformation => {
-            const index = prevStockInformation.findIndex(stock =>
-                stock.color && stock.color.id === color.id && stock.size && stock.size.id === size.id
-            );
+            const colorIndex = colorInformation.findIndex(c => c.id === color.id);
+            const updatedStockInformation = [...prevStockInformation];
 
-            if (index !== -1) {
-                const updatedStockInformation = [...prevStockInformation];
-                updatedStockInformation[index].quantity = quantity;
-                return updatedStockInformation;
-            } else {
-                return [...prevStockInformation, { color, size, quantity }];
+            if (!updatedStockInformation[sizeIndex]) {
+                updatedStockInformation[sizeIndex] = [];
             }
+
+            updatedStockInformation[sizeIndex][colorIndex] = quantity;
+
+            return updatedStockInformation;
         });
     };
 
@@ -96,13 +95,13 @@ function RightSide({setProductImages, setColorInformation, setSizeInformation, s
                 </div>
             </div>
 
-            <div className="flex flex-wrap overflow-auto h-64 mb-4">
+            <div className="flex flex-wrap overflow-auto h-64 mb-4 border-2 border-black rounded p-3">
                 {images.map((url, index) => (
                     <ImageCard key={index} url={url} onDelete={() => handleDeleteImage(index)} />
                 ))}
             </div>
 
-            <div className="flex flex-col gap-3 mb-4">
+            <div className="flex flex-col gap-3 mb-4 border-2 border-black rounded p-3">
                 <label>Colors</label>
                 <div className="overflow-auto h-44 flex flex-col gap-3">
                     {colorComponents}
@@ -110,7 +109,7 @@ function RightSide({setProductImages, setColorInformation, setSizeInformation, s
                 <button onClick={handleAddColorComponent} className="text-white bg-blue-500 w-full rounded-md p-3">Add new color</button>
             </div>
 
-            <div className="flex flex-col gap-3 mb-4">
+            <div className="flex flex-col gap-3 mb-4 border-2 border-black rounded p-3">
                 <label>Sizes</label>
                 <div className="grid lg:grid-cols-4 grid-cols-1 gap-2 overflow-auto h-40">
                     {sizeComponents}
@@ -118,15 +117,16 @@ function RightSide({setProductImages, setColorInformation, setSizeInformation, s
                 <button onClick={handleAddSizeComponent} className="text-white bg-blue-500 w-full rounded-md p-3">Add new size</button>
             </div>
 
-            <div>
+            <div className={'border-2 border-black rounded p-3'}>
                 <label className={'mb-3'}>Stock</label>
-                <div className={'flex flex-col gap-1'}>
-                    {colorInformation.map(color =>
-                        sizeInformation.map(size =>
+                <div className={'flex flex-col gap-2'}>
+                    {sizeInformation.map((size, sizeIndex) =>
+                        colorInformation.map(color =>
                             <StockItem
                                 key={`${color.id}-${size.id}`}
                                 color={color}
                                 size={size}
+                                sizeIndex={sizeIndex}
                                 handleQuantityChange={handleQuantityChange}
                             />
                         )

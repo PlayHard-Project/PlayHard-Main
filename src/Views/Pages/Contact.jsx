@@ -10,6 +10,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [submissionMessage, setSubmissionMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,15 +48,21 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        console.log('Formulario enviado exitosamente!');
+        setSubmissionMessage('Tu solicitud ha sido enviada. Pronto recibirás una respuesta en el correo que proporcionaste.');
       } else {
-        console.error('Error al enviar el formulario');
+        setSubmissionMessage('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
       }
+
+      // Limpiar el mensaje después de 5 segundos
+      setTimeout(() => {
+        setSubmissionMessage("");
+      }, 5000);
     } catch (error) {
       console.error('Error:', error);
+      setSubmissionMessage('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
     }
 
-    // Limpiar el formulario después del envío exitoso
+    // Limpiar el formulario después del envío exitoso o fallido
     setName("");
     setEmail("");
     setMessage("");
@@ -109,6 +116,8 @@ const Contact = () => {
           </div>
 
           <button type="submit">Submit</button>
+
+          {submissionMessage && <p className="submission-message green">{submissionMessage}</p>}
         </form>
       </div>
     </div>

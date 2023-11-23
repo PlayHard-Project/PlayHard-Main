@@ -26,6 +26,11 @@ const AddProduct = () => {
   const [targetInput, setTargetInput] = useState("");
   const [selectedSports, setSelectedSports] = useState([]);
   const [sportInput, setSportInput] = useState("");
+  const [sizeInformation, setSizeInformation] = useState([]);
+  const [productImages, setProductImages] = useState([]);
+  const [colorInformation, setColorInformation] = useState([]);
+  const [stockInformation, setStockInformation] = useState([[]]);
+
 
   //Validation for each input.
   const handleProductNameChange = (e) => {
@@ -278,7 +283,9 @@ const AddProduct = () => {
         </div>
 
         <div className={' lg:w-1/2'}>
-          <RightSide />
+          <RightSide setProductImages={setProductImages} setColorInformation={setColorInformation}
+                     setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
+                     colorInformation={colorInformation} sizeInformation={sizeInformation}/>
         </div>
       </div>
 
@@ -286,10 +293,8 @@ const AddProduct = () => {
 
 
       <div className="buttons-container">
-        <button className="styleButton button-cancel">Cancel</button>
-        <button className="styleButton button-add" onClick={handleAddProduct}>
-          Add Product
-        </button>
+        <button className="styleButton button-cancel" onClick={() => console.log(sizeInformation)}>Cancel</button>
+        <button className="styleButton button-add" onClick={handleAddProduct}>Add Product</button>
       </div>
     </div>
   );

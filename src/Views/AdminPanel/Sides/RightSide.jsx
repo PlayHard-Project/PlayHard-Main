@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
-import SizeComponent from "../components/SizeComponent";
-import StockRow from "../components/StockRow";
+import StockItem from "../components/StockItem";
+import SelectSizeComponent from "../components/SelectSizeComponent";
 
-function RightSide() {
+function RightSide({setProductImages, setColorInformation, setSizeInformation, setStockInformation, colorInformation, sizeInformation}) {
     const [images, setImages] = useState([]);
     const [input, setInput] = useState('');
     const [colorComponents, setColorComponents] = useState([]);
@@ -12,36 +12,71 @@ function RightSide() {
     const [stockRows, setStockRows] = useState([]);
 
     const handleAddImage = () => {
-        setImages([...images, input]);
+        const newImages = [...images, input];
+        setImages(newImages);
+        setProductImages(newImages);
         setInput('');
     };
 
     const handleDeleteImage = (index) => {
-        setImages(images.filter((_, i) => i !== index));
+        const newImages = images.filter((_, i) => i !== index);
+        setImages(newImages);
+        setProductImages(newImages);
     };
+
 
     const handleAddColorComponent = () => {
-        setColorComponents([...colorComponents, <ColorComponent key={colorComponents.length} onDelete={() => handleDeleteColorComponent(colorComponents.length)} />]);
+        const id = Math.random(); // Genera un identificador único
+        setColorComponents(prevColorComponents => [
+            ...prevColorComponents,
+            <ColorComponent
+                key={id}
+                id={id}
+                onDelete={() => handleDeleteColorComponent(id)}
+                setColorInformation={setColorInformation}
+            />,
+        ]);
     };
 
-    const handleDeleteColorComponent = (index) => {
-        setColorComponents(colorComponents.filter((_, i) => i !== index));
+    const handleDeleteColorComponent = (id) => {
+        setColorComponents(prevColorComponents => prevColorComponents.filter((component) => component.props.id !== id));
+        setColorInformation(prevColorInformation => prevColorInformation.filter(colorInfo => colorInfo.id !== id));
     };
+
+
 
     const handleAddSizeComponent = () => {
-        setSizeComponents([...sizeComponents, <SizeComponent key={sizeComponents.length} onDelete={() => handleDeleteSizeComponent(sizeComponents.length)} />]);
+        const id = Math.random(); // Genera un identificador único
+        setSizeComponents(prevSizeComponents => [
+            ...prevSizeComponents,
+            <SelectSizeComponent
+                key={id}
+                id={id}
+                onDelete={handleDeleteSizeComponent}
+                setSizeInformation={setSizeInformation}
+            />,
+        ]);
     };
 
     const handleDeleteSizeComponent = (id) => {
-        setSizeComponents(sizeComponents.filter((component) => component.id !== id));
+        setSizeComponents(prevSizeComponents => prevSizeComponents.filter((component) => component.props.id !== id));
+        setSizeInformation(prevSizeInformation => prevSizeInformation.filter(sizeInfo => sizeInfo.id !== id));
     };
 
-    const handleAddStockRow = () => {
-        setStockRows([...stockRows, <StockRow key={stockRows.length} colors={colorComponents} sizes={sizeComponents} onDelete={() => handleDeleteStockRow(stockRows.length)} />]);
-    };
+    const handleQuantityChange = (color, size, quantity) => {
+        setStockInformation(prevStockInformation => {
+            const index = prevStockInformation.findIndex(stock =>
+                stock.color && stock.color.id === color.id && stock.size && stock.size.id === size.id
+            );
 
-    const handleDeleteStockRow = (index) => {
-        setStockRows(stockRows.filter((_, i) => i !== index));
+            if (index !== -1) {
+                const updatedStockInformation = [...prevStockInformation];
+                updatedStockInformation[index].quantity = quantity;
+                return updatedStockInformation;
+            } else {
+                return [...prevStockInformation, { color, size, quantity }];
+            }
+        });
     };
 
     return (
@@ -69,7 +104,7 @@ function RightSide() {
 
             <div className="flex flex-col gap-3 mb-4">
                 <label>Colors</label>
-                <div className="overflow-auto h-64 flex flex-col gap-3">
+                <div className="overflow-auto h-44 flex flex-col gap-3">
                     {colorComponents}
                 </div>
                 <button onClick={handleAddColorComponent} className="text-white bg-blue-500 w-full rounded-md p-3">Add new color</button>
@@ -77,21 +112,28 @@ function RightSide() {
 
             <div className="flex flex-col gap-3 mb-4">
                 <label>Sizes</label>
-                <div className="grid lg:grid-cols-4 grid-cols-1 gap-2 overflow-auto h-64">
-                    {sizeComponents.map((component, index) => (
-                        <SizeComponent key={component.id} onDelete={() => handleDeleteSizeComponent(component.id)} />
-                    ))}
+                <div className="grid lg:grid-cols-4 grid-cols-1 gap-2 overflow-auto h-40">
+                    {sizeComponents}
                 </div>
                 <button onClick={handleAddSizeComponent} className="text-white bg-blue-500 w-full rounded-md p-3">Add new size</button>
             </div>
 
-            <div className="flex flex-col gap-3">
-                <label>Stock</label>
-                <div className="overflow-auto h-64">
-                    {stockRows}
+            <div>
+                <label className={'mb-3'}>Stock</label>
+                <div className={'flex flex-col gap-1'}>
+                    {colorInformation.map(color =>
+                        sizeInformation.map(size =>
+                            <StockItem
+                                key={`${color.id}-${size.id}`}
+                                color={color}
+                                size={size}
+                                handleQuantityChange={handleQuantityChange}
+                            />
+                        )
+                    )}
                 </div>
-                <button onClick={handleAddStockRow} className="text-white bg-blue-500 w-full rounded-md p-3">Add new stock</button>
             </div>
+
         </div>
     );
 }

@@ -136,36 +136,41 @@ const login = async (req, res) => {
     }
 }
 
-const getItems = async (req, res) => {
+const getUser = async (req, res) => {
     try {
-        const listAll = await User.find({})
-        res.send({ data: listAll })
+        // Access the tokenData stored in the req object during storeTokenData
+        const tokenData = req.tokenData;
+
+        // Return only the tokenData
+        res.send({ tokenData });
     } catch (e) {
-        httpError(res, e)
+        httpError(res, e);
     }
 }
 
-const checkAuth = async (req, res, next) => {
+const storeTokenData = async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ').pop()
-        const tokenData = await verifyToken(token)
-        console.log("TOKENDATA ", tokenData)
+        const token = req.headers.authorization.split(' ').pop();
+        const tokenData = await verifyToken(token);
+
+        console.log(tokenData);
+
         if (tokenData._id) {
-            next()
+            // Store tokenData in the req object for later access in getUser
+            req.tokenData = tokenData;
+            next();
         } else {
-            res.send({ tokenData })
+            res.send({ tokenData });
         }
-
     } catch (e) {
-        console.log(e)
-        res.send({ error: 'Do not have permissions!' })
+        console.log(e);
+        res.send({ error: 'Do not have permissions!' });
     }
-
 }
 
 module.exports = {
     createRoutes,
     login,
-    getItems,
-    checkAuth
+    getUser,
+    storeTokenData
 };

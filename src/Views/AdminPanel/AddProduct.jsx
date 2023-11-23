@@ -340,7 +340,7 @@ const AddProduct = () => {
 
 
       <div className="buttons-container">
-        <button className="styleButton button-cancel" onClick={() => console.log(sizeInformation)}>Cancel</button>
+        <button className="styleButton button-cancel" onClick={() => navigate('/')}>Cancel</button>
         <button className="styleButton button-add"  onClick={() => {
                             handleAddProduct();
                             handleAddProductMessages();

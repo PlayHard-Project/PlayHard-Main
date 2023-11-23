@@ -20,20 +20,30 @@ function RightSide({
   const [stockRows, setStockRows] = useState([]);
 
   const handleAddImage = () => {
+    const trimmedInput = input.trim();
+
+    // Verifica si el input está vacío o solo contiene espacios
+    if (!trimmedInput) {
+      toast.error("El campo de entrada no puede estar vacío o contener solo espacios.", {
+        position: "bottom-right",
+      });
+      return;
+    }
+
     if (images.length < 4) {
-        if (input && !input.startsWith("http://") && !input.startsWith("https://") && !input.startsWith("data:image/")) {
-            toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
-              position: "bottom-right",
-            });
-            return;
-          }
-          
-      const newImages = [...images, input];
+      if (!trimmedInput.startsWith("http://") && !trimmedInput.startsWith("https://") && !trimmedInput.startsWith("data:image/")) {
+        toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
+          position: "bottom-right",
+        });
+        return;
+      }
+
+      const newImages = [...images, trimmedInput];
       setImages(newImages);
       setProductImages(newImages);
       setInput("");
     } else {
-      toast.error("The maximum number of images is 4.", {
+      toast.error("El número máximo de imágenes es 4.", {
         position: "bottom-right",
       });
     }

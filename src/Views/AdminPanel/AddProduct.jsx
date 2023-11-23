@@ -228,6 +228,8 @@ const AddProduct = () => {
       inStock: stockInformation
     };
 
+    //HOLADIABLO
+
     try {
       const response = await addElement(product, '/products');
       console.log(response);

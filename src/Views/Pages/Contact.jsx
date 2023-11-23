@@ -44,7 +44,7 @@ const Contact = () => {
     const formData = {
       to: 'playhard.jala.managment@gmail.com',
       subject: 'Contact Us: Request for ' + email,
-      html: `<p>Contenido del correo: ${message}</p>`,
+      html: `<p>Name:  ${name} <br/> Email:  ${email} <br/> Contenido del correo: ${message}</p>`,
     };
 
     try {
@@ -57,24 +57,20 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        setSubmissionMessage('Tu solicitud ha sido enviada. Pronto recibirás una respuesta en el correo que proporcionaste.');
+        setSubmissionMessage('Your request has been sent. You will soon receive a reply to the email you provided.');
       } else {
-        setSubmissionMessage('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
+        setSubmissionMessage('Error submitting the form. Please try again.');
       }
-
-      // Limpiar el mensaje después de 5 segundos
       setTimeout(() => {
         setSubmissionMessage("");
       }, 5000);
     } catch (error) {
       console.error('Error:', error);
-      setSubmissionMessage('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
+      setSubmissionMessage('Error submitting the form. Please try again.');
     } finally {
-      // Limpiar el formulario después del envío exitoso o fallido
       setName("");
       setEmail("");
       setMessage("");
-      // Habilitar el botón después de completar el proceso de envío
       setIsSubmitting(false);
     }
   };

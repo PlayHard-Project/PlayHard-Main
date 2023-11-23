@@ -45,10 +45,6 @@ const Login = () => {
   const validatePassword = () => {
     const requirements = {
       minLength: password.length >= 6,
-      hasNumber: /\d/.test(password),
-      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-      hasUpperCase: /[A-Z]/.test(password),
-      hasLowerCase: /[a-z]/.test(password),
     };
     return requirements;
   };
@@ -75,13 +71,12 @@ const Login = () => {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!passwordRequirements.minLength ||
-      !passwordRequirements.hasNumber ||
-      !passwordRequirements.hasSpecialChar ||
-      !passwordRequirements.hasUpperCase ||
-      !passwordRequirements.hasLowerCase ||
-      password.includes(" ")) {
-      toast.error("Please enter a valid password without spaces.", {
+    } else if (!passwordRequirements.minLength){
+      toast.error("The password cannot be less than 6 characters.", {
+        position: "bottom-right",
+      });
+    } else if(password.includes(" ")){
+      toast.error("Please enter a valid password.", {
         position: "bottom-right",
       });
     } else {
@@ -94,41 +89,22 @@ const Login = () => {
   return (
     <div className="container container-login">
       <div className="container-information">
-        <div className="title-login" style={{ marginBottom: "20px" }}>
-        Welcome back!        
-        </div>
-        <div style={{marginBottom: "50px"}}>Enter your Credentials to access your account</div>
+        <div className="title-login" style={{ marginBottom: "20px" }}> Welcome back!</div>
+        <div style={{marginBottom: "50px", fontWeight:"bold"}}>Enter your Credentials to access your account</div>
         <div>
           <div>
             <label htmlFor="email">Email Address*</label>
           </div>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="input-add"
-            value={email}
-            onChange={handleInputChange}
-            placeholder="example@gmail.com"
-          />
-          <div>
+          <input type="email" id="email" name="email" className="input-add" value={email} onChange={handleInputChange} placeholder="example@gmail.com"/>
+          <div style={{ width:"70%", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <label htmlFor="password">Password*</label>
+            <Link to="/forgot-password" style={{ color: 'blue' }}>Forgot password</Link>
           </div>
           <div className="password-input-container">
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              className="input-add"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
+              type={showPassword ? "text" : "password"} id="password" name="password" className="input-add" placeholder="Password" value={password} onChange={handlePasswordChange}
             />
-            <button
-              type="button"
-              className="toggle-password"
-              onClick={toggleShowPassword}
-            >
+            <button type="button" className="toggle-password" onClick={toggleShowPassword}>
               {showPassword ? <BiSolidHide style={{marginLeft:"10px" , fontSize:'26px'}}/> : <BiShow style={{marginLeft:"10px" , fontSize:'26px'}}/>}
             </button>
           </div>
@@ -154,7 +130,7 @@ const Login = () => {
           </button>
         </div>
         <div style={{ width: "70%", textAlign: "center", marginTop: "10px" }}>
-          Have an account?{" "}
+        Don’t have an account?{" "}
           <Link to="/sign-up" style={{ color: "blue" }}>
             Sign Up
           </Link>

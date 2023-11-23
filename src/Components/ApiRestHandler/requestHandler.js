@@ -24,6 +24,26 @@ export const getElements = async (route) => {
   }
 };
 
+/**
+ * Performs a search for elements on a specific route using a search query.
+ *
+ * @param {string} route - The route on which to perform the search.
+ * @param {string} query - The search query to use for filtering the elements.
+ *
+ * @returns {Promise<Array>} A promise that resolves with the elements that match the search query.
+ *
+ * @throws {Error} Throws an error if there is an issue performing the search.
+ */
+export const searchElements = async (route, query) => {
+  try {
+    const response = await axios.get(`${apiURL}${route}/search`, { params: { search: query } });
+    return response.data;
+  } catch (error) {
+    console.error('Error searching elements: ', error);
+    throw error;
+  }
+};
+
 export const getElementByID = async (elemenetId, route) => {
   try {
     const response = await axios.get(apiURL + route + '/' + elemenetId);

@@ -5,6 +5,8 @@ import SelectWithAddButton from "./SelectWithAddButton";
 import BrandsSelect from "./BrandsSelect";
 import "../../css/AdminPanelStyle/simpleDataComponentStyle.css";
 import "../../css/AdminPanelStyle/addProductStyle.css";
+import RightSide from "./Sides/RightSide";
+import {addElement} from "../../Components/ApiRestHandler/requestHandler";
 
 
 /**
@@ -17,7 +19,7 @@ import "../../css/AdminPanelStyle/addProductStyle.css";
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState('654c41ca1754c5a319281642');
   const [price, setPrice] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
@@ -25,6 +27,11 @@ const AddProduct = () => {
   const [targetInput, setTargetInput] = useState("");
   const [selectedSports, setSelectedSports] = useState([]);
   const [sportInput, setSportInput] = useState("");
+  const [sizeInformation, setSizeInformation] = useState([]);
+  const [productImages, setProductImages] = useState([]);
+  const [colorInformation, setColorInformation] = useState([]);
+  const [stockInformation, setStockInformation] = useState([[]]);
+
 
   //Validation for each input.
   const handleProductNameChange = (e) => {
@@ -167,6 +174,7 @@ const AddProduct = () => {
     setSelectedSports(updatedSports);
   };
 
+  /*
   const handleAddProduct = () => {
     const trimmedProductName = productName.trim();
     const trimmedProductDescription = productDescription.trim();
@@ -192,8 +200,37 @@ const AddProduct = () => {
     }
   };
 
+   */
+
+  const handleAddProduct = async () => {
+    const product = {
+      name: productName,
+      description: productDescription,
+      price: parseFloat(price),
+      brand: selectedBrand || null,
+      categories: selectedCategories,
+      target: selectedTarget,
+      sport: selectedSports,
+      size: sizeInformation.map(size => size.size),
+      colorInformation: colorInformation.map(color => ({
+        color: color.color,
+        hex: color.hex,
+        imagePath: color.imagePath
+      })),
+      imagePath: productImages,
+      inStock: stockInformation
+    };
+
+    try {
+      const response = await addElement(product, '/products');
+      console.log(response);
+    } catch (error) {
+      console.error('Error adding the new product: ', error);
+    }
+  };
+
   return (
-    <div className="container">
+    <div className={'container'}>
       <div
         style={{
           fontSize: "30px",
@@ -203,84 +240,94 @@ const AddProduct = () => {
       >
         Add Product
       </div>
-      <div className="data-components-container flex flex-col lg:flex-row">
-        <div className="simple-data-container">
-          <ProductForm
-            label="Product Name"
-            id="productName"
-            value={productName}
-            onChange={handleProductNameChange}
-            placeholder="Enter product name"
-          />
-          <ProductForm
-            label="Description"
-            id="productDescription"
-            value={productDescription}
-            onChange={handleProductDescriptionChange}
-            inputType="textarea"
-            placeholder="Enter product description"
-          />
-          <BrandsSelect
-            value={selectedBrand}
-            onChange={handleBrandChange}
-            options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
-          />
-          <ProductForm
-            label="Price"
-            id="price"
-            value={price}
-            onChange={handlePriceChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Enter product price"
-          />
-          <label htmlFor="categories">Categories</label>
-          <SelectWithAddButton
-            id="category"
-            value={categoryInput}
-            onChange={handleCategoryChange}
-            inputValue={categoryInput}
-            onInputChange={(e) => setCategoryInput(e.target.value)}
-            onAdd={handleAddCategory}
-            options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
-            selectedItems={selectedCategories}
-            onRemoveItem={handleRemoveCategory}
-            placeholder="Select a category"
-          />
-          <label htmlFor="target">Target</label>
-          <SelectWithAddButton
-            id="target"
-            value={targetInput}
-            onChange={handleTargetChange}
-            inputValue={targetInput}
-            onInputChange={(e) => setTargetInput(e.target.value)}
-            onAdd={handleAddTarget}
-            options={["Men", "Woman", "Teenagers", "Kids"]}
-            selectedItems={selectedTarget}
-            onRemoveItem={handleRemoveTarget}
-            placeholder="Select a target"
-          />
-          <label htmlFor="sport">Sport</label>
 
-          <SelectWithAddButton
-            id="sport"
-            value={sportInput}
-            onChange={handlSportChange}
-            inputValue={sportInput}
-            onInputChange={(e) => setSportInput(e.target.value)}
-            onAdd={handleAddSport}
-            options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
-            selectedItems={selectedSports}
-            onRemoveItem={handleRemoveSport}
-            placeholder="Select a sport"
-          />
+
+        <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4 border-2 border-black rounded p-3">
+          <div className="lg:w-1/2">
+            <ProductForm
+              label="Product Name"
+              id="productName"
+              value={productName}
+              onChange={handleProductNameChange}
+              placeholder="Enter product name"
+            />
+            <ProductForm
+              label="Description"
+              id="productDescription"
+              value={productDescription}
+              onChange={handleProductDescriptionChange}
+              inputType="textarea"
+              placeholder="Enter product description"
+            />
+            <BrandsSelect
+              value={selectedBrand}
+              onChange={handleBrandChange}
+              options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
+            />
+            <ProductForm
+              label="Price"
+              id="price"
+              value={price}
+              onChange={handlePriceChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Enter product price"
+            />
+            <label htmlFor="categories">Categories</label>
+            <SelectWithAddButton
+              id="category"
+              value={categoryInput}
+              onChange={handleCategoryChange}
+              inputValue={categoryInput}
+              onInputChange={(e) => setCategoryInput(e.target.value)}
+              onAdd={handleAddCategory}
+              options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
+              selectedItems={selectedCategories}
+              onRemoveItem={handleRemoveCategory}
+              placeholder="Select a category"
+            />
+            <label htmlFor="target">Target</label>
+            <SelectWithAddButton
+              id="target"
+              value={targetInput}
+              onChange={handleTargetChange}
+              inputValue={targetInput}
+              onInputChange={(e) => setTargetInput(e.target.value)}
+              onAdd={handleAddTarget}
+              options={["Men", "Woman", "Teenagers", "Kids"]}
+              selectedItems={selectedTarget}
+              onRemoveItem={handleRemoveTarget}
+              placeholder="Select a target"
+            />
+            <label htmlFor="sport">Sport</label>
+
+            <SelectWithAddButton
+              id="sport"
+              value={sportInput}
+              onChange={handlSportChange}
+              inputValue={sportInput}
+              onInputChange={(e) => setSportInput(e.target.value)}
+              onAdd={handleAddSport}
+              options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
+              selectedItems={selectedSports}
+              onRemoveItem={handleRemoveSport}
+              placeholder="Select a sport"
+            />
+          </div>
+
+          <div className={' lg:w-1/2 border-2 border-black rounded p-3'}>
+            <RightSide setProductImages={setProductImages} setColorInformation={setColorInformation}
+                       setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
+                       colorInformation={colorInformation} sizeInformation={sizeInformation}/>
+          </div>
         </div>
-      </div>
+
+
+
+
 
       <div className="buttons-container">
-        <button className="styleButton button-cancel">Cancel</button>
-        <button className="styleButton button-add" onClick={handleAddProduct}>
-          Add Product
-        </button>
+        <button className="styleButton button-cancel" onClick={() => console.log(sizeInformation)}>Cancel</button>
+        <button className="styleButton button-add" onClick={handleAddProduct}>Add Product</button>
       </div>
     </div>
   );

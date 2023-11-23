@@ -1,6 +1,9 @@
 const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { tokenSign, verifyToken } = require('../models/middelware/generateToken')
+const { encrypt, compare } = require('../models/middelware/handleBcrypt')
+const cookie = require('cookie');
 
 /**
  * Creates routes for handling user-related operations.
@@ -99,83 +102,70 @@ async function createRoutes(router, model, baseRoute) {
  */
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body
 
-        // Validate empty email
-        if (!email) {
-            return res.json({ error: 'Error 400 Bad Request: Email is required' });
-        }
-
-        // Validate supported email format
-        if (!email.endsWith('@gmail.com')) {
-            return res.json({ error: ' Error 400 Bad Request: Invalid email format, only @gmail.com supported' });
-        }
-
-        // Validate incomplete email format
-        if (email==('@gmail.com')) {
-            return res.json({ error: ' Error 400 Bad Request: Invalid incomplete email format.' });
-        }
-
-        // Validate empty password
-        if (!password) {
-            return res.json({ error: 'Error 400 Bad Request: Password is required' });
-        }
-
-        // Validate password length
-        if (password.length < 6) {
-            return res.json({ error: 'Error 400 Bad Request: Password should be at least 6 characters long' });
-        }
-
-        // Check if user exists
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email })
 
         if (!user) {
-            return res.json({ error: 'Error 404 Not Found: Email not registered' });
+            res.status(404)
+            res.send({ error: 'User not found' })
         }
 
-        // Check if password matches (encrypted)
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const checkPassword = await compare(password, user.password)
+        const tokenSession = await tokenSign(user)
+        //console.log(tokenSession) SE GENERA BIEN
 
-        if (passwordMatch) {
-            jwt.sign({ email: user.email, id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {}, (err, token) => {
-                if (err) throw err;
-                res.cookie('token', token).json(user);
-            });
-        } else {
-            return res.json({ error: 'Error 401 Unauthorized: Incorrect password' });
+        if (checkPassword) { //TODO Contraseña es correcta!
+            res.send({
+                data: user,
+                tokenSession
+            })
+            return
         }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'Error 500 Internal Server Error' });
+
+        if (!checkPassword) {
+            res.status(409)
+            res.send({
+                error: 'Invalid password'
+            })
+            return
+        }
+
+    } catch (e) {
+        httpError(res, e)
     }
-};
+}
 
-/**
- * Get the unique Json Web Token assigned for login sesions.
- *
- * @param {request} req - The request handled by the profiles api.
- * @param {response} res - The response after API process the request.
- * @returns {json} A token if it was recovered succesfully or an error if not.
- */
-const getProfile = (req, res) => {
+const getItems = async (req, res) => {
     try {
-        const { token } = req.cookies;
-        if (token) {
-            jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-                if (err) throw err;
-                res.json(user);
-            });
-        } else {
-            res.json({ error: 'Error 401 Unauthorized: Token not provided' });
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'Error 500 Internal Server Error' });
+        const listAll = await User.find({})
+        res.send({ data: listAll })
+    } catch (e) {
+        httpError(res, e)
     }
-};
+}
+
+const checkAuth = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ').pop()
+        const tokenData = await verifyToken(token)
+        console.log("TOKENDATA ", tokenData)
+        if (tokenData._id) {
+            next()
+        } else {
+            res.send({ tokenData })
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.send({ error: 'Do not have permissions!' })
+    }
+
+}
 
 module.exports = {
     createRoutes,
     login,
-    getProfile,
+    getItems,
+    checkAuth
 };

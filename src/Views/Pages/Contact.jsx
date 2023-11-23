@@ -11,41 +11,51 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Limpiar advertencias previas
+    // Validaciones síncronas
+    const nameWarning = (name.length < 5 || name.length > 50) ? "Name should be between 5 and 50 characters." : "";
+    const emailWarning = !email.match(/\S+@\S+\.\S+/) ? "Invalid email format. It should be like example@gmail.com" : "";
+    const messageWarning = (message.length < 10 || message.length > 250) ? "Message should be between 10 and 250 characters." : "";
+
+    // Establecer advertencias
     setWarnings({
-      name: "",
-      email: "",
-      message: "",
+      name: nameWarning,
+      email: emailWarning,
+      message: messageWarning,
     });
 
-    // Validaciones
-    if (name.length < 5 || name.length > 50) {
-      setWarnings((prev) => ({ ...prev, name: "Name should be between 5 and 50 characters." }));
-    }
-
-    if (!email.match(/\S+@\S+\.\S+/)) {
-      setWarnings((prev) => ({ ...prev, email: "Invalid email format. It should be like example@gmail.com" }));
-    }
-
-    if (message.length < 10 || message.length > 250) {
-      setWarnings((prev) => ({ ...prev, message: "Message should be between 10 and 250 characters." }));
-    }
-
-    // Si hay advertencias, no continuar con el envío
-    if (Object.values(warnings).some((warning) => warning !== "")) {
+    // Verificar si hay alguna advertencia
+    if (nameWarning || emailWarning || messageWarning) {
       return;
     }
 
-    // TODO: Handle form submission logic here
-    console.log("Form submitted!");
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Message:", message);
+    const formData = {
+      to: 'playhard.jala.managment@gmail.com',
+      subject: 'Contact Us: Request for ' + email,
+      html: `<p>Contenido del correo: ${message}</p>`,
+    };
 
-    // Reset form fields
+    try {
+      const response = await fetch('http://localhost:9000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Formulario enviado exitosamente!');
+      } else {
+        console.error('Error al enviar el formulario');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+    // Limpiar el formulario después del envío exitoso
     setName("");
     setEmail("");
     setMessage("");
@@ -79,7 +89,9 @@ const Contact = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {warnings.email && <p className="error-message">{warnings.email}</p>}
+            {warnings.email && (
+              <p className="error-message">{warnings.email}</p>
+            )}
           </div>
 
           <div className="form-group">
@@ -91,7 +103,9 @@ const Contact = () => {
               onChange={(e) => setMessage(e.target.value)}
               required
             ></textarea>
-            {warnings.message && <p className="error-message">{warnings.message}</p>}
+            {warnings.message && (
+              <p className="error-message">{warnings.message}</p>
+            )}
           </div>
 
           <button type="submit">Submit</button>

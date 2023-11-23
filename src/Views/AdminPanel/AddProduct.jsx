@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import ProductForm from "./ProductForm";
+import { useNavigate  } from "react-router-dom";
 import SelectWithAddButton from "./SelectWithAddButton";
 import BrandsSelect from "./BrandsSelect";
 import "../../css/AdminPanelStyle/simpleDataComponentStyle.css";
@@ -20,6 +21,7 @@ const AddProduct = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [selectedBrand, setSelectedBrand] = useState('654c41ca1754c5a319281642');
+  const [selectedBrandHarcode, setSelectedBrandHardcode] = useState('654c41ca1754c5a319281642');
   const [price, setPrice] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
@@ -31,6 +33,7 @@ const AddProduct = () => {
   const [productImages, setProductImages] = useState([]);
   const [colorInformation, setColorInformation] = useState([]);
   const [stockInformation, setStockInformation] = useState([[]]);
+  const navigate  = useNavigate ();
 
 
   //Validation for each input.
@@ -174,8 +177,7 @@ const AddProduct = () => {
     setSelectedSports(updatedSports);
   };
 
-  /*
-  const handleAddProduct = () => {
+  const handleAddProductMessages = () => {
     const trimmedProductName = productName.trim();
     const trimmedProductDescription = productDescription.trim();
 
@@ -193,21 +195,26 @@ const AddProduct = () => {
       toast.error("Please add at least one target.", { position: "bottom-right", });
     } else if (selectedSports.length === 0) {
       toast.error("Please add at least one sport.", { position: "bottom-right", });
+    } else if (productImages.length === 0) {
+      toast.error("Please add at least one product Image.", { position: "bottom-right", });
+    } else if (colorInformation.length === 0) {
+      toast.error("Please add at least one color and Image.", { position: "bottom-right", });
+    } else if (sizeInformation.length === 0) {
+      toast.error("Please add at least one size.", { position: "bottom-right", });
+    } else if (stockInformation.length === 0) {
+      toast.error("Please add at stock information.", { position: "bottom-right", });
     } else {
-      // Add your logic for adding the product here
-      // This function will be triggered when the "Add Product" button is clicked
       toast.success("The product was added!",{position: "bottom-right"})
     }
   };
 
-   */
 
   const handleAddProduct = async () => {
     const product = {
       name: productName,
       description: productDescription,
       price: parseFloat(price),
-      brand: selectedBrand || null,
+      brand: selectedBrandHarcode || null,
       categories: selectedCategories,
       target: selectedTarget,
       sport: selectedSports,
@@ -224,6 +231,7 @@ const AddProduct = () => {
     try {
       const response = await addElement(product, '/products');
       console.log(response);
+      navigate("/");
     } catch (error) {
       console.error('Error adding the new product: ', error);
     }
@@ -242,7 +250,7 @@ const AddProduct = () => {
       </div>
 
 
-        <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4 border-2 border-black rounded p-3">
+        <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4 rounded p-3">
           <div className="lg:w-1/2">
             <ProductForm
               label="Product Name"
@@ -327,7 +335,11 @@ const AddProduct = () => {
 
       <div className="buttons-container">
         <button className="styleButton button-cancel" onClick={() => console.log(sizeInformation)}>Cancel</button>
-        <button className="styleButton button-add" onClick={handleAddProduct}>Add Product</button>
+        <button className="styleButton button-add"  onClick={() => {
+                            handleAddProduct();
+                            handleAddProductMessages();
+                            
+                        }}>Add Product</button>
       </div>
     </div>
   );

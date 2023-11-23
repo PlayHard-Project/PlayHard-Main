@@ -86,7 +86,7 @@ function RightSide({setProductImages, setColorInformation, setSizeInformation, s
                     <input
                         type="text"
                         className="input-add_right lg:w-2/3 block"
-                        placeholder="hola mundo"
+                        placeholder="Imahe URL"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         required

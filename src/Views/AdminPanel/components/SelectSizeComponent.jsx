@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import toast from "react-hot-toast";
+
 
 function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
     const [size, setSize] = useState('');
@@ -15,7 +17,13 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
         setSizeInformation(prevSizeInformation => [...prevSizeInformation, { id, size }]);
     };
 
-
+    const handleAddProductMessages = () => {
+    
+        if (size.length === 0) {
+          toast.error("Please add the size.", { position: "bottom-right", });
+          onDelete(id);
+        }
+    }
 
     return (
         <div className="flex flex-col items-start justify-center">
@@ -29,7 +37,7 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
                 required
                 disabled={isAdded}
             />
-            <button onClick={handleAddSize} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Add</button>
+            <button onClick={() => {handleAddSize(); handleAddProductMessages();}} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Add</button>
             <button onClick={() => onDelete(id)} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isAdded}>Delete</button>
         </div>
     );

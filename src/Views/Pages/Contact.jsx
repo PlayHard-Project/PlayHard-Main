@@ -43,7 +43,7 @@ const Contact = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:9000/send-email', {
+      const response = await fetch('https://backend-fullapirest-test.onrender.com/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

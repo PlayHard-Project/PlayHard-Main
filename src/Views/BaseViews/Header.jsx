@@ -241,9 +241,9 @@ const Header = ({
                   subTotal={subTotal}
               />
             </div>
-            <button className="lg:flex hidden">
+            <Link to="/history" className="lg:flex hidden" >
               <MdSettings size={30} color="#72a3ff" className="style-icon" />
-            </button>
+            </Link>
           </div>
           <div className="lg:hidden space-x-4 relative mr-3">
             <div className="flex items-center space-x-4">

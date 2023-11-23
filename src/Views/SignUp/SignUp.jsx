@@ -5,9 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import "../../css/SignUp/signUpStyle.css";
-import axios from 'axios';
+import { useNavigate  } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate  = useNavigate ();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -130,7 +131,7 @@ const SignUp = () => {
 
     //Created POST request 
     try {
-      const response = await fetch('http://localhost:9000/api/signup', {
+      const response = await fetch('https://backend-fullapirest.onrender.com/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -150,9 +151,7 @@ const SignUp = () => {
           position: "bottom-right",
         });
       } else {
-        toast.success(`Sign Up successful for ${name}!`, {
-          position: "bottom-right",
-        });
+        navigate("/");
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -242,10 +241,8 @@ const SignUp = () => {
             </div>
           )}
         </div>
-        <button className="button-signup" >
-          <Link to="/" className="button-signup" onClick={handleSignUp}>
+        <button className="button-signup" onClick={handleSignUp}>
             Sign Up
-          </Link>
         </button>
         <div style={{ width: "70%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
           or

@@ -5,9 +5,17 @@
 .header-1 h1 {
     font-size: 3rem;
     font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
-.header-1 {
-    font-size: 2rem;
-    font-weight: bold;
+.header-1 h2{
+    margin: 0.7rem;
+    font-size: 1.3rem;
+    font-weight:bold;
+}
+
+.header-1 h2 span{
+    margin: 0.7rem;
+    font-size: 1.3rem;
+    font-weight:normal;
 }

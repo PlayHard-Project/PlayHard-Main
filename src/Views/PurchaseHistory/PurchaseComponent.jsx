@@ -43,7 +43,7 @@ export default function PurchaseComponent({ idOrder }) {
       ) : (
         <section className="purchase-section">
           <div className="text-container1">
-            <h2 className="header-1">Payment ID: &nbsp;</h2>
+            <h2 className="header-1">Payment ID:&nbsp;</h2>
             <label className="result-1">{order.paymentIntentId}</label>
           </div>
           <div className="text-container1">

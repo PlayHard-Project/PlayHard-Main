@@ -22,8 +22,7 @@ export default function ShoppingHistory() {
     <div className="container">
       <section className="header-1">
         <h1>Shopping History</h1>
-        <h2>User Name: </h2>
-        <h2>User ID: {idUser}</h2>
+        <h2>User ID:<span>{idUser}</span></h2>
       </section>
       {orders.map((order) => (
         <PurchaseComponent key={order._id} idOrder={order._id} />

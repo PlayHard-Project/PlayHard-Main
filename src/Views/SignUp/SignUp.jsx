@@ -242,8 +242,10 @@ const SignUp = () => {
             </div>
           )}
         </div>
-        <button className="button-signup" onClick={handleSignUp}>
-          Sign Up
+        <button className="button-signup" >
+          <Link to="/" className="button-signup" onClick={handleSignUp}>
+            Sign Up
+          </Link>
         </button>
         <div style={{ width: "70%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
           or

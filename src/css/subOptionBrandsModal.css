@@ -1,5 +1,5 @@
 .modal-content-suboptions-brands {
-    position: absolute;
+    position: fixed;
     top: 42.5%;
     left: 65%;
     transform: translate(-50%, -50%);

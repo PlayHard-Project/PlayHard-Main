@@ -8,35 +8,26 @@ import SubOptionsBrandsModal from "./SubOptionsBrandsModal";
 import SubOptionsSportsModal from "./SubOptionsSportsModal";
 import { useMediaQuery } from "react-responsive";
 
-/**
- * Component for rendering a modal with admin options.
- *
- * @param {Object} props - The component properties.
- * @param {boolean} props.isOpen - Indicates whether the modal is open.
- * @param {Array} props.options - Array of options to be displayed in the modal.
- * @param {Function} props.onClose - Function to close the modal.
- * @param {React.RefObject} props.modalRef - Reference to the modal container.
- * @param {string} props.sectionText - Text to display as the section name.
- * @param {Function} props.onRequestOpen - Function to request opening the modal.
- * @param {Function} props.onRequestClose - Function to request closing the modal.
- */
 const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, onRequestOpen, onRequestClose }) => {
-    const containerWidth = options.length > 0 ? `${90 / options.length}%` : '100%';
+    const containerWidth = options.length > 0 ? `${80 / options.length}%` : '100%';
     const [selectedOption, setSelectedOption] = useState(null);
+    const [subOptionsBrandsModalOpen, setSubOptionsBrandsModalOpen] = useState(false);
+    const [subOptionsClothesModalOpen, setSubOptionsClothesModalOpen] = useState(false);
+    const [subOptionsSportsModalOpen, setSubOptionsSportsModalOpen] = useState(false);
+
+
     const isMobile = useMediaQuery({ maxWidth: 888 });
 
     const handleOptionClick = (option) => {
         setSelectedOption((prevOption) => (prevOption === option ? null : option));
     };
 
-    // Close the modal if the viewport is mobile.
     useEffect(() => {
         if (isMobile) {
             handleOptionClick();
         }
     }, [isMobile]);
 
-    // Close the modal when clicking outside of it.
     useEffect(() => {
         const handleOutsideClick = (e) => {
             if (
@@ -58,6 +49,14 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
         };
     }, [isOpen, onRequestClose, modalRef]);
 
+    useEffect(() => {
+        if (!isOpen) {
+            setSubOptionsBrandsModalOpen(false);
+            setSubOptionsClothesModalOpen(false);
+            setSubOptionsSportsModalOpen(false)
+        }
+    }, [isOpen]);
+
     return (
         <div ref={modalRef}>
             {!isOpen ? (
@@ -76,8 +75,13 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                     style={{ cursor: 'pointer' }}
                 >
                     <div
-                        onClick={onRequestClose}
-                        className="text"
+                        onClick={() => {
+                            onRequestClose();
+                            setSubOptionsBrandsModalOpen(false);
+                            setSubOptionsClothesModalOpen(false);
+                            setSubOptionsSportsModalOpen(false)
+                        }}
+                        className="text text-active"
                     >
                         {sectionText}
                     </div>
@@ -85,7 +89,12 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
             )}
             <Modal
                 isOpen={isOpen}
-                onRequestClose={onRequestClose}
+                onRequestClose={() => {
+                    onRequestClose();
+                    setSubOptionsBrandsModalOpen(false);
+                    setSubOptionsClothesModalOpen(false);
+                    setSubOptionsSportsModalOpen(false)
+                }}
                 className="modal-content-options"
                 overlayClassName="modal-overlay-options"
                 shouldCloseOnOverlayClick={false}
@@ -95,7 +104,12 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                         <div
                             key={index}
                             style={{ flex: `0 0 ${containerWidth}`, cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
-                            onClick={() => handleOptionClick(option.label)}
+                            onClick={() => {
+                                handleOptionClick(option.label);
+                                if (option.label === 'Brands') { setSubOptionsBrandsModalOpen(true);}
+                                if(option.label === 'Clothes'){ setSubOptionsClothesModalOpen(true);}
+                                if(option.label === 'Sports'){setSubOptionsSportsModalOpen(true);}
+                            }}
                         >
                             <div>
                                 {['Clothes', 'Brands', 'Sports'].includes(option.label) ? (
@@ -107,7 +121,7 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                                 )}
                             </div>
                             {option.icon && (
-                                <span style={{ marginLeft: '20px', marginTop:'4px' }}>{option.icon}</span>
+                                <span style={{ marginLeft: '20px', marginTop: '4px' }}>{option.icon}</span>
                             )}
                         </div>
                     ))}
@@ -116,22 +130,25 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
 
             {selectedOption === 'Clothes' && (
                 <SubOptionsClothesModal
-                    isOpen={selectedOption === 'Clothes'}
-                    onRequestClose={() => setSelectedOption(null)}
+                    isOpen={selectedOption === 'Clothes' && subOptionsClothesModalOpen}
+                    onRequestClose={() => {setSelectedOption(null); setSubOptionsClothesModalOpen(false)}}
                     options={['T-Shrits', 'Jerseys', 'Hoodies', 'Jackets', 'Shorts', 'Pants', 'Socks']}
                 />
             )}
             {selectedOption === 'Brands' && (
                 <SubOptionsBrandsModal
-                    isOpen={selectedOption === 'Brands'}
-                    onRequestClose={() => setSelectedOption(null)}
+                    isOpen={selectedOption === 'Brands' && subOptionsBrandsModalOpen}
+                    onRequestClose={() => {
+                        setSelectedOption(null);
+                        setSubOptionsBrandsModalOpen(false);
+                    }}
                     options={['Adidas', 'Asics', 'Fila', 'Givenchy', 'New Balance', 'Nike', 'Puma', 'Under Armour', 'Vans', 'Champion', 'Wilson']}
                 />
             )}
             {selectedOption === 'Sports' && (
                 <SubOptionsSportsModal
-                    isOpen={selectedOption === 'Sports'}
-                    onRequestClose={() => setSelectedOption(null)}
+                    isOpen={selectedOption === 'Sports' && subOptionsSportsModalOpen}
+                    onRequestClose={() => {setSelectedOption(null); setSubOptionsSportsModalOpen(false)}}
                     options={['Basketball', 'Soccer', 'Yoga', 'Gym', 'Tennis', 'Cycling', 'Swimming', 'Golf']}
                 />
             )}

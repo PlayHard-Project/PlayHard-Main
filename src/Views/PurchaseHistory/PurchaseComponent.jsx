@@ -1,31 +1,22 @@
-import React from 'react'
+import React from 'react';
 import { getElementByID } from '../../Components/ApiRestHandler/requestHandler';
 
 export default function PurchaseComponent(props) {
-  const order = getElementByID();
-    
+  const order = getElementByID(props.idOrder);
+
   return (
     <div>
-        <section>
-        <h2>Payment ID:</h2>
-        <h2>Date:</h2>
-        </section>
-        <section>
-        {props.products.map((product) => (
-          <Link key={item.name} to={`${item.reactRoute}`}>
-            <div key={item.id}>
-              <img
-                src={item.imagePath}
-                alt={`offerImg-${item.id}`}
-                className="img-responsive"
-              />
+      <section>
+        <h2>Payment ID: {order.paymentIntentId}</h2>
+        <h2>Date: {order.date}</h2>
+        <div>
+          {order.products.map(productFromOrder => (
+            <div key={productFromOrder.id}>
+              <h2>{productFromOrder.name}</h2>
             </div>
-          </Link>
-        ))}
-        </section>
-        <section>
-
-        </section>
+          ))}
+        </div>
+      </section>
     </div>
-  )
+  );
 }

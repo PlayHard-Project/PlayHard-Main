@@ -11,9 +11,15 @@ const Contact = () => {
     message: "",
   });
   const [submissionMessage, setSubmissionMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Nuevo estado para controlar si se está enviando el formulario
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Evitar múltiples envíos mientras se está procesando
+    if (isSubmitting) {
+      return;
+    }
 
     // Validaciones síncronas
     const nameWarning = (name.length < 5 || name.length > 50) ? "Name should be between 5 and 50 characters." : "";
@@ -31,6 +37,9 @@ const Contact = () => {
     if (nameWarning || emailWarning || messageWarning) {
       return;
     }
+
+    // Iniciar el proceso de envío
+    setIsSubmitting(true);
 
     const formData = {
       to: 'playhard.jala.managment@gmail.com',
@@ -60,12 +69,14 @@ const Contact = () => {
     } catch (error) {
       console.error('Error:', error);
       setSubmissionMessage('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
+    } finally {
+      // Limpiar el formulario después del envío exitoso o fallido
+      setName("");
+      setEmail("");
+      setMessage("");
+      // Habilitar el botón después de completar el proceso de envío
+      setIsSubmitting(false);
     }
-
-    // Limpiar el formulario después del envío exitoso o fallido
-    setName("");
-    setEmail("");
-    setMessage("");
   };
 
   return (
@@ -115,7 +126,9 @@ const Contact = () => {
             )}
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'Submit'}
+          </button>
 
           {submissionMessage && <p className="submission-message green">{submissionMessage}</p>}
         </form>

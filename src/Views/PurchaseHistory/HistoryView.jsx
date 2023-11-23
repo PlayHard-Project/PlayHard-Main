@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import PurchaseComponent from './PurchaseComponent';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PurchaseComponent from "./PurchaseComponent";
+import '../../css/PurchaseHistory.css'
 
 export default function ShoppingHistory() {
   const [orders, setOrders] = useState([]);
-  const idUser = "1233";
+  const idUser = "123";
 
   useEffect(() => {
-    axios.get(`https://backend-fullapirest.onrender.com/orders/user/${idUser}`)
-      .then(response => {
+    axios
+      .get(`http://localhost:9000/api/orders/user/${idUser}`)
+      .then((response) => {
         setOrders(response.data);
       })
-      .catch(error => {
-        console.error('Error al obtener las órdenes:', error);
+      .catch((error) => {
+        console.error("Error al obtener las órdenes:", error);
       });
   }, [idUser]);
 
   return (
-    <div>
-      <section>
+    <div className="container">
+      <section className="header-1">
         <h1>Shopping History</h1>
-        <h2>User Name: {/* Add user name here */}</h2>
+        <h2>User Name: </h2>
         <h2>User ID: {idUser}</h2>
       </section>
-      {orders.map(order => (
+      {orders.map((order) => (
         <PurchaseComponent key={order._id} idOrder={order._id} />
       ))}
     </div>

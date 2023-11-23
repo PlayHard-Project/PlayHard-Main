@@ -14,7 +14,7 @@ import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
-
+import HistoryView from "./Views/PurchaseHistory/HistoryView.jsx";
 
 
 export default function App() {
@@ -59,6 +59,7 @@ export default function App() {
                 <Route path="/products" element={<Products setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/history" element={<HistoryView />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>
             <Footer />

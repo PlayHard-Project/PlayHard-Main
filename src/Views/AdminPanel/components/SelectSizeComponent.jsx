@@ -8,9 +8,9 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
 
     const handleSizeChange = (e) => {
         if (!isAdded) {
-            setSize(e.target.value);
+          setSize(e.target.value.slice(0, 20));
         }
-    };
+      };
 
     const handleAddSize = () => {
         setIsAdded(true);

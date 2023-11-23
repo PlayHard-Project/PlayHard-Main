@@ -4,6 +4,7 @@ import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
 import StockItem from "../components/StockItem";
 import SelectSizeComponent from "../components/SelectSizeComponent";
+import {Axios} from "axios";
 
 function RightSide({
   setProductImages,

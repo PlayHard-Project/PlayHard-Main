@@ -16,6 +16,8 @@ import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
 import { useState, useEffect } from "react";
 import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
 import { UserContextProvider } from './Views/UserContext/UserContext.jsx';
+import Login from "./Views/LogIn/Login.jsx";
+import { Toaster } from 'react-hot-toast';
 import Test from './Views/Pages/Test.jsx';
 
 
@@ -51,6 +53,7 @@ export default function App() {
 
         <Router>
             <ScrollToTop />
+            <Toaster/>
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />

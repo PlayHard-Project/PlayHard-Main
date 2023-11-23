@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import "../../css/SignUp/signUpStyle.css";
+import axios from 'axios';
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
     useState(false);
-    const signUpImage =
+  const signUpImage =
     "https://res.cloudinary.com/playhardimages/image/upload/v1700626890/SignUpSignInImage.png";
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +75,7 @@ const SignUp = () => {
     return requirements;
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     const passwordRequirements = validatePassword();
 
     if (!name) {
@@ -123,6 +124,39 @@ const SignUp = () => {
       });
     } else {
       toast.success(`Sign Up successful for ${name}!`, {
+        position: "bottom-right",
+      });
+    }
+
+    //Created POST request 
+    try {
+      const response = await fetch('http://localhost:9000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          isAdmin: "false",
+        }),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.error) {
+        toast.error(responseData.error, {
+          position: "bottom-right",
+        });
+      } else {
+        toast.success(`Sign Up successful for ${name}!`, {
+          position: "bottom-right",
+        });
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      toast.error("An error occurred during signup. Please try again.", {
         position: "bottom-right",
       });
     }
@@ -177,7 +211,7 @@ const SignUp = () => {
               className="toggle-password"
               onClick={toggleShowPassword}
             >
-              {showPassword ? <BiSolidHide style={{marginLeft:"10px" , fontSize:'26px'}}/> : <BiShow style={{marginLeft:"10px" , fontSize:'26px'}}/>}
+              {showPassword ? <BiSolidHide style={{ marginLeft: "10px", fontSize: '26px' }} /> : <BiShow style={{ marginLeft: "10px", fontSize: '26px' }} />}
             </button>
           </div>
           {showPasswordRequirements && (

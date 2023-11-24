@@ -3,20 +3,19 @@ import ProductEntity from '../Entities/ProductEntity'
 import {getElementByID} from "../Components/ApiRestHandler/requestHandler";
 
 export default class BuyCartManagement {
-
     getProducts() {
         const products = localStorage.getItem('buyCart');
-        return products ? JSON.parse(products).map(product => new ProductEntity(product.id, product.quantity, product.size, product.color)) : [];
+        return products ? JSON.parse(products).map(product => new ProductEntity(product.id, product.quantity, product.size, product.color, product.price)) : [];
     }
 
-    addProduct(id, quantity, size, color) {
+    addProduct(id, quantity, size, color, price) {
         const products = this.getProducts();
-        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        let existingProduct = products.find(product => product.id === id && product.size === size && product.color === color && product.price === price);
 
         if (existingProduct) {
             existingProduct.quantity += quantity;
         } else {
-            existingProduct = new ProductEntity(id, quantity, size, color);
+            existingProduct = new ProductEntity(id, quantity, size, color, price);
             products.push(existingProduct);
         }
 
@@ -27,30 +26,30 @@ export default class BuyCartManagement {
         localStorage.clear();
     }
 
-    deleteProduct(id, size, color) {
+    deleteProduct(id, size, color, price) {
         let products = this.getProducts();
-        products = products.filter(product => !(product.id === id && product.size === size && product.color === color));
+        products = products.filter(product => !(product.id === id && product.size === size && product.color === color && product.price === price));
         localStorage.setItem('buyCart', JSON.stringify(products));
     }
 
-    decreaseQuantity(id, size, color) {
+    decreaseQuantity(id, size, color, price) {
         const products = this.getProducts();
-        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color && product.price === price);
 
         if (existingProduct) {
             existingProduct.quantity -= 1;
 
             if (existingProduct.quantity <= 0) {
-                this.deleteProduct(id, size, color);
+                this.deleteProduct(id, size, color, price);
             } else {
                 localStorage.setItem('buyCart', JSON.stringify(products));
             }
         }
     }
 
-    incrementQuantity(id, size, color) {
+    incrementQuantity(id, size, color, price) {
         const products = this.getProducts();
-        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color);
+        const existingProduct = products.find(product => product.id === id && product.size === size && product.color === color && product.price === price);
 
         if (existingProduct) {
             existingProduct.quantity += 1;

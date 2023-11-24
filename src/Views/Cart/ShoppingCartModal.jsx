@@ -46,7 +46,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                         style={{ cursor: "pointer" }}
                     >
                         <MdShoppingCart onClick={onRequestOpen} size={30} color="#72a3ff" />
-                        <span 
+                        <span
                             id="cartRedIcon"
                             className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex
                             items-center justify-center rounded-full" onClick={onRequestOpen}>{cartItemsQuantity}
@@ -59,8 +59,8 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                     >
                         <MdShoppingCart onClick={onRequestClose} size={30} color="#72a3ff" />
                         <span
-                        id="cartRedIcon"
-                        className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex
+                            id="cartRedIcon"
+                            className="bg-red-500 text-white absolute top-0 right-0 w-4 h-4 flex
                       items-center justify-center rounded-full" onClick={onRequestClose}>{cartItemsQuantity}
               </span>
                     </div>

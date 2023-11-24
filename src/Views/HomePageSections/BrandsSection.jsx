@@ -2,9 +2,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../../css/BrandsSection.css";
 import {Link, useNavigate} from "react-router-dom";
+import {GridLoader} from "react-spinners";
 
 const BrandItem = ({ to, children }) => {
     const navigate = useNavigate();
@@ -80,6 +81,30 @@ export default function BrandsSection() {
             window.removeEventListener('resize', handleWindowSizeChange);
         };
     }, []);
+
+    /**
+     * Renders a loading component along with a title when there is no data available.
+     * @param {Array} data - The array of data to be checked for emptiness.
+     * @returns {JSX.Element} - The JSX representing the title and loading component.
+     */
+    if (data.length === 0) {
+        return (
+            <>
+                {/* Title container with the "Brands" section title */}
+                <div className="title-container">
+                    <h1 className="section-title">Brands</h1>
+                </div>
+                {/* Loading component container with a loading spinner */}
+                <div
+                    className={
+                        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+                    }
+                >
+                    <GridLoader color="#023fc5" />
+                </div>
+            </>
+        );
+    }
 
     return (
         <section className="brands-container">

@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
  * @param {Function} props.handleCloseCategoriesModal - Function to close the categories modal.
  * @param {Function} props.toggleMenuAndCategories - Function to toggle between menu and categories.
  */
-const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }) => {
+const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, handleSecondModal }) => {
     const [showClothesSubCategories, setShowClothesSubCategories] = useState(false);
     const [showBrandsSubCategories, setShowBrandsSubCategories] = useState(false);
     const [showSportsSubCategories, setShowSportsSubCategories] = useState(false);
@@ -91,9 +91,10 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
             {showClothesSubCategories && (
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowClothesSubCategories(false)}
+                    handleSecondModal={handleSecondModal}
+                    handleCategoriesModal={handleCloseCategoriesModal}
                     options={clothesSubCategories}
                     toggleOption={(option) => {
-                        console.log(`Selected subcategory: ${option.label}`);
                     }}
                 />
             )}
@@ -133,9 +134,10 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
             {showBrandsSubCategories && (
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowBrandsSubCategories(false)}
+                    handleSecondModal={handleSecondModal}
+                    handleCategoriesModal={handleCloseCategoriesModal}
                     options={brandsSubCategories}
                     toggleOption={(option) => {
-                        console.log(`Selected subcategory: ${option.label}`);
                     }}
                 />
             )}
@@ -160,6 +162,8 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories }
             {showSportsSubCategories && (
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowSportsSubCategories(false)}
+                    handleSecondModal={handleSecondModal}
+                    handleCategoriesModal={handleCloseCategoriesModal}
                     options={sportsSubCategories}
                     toggleOption={(option) => {
                     }}

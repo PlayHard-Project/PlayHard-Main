@@ -1,83 +1,215 @@
-const express = require('express');
-const stripe = require('stripe');
-const cors = require('cors');
+const { Order } = require("./models/orderSchema");
+const { Invoice } = require('./html_templates/invoice.js');
 
+/**
+ * Configuration function to implement Stripe server functionality in an Express application.
+ * @module configureAppImplementingStripeServer
+ * @param {Object} app - Express application instance.
+ * @returns {void}
+ */
 const configureAppImplementingStripeServer = (app) => {
-    app.use(express.static('public'));
-    app.use(express.json());
-    app.use(cors()); 
+  const express = require("express");
+  const stripe = require("stripe");
+  const cors = require("cors");
+  const sendMail = require("./sendEmail");
 
-    const stripeGateway = stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2020-08-27' });
+  /**
+   * Initialize the Stripe gateway with the provided secret key.
+   * @type {Object}
+   */
+  const stripeGateway = stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2020-08-27",
+  });
 
-    app.get('/', (req, res) => {
-        res.send("Welcome to Full API Rest Playhard E-commerce");
+  app.use(express.static("public"));
+  app.use(express.json());
+  app.use(cors());
+
+  /**
+   * Endpoint to create a payment session for Stripe Checkout.
+   * @name app.post
+   * @method
+   * @param {string} '/stripe-api/intent-payment' - The path for creating a payment session.
+   * @param {Function} async (req, res) - Async callback function to handle the route.
+   * @returns {void}
+   */
+  const fetchProductDetails = async (productId) => {
+    try {
+      const response = await fetch(
+        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
+      );
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error(
+        `Error fetching product details for product ID ${productId}:`,
+        error
+      );
+      throw error;
+    }
+  };
+
+  app.post("/stripe-api/intent-payment", async (req, res) => {
+    const customer = await stripeGateway.customers.create({
+      metadata: {
+        userId: req.body.userId,
+        products: JSON.stringify(req.body.products),
+      },
     });
 
-    app.post('/stripe-api/intent-payment', async (req, res) => {
-        const { products } = req.body;
-        console.log(products);
-
-        const lineItems = products.map((product) => ({        
+    try {
+      const lineItems = await Promise.all(
+        req.body.products.map(async (productFromBody) => {
+          const product = await fetchProductDetails(productFromBody.id);
+          return {
             price_data: {
-                currency: "usd",
-                product_data: {
-                    name: product.name,
-                    description: product.description,
-                    images: product.imagePath
-                },
-                unit_amount: Math.round((product.price * 10)/100) + product.price,
+              currency: "usd",
+              product_data: {
+                name: product.name,
+                description: product.description,
+                images: product.imagePath,
+              },
+              unit_amount:
+                (product.price + (product.price * 10) / 100).toFixed(2) * 100,
             },
-            quantity: product.quantity,
-        }));
-    
+            quantity: productFromBody.quantity,
+          };
+        })
+      );
+
+      console.log("customer: " + customer.id);
+      const session = await stripeGateway.checkout.sessions.create({
+        payment_method_types: ["card"],
+        mode: "payment",
+        customer: customer.id,
+        line_items: lineItems,
+        success_url: "https://play-hard-main.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        billing_address_collection: "required",
+      });
+      res.json({ id: session.id });
+    } catch (error) {
+      console.error("Error creating payment session:", error);
+      res.status(500).json({ error: "Error creating payment session" });
+    }
+  });
+
+  const createOrder = async (customer, data) => {
+    const items = JSON.parse(customer.metadata.products);
+    const newOrder = new Order({
+      userId: customer.metadata.userId,
+      customerId: data.customer,
+      paymentIntentId: data.payment_intent,
+      products: items,
+      subtotal: data.amount_subtotal / 100,
+      total: data.amount_total / 100,
+      payment_status: data.payment_status,
+      shippingAddress: {
+        avenue1: data.customer_details.address.line1,
+        avenue2: data.customer_details.address.line2,
+        city: data.customer_details.address.city,
+        country: data.customer_details.address.country,
+      },
+      userInformation: {
+        name: data.customer_details.name,
+        email: data.customer_details.email,
+      },
+    });
+
+    try {
+      const saveOrder = await newOrder.save();
+      console.log("Processed Order: ", saveOrder);
+
+      const myInvoice = new Invoice();
+      const htmlFile = await myInvoice.generateHTML();
+      try {
+        await sendMail(
+          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
+          console.log("Email sent successfully");
+      } catch (error) {
+        console.error("Error sending email:", error.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  let endpointSecret;
+
+  app.post(
+    "/stripe-api/webhook",
+    express.raw({ type: "application/json" }),
+    (request, response) => {
+      const sig = request.headers["stripe-signature"];
+
+      let data;
+      let eventType;
+
+      if (endpointSecret) {
+        let event;
+
         try {
-            const session = await stripeGateway.checkout.sessions.create({
-                payment_method_types: ['card'],
-                mode: 'payment',
-                line_items: lineItems,
-                success_url: 'https://play-hard-main.vercel.app/success-payment-status',
-                cancel_url: 'https://play-hard-main.vercel.app/fail-payment-status',
-                billing_address_collection: 'required'
+          event = stripe.webhooks.constructEvent(
+            request.body,
+            sig,
+            endpointSecret
+          );
+          console.log("Webhook verified.");
+        } catch (err) {
+          console.log(`Webhook Error: ${err.message}`);
+          response.status(400).send(`Webhook Error: ${err.message}`);
+          return;
+        }
+
+        data = event.data ? event.data.object : null;
+        eventType = event.type;
+      } else {
+        data = request.body.data ? request.body.data.object : null;
+        eventType = request.body.type;
+      }
+
+      console.log("Webhook data:", data);
+      console.log("Webhook eventType:", eventType);
+
+      if (eventType === "checkout.session.completed") {
+        const customerId = data?.customer;
+        if (customerId) {
+          stripeGateway.customers
+            .retrieve(customerId)
+            .then((customer) => {
+              createOrder(customer, data);
+            })
+            .catch((error) => {
+              console.log(error.message);
             });
-    
-            res.json({ id: session.id });
-        } catch (error) {
-            console.error('Error creating payment session:', error);
-            res.status(500).json({ error: 'Error creating payment session' });
+        } else {
+          console.log("Customer ID not found in webhook data");
         }
-    });
+      } else {
+        console.log(`Unhandled event type: ${eventType}`);
+      }
 
-    app.post('/stripe-api/confirm-payment', async (req, res) => {
-        try {
-            res.send("Payment confirmed");
-        } catch (error) {
-            console.error('Error confirming payment:', error);
-            res.status(500).json({ error: 'Error confirming payment' });
-        }
-    });
+      // Return a 200 response to acknowledge receipt of the event
+      response.send().end();
+    }
+  );
 
-    app.post('/stripe-api/failure-payment', (req, res) => {
-        try {
-            res.send("Payment failed");
-        } catch (error) {
-            console.error('Error handling failed payment:', error);
-            res.status(500).json({ error: 'Error handling failed payment' });
-        }
-    });
-
-    app.get('/stripe-api/intent-payment', (req, res) => {
-        res.send("Intent-payment");
-    });
-
-    app.get('/stripe-api/confirm-payment', (req, res) => {
-        res.send("Confirm-payment");
-    });
-
-    app.get('/stripe-api/failure-payment', (req, res) => {
-        res.send("failure-payment");
-    });
-
-    console.log("-> Successfully connected to Stripe server.");
+  /**
+   * Log a success message upon successful connection to the Stripe server.
+   * @name console.log
+   * @method
+   * @param {string} '-> Successfully connected to Stripe server.' - The success message.
+   * @returns {void}
+   */
+  console.log("-> Successfully connected to Stripe server.");
 };
 
+/**
+ * Export the configuration function for implementing Stripe server functionality.
+ * @name module.exports
+ * @method
+ * @type {Function}
+ * @param {Object} configureAppImplementingStripeServer - Configuration function.
+ * @returns {void}
+ */
 module.exports = configureAppImplementingStripeServer;

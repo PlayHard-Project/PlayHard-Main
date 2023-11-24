@@ -1,0 +1,37 @@
+.purchase-component {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(2, 1, 1, 0.5);
+  margin-bottom: 2rem;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.scroll-container {
+  min-height: auto;
+  max-height: auto;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.text-container1 {
+  display: flex;
+}
+
+.purchase-component h2 {
+  font-weight: bold;
+  color: blue;
+}
+
+.text-container1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header-container {
+  margin-bottom: 5px;
+}
+
+.result-container {
+  flex-grow: 1;
+}

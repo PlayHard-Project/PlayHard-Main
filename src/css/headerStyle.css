@@ -112,9 +112,7 @@
 
 .popup {
     position: absolute;
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #72a3ff;
+
     box-shadow: 3px 3px 5px 6px #ccc;
     background-color: white;
     border-radius: 8px;
@@ -161,6 +159,11 @@
         font-size: 17px;
     }
 }
+@media only screen and (max-width: 1364px) {
+    .search-container{
+        width: 320px;
+    }
+}
 @media only screen and (max-width: 1359px) {
     .custom-rectangle{
         width: 60px;
@@ -202,6 +205,12 @@
         margin-right: 6px;
         margin-left: 6px;
         font-size: 14px;
+    }
+}
+
+@media only screen and (max-width:1244px) {
+    .search-container{
+        width: 260px;
     }
 }
 
@@ -254,6 +263,13 @@
         font-size: 14px;
     }
 }
+
+@media only screen and (max-width: 1172px) {
+    .search-container{
+        width: 220px;
+    }
+}
+
 @media only screen and (max-width: 1150px) {
     .header .text {
         margin-right: 1px;
@@ -261,7 +277,7 @@
         font-size: 14px;
     }
     .search-container{
-        width: 240px;
+        width: 220px;
     }
 }
 @media only screen and (max-width: 1088px) {
@@ -287,7 +303,7 @@
 
 @media only screen and (max-width: 1039px) {
     .search-container{
-        width: 220px;
+        width: 210px;
     }
     .header .text {
         margin-right: -3px;
@@ -318,7 +334,7 @@
         margin-top: -85px;
     }
     .header .background-shape {
-        width: 300px;
+        width: 400px;
         height: 60px;
         margin-left: -20px;
     }
@@ -337,6 +353,11 @@
         font-size: 13px;
     }
 }
+@media only screen and (max-width: 936px) {
+    .search-container {
+        width: 150px;
+    }
+}
 @media only screen and (max-width: 907px) {
     .header .background-shape {
         height: 55px;
@@ -347,7 +368,7 @@
         width: 50px;
     }
     .search-container {
-        width: 195px;
+        width: 150px;
         padding-right: 5px;
         margin-right: -6px;
     }

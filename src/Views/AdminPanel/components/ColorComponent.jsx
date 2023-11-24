@@ -22,9 +22,9 @@ function ColorComponent({ id, onDelete, setColorInformation}) {
     const handleAddImage = () => {
         const trimmedInput = input.trim();
 
-        // Verifica si el input está vacío o solo contiene espacios
+        // Check if the input is empty or contains only spaces.
         if (!trimmedInput) {
-            toast.error("El campo de entrada no puede estar vacío o contener solo espacios.", {
+            toast.error("The input field cannot be empty or contain only spaces.", {
                 position: "bottom-right",
             });
             return;

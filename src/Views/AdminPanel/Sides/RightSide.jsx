@@ -4,7 +4,7 @@ import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
 import StockItem from "../components/StockItem";
 import SelectSizeComponent from "../components/SelectSizeComponent";
-import {Axios} from "axios";
+import { Axios } from "axios";
 
 function RightSide({
   setProductImages,
@@ -23,19 +23,26 @@ function RightSide({
   const handleAddImage = () => {
     const trimmedInput = input.trim();
 
-    // Verifica si el input está vacío o solo contiene espacios
+    // Check if the input is empty or contains only spaces.
     if (!trimmedInput) {
-      toast.error("El campo de entrada no puede estar vacío o contener solo espacios.", {
+      toast.error("The input field cannot be empty or contain only spaces.", {
         position: "bottom-right",
       });
       return;
     }
 
     if (images.length < 4) {
-      if (!trimmedInput.startsWith("http://") && !trimmedInput.startsWith("https://") && !trimmedInput.startsWith("data:image/")) {
-        toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
-          position: "bottom-right",
-        });
+      if (
+        !trimmedInput.startsWith("http://") &&
+        !trimmedInput.startsWith("https://") &&
+        !trimmedInput.startsWith("data:image/")
+      ) {
+        toast.error(
+          "The image URL must start with 'http://', 'https://' or 'data:image/'",
+          {
+            position: "bottom-right",
+          }
+        );
         return;
       }
 
@@ -44,7 +51,7 @@ function RightSide({
       setProductImages(newImages);
       setInput("");
     } else {
-      toast.error("El número máximo de imágenes es 4.", {
+      toast.error("The maximum number of images is 4.", {
         position: "bottom-right",
       });
     }

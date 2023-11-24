@@ -1,5 +1,5 @@
 .modal-content-suboptions {
-    position: absolute;
+    position: fixed;
     top: 34%;
     left: 15%;
     transform: translate(-50%, -50%);

@@ -100,7 +100,7 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
           </span>
           <h2 className={"text-3xl font-bold"}>{product.name}</h2>
         </div>
-        <p className={"text-gray-700"}>{product.description}</p>
+        <p className={"overflow-auto text-gray-700"}>{product.description}</p>
 
         <h5 className={"text-2xl font-semibold mb-10"}>{currency} {product.price}</h5>
 

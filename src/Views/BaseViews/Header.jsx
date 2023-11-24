@@ -14,6 +14,8 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
+import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
+import SearchBar from "../../Utilities/SearchBar/SearchBar";
 
 /**
  * Header component for the website.
@@ -40,6 +42,8 @@ const Header = ({
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
+  const [isAdminModalOpen, setAdminModalOpen] = useState(false);
+  const [product, setProduct] = useState();
 
   /**
    * Function to toggle the menu and categories visibility.
@@ -48,6 +52,26 @@ const Header = ({
   const toggleMenuAndCategories = (category) => {
     toggleMenu();
     toggleCategories();
+  };
+
+  /**
+   * Function to handle the opening and closing of the admin modal.
+   */
+  const handleAdminModal = () => {
+    if(isAdminModalOpen){
+      setAdminModalOpen(false)
+      return;
+    }
+    setAdminModalOpen((prevOpen) => !prevOpen);
+    setShowSearchPopup(false);
+    setShowMenuPopup(false);
+  };
+
+  /**
+   * Function to handle the closing of the admin modal.
+   */
+  const handleCloseAdminModal = () => {
+    setAdminModalOpen(false);
   };
 
   /**
@@ -150,156 +174,127 @@ const Header = ({
 
   const modalRef = useRef();
   const modalOptionsRef = useRef();
+  const modalAdminRef=useRef();
 
   return (
-    <header className="text-white header container">
-      <div className="flex justify-between items-center">
-        <div className="custom-rectangle"> </div>
-        <div className="md:flex items-center">
-          <Link to="/">
-            <img
-              src={headerIcon}
-              alt="Icon Main"
-              className="background-shape"
-            />
-          </Link>
-          <div className="lg:flex space-x-5 hidden text-active pl-5">
-            {paths.map((path) => (
-              <Link
-                key={path.link}
-                to={path.link}
-                className={`text ${
-                  path.link === location.pathname && "text-active"
-                }`}
-              >
-                {path.title}
-              </Link>
-            ))}
-            <div ref={modalOptionsRef}>
-              <ModalAdminOptions
-                sectionText={"Categories"}
-                onRequestOpen={handleOptionsModal}
-                isOpen={isOptionsModalOpen}
-                onRequestClose={handleCloseOptionsModal}
-                modalRef={modalOptionsRef}
-                options={[
-                  { label: "Clothes", icon: <SlArrowDown strokeWidth={100} /> },
-                  { label: "Shoes", icon: " " },
-                  { label: "Equipment", icon: " " },
-                  { label: "Accessories", icon: " " },
-                  { label: "Brands", icon: <SlArrowDown strokeWidth={100} /> },
-                  { label: "Offers", icon: " " },
-                  { label: "Sports", icon: <SlArrowDown strokeWidth={100} /> },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="lg:flex hidden space-x-4 items-center">
-          <div className="flex items-center search-container">
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search"
-              maxLength={60}
-            />
-            <button>
-              <MdSearch size={24} color="#72a3ff" />
-            </button>
-          </div>
-          <Link to="/login" className="text lg:flex hidden items-center">
-            <MdPerson size={30} color="#72a3ff" className="style-icon" />
-          </Link>
-          <div ref={modalRef}>
-            <ShoppingCartModal
-              onRequestOpen={handleOpenCartModal}
-              isOpen={isCartModalOpen}
-              onRequestClose={handleCloseModal}
-              modalRef={modalRef}
-              cartItemsQuantity={cartItemsQuantity}
-              setCartItemsQuantity={setCartItemsQuantity}
-              setSubTotal={setSubTotal}
-              subTotal={subTotal}
-            />
-          </div>
-          <button className="lg:flex hidden">
-            <MdSettings size={30} color="#72a3ff" className="style-icon" />
-          </button>
-        </div>
-        <div className="lg:hidden space-x-4 relative mr-3">
-          <div className="flex items-center space-x-4">
-            <div onClick={toggleSearchPopup}>
-              <MdSearch size={24} color="#72a3ff" />
-            </div>
-            <button onClick={toggleMenu}>
-              <MdMenu size={30} color="#72a3ff" className="style-icon" />
-            </button>
-          </div>
-          {showSearchPopup && (
-            <div className="absolute shadow-lg popup right-4 search-container-little">
-              <input
-                type="text"
-                className="search-input-little"
-                placeholder="Search"
-              />
-              <button onClick={toggleSearchPopup}>
-                <MdClose size={24} color="#72a3ff" />
-              </button>
-            </div>
-          )}
-          {showMenuPopup && (
-            <div className="absolute p-2 shadow-lg popup right-4 space-y-1 flex flex-col items-start">
+      <header className="text-white header container">
+        <div className="flex justify-between items-center">
+          <div className="custom-rectangle"> </div>
+          <div className="md:flex items-center">
+            <Link to="/">
+              <img src={headerIcon} alt="Icon Main" className="background-shape" />
+            </Link>
+            <div className="lg:flex space-x-5 hidden text-active pl-5">
               {paths.map((path) => (
-                <Link
-                  key={path.link}
-                  to={path.link}
-                  className={`text-link ${
-                    path.link === location.pathname && "text-link-active"
-                  }`}
-                  onClick={toggleMenu}
-                >
-                  {path.title}
-                </Link>
+                  <Link
+                      key={path.link}
+                      to={path.link}
+                      className={`text ${path.link === location.pathname && 'text-active'}`}
+                  >
+                    {path.title}
+                  </Link>
               ))}
-              <div
-                className="relative flex items-center text-link"
-                onClick={toggleCategories}
-              >
-                Categories{" "}
-                <SlArrowRight
-                  size={10}
-                  color="#72a3ff"
-                  strokeWidth={200}
-                  style={{ marginLeft: "70px" }}
+              <div ref={modalOptionsRef}>
+                <ModalAdminOptions
+                    sectionText={"Categories"}
+                    onRequestOpen={handleOptionsModal}
+                    isOpen={isOptionsModalOpen}
+                    onRequestClose={handleCloseOptionsModal}
+                    modalRef={modalOptionsRef}
+                    options={[
+                      { label: "Clothes", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Shoes", icon: " " },
+                      { label: "Equipment",  icon: " " },
+                      { label: "Accessories",  icon: " "},
+                      { label: "Brands", icon: <SlArrowDown strokeWidth={100}/> },
+                      { label: "Offers",  icon: " " },
+                      { label: "Sports", icon: <SlArrowDown strokeWidth={100}/> },
+                    ]}
                 />
               </div>
-              <Link
-                to="/login"
-                className="relative flex items-center text-link"
-              >
-                Sign-Up
-              </Link>
-              <Link
-                to="/shopcart"
-                className="relative flex items-center text-link"
-                onClick={toggleMenu}
-              >
-                Shop Cart
-              </Link>
-              <div className="relative flex items-center text-link">
-                Settings
+              <div ref={modalAdminRef}>
+                <ModalAdminPanel
+                    sectionText={"Admin"}
+                    onRequestOpen={handleAdminModal}
+                    isOpen={isAdminModalOpen}
+                    onRequestClose={handleCloseAdminModal}
+                    modalRef={modalAdminRef}
+                />
               </div>
+
             </div>
-          )}
-          {showCategoriesPopup && (
-            <CategoriesPopup
-              handleCloseCategoriesModal={handleCloseCategoriesModal}
-              toggleMenuAndCategories={toggleMenuAndCategories}
-            />
-          )}
+          </div>
+          <div className="lg:flex hidden space-x-4 items-center">
+            <SearchBar isRedirect={true} setProduct={setProduct}/>
+            <Link to="/sign-up" className="text lg:flex hidden items-center">
+              <MdPerson size={30} color="#72a3ff" className="style-icon" />
+            </Link>
+            <div ref={modalRef}>
+              <ShoppingCartModal
+                  onRequestOpen={handleOpenCartModal}
+                  isOpen={isCartModalOpen}
+                  onRequestClose={handleCloseModal}
+                  modalRef={modalRef}
+                  cartItemsQuantity={cartItemsQuantity}
+                  setCartItemsQuantity={setCartItemsQuantity}
+                  setSubTotal={setSubTotal}
+                  subTotal={subTotal}
+              />
+            </div>
+            <Link to="/history" className="lg:flex hidden" >
+              <MdSettings size={30} color="#72a3ff" className="style-icon" />
+            </Link>
+          </div>
+          <div className="lg:hidden space-x-4 relative mr-3">
+            <div className="flex items-center space-x-4">
+              <div onClick={toggleSearchPopup}>
+                <MdSearch size={24} color="#72a3ff" />
+              </div>
+              <button onClick={toggleMenu}>
+                <MdMenu size={30} color="#72a3ff" className="style-icon" />
+              </button>
+            </div>
+            {showSearchPopup && (
+                <div className="absolute shadow-lg popup right-4">
+                  <SearchBar isRedirect={true} setProduct={setProduct}/>
+                </div>
+            )}
+            {showMenuPopup && (
+                <div className="absolute p-2 shadow-lg popup right-4 space-y-1 flex flex-col items-start">
+                  {paths.map((path) => (
+                      <Link
+                          key={path.link}
+                          to={path.link}
+                          className={`text-link ${path.link === location.pathname && "text-link-active"}`}
+                          onClick={toggleMenu}
+                      >
+                        {path.title}
+                      </Link>
+                  ))}
+                  <div className="relative flex items-center text-link" onClick={toggleCategories}>
+                    Categories <SlArrowRight size={10} color="#72a3ff" strokeWidth={200} style={{ marginLeft: '70px' }} />
+                  </div>
+                  <Link to="/sign-up" className="relative flex items-center text-link" onClick={toggleMenu}>Sign Up</Link>
+                  <Link
+                      to="/shopcart"
+                      className="relative flex items-center text-link"
+                      onClick={toggleMenu}
+                  >
+                    Shop Cart
+                  </Link>
+                  <div className="relative flex items-center text-link">Settings</div>
+                </div>
+            )}
+            {showCategoriesPopup && (
+                <CategoriesPopup
+                    handleCloseCategoriesModal={handleCloseCategoriesModal}
+                    handleSecondModal={handleCloseOptionsModal}
+                    toggleMenuAndCategories={toggleMenuAndCategories}
+                />
+            )}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
   );
 };
 

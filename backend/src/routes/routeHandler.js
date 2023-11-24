@@ -16,11 +16,58 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.post(`/${baseRoute}`, (req, res) => {
-      const newItem = model(req.body);
-      newItem
-          .save()
-          .then((data) => res.json(data))
-          .catch((error) => res.json({ message: error }));
+    const newItem = model(req.body);
+    newItem
+      .save()
+      .then((data) => res.json(data))
+      .catch((error) => res.json({ message: error }));
+  });
+
+  /**
+   * Endpoint to retrieve the last inserted item's ID from the database.
+   * @name router.get
+   * @method
+   * @param {string} `/${baseRoute}/last-id` - The path for retrieving the last inserted item's ID.
+   * @param {Function} (req, res) - Callback function to handle the route.
+   * @returns {void}
+   */
+  router.get(`/${baseRoute}/last-id`, (req, res) => {
+    model
+      .findOne()
+      .sort({ _id: -1 })
+      .then((data) => {
+        if (data) {
+          res.json({ lastId: data._id });
+        } else {
+          res.json({ lastId: null });
+        }
+      })
+      .catch((err) => res.json({ message: err }));
+  });
+
+    /**
+     * Route for performing a search on the model data.
+     *
+     * @param {string} `/${baseRoute}/search` - The route on which to perform the search.
+     * @param {Function} (req, res) - The callback function to handle the route.
+     * @returns {void}
+     */
+  router.get(`/${baseRoute}/search`, (req, res) => {
+      const search = req.query.search;
+      if (search) {
+          const normalizedSearch = search.replace(/[^\w\s]/gi, '').toLowerCase();
+          model
+              .find()
+              .then((data) => {
+                  const filteredData = data.filter(product =>
+                      product.name.replace(/[^\w\s]/gi, '').toLowerCase().includes(normalizedSearch)
+                  );
+                  res.json(filteredData);
+              })
+              .catch((err) => res.json({ message: err }));
+      } else {
+          res.json({ message: 'No search query provided' });
+      }
   });
 
   /**
@@ -47,11 +94,11 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.get(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      model
-          .findById(id)
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    model
+      .findById(id)
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -63,12 +110,12 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.put(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      const updateData = req.body;
-      model
-          .updateOne({ _id: id }, { $set: updateData })
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    const updateData = req.body;
+    model
+      .updateOne({ _id: id }, { $set: updateData })
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 
   /**
@@ -80,20 +127,20 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.delete(`/${baseRoute}/:id`, (req, res) => {
-      const { id } = req.params;
-      model
-          .deleteOne({ _id: id })
-          .then((data) => res.json(data))
-          .catch((err) => res.json({ message: err }));
+    const { id } = req.params;
+    model
+      .deleteOne({ _id: id })
+      .then((data) => res.json(data))
+      .catch((err) => res.json({ message: err }));
   });
 }
 
 /**
-* Export the createRoutes function.
-* @name module.exports
-* @method
-* @type {Function}
-* @param {Object} createRoutes - The createRoutes function.
-* @returns {void}
-*/
+ * Export the createRoutes function.
+ * @name module.exports
+ * @method
+ * @type {Function}
+ * @param {Object} createRoutes - The createRoutes function.
+ * @returns {void}
+ */
 module.exports = createRoutes;

@@ -4,6 +4,7 @@ import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
 import StockItem from "../components/StockItem";
 import SelectSizeComponent from "../components/SelectSizeComponent";
+import { Axios } from "axios";
 
 function RightSide({
   setProductImages,
@@ -20,15 +21,32 @@ function RightSide({
   const [stockRows, setStockRows] = useState([]);
 
   const handleAddImage = () => {
+    const trimmedInput = input.trim();
+
+    // Check if the input is empty or contains only spaces.
+    if (!trimmedInput) {
+      toast.error("The input field cannot be empty or contain only spaces.", {
+        position: "bottom-right",
+      });
+      return;
+    }
+
     if (images.length < 4) {
-        if (input && !input.startsWith("http://") && !input.startsWith("https://") && !input.startsWith("data:image/")) {
-            toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
-              position: "bottom-right",
-            });
-            return;
+      if (
+        !trimmedInput.startsWith("http://") &&
+        !trimmedInput.startsWith("https://") &&
+        !trimmedInput.startsWith("data:image/")
+      ) {
+        toast.error(
+          "The image URL must start with 'http://', 'https://' or 'data:image/'",
+          {
+            position: "bottom-right",
           }
-          
-      const newImages = [...images, input];
+        );
+        return;
+      }
+
+      const newImages = [...images, trimmedInput];
       setImages(newImages);
       setProductImages(newImages);
       setInput("");

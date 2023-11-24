@@ -68,7 +68,7 @@ const AddProduct = () => {
   const handlePriceChange = (e) => {
     const enteredValue = e.target.value;
   
-    // Verifica si el valor ingresado cumple con el formato requerido (hasta dos dígitos después del punto)
+    // Check if the entered value complies with the required format (up to two digits after the decimal point).
     if (/^\d+(\.\d{0,2})?$/.test(enteredValue) || enteredValue === "") {
       setPrice(enteredValue);
     } else {
@@ -340,7 +340,7 @@ const AddProduct = () => {
 
 
       <div className="buttons-container">
-        <button className="styleButton button-cancel" onClick={() => console.log(sizeInformation)}>Cancel</button>
+        <button className="styleButton button-cancel" onClick={() => navigate('/')}>Cancel</button>
         <button className="styleButton button-add"  onClick={() => {
                             handleAddProduct();
                             handleAddProductMessages();

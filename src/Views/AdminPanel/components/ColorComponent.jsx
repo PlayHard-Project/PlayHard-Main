@@ -31,7 +31,7 @@ function ColorComponent({ id, onDelete, setColorInformation}) {
         }
 
         if (!trimmedInput.startsWith("http://") && !trimmedInput.startsWith("https://") && !trimmedInput.startsWith("data:image/")) {
-            toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
+            toast.error("The image URL should start with 'http://', 'https://' o 'data:image/'", {
                 position: "bottom-right",
             });
             return;

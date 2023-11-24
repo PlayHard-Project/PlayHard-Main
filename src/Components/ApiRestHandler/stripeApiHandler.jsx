@@ -5,10 +5,12 @@ import BuyCartManagement from "../../Utilities/BuyCartManagement";
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
 
+  // Fetch products and format them when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       const productsArray = await new BuyCartManagement().getProducts();
       setProducts(productsArray);
+
     };
     fetchData();
   }, []);
@@ -47,13 +49,14 @@ export default function GoToCheckout({ disabled }) {
     }
   };
 
+    // Render the checkout button
   return (
-    <button
-      className={`checkout-button ${disabled ? "disabled" : ""}`}
-      onClick={makePayment}
-      disabled={disabled}
-    >
-      Checkout
-    </button>
+      <button
+          className={`checkout-button ${disabled ? "disabled" : ""}`}
+          onClick={makePayment}
+          disabled={disabled}
+      >
+        Checkout
+      </button>
   );
 }

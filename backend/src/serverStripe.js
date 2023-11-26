@@ -36,7 +36,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest.onrender.com/api/products/${productId}`
+        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -83,8 +83,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-test.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-test.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-main.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });

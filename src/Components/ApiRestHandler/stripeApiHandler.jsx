@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
-// Functional component for the checkout button
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
 
@@ -14,7 +13,6 @@ export default function GoToCheckout({ disabled }) {
     fetchData();
   }, []);
 
-  // Function to handle the payment process
   const makePayment = async () => {
     try {
       const stripe = await loadStripe(
@@ -25,7 +23,7 @@ export default function GoToCheckout({ disabled }) {
       const headers = { "Content-Type": "application/json" };
 
       const response = await fetch(
-        "https://backend-fullapirest.onrender.com/stripe-api/intent-payment",
+        "https://backend-fullapirest-test.onrender.com/stripe-api/intent-payment",
         {
           method: "POST",
           headers: headers,
@@ -49,7 +47,6 @@ export default function GoToCheckout({ disabled }) {
     }
   };
 
-  // Render the checkout button
   return (
     <button
       className={`checkout-button ${disabled ? "disabled" : ""}`}

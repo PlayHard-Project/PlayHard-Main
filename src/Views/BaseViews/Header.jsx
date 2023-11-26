@@ -282,7 +282,7 @@ const Header = ({
                   >
                     Shop Cart
                   </Link>
-                  <div className="relative flex items-center text-link">Settings</div>
+                  <Link to="/history" className="relative flex items-center text-link">Settings</Link>
                 </div>
             )}
             {showCategoriesPopup && (

@@ -6,4 +6,5 @@ Container for cards in the administration area.
     flex-wrap: wrap;
     margin-left: 17%;
     z-index: -2;
+    cursor: default;
   }

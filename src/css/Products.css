@@ -19,3 +19,6 @@ Container for all products in the administration and normal area.
     width: 50px;
     text-align: center;
 }
+.add-product-link:hover {
+    background-color: #a9c8ff;
+}

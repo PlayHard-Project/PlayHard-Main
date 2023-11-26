@@ -15,7 +15,7 @@ Container for each card in the administration area.
     width: 100%;
     height: 70%;
     object-fit: cover;
-    cursor: pointer;
+    cursor: auto;
   }
   
   .shopping-card-title-admin {
@@ -23,6 +23,7 @@ Container for each card in the administration area.
     margin-left: 5px;
     font-size: medium;
     white-space: wrap;
+    cursor: auto;
   }
   
   .shopping-card-price-admin {
@@ -75,7 +76,7 @@ Container for each card in the administration area.
     margin-right: 12px;
   }
   .edit-button:hover {
-    text-decoration: underline;
+    background-color: #d6cf8c;
   }
   
   .delete-button{
@@ -97,5 +98,5 @@ Container for each card in the administration area.
   }
   
   .delete-button:hover {
-    text-decoration: underline;
+    background-color: #e57575;
   }

@@ -41,13 +41,13 @@ const CardAdmin = ({ _id, img, title, price, colorInformation, size, setCartItem
   return (
     <>
       <div className="shopping-card-admin">
-        <Link key={_id} style={{cursor: 'default'}}>
+        <Link key={_id} style={{cursor: 'auto'}}>
           <img src={img} alt={title} className="shopping-card-img-admin" />
         </Link>
         <div>
             <div className="flip-card-inner">
               <div className="shopping-card-flip-front">
-                <Link key={_id} to={`/product/${_id}`} >
+                <Link key={_id} >
                   <div ref={titleRef} className={`shopping-card-title-admin ${title.length > 21 ? "overflow-animation" : ""}`}>
                     {title.toUpperCase()}
                   </div>

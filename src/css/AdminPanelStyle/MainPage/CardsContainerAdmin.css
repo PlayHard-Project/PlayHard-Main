@@ -1,0 +1,101 @@
+/* 
+Container for each card in the administration area.
+*/
+.shopping-card-admin {
+    width: 250px;
+    height: 450px;
+    margin: 20px;
+    background-color: #70a2ff;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .shopping-card-img-admin {
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .shopping-card-title-admin {
+    color: white;
+    margin-left: 5px;
+    font-size: medium;
+    white-space: wrap;
+  }
+  
+  .shopping-card-price-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin-left: 5px;
+    font-size: medium;
+  }
+  
+  .shopping-card-price-admin > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .card-content-admin {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .edit-button {
+    display: flex;
+    align-items: center;
+    background-color: #C3B533;
+    width: 50%;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: larger;
+  }
+  
+  .edit-button svg {
+    margin-left: 15px;
+    margin-right: 12px;
+  }
+  .edit-button:hover {
+    text-decoration: underline;
+  }
+  
+  .delete-button{
+    display: flex;
+    align-items: center;
+    background-color: #E95A5A;
+    width: 50%;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: larger;
+  }
+  
+  .delete-button svg {
+    margin-left: 13px;
+    margin-right: 8px;
+  }
+  
+  .delete-button:hover {
+    text-decoration: underline;
+  }

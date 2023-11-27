@@ -14,12 +14,22 @@ createRoutes(router, Order, "orders");
  * @param {Function} (req, res) - Callback function to handle the route.
  * @returns {void}
  */
-router.get('/orders/user/:userId', (req, res) => {
+router.get('/orders/user/:userId', async (req, res) => {
   const { userId } = req.params;
-  Order
-    .find({ userId })
-    .then((data) => res.json(data))
-    .catch((err) => res.json({ message: err }));
+  const { date } = req.query;
+
+  let query = { userId };
+
+  if (date) {
+    query.createdAt = { $gte: new Date(date), $lt: new Date(date).setDate(new Date(date).getDate() + 1) };
+  }
+
+  try {
+    const orders = await Order.find(query);
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;

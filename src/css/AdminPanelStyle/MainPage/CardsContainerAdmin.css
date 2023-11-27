@@ -8,6 +8,7 @@ Container for each card in the administration area.
     background-color: #70a2ff;
     overflow: hidden;
     position: relative;
+    justify-content: center;
   }
   
   .shopping-card-img-admin {
@@ -100,87 +101,39 @@ Container for each card in the administration area.
   .delete-button:hover {
     background-color: #e57575;
   }
-  @media only screen and (max-width: 675px) {
+  @media only screen and (max-width: 1029px) {
     .shopping-card-admin {
-      width: 220px;
-      height: 400px;
+      width: 260px;
+      height: 515px;
     }
   }
-  @media only screen and (max-width: 615px) {
+  @media only screen and (max-width: 825px) {
     .shopping-card-admin {
-      width: 200px;
-      height: 420px;
+      width: 250px;
+      height: 515px;
     }
   }
-  @media only screen and (max-width: 556px) {
+  @media only screen and (max-width: 800px) {
     .shopping-card-admin {
-      width: 180px;
-      height: 420px;
+      width: 250px;
+      height: 500px;
     }
   }
-  @media only screen and (max-width: 507px) {
+  @media only screen and (max-width:740px) {
     .shopping-card-admin {
-      width: 160px;
-      height: 400px;
-    }
-    .edit-button {
-      width: 50%;
-      height: 35px;
-      font-size: medium;
-    }
-    .edit-button svg {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-    .delete-button {
-      width: 50%;
-      height: 35px;
-      font-size: medium;
-    }
-    .delete-button svg {
-      margin-left: 10px;
-      margin-right: 10px;
+      width: 300px;
+      height: 500px;
     }
   }
-
-  @media only screen and (max-width: 478px) {
+  @media only screen and (max-width:500px) {
     .shopping-card-admin {
-      width: 160px;
-      height: 400px;
-    }
-    .edit-button {
-      width: 50%;
-      height: 35px;
-      font-size: medium;
-    }
-    .edit-button svg {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-    .delete-button {
-      width: 50%;
-      height: 35px;
-      font-size: medium;
-    }
-    .delete-button svg {
-      margin-left: 10px;
-      margin-right: 10px;
+      width: 250px;
+      margin-left: -20px;
     }
   }
-
-@media only screen and (max-width: 460px) {
-  .shopping-card-admin {
-    width: 200px;
-    height: 400px;
+  @media only screen and (max-width:390px) {
+    .shopping-card-admin {
+      width: 240px;
+      margin-left: -50px;
+    }
   }
-  .card-buttons {
-    padding-top: 10px;
-    padding-bottom: 30px;
-  }
-  
-}
-@media only screen and (max-width: 400px) {
-  .shopping-card-admin {
-    margin-left: -30px;
-  }
-}

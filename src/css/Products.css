@@ -22,11 +22,11 @@ Container for all products in the administration and normal area.
 .add-product-link:hover {
     background-color: #a9c8ff;
 }
-@media only screen and (max-width: 567px) {
+@media only screen and (max-width: 410px) {
     .add-product-link {
         font-size: x-large;
         height: 40px;
         width: 40px;
-        margin-right: 30px;
+        margin-right: 5px;
     }
 }

@@ -88,7 +88,7 @@ const orderSchema = new Schema(
         return currentDate;
       },
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );

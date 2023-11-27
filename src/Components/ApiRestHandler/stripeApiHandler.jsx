@@ -8,6 +8,7 @@ import {getElementByID} from "./requestHandler";
 
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const buyCartManager = new BuyCartManagement();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function GoToCheckout({ disabled }) {
 
   const makePayment = async () => {
     try {
+        setIsPaymentProcessing(true);
         setProducts(buyCartManager.getProducts);
 
         const verification = await  buyCartManager.verifyGeneralStock();
@@ -33,7 +35,7 @@ export default function GoToCheckout({ disabled }) {
             const headers = { "Content-Type": "application/json" };
 
             const response = await fetch(
-                "http://localhost:9000/stripe-api/intent-payment",
+                "https://backend-fullapirest-test.onrender.com/stripe-api/intent-payment",
                 {
                     method: "POST",
                     headers: headers,
@@ -57,16 +59,18 @@ export default function GoToCheckout({ disabled }) {
                 console.log(result.error);
             }
         }
+        setIsPaymentProcessing(false);
     } catch (error) {
       console.error("Error making payment:", error);
+      setIsPaymentProcessing(false);
     }
   };
 
   return (
     <button
-      className={`checkout-button ${disabled ? "disabled" : ""}`}
+      className={`checkout-button ${disabled || isPaymentProcessing ? "disabled" : ""}`}
       onClick={makePayment}
-      disabled={disabled}
+      disabled={disabled || isPaymentProcessing}
     >
       Checkout
     </button>

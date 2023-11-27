@@ -10,6 +10,7 @@ import About from './Views/Pages/About.jsx';
 import Products from './Views/Pages/Products.jsx';
 import Contact from './Views/Pages/Contact.jsx';
 import SignIn from './Views/LogIn/Login.jsx';
+import Profile from './Views/Pages/Profile.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
 import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
@@ -68,6 +69,7 @@ export default function App() {
                 <Route path="/admin/add-product" element={<AddProduct/>} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>
             <Footer />

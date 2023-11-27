@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
+import { useNavigate  } from "react-router-dom";
 import "../../css/LogIn/logInStyle.css"
 
 const Login = () => {
+  const navigate  = useNavigate ();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -106,6 +108,7 @@ const Login = () => {
           console.log('Token set in local storage:', tokenSession);
         }
         // Redirect to the '/' page or perform any other actions
+        navigate("/");
       }
     } catch (error) {
       console.error("Error during login:", error);

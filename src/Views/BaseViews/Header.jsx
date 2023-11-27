@@ -16,6 +16,7 @@ import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
 import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
+import { isLoggedIn } from "../../Utilities/auth";
 
 /**
  * Header component for the website.
@@ -226,7 +227,7 @@ const Header = ({
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
             <SearchBar isRedirect={true} setProduct={setProduct}/>
-            <Link to="/sign-up" className="text lg:flex hidden items-center">
+            <Link to= {isLoggedIn() ? "/profile":"/sign-in"} className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
             </Link>
             <div ref={modalRef}>

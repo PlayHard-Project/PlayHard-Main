@@ -262,7 +262,7 @@ const SignUp = () => {
         </div>
         <div style={{ width: "70%", textAlign: "center", marginTop: "10px" }}>
           Have an account?{" "}
-          <Link to="/login" style={{ color: "blue" }}>
+          <Link to="/sign-in" style={{ color: "blue" }}>
             Login
           </Link>
         </div>

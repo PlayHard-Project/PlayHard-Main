@@ -32,6 +32,7 @@ export default function App() {
     const [subTotal, setSubTotal] = useState(0);
     const buyCartManagement = new BuyCartManagement();
 
+
     function ScrollToTop() {
         const { pathname } = useLocation();
 
@@ -56,7 +57,7 @@ export default function App() {
     return (
         <Router>
             <ScrollToTop />
-            <Toaster/>
+            <Toaster position="bottom-center"/>
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />

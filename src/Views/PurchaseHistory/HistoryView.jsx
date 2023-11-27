@@ -1,11 +1,9 @@
-// ShoppingHistory.js
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PurchaseComponent from "./PurchaseComponent";
-import { FaRegTrashAlt, FaCalendarAlt} from "react-icons/fa";
+import { FaRegTrashAlt, FaCalendarAlt } from "react-icons/fa";
 
 import "../../css/PurchaseHistory.css";
 
@@ -17,11 +15,16 @@ const ShoppingHistory = () => {
 
   const handleFilterClick = async () => {
     try {
-      const apiUrl = selectedDate
-        ? `http://localhost:9000/api/orders/user/${idUser}?date=${selectedDate.toISOString()}`
-        : `http://localhost:9000/api/orders/user/${idUser}`;
+      let apiUrl = `http://localhost:9000/api/orders/user/${idUser}`;
 
-        console.log(apiUrl);
+      if (selectedDate) {
+        const dateWithoutTime = new Date(selectedDate);
+        dateWithoutTime.setHours(0, 0, 0, 0);
+        apiUrl += `?date=${dateWithoutTime.toISOString()}`;
+      }
+
+      console.log(apiUrl);
+
       const response = await axios.get(apiUrl);
       setOrders(response.data);
       setKey((prevKey) => prevKey + 1);
@@ -69,9 +72,13 @@ const ShoppingHistory = () => {
         {orders.length === 0 ? (
           <div className="no-history-message-container">
             <label className="title-no-p"> NO PURCHASES FOUND</label>
-            <img className="no-history-icon" src="https://res.cloudinary.com/playhardimages/image/upload/v1701056416/m42rcrshbzghceiqkyut.png" alt="no-found-purchase.png" />
+            <img
+              className="no-history-icon"
+              src="https://res.cloudinary.com/playhardimages/image/upload/v1701056416/m42rcrshbzghceiqkyut.png"
+              alt="no-found-purchase.png"
+            />
             <p className="no-history-text">
-              Oops! There is no purchase made on that date. 
+              Oops! There is no purchase made on that date.
             </p>
           </div>
         ) : (

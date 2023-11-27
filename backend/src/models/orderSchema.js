@@ -82,9 +82,13 @@ const orderSchema = new Schema(
     },
     date: {
       type: Date,
-      default: () => new Date().toLocaleString("en-US", { timeZone: "America/La_Paz" }),
+      default: function () {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        return currentDate;
+      },
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );

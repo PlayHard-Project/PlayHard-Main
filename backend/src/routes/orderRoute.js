@@ -14,14 +14,17 @@ createRoutes(router, Order, "orders");
  * @param {Function} (req, res) - Callback function to handle the route.
  * @returns {void}
  */
-router.get('/orders/user/:userId', async (req, res) => {
+router.get("/orders/user/:userId", async (req, res) => {
   const { userId } = req.params;
   const { date } = req.query;
 
   let query = { userId };
 
   if (date) {
-    query.createdAt = { $gte: new Date(date), $lt: new Date(date).setDate(new Date(date).getDate() + 1) };
+    const dateWithoutTime = new Date(date);
+    dateWithoutTime.setHours(0, 0, 0, 0);
+
+    query.createdAt = dateWithoutTime;
   }
 
   try {

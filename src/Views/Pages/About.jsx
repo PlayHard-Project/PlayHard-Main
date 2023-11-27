@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "../../css/aboutUs.css";
-import { Link } from "react-router-dom";
 import Contact from "../Pages/Contact";
 
 const About = () => {
   const [isContactVisible, setIsContactVisible] = useState(false);
-
   const headerIcon =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1700613652/pstnpenxhiugial3cije.png";
+    "https://res.cloudinary.com/playhardimages/image/upload/v1701087122/About/voa09haeezjlbhmdzs8x.png";
   const missionIcon =
     "https://res.cloudinary.com/playhardimages/image/upload/v1701059968/About/wzn7izmihz6knjxqots2.png";
   const visionIcon =
@@ -19,12 +17,12 @@ const About = () => {
     <div className="about-container">
       <div className="container">
         <div className="container-logo">
+          <h1 className="about-title">About Us</h1>
           <img
             src={headerIcon}
             alt="Icon Main"
             style={{ margin: "auto", display: "block", width: "30%" }}
           />
-          <h1 className="about-title">About Us</h1>
         </div>
         <div className="about-text">
           Welcome to PlayHard, your destination for sports fashion and
@@ -106,20 +104,28 @@ const About = () => {
         </div>
         <div className="contact-section">
           <h2 className="contact-title">Contact Us</h2>
-          <p className="contact-text">Do you have a question or comment? We are here to help you!</p>
-          <button className="contact-button" onClick={() => setIsContactVisible(!isContactVisible)}>
+          <p className="contact-text">
+            Do you have a question or comment? We are here to help you!
+          </p>
+          <button
+            className="contact-button"
+            onClick={() => setIsContactVisible(!isContactVisible)}
+          >
             Contact Us
           </button>
-          <div className={`contact-map-container ${isContactVisible ? "visible" : "hidden"}`}>
+          <div
+            className={`contact-map-container ${
+              isContactVisible ? "visible" : "hidden"
+            }`}
+          >
             {isContactVisible && <Contact />}
             <div className="map-container">
-              {/* Mapa de Google */}
               <iframe
                 title="Google Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d960.8459716780966!2d-66.17527006430572!3d-17.36641240795634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e3744366e94b57%3A0xd8cae80417605d8e!2sJalasoft!5e0!3m2!1ses!2sbo!4v1701029866667!5m2!1ses!2sbo"
-                width="480"
+                width="600"
                 height="438"
-                style={{ border: "0", marginTop:"100px"}}
+                style={{ marginTop: "100px" }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

@@ -25,18 +25,11 @@ const configureAppImplementingStripeServer = (app) => {
   app.use(express.json());
   app.use(cors());
 
-  /**
-   * Endpoint to create a payment session for Stripe Checkout.
-   * @name app.post
-   * @method
-   * @param {string} '/stripe-api/intent-payment' - The path for creating a payment session.
-   * @param {Function} async (req, res) - Async callback function to handle the route.
-   * @returns {void}
-   */
+
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest.onrender.com/api/products/${productId}`
+        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -49,6 +42,14 @@ const configureAppImplementingStripeServer = (app) => {
     }
   };
 
+  /**
+   * Endpoint to create a payment session for Stripe Checkout.
+   * @name app.post
+   * @method
+   * @param {string} '/stripe-api/intent-payment' - The path for creating a payment session.
+   * @param {Function} async (req, res) - Async callback function to handle the route.
+   * @returns {void}
+   */
   app.post("/stripe-api/intent-payment", async (req, res) => {
     const customer = await stripeGateway.customers.create({
       metadata: {
@@ -83,8 +84,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
+        success_url: "http://localhost:3000/success-payment-status",
+        cancel_url: "http://localhost:3000/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });

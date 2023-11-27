@@ -6,10 +6,18 @@ import '../../css/CartShop.css';
 import toast from "react-hot-toast";
 import {getElementByID} from "./requestHandler";
 
-// Functional component for the checkout button
 export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
   const buyCartManager = new BuyCartManagement();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const productsArray = await new BuyCartManagement().getProducts();
+      setProducts(productsArray);
+    };
+    fetchData();
+  }, []);
+
 
   const makePayment = async () => {
     try {
@@ -25,7 +33,7 @@ export default function GoToCheckout({ disabled }) {
             const headers = { "Content-Type": "application/json" };
 
             const response = await fetch(
-                "https://backend-fullapirest.onrender.com/stripe-api/intent-payment",
+                "http://localhost:9000/stripe-api/intent-payment",
                 {
                     method: "POST",
                     headers: headers,
@@ -36,7 +44,10 @@ export default function GoToCheckout({ disabled }) {
             if (!response.ok) {
                 throw new Error(`Server returned status ${response.status}`);
             } else {
-                buyCartManager.madePurchase();
+                localStorage.setItem("reversible", true);
+                if (buyCartManager.madePurchase()) {
+
+                }
             }
 
             const session = await response.json();
@@ -51,7 +62,6 @@ export default function GoToCheckout({ disabled }) {
     }
   };
 
-  // Render the checkout button
   return (
     <button
       className={`checkout-button ${disabled ? "disabled" : ""}`}

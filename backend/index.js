@@ -1,6 +1,7 @@
 const express = require('express');
 const configureAppImplementingMongoDBServer = require('./src/serverBDMongo');
 const configureAppImplementingStripeServer = require('./src/serverStripe');
+const configureAppImplementingEmailApi = require('./src/serverEmail');
 
 /**
  * Express application instance.
@@ -23,6 +24,14 @@ configureAppImplementingMongoDBServer(app);
  * @returns {void}
  */
 configureAppImplementingStripeServer(app);
+
+/**
+ * Configure the Express application to implement Email server functionality.
+ * @function
+ * @param {Object} app - Express application instance.
+ * @returns {void}
+ */
+configureAppImplementingEmailApi(app);
 
 /**
  * Start the Express application and listen on the specified port.

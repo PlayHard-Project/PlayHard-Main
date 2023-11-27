@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { isLoggedIn } from "../../Utilities/auth";
+import { isLoggedIn, isUserAdmin } from "../../Utilities/auth";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -30,6 +30,7 @@ const Profile = () => {
           <p>ID: {userData._id}</p>
           <p>Name: {userData.name}</p>
           <p>Email: {userData.email}</p>
+          <p>isAdmin: {isUserAdmin() ? "Yes" : "No"}</p>
           <button onClick={handleLogout}
           style={{ backgroundColor: 'red', color: 'white' }}
           >Logout</button>

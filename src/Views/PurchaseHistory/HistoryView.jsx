@@ -22,9 +22,7 @@ const ShoppingHistory = () => {
         dateWithoutTime.setUTCHours(0, 0, 0, 0);
         apiUrl += `?date=${dateWithoutTime.toISOString()}`;
       }
-
-      console.log(apiUrl);
-
+      
       const response = await axios.get(apiUrl);
       setOrders(response.data);
       setKey((prevKey) => prevKey + 1);

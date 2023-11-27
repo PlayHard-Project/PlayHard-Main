@@ -14,7 +14,6 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
-import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
 
 /**
@@ -167,9 +166,10 @@ const Header = ({
 
   const paths = [
     { link: "/", title: "Home" },
-    { link: "/about", title: "About" },
+    { link: "/about", title: "About Us" },
     { link: "/products", title: "Products" },
-    { link: "/contact", title: "Contact" },
+    { link: "/contact", title: "Contact Us" },
+    { link: "/admin", title: "Admin" },
   ];
 
   const modalRef = useRef();
@@ -212,16 +212,6 @@ const Header = ({
                     ]}
                 />
               </div>
-              <div ref={modalAdminRef}>
-                <ModalAdminPanel
-                    sectionText={"Admin"}
-                    onRequestOpen={handleAdminModal}
-                    isOpen={isAdminModalOpen}
-                    onRequestClose={handleCloseAdminModal}
-                    modalRef={modalAdminRef}
-                />
-              </div>
-
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
@@ -282,7 +272,7 @@ const Header = ({
                   >
                     Shop Cart
                   </Link>
-                  <div className="relative flex items-center text-link">Settings</div>
+                  <Link to="/history" className="relative flex items-center text-link" onClick={toggleMenu}>Settings</Link>
                 </div>
             )}
             {showCategoriesPopup && (

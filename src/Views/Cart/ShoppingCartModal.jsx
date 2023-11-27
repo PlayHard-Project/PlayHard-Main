@@ -83,8 +83,9 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <p className="mr-4 mt-14 font-extrabold justify-center align-middle">The cart is empty</p>
                         ) : (
                             <>
-                                {items.map((item) => (
+                                {items.map((item, index) => (
                                     <ItemCart
+                                        key={index}
                                         productID={item.id}
                                         size={item.size}
                                         color={item.color}

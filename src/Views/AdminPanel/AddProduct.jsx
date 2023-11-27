@@ -233,8 +233,6 @@ const AddProduct = () => {
       inStock: stockInformation
     };
 
-    //HOLADIABLO
-
     try {
       const response = await addElement(product, '/products');
       console.log(response);
@@ -334,13 +332,8 @@ const AddProduct = () => {
                        colorInformation={colorInformation} sizeInformation={sizeInformation}/>
           </div>
         </div>
-
-
-
-
-
       <div className="buttons-container">
-        <button className="styleButton button-cancel" onClick={() => navigate('/')}>Cancel</button>
+        <button className="styleButton button-cancel" onClick={() => navigate('/admin')}>Cancel</button>
         <button className="styleButton button-add"  onClick={() => {
                             handleAddProduct();
                             handleAddProductMessages();

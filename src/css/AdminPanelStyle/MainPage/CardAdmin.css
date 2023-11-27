@@ -1,0 +1,15 @@
+/* 
+Container for cards in the administration area.
+*/
+.card-container-admin {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: -2;
+    cursor: default;
+    justify-content: center;
+}
+@media only screen and (max-width: 400px) {
+  .card-container-admin {
+    margin-left: 40px;
+  }
+}

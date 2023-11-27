@@ -49,7 +49,7 @@ const Login = () => {
     return requirements;
   };
 
-  const handleSignUp = () => {
+  const handleSignIn = async () => {
     const passwordRequirements = validatePassword();
 
     if (!email) {
@@ -63,10 +63,6 @@ const Login = () => {
           position: "bottom-right",
         }
       );
-    } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-      toast.error("Please enter a valid email address.", {
-        position: "bottom-right",
-      });
     } else if (!password) {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
@@ -79,8 +75,41 @@ const Login = () => {
       toast.error("Please enter a valid password.", {
         position: "bottom-right",
       });
-    } else {
-      toast.success(`Login successful for ${email}!`, {
+    }
+
+    // HERE WORK WITH BACKEND AND SENT email AND password, then set the token in local storage and redirect to the '/' page
+    try {
+      const response = await fetch('http://localhost:9000/api/sign-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+    
+      if (!response.ok) {
+        console.log('Si entro al error');
+        const errorData = await response.json();  // Assuming your backend sends an error object
+        toast.error(errorData.error || 'Login failed. Please check your credentials.', {
+          position: 'bottom-right',
+        });
+      } else {
+        const data = await response.json();
+        // Assuming your backend sends a token in the response
+        const { tokenSession } = data;
+        if (tokenSession) {
+          // Set the token in local storage
+          localStorage.setItem('token', tokenSession);
+          console.log('Token set in local storage:', tokenSession);
+        }
+        // Redirect to the '/' page or perform any other actions
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("An error occurred during login. Please try again.", {
         position: "bottom-right",
       });
     }
@@ -109,7 +138,7 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <button className="button-signup" onClick={handleSignUp}>
+        <button className="button-signup" onClick={handleSignIn}>
           Login
         </button>
         <div style={{ width: "70%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>

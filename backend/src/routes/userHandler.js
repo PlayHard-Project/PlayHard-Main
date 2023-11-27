@@ -1,9 +1,5 @@
 const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { tokenSign, verifyToken } = require('../models/middelware/generateToken')
-const { encrypt, compare } = require('../models/middelware/handleBcrypt')
-const cookie = require('cookie');
 
 /**
  * Creates routes for handling user-related operations.
@@ -133,84 +129,7 @@ async function createRoutes(router, model, baseRoute) {
     });
 }
 
-/**
- * Handle all login validations and responses.
- *
- * @param {request} req - The request handled by the login api.
- * @param {response} res - The response after API process the request.
- * @returns {json} A token if it was succesful or an error if not.
- */
-const login = async (req, res) => {
-    try {
-        const { email, password } = req.body
-
-        const user = await User.findOne({ email })
-
-        if (!user) {
-            res.status(404)
-            res.send({ error: 'User not found' })
-        }
-
-        const checkPassword = await compare(password, user.password)
-        const tokenSession = await tokenSign(user)
-        //console.log(tokenSession) SE GENERA BIEN
-
-        if (checkPassword) { //TODO Contraseña es correcta!
-            res.send({
-                data: user,
-                tokenSession
-            })
-            return
-        }
-
-        if (!checkPassword) {
-            res.status(409)
-            res.send({
-                error: 'Invalid password'
-            })
-            return
-        }
-
-    } catch (e) {
-        httpError(res, e)
-    }
-}
-
-const getUser = async (req, res) => {
-    try {
-        // Access the tokenData stored in the req object during storeTokenData
-        const tokenData = req.tokenData;
-
-        // Return only the tokenData
-        res.send({ tokenData });
-    } catch (e) {
-        httpError(res, e);
-    }
-}
-
-const storeTokenData = async (req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(' ').pop();
-        const tokenData = await verifyToken(token);
-
-        console.log(tokenData);
-
-        if (tokenData._id) {
-            // Store tokenData in the req object for later access in getUser
-            req.tokenData = tokenData;
-            next();
-        } else {
-            res.send({ tokenData });
-        }
-    } catch (e) {
-        console.log(e);
-        res.send({ error: 'Do not have permissions!' });
-    }
-}
 
 module.exports = {
     createRoutes,
-    login,
-    getUser,
-    storeTokenData
 };

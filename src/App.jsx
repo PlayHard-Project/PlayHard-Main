@@ -9,7 +9,7 @@ import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
 import Products from './Views/Pages/Products.jsx';
 import Contact from './Views/Pages/Contact.jsx';
-import Login from './Views/Pages/Login.jsx';
+import SignIn from './Views/LogIn/Login.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
 import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
@@ -67,6 +67,7 @@ export default function App() {
                 <Route path="/history" element={<HistoryView />} />
                 <Route path="/admin/add-product" element={<AddProduct/>} />
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
             </Routes>
             <Footer />

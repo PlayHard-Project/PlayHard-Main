@@ -19,7 +19,7 @@ const ShoppingHistory = () => {
 
       if (selectedDate) {
         const dateWithoutTime = new Date(selectedDate);
-        dateWithoutTime.setHours(0, 0, 0, 0);
+        dateWithoutTime.setUTCHours(0, 0, 0, 0);
         apiUrl += `?date=${dateWithoutTime.toISOString()}`;
       }
 

@@ -25,7 +25,6 @@ const CartComponent = ({ productFromOrder, color }) => {
 
   return (
     <>
-      {console.log(color)}
       {loading ? (
       <div className= {"flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"}>
         <GridLoader color="#023fc5" />

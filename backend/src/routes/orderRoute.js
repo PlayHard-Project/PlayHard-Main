@@ -22,13 +22,14 @@ router.get("/orders/user/:userId", async (req, res) => {
 
   if (date) {
     const dateWithoutTime = new Date(date);
-    dateWithoutTime.setHours(0, 0, 0, 0);
+    dateWithoutTime.setUTCHours(0, 0, 0, 0);
 
     query.createdAt = dateWithoutTime;
   }
 
   try {
-    const orders = await Order.find(query);
+    const orders = await Order.find(query)
+    .sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: err.message });

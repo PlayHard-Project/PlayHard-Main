@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import "../../css/aboutUs.css";
 import Contact from "../Pages/Contact";
+import { LiaEye } from "react-icons/lia";
+import { GiNotebook } from "react-icons/gi";
+import { GoGoal } from "react-icons/go";
 
 const About = () => {
   const [isContactVisible, setIsContactVisible] = useState(false);
   const headerIcon =
     "https://res.cloudinary.com/playhardimages/image/upload/v1701087122/About/voa09haeezjlbhmdzs8x.png";
-  const missionIcon =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1701059968/About/wzn7izmihz6knjxqots2.png";
-  const visionIcon =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1701059968/About/qbxsopby3msylgumtlxl.png";
-  const planIcon =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1701059967/About/akbeymgvnpfgaixkoxdj.png";
 
   return (
     <div className="about-container">
@@ -33,9 +30,7 @@ const About = () => {
         </div>
         <div className="about-content">
           <div className="column">
-            <div className="icon">
-              <img src={missionIcon} alt="Icon Mission" />
-            </div>
+            <GoGoal className="icon"/>
             <h2 className="about-subtitle">Mission</h2>
             <p className="about-subtext">
               At PlayHard, we are committed to providing our customers with the
@@ -47,9 +42,7 @@ const About = () => {
           </div>
 
           <div className="column">
-            <div className="icon">
-              <img src={visionIcon} alt="Icon Mission" />
-            </div>
+              <LiaEye className="icon" />
             <h2 className="about-subtitle">Vision</h2>
             <p className="about-subtext">
               At PlayHard, our vision is to empower individuals to embrace an
@@ -59,16 +52,12 @@ const About = () => {
               potential through the fusion of performance and fashion. In this
               vision, we see a community united by a passion for movement, where
               every purchase is a step towards self-expression and
-              self-improvement. Together, we envision a world where the thrill
-              of the game meets the elegance of design, and where everyone can
-              look, feel, and perform at their absolute best.
+              self-improvement.
             </p>
           </div>
 
           <div className="column">
-            <div className="icon">
-              <img src={planIcon} alt="Icon Mission" />
-            </div>
+            <GiNotebook className="icon" />
             <h2 className="about-subtitle">Plan</h2>
             <p className="about-subtext">
               PlayHard prioritizes creating a strong brand presence through
@@ -76,10 +65,7 @@ const About = () => {
               Focused on storytelling, we showcase the quality and versatility
               of our sports apparel. Targeted advertising campaigns, data
               analytics, and personalized promotions are key elements to engage
-              our audience and build lasting relationships. Our sales strategy
-              emphasizes a seamless online shopping experience, competitive
-              pricing, and strategic partnerships to enhance visibility and
-              customer acquisition.
+              our audience and build lasting relationships.
             </p>
           </div>
         </div>

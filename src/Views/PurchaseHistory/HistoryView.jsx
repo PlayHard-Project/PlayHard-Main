@@ -5,6 +5,8 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PurchaseComponent from "./PurchaseComponent";
+import { FaRegTrashAlt, FaCalendarAlt} from "react-icons/fa";
+
 import "../../css/PurchaseHistory.css";
 
 const ShoppingHistory = () => {
@@ -12,7 +14,6 @@ const ShoppingHistory = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [key, setKey] = useState(0);
   const idUser = "123";
-  const noHistoryMessage = "No hay historial de compra.";
 
   const handleFilterClick = async () => {
     try {
@@ -20,6 +21,7 @@ const ShoppingHistory = () => {
         ? `http://localhost:9000/api/orders/user/${idUser}?date=${selectedDate.toISOString()}`
         : `http://localhost:9000/api/orders/user/${idUser}`;
 
+        console.log(apiUrl);
       const response = await axios.get(apiUrl);
       setOrders(response.data);
       setKey((prevKey) => prevKey + 1);
@@ -39,41 +41,48 @@ const ShoppingHistory = () => {
   return (
     <div className="container">
       <section className="header-1">
-        <h1>Shopping History</h1>
-        <h2>
-          User ID:<span>{idUser}</span>
-        </h2>
-      </section>
-      <div className="datepicker-container">
-        <DatePicker
-          className="custom-datepicker"
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="yyyy-MM-dd"
-          placeholderText="Select a date"
-          // Añade el estilo para el DatePicker
-          wrapperClassName="datepicker-wrapper"
-        />
-        {selectedDate && (
+        <div className="header-text">
+          <h1>Shopping History</h1>
+          <h2>
+            User ID:<span>{idUser}</span>
+          </h2>
+        </div>
+        <div className="datepicker-container">
+          <DatePicker
+            className="custom-datepicker"
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
+            wrapperClassName="datepicker-wrapper"
+          />
           <button
             className="clear-filter-button"
             onClick={handleClearDate}
-            disabled={false}
+            disabled={!selectedDate}
           >
-            Limpiar Fecha
+            {selectedDate ? <FaRegTrashAlt /> : <FaCalendarAlt />}
           </button>
+        </div>
+      </section>
+      <div className="content-container">
+        {orders.length === 0 ? (
+          <div className="no-history-message-container">
+            <label className="title-no-p"> NO PURCHASES FOUND</label>
+            <img className="no-history-icon" src="https://res.cloudinary.com/playhardimages/image/upload/v1701056416/m42rcrshbzghceiqkyut.png" alt="no-found-purchase.png" />
+            <p className="no-history-text">
+              Oops! There is no purchase made on that date. 
+            </p>
+          </div>
+        ) : (
+          orders.map((order) => (
+            <PurchaseComponent
+              key={`${order._id + order.paymentIntentId}-${key}`}
+              idOrder={order._id}
+            />
+          ))
         )}
       </div>
-      {orders.length === 0 ? (
-        <p>{noHistoryMessage}</p>
-      ) : (
-        orders.map((order) => (
-          <PurchaseComponent
-            key={`${order._id + order.paymentIntentId}-${key}`}
-            idOrder={order._id}
-          />
-        ))
-      )}
     </div>
   );
 };

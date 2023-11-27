@@ -82,9 +82,10 @@ const orderSchema = new Schema(
     },
     date: {
       type: Date,
-      default: function () {
+      ddefault: function () {
         const currentDate = new Date();
         currentDate.setUTCHours(0, 0, 0, 0);
+        console.log(currentDate);
         return currentDate;
       },
       required: true,

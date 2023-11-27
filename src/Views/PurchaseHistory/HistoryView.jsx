@@ -15,7 +15,7 @@ const ShoppingHistory = () => {
 
   const handleFilterClick = async () => {
     try {
-      let apiUrl = `http://localhost:9000/api/orders/user/${idUser}`;
+      let apiUrl = `https://backend-fullapirest.onrender.com/api/orders/user/${idUser}`;
 
       if (selectedDate) {
         const dateWithoutTime = new Date(selectedDate);

@@ -5,10 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import "../../css/SignUp/signUpStyle.css";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const navigate  = useNavigate ();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,18 +27,12 @@ const SignUp = () => {
           position: "bottom-right",
         });
       }
-      if (
-        value === "" ||
-        /^[^\s@#$%",ç^&*()+={}|<>]+$/i.test(truncatedValue)
-      ) {
+      if (value === "" || /^[^\s@#$%",ç^&*()+={}|<>]+$/i.test(truncatedValue)) {
         setName(truncatedValue);
       } else {
-        toast.error(
-          "The name cannot contain special characters or spaces.",
-          {
-            position: "bottom-right",
-          }
-        );
+        toast.error("The name cannot contain special characters or spaces.", {
+          position: "bottom-right",
+        });
       }
     } else if (name === "email") {
       if (!/\s/.test(value)) {
@@ -114,31 +108,36 @@ const SignUp = () => {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!passwordRequirements.minLength ||
+    } else if (
+      !passwordRequirements.minLength ||
       !passwordRequirements.hasNumber ||
       !passwordRequirements.hasSpecialChar ||
       !passwordRequirements.hasUpperCase ||
       !passwordRequirements.hasLowerCase ||
-      password.includes(" ")) {
+      password.includes(" ")
+    ) {
       toast.error("Please enter a valid password", {
         position: "bottom-right",
       });
     }
 
-    //Created POST request 
+    //Created POST request
     try {
-      const response = await fetch('https://backend-fullapirest.onrender.com/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          isAdmin: "false",
-        }),
-      });
+      const response = await fetch(
+        "https://backend-fullapirest.onrender.com/api/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            isAdmin: "false",
+          }),
+        }
+      );
 
       const responseData = await response.json();
 
@@ -150,6 +149,7 @@ const SignUp = () => {
         toast.success(`Sign Up successful for ${name}!`, {
           position: "bottom-right",
         });
+        signInAfterSignUp();
         navigate("/");
       }
     } catch (error) {
@@ -157,6 +157,31 @@ const SignUp = () => {
       toast.error("An error occurred during signup. Please try again.", {
         position: "bottom-right",
       });
+    }
+  };
+
+  // HANDLES LOGIN 
+  const signInAfterSignUp = async () => {
+    try {
+      const response = await fetch("http://localhost:9000/api/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const data = await response.json();
+      const { tokenSession } = data;
+      if (tokenSession) {
+        localStorage.setItem("token", tokenSession);
+        console.log("Token set in local storage:", tokenSession);
+      }
+      navigate("/");
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
 
@@ -209,7 +234,11 @@ const SignUp = () => {
               className="toggle-password"
               onClick={toggleShowPassword}
             >
-              {showPassword ? <BiSolidHide style={{ marginLeft: "10px", fontSize: '26px' }} /> : <BiShow style={{ marginLeft: "10px", fontSize: '26px' }} />}
+              {showPassword ? (
+                <BiSolidHide style={{ marginLeft: "10px", fontSize: "26px" }} />
+              ) : (
+                <BiShow style={{ marginLeft: "10px", fontSize: "26px" }} />
+              )}
             </button>
           </div>
           {showPasswordRequirements && (
@@ -241,9 +270,16 @@ const SignUp = () => {
           )}
         </div>
         <button className="button-signup" onClick={handleSignUp}>
-            Sign Up
+          Sign Up
         </button>
-        <div style={{ width: "70%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
+        <div
+          style={{
+            width: "70%",
+            textAlign: "center",
+            marginTop: "50px",
+            marginBottom: "50px",
+          }}
+        >
           or
         </div>
         <div style={{ width: "70%", textAlign: "center", marginTop: "10px" }}>

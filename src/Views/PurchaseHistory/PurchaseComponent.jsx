@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 import CartComponent from "./CartComponent";
 import "../../css/PurchaseComponent.css";
+import { GridLoader } from "react-spinners";
 
 export default function PurchaseComponent({ idOrder }) {
   const [order, setOrder] = useState(null);
@@ -37,7 +38,13 @@ export default function PurchaseComponent({ idOrder }) {
   return (
     <div className="purchase-component">
       {loading ? (
-        <span>Loading....</span>
+        <div
+          className={
+            "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+          }
+        >
+          <GridLoader color="#023fc5" />
+        </div>
       ) : error || !order ? (
         <span>Error loading order.</span>
       ) : (

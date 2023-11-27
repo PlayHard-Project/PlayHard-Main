@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
 import "../../css/CartComponent.css";
+import { GridLoader } from "react-spinners";
 
 const CartComponent = ({ productFromOrder, color }) => {
   const [product, setProduct] = useState(null);
@@ -26,7 +27,9 @@ const CartComponent = ({ productFromOrder, color }) => {
     <>
       {console.log(color)}
       {loading ? (
-        <span>Loading...</span>
+      <div className= {"flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"}>
+        <GridLoader color="#023fc5" />
+      </div>
       ) : (
         <div className="product-container" key={productFromOrder._id}>
           <section className="image-section">
@@ -40,10 +43,6 @@ const CartComponent = ({ productFromOrder, color }) => {
           <section className="text-section1">
             <label className="sub-title1">Name</label>
             <label className="text1">{product.name}</label>
-          </section>
-          <section className="text-section1">
-            <label className="sub-title1">Description</label>
-            <label className="text1">{product.description}</label>
           </section>
           <section className="text-section1">
             <label className="sub-title1">Quantity</label>

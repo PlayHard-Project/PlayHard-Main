@@ -23,15 +23,14 @@ router.get("/orders/user/:userId", async (req, res) => {
   if (date) {
     const dateWithoutTime = new Date(date);
     dateWithoutTime.setUTCHours(0, 0, 0, 0);
-
-    query.createdAt = dateWithoutTime;
+    query.date = dateWithoutTime;
   }
 
   try {
-    const orders = await Order.find(query)
-    .sort({ createdAt: -1 });
+    const orders = await Order.find(query).sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
+    console.error("Error fetching orders:", err);
     res.status(500).json({ message: err.message });
   }
 });

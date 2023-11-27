@@ -18,7 +18,7 @@ export default function PurchaseComponent({ idOrder }) {
 
         const inputDate = orderC.date;
         const dateObject = new Date(inputDate);
-
+        dateObject.setDate(dateObject.getDate() + 1);
         const options = { year: "numeric", month: "short", day: "numeric" };
         const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
           dateObject

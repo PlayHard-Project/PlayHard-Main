@@ -82,9 +82,9 @@ const ShoppingHistory = () => {
             </p>
           </div>
         ) : (
-          orders.map((order) => (
+          orders.map((order, index) => (
             <PurchaseComponent
-              key={`${order._id + order.paymentIntentId}-${key}`}
+              key={`${order._id}-${index}`}
               idOrder={order._id}
             />
           ))

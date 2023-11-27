@@ -84,7 +84,7 @@ const orderSchema = new Schema(
       type: Date,
       default: function () {
         const currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
+        currentDate.setUTCHours(0, 0, 0, 0);
         return currentDate;
       },
       required: true,

@@ -63,7 +63,7 @@ const SignUp = () => {
     const requirements = {
       minLength: password.length >= 6,
       hasNumber: /\d/.test(password),
-      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      hasSpecialChar: /[!@#$%^&*(),.?:{}|<>]/.test(password),
       hasUpperCase: /[A-Z]/.test(password),
       hasLowerCase: /[a-z]/.test(password),
     };
@@ -142,9 +142,7 @@ const SignUp = () => {
       const responseData = await response.json();
 
       if (responseData.error) {
-        toast.error(responseData.error, {
-          position: "bottom-right",
-        });
+        console.log(responseData.error);
       } else {
         toast.success(`Sign Up successful for ${name}!`, {
           position: "bottom-right",
@@ -254,7 +252,7 @@ const SignUp = () => {
                 </li>
                 <li
                   className={
-                    /[!@#$%^&*(),.?":{}|<>]/.test(password) ? "valid" : ""
+                    /[!@#$%^&*(),.?:{}|<>]/.test(password) ? "valid" : ""
                   }
                 >
                   At least 1 special character

@@ -20,15 +20,26 @@ function ColorComponent({ id, onDelete, setColorInformation}) {
     }
 
     const handleAddImage = () => {
-        if (input && !input.startsWith("http://") && !input.startsWith("https://") && !input.startsWith("data:image/")) {
-            toast.error("La URL de la imagen debe comenzar con 'http://', 'https://' o 'data:image/'", {
-              position: "bottom-right",
+        const trimmedInput = input.trim();
+
+        // Check if the input is empty or contains only spaces.
+        if (!trimmedInput) {
+            toast.error("The input field cannot be empty or contain only spaces.", {
+                position: "bottom-right",
             });
             return;
-          }
+        }
+
+        if (!trimmedInput.startsWith("http://") && !trimmedInput.startsWith("https://") && !trimmedInput.startsWith("data:image/")) {
+            toast.error("The image URL should start with 'http://', 'https://' o 'data:image/'", {
+                position: "bottom-right",
+            });
+            return;
+        }
+
         if (!isDisabled) {
-            setImage(input);
-            setInput('');
+            setImage(trimmedInput);
+            setInput("");
         }
     };
 

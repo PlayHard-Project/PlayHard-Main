@@ -4,12 +4,6 @@ import BuyCartManagement from '../../Utilities/BuyCartManagement'
 import ClipLoader from "react-spinners/ClipLoader";
 import {GridLoader, MoonLoader} from "react-spinners";
 
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
-
 function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
   const [product, setProduct] = useState(null);
   const [activeImg, setActiveImg] = useState(null);
@@ -55,7 +49,7 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
     return (
         <div
             className={
-              "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
+              "flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
             }
         >
           {/* Display a loading spinner with the specified color */}

@@ -97,7 +97,7 @@ export default function BrandsSection() {
                 {/* Loading component container with a loading spinner */}
                 <div
                     className={
-                        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+                        "flex flex-col items-center justify-center p-3 gap-16 container"
                     }
                 >
                     <GridLoader color="#023fc5" />

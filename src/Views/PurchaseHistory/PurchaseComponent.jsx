@@ -55,7 +55,7 @@ export default function PurchaseComponent({ idOrder, indexOrder }) {
             <div>
               <div className="text-container1">
                 <h2 className="header-title-sub">Order Nº:</h2>
-                <label>{indexOrder + 1}</label>
+                <label>{order.orderCount}</label>
               </div>
               <div className="text-container1">
                 <h2 className="header-title-sub">Date:</h2>

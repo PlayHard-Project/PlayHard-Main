@@ -3,16 +3,33 @@ POST https://backend-fullapirest.onrender.com/api/orders HTTP/1.1
 Content-Type: application/json
 
 {
-  "user": "654b93f5b4182ff7f5a41a06",
-  "isDelivered": true,
-  "date": "2023-05-22",
-  "shippingAddress": "JalaSoft, Cochabamba, Bolivia",
-  "boughtProducts": [
-    "654b904eb4182ff7f5a419ec",
-    "654b9486b4182ff7f5a41a08"
+  "userId": "123",
+  "customerId": "qqqqqq",
+  "paymentIntentId": "id_del_intentodepago",
+  "products": [
+    {
+      "id": "654c436360c78adccb61fbdc",
+      "quantity": 2,
+      "size": "XL",
+      "color": "rojo"
+    }
   ],
-  "total": null
+  "subtotal": 100.50,
+  "total": 120.00,
+  "delivery_status": "pending",
+  "payment_status": "paid",
+  "shippingAddress": {
+    "avenue1": "Calle Principal",
+    "avenue2": "s/n",
+    "city": "Ciudad Principal",
+    "country": "País Principal"
+  },
+  "userInformation": {
+    "name": "Nombre del Usuario",
+    "email": "usuario@example.com"
+  }
 }
+
 
 ###
 GET http://localhost:9000/api/orders HTTP/1.1

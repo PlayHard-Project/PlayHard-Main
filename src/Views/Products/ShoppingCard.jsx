@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import "../../css/ShoppingCard.css";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
+import {getElementByID} from "../../Components/ApiRestHandler/requestHandler";
+import toast from "react-hot-toast";
 
 const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuantity, setSubTotal }) => {
   const titleRef = useRef();
@@ -25,13 +27,16 @@ const Card = ({ _id, img, title, price, colorInformation, size, setCartItemsQuan
     setSelectedSizeButton(buttonNumber === selectedSizeButton ? null : buttonNumber);
   };
 
-  const addProductFromCart = ( _id, size, color ) => {
-    buyCartManagement.addProduct(_id, 1, size, color);
-    setCartItemsQuantity(buyCartManagement.getProducts().length);
-    const subTotalPromise = buyCartManagement.getSubTotal();
-    subTotalPromise.then((element) => {
-      setSubTotal(element);
-    });
+  const addProductFromCart = async ( _id, size, color ) => {
+    const product = await getElementByID(_id, "products")
+    if ((product.inStock[size][color] - buyCartManagement.getQuantityOrdered(_id, size, color)) > 0) {
+      buyCartManagement.addProduct(_id, 1, size, color);
+      setCartItemsQuantity(buyCartManagement.getProducts().length);
+      const subtotal = await buyCartManagement.getSubTotal();
+      setSubTotal(subtotal);
+    } else {
+      toast('This product is sold out', {icon: '📉'})
+    }
   }
 
   useEffect(() => {

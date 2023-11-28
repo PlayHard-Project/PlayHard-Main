@@ -1,7 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PaymentStatus from "./PaymentStatus";
+import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const FailedPayment = () => {
+
+  useEffect(() => {
+    revert();
+  }, []);
+
+  const revert = () => {
+    console.log("CARGADO AL PRINCIPIO");
+
+    if (localStorage.getItem("reversible") === "true") {
+      console.log("REVIRTIENDO");
+      const buyManager = new BuyCartManagement();
+      buyManager.revertPurchase().then(r => {
+        localStorage.setItem("reversible", false);
+      });
+    }
+  }
+
   return (
     <PaymentStatus
       title="Something Went Wrong!"

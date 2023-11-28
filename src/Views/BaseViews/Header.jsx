@@ -14,8 +14,8 @@ import ModalAdminOptions from "../HeaderOptions/ModalAdminOptions";
 import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
-import ModalAdminPanel from "../AdminPanel/ModalAdminPanel";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
+import { isLoggedIn } from "../../Utilities/auth";
 
 /**
  * Header component for the website.
@@ -167,9 +167,10 @@ const Header = ({
 
   const paths = [
     { link: "/", title: "Home" },
-    { link: "/about", title: "About" },
+    { link: "/about", title: "About Us" },
     { link: "/products", title: "Products" },
-    { link: "/contact", title: "Contact" },
+    { link: "/contact", title: "Contact Us" },
+    { link: "/admin", title: "Admin" },
   ];
 
   const modalRef = useRef();
@@ -212,21 +213,11 @@ const Header = ({
                     ]}
                 />
               </div>
-              <div ref={modalAdminRef}>
-                <ModalAdminPanel
-                    sectionText={"Admin"}
-                    onRequestOpen={handleAdminModal}
-                    isOpen={isAdminModalOpen}
-                    onRequestClose={handleCloseAdminModal}
-                    modalRef={modalAdminRef}
-                />
-              </div>
-
             </div>
           </div>
           <div className="lg:flex hidden space-x-4 items-center">
             <SearchBar isRedirect={true} setProduct={setProduct}/>
-            <Link to="/sign-up" className="text lg:flex hidden items-center">
+            <Link to= {isLoggedIn() ? "/profile":"/sign-in"} className="text lg:flex hidden items-center">
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
             </Link>
             <div ref={modalRef}>
@@ -282,7 +273,7 @@ const Header = ({
                   >
                     Shop Cart
                   </Link>
-                  <div className="relative flex items-center text-link">Settings</div>
+                  <Link to="/history" className="relative flex items-center text-link" onClick={toggleMenu}>Settings</Link>
                 </div>
             )}
             {showCategoriesPopup && (

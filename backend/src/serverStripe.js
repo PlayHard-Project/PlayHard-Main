@@ -1,5 +1,5 @@
 const { Order } = require("./models/orderSchema");
-const { Invoice } = require('./html_templates/invoice.js');
+const { Invoice } = require("./html_templates/invoice.js");
 
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
@@ -25,14 +25,6 @@ const configureAppImplementingStripeServer = (app) => {
   app.use(express.json());
   app.use(cors());
 
-  /**
-   * Endpoint to create a payment session for Stripe Checkout.
-   * @name app.post
-   * @method
-   * @param {string} '/stripe-api/intent-payment' - The path for creating a payment session.
-   * @param {Function} async (req, res) - Async callback function to handle the route.
-   * @returns {void}
-   */
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
@@ -49,6 +41,14 @@ const configureAppImplementingStripeServer = (app) => {
     }
   };
 
+  /**
+   * Endpoint to create a payment session for Stripe Checkout.
+   * @name app.post
+   * @method
+   * @param {string} '/stripe-api/intent-payment' - The path for creating a payment session.
+   * @param {Function} async (req, res) - Async callback function to handle the route.
+   * @returns {void}
+   */
   app.post("/stripe-api/intent-payment", async (req, res) => {
     const customer = await stripeGateway.customers.create({
       metadata: {
@@ -83,8 +83,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-main.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });
@@ -117,20 +117,37 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const saveOrder = await newOrder.save();
-      console.log("Processed Order: ", saveOrder);
+      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newOrder),
+      });
 
-      const myInvoice = new Invoice();
-      const htmlFile = await myInvoice.generateHTML();
-      try {
-        await sendMail(
-          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
-          console.log("Email sent successfully");
-      } catch (error) {
-        console.error("Error sending email:", error.message);
+      if (respuesta.ok) {
+        const saveOrder = await respuesta.json();
+        console.log("Orden procesada:", saveOrder);
+
+        const myInvoice = new Invoice();
+        const htmlFile = await myInvoice.generateHTML();
+        try {
+          await sendMail(
+            saveOrder.userInformation.email,
+            "Confirmación de Orden",
+            htmlFile
+          );
+        } catch (error) {
+          console.error(
+            "Error sending the email:",
+            error.message
+          );
+        }
+      } else {
+        console.error("Error when creating the order:", respuesta.statusText);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error when making the request:", error.message);
     }
   };
 

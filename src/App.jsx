@@ -19,6 +19,7 @@ import AddProduct from "./Views/AdminPanel/AddProduct";
 import SignUp from './Views/SignUp/SignUp.jsx';
 import AdminPanelView from './Views/AdminPanel/AdminPanelView.jsx';
 import { Toaster } from 'react-hot-toast';
+import SettingView from './Views/Settings/SettingView.jsx';
 
 /**
  * App Component
@@ -75,6 +76,7 @@ export default function App() {
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
                 <Route path="/admin" element={<AdminPanelView/>}/>
+                <Route path="/settings" element={<SettingView/>}/>
             </Routes>
             <Footer />
         </Router>

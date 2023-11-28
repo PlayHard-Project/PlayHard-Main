@@ -83,8 +83,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-main.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });

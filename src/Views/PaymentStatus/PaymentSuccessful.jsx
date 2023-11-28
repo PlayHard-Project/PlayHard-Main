@@ -4,7 +4,7 @@ import BuyCartManagement from "../../Utilities/BuyCartManagement";
 
 const PaymentSuccessful = () => {
   const manager = new BuyCartManagement();
-  manager.clearCard();
+  manager.clearCart();
   
   return (
     <PaymentStatus

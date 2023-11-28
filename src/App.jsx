@@ -19,13 +19,21 @@ import ShoppingCartScreen from "./Views/Cart/ShoppingCartScreen";
 import HistoryView from "./Views/PurchaseHistory/HistoryView.jsx";
 import AddProduct from "./Views/AdminPanel/AddProduct";
 import SignUp from './Views/SignUp/SignUp.jsx';
+import AdminPanelView from './Views/AdminPanel/AdminPanelView.jsx';
 import { Toaster } from 'react-hot-toast';
 
+/**
+ * App Component
+ * 
+ * The main component representing the entire application. It configures routes, manages cart state,
+ * and renders various views based on the route.
+ */
 export default function App() {
 
     const [cartItemsQuantity, setCartItemsQuantity] = useState([]);
     const [subTotal, setSubTotal] = useState(0);
     const buyCartManagement = new BuyCartManagement();
+
 
     function ScrollToTop() {
         const { pathname } = useLocation();
@@ -52,7 +60,7 @@ export default function App() {
 
         <Router>
             <ScrollToTop />
-            <Toaster/>
+            <Toaster position="bottom-center"/>
             <Header cartItemsQuantity={cartItemsQuantity} setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -71,6 +79,7 @@ export default function App() {
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
+                <Route path="/admin" element={<AdminPanelView/>}/>
             </Routes>
             <Footer />
         </Router>

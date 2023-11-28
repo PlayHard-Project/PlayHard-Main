@@ -10,7 +10,8 @@ const { compare } = require("../middelware/handleBcrypt");
  * @param {response} res - The response after API process the request.
  * @returns {json} A token if it was succesful or an error if not.
  */
-const signIn = async (req, res) => {
+async function createRoutesSignIn(router, model, baseRoute) {
+  router.post(`/${baseRoute}`, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -35,8 +36,9 @@ const signIn = async (req, res) => {
     console.error(e);
     res.json({ error: "Internal Server Error" });
   }
-};
+});
+}
 
 module.exports = {
-  signIn,
+  createRoutesSignIn,
 };

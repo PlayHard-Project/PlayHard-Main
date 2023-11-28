@@ -62,10 +62,10 @@ export default function PurchaseComponent({ idOrder, indexOrder }) {
                 <label>{date}</label>
               </div>
             </div>
-            <button
+            <button className="button-arrow"
               onClick={() => setScrollContainerVisible(!scrollContainerVisible)}
             >
-              <IoIosArrowDropdownCircle />
+              <IoIosArrowDropdownCircle size={30} />
             </button>
           </div>
           <div

@@ -36,6 +36,7 @@ const AddProduct = ({ isEditMode = false}) => {
   const [stockInformation, setStockInformation] = useState([[]]);
   const navigate  = useNavigate ();
   const [isProductAdded, setIsProductAdded] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   const transformColorInformation = (colorInformation) => {
     return colorInformation.map(colorInfo => ({
@@ -70,6 +71,7 @@ const AddProduct = ({ isEditMode = false}) => {
             setSizeInformation(transformedSizeInformation);
             setProductImages(product.imagePath);
             setStockInformation(product.inStock);
+            setIsDataLoaded(true);
           })
           .catch(error => {
             console.error('Error al obtener el producto: ', error);
@@ -408,7 +410,8 @@ const AddProduct = ({ isEditMode = false}) => {
             <RightSide setProductImages={setProductImages} setColorInformation={setColorInformation}
                        setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
                        colorInformation={colorInformation} sizeInformation={sizeInformation}
-                        isEditMode={isEditMode} productImages={productImages} stockInformation={stockInformation}/>
+                        isEditMode={isEditMode} productImages={productImages} stockInformation={stockInformation}
+                        isDataLoaded={isDataLoaded}/>
           </div>
         </div>
       <div className="buttons-container">

@@ -15,7 +15,8 @@ function RightSide({
   setColorInformation,
   setSizeInformation,
   setStockInformation,
-    stockInformation
+    stockInformation,
+    isDataLoaded
 }) {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
@@ -51,7 +52,7 @@ function RightSide({
       setSizeComponents(newSizeComponents);
       setImages(productImages);
     }
-  }, [isEditMode, colorInformation, sizeInformation, productImages]);
+  }, [isDataLoaded]);
 
   const handleAddImage = () => {
     const trimmedInput = input.trim();
@@ -106,6 +107,7 @@ function RightSide({
           id={id}
           onDelete={() => handleDeleteColorComponent(id)}
           setColorInformation={setColorInformation}
+          isEditMode={false}
         />,
       ]);
     } else {

@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
-function StockItem({ color, size, handleQuantityChange, sizeIndex, initialQuantity = 1 }) {
-    const [quantity, setQuantity] = useState(initialQuantity >= 0 ? initialQuantity : 1);
+function StockItem({ color, size, handleQuantityChange, sizeIndex, initialQuantity = 1, isEditMode = false }) {
+    const [quantity, setQuantity] = useState(initialQuantity);
 
     const handleChange = (e) => {
         setQuantity(e.target.value);
         handleQuantityChange(color, size, e.target.value, sizeIndex);
     };
+
+    useEffect(() => {
+        if (isEditMode) {
+            handleChange({ target: { value: initialQuantity } });
+        }
+    }, []);
 
     return (
 

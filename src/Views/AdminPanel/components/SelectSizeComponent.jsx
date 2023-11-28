@@ -15,7 +15,13 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation, isEditMode = fa
 
     const handleAddSize = () => {
         setIsAdded(true);
-        setSizeInformation(prevSizeInformation => [...prevSizeInformation, { id, size: selectedSize }]);
+        setSizeInformation(prevSizeInformation => {
+            const sizeExists = prevSizeInformation.some(prevSize => prevSize.id === id && prevSize.size === selectedSize);
+            if (!sizeExists) {
+                return [...prevSizeInformation, { id, size: selectedSize }];
+            }
+            return prevSizeInformation;
+        });
     };
 
     useEffect(() => {

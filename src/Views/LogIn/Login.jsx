@@ -53,11 +53,11 @@ const Login = () => {
 
   const handleSignIn = async () => {
     const passwordRequirements = validatePassword();
-
     if (!email) {
       toast.error("Email cannot be empty.", {
         position: "bottom-right",
       });
+      return;
     } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
       toast.error(
         "Please enter a valid email address. Only Gmail addresses ending in @gmail.com are accepted.",
@@ -65,19 +65,24 @@ const Login = () => {
           position: "bottom-right",
         }
       );
+      return;
     } else if (!password) {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
+      return;
     } else if (!passwordRequirements.minLength) {
       toast.error("The password cannot be less than 6 characters.", {
         position: "bottom-right",
       });
+      return;
     } else if (password.includes(" ")) {
       toast.error("Please enter a valid password.", {
         position: "bottom-right",
       });
+      return;
     }
+
 
     try {
       const response = await fetch("http://localhost:9000/api/sign-in", {
@@ -91,27 +96,24 @@ const Login = () => {
         }),
       });
 
-      if (!response.ok) {
-        console.log("Si entro al error");
-        const errorData = await response.json(); // Assuming your backend sends an error object
-        toast.error(
-          errorData.error || "Login failed. Please check your credentials.",
-          {
-            position: "bottom-right",
-          }
+      const responseData = await response.json();
+
+      if (responseData.error) {
+        toast.error(responseData.error, {position: "bottom-right",}
         );
       } else {
-        const data = await response.json();
-        const { tokenSession } = data;
+        toast.success(`Sign Up successful for ${email}!`, {
+          position: "bottom-right",
+        });
+        const { tokenSession } = responseData;
         if (tokenSession) {
           localStorage.setItem("token", tokenSession);
-          console.log("Token set in local storage:", tokenSession);
           navigate("/");
         }
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("An error occurred during login. Please try again.", {
+    }  catch (error) {
+      console.error("Error during sig-in:", error);
+      toast.error("An error occurred during sig-in. Please try again.", {
         position: "bottom-right",
       });
     }

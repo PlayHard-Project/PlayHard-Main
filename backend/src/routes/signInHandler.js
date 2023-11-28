@@ -13,33 +13,25 @@ const { compare } = require('../models/middelware/handleBcrypt')
 const signIn = async (req, res) => {
     try {
       const { email, password } = req.body
-  
+
       const user = await User.findOne({ email })
   
       if (!user) {
-        res.json({ error: 'User not found' });
-        console.log('User not found');
-      } else {
+        return res.json({ error: 'Error 404: User not found' });
+      } 
         const checkPassword = await compare(password, user.password);
   
         if (checkPassword) {
           const tokenSession = await tokenSign(user);
-          console.log('SignIn Successfully');
           res.json({
             data: user,
             tokenSession
           });
           return;
-        }
-  
-        if (!checkPassword) {
-          res.json({
-            error: 'Invalid password'
-          });
-          console.log('Invalid password');
-          return;
-        }
+        } else {
+          res.json({ error: 'Error 401: Incorrect password' });
       }
+      
     } catch (e) {
       console.error(e);
       res.status(500).json({ error: 'Internal Server Error' });

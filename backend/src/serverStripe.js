@@ -1,5 +1,5 @@
 const { Order } = require("./models/orderSchema");
-const { Invoice } = require('./html_templates/invoice.js');
+const { Invoice } = require("./html_templates/invoice.js");
 
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
@@ -24,7 +24,6 @@ const configureAppImplementingStripeServer = (app) => {
   app.use(express.static("public"));
   app.use(express.json());
   app.use(cors());
-
 
   const fetchProductDetails = async (productId) => {
     try {
@@ -118,20 +117,37 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const saveOrder = await newOrder.save();
-      console.log("Processed Order: ", saveOrder);
+      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
 
-      const myInvoice = new Invoice();
-      const htmlFile = await myInvoice.generateHTML();
-      try {
-        await sendMail(
-          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
-          console.log("Email sent successfully");
-      } catch (error) {
-        console.error("Error sending email:", error.message);
+      if (respuesta.ok) {
+        const saveOrder = await respuesta.json();
+        console.log("Orden procesada:", saveOrder);
+
+        const myInvoice = new Invoice();
+        const htmlFile = await myInvoice.generateHTML();
+        try {
+          await sendMail(
+            saveOrder.userInformation.email,
+            "Confirmación de Orden",
+            htmlFile
+          );
+        } catch (error) {
+          console.error(
+            "Error sending the email:",
+            error.message
+          );
+        }
+      } else {
+        console.error("Error when creating the order:", respuesta.statusText);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error when making the request:", error.message);
     }
   };
 

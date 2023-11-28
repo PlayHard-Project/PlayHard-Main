@@ -2,6 +2,23 @@ const express = require("express");
 const { Order } = require("../models/orderSchema");
 const router = express.Router();
 
+router.post('/orders', async (req, res) => {
+  try {
+    console.log("eee");
+    const orderCount = await Order.countDocuments() + 1;
+    console.log(orderCount);
+    const newItem = new Order({
+      ...req.body,
+      orderCount,
+    });
+
+    const data = await newItem.save();
+    res.json(data);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 /**
  * Endpoint to retrieve all orders for a specific user ID.
  * @name router.get
@@ -28,23 +45,6 @@ router.get("/orders/user/:userId", async (req, res) => {
   } catch (err) {
     console.error("Error fetching orders:", err);
     res.status(500).json({ message: err.message });
-  }
-});
-
-
-router.post('/orders', async (req, res) => {
-  try {
-    console.log("eee");
-    const orderCount = await Order.countDocuments() + 1;
-    const newItem = new Order({
-      ...req.body,
-      orderCount,
-    });
-
-    const data = await newItem.save();
-    res.json(data);
-  } catch (error) {
-    res.json({ message: error });
   }
 });
 

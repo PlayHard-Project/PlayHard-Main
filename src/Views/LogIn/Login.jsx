@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "../../css/LogIn/logInStyle.css";
 
 const Login = () => {
+  const apiBackend = process.env.URL_BACKEND;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -86,7 +87,7 @@ const Login = () => {
 
     // POST request with the email and password to the backend
     try {
-      const response = await fetch("https://backend-fullapirest.onrender.com/api/sign-in", {
+      const response = await fetch(apiBackend+"/sign-in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,8 +113,8 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.error("Error during sig-in:", error);
-      toast.error("An error occurred during sig-in. Please try again.", {
+      console.error("Error during sign-in:", error);
+      toast.error("An error occurred during sign-in. Please try again.", {
         position: "bottom-right",
       });
     }

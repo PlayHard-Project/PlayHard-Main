@@ -8,6 +8,7 @@ import "../../css/SignUp/signUpStyle.css";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const apiBackend = process.env.URL_BACKEND;
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,7 +125,7 @@ const SignUp = () => {
     //Created POST request
     try {
       const response = await fetch(
-        "https://backend-fullapirest.onrender.com/api/signup",
+        apiBackend+"/signup",
         {
           method: "POST",
           headers: {
@@ -161,8 +162,8 @@ const SignUp = () => {
   // HANDLES LOGIN
   const signInAfterSignUp = async () => {
     try {
-      const response = await fetch("https://backend-fullapirest.onrender.com/api/sign-in", {
-        method: "POST",
+      const response = await fetch(apiBackend+"/sign-in", {
+        method: "POST", 
         headers: {
           "Content-Type": "application/json",
         },

@@ -10,7 +10,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
 
     useEffect(() => {
         if (isEditMode) {
-            handleAddColor();
+            setIsDisabled(true);
         }
     }, []);
 
@@ -58,11 +58,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
         setColorInformation(prevColorInformation => [...prevColorInformation, {id, color: colorName, hex: colorValue, imagePath: image}]);
     };
 
-    useEffect(() => {
-        return () => {
-            setColorInformation(prevColorInformation => prevColorInformation.filter(colorInfo => colorInfo.id !== id));
-        };
-    }, []);
+
 
     return (
         <div className="flex gap-2 justify-center items-center">

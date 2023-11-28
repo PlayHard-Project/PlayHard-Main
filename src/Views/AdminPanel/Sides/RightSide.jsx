@@ -126,6 +126,10 @@ function RightSide({
     );
   };
 
+  useEffect(() => {
+    console.log(colorInformation)
+  }, [colorInformation]);
+
   const handleAddSizeComponent = () => {
     const id = Math.random();
     if (sizeComponents.length < 8) {

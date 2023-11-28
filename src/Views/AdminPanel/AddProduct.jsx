@@ -77,7 +77,11 @@ const AddProduct = ({ isEditMode = false}) => {
             console.error('Error al obtener el producto: ', error);
           });
     }
-  }, [isEditMode, productId]);
+  }, []);
+
+  useEffect(() => {
+    console.log(isDataLoaded)
+  }, [isDataLoaded]);
 
 
   const handleProductNameChange = (e) => {

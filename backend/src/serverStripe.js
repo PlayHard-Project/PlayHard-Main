@@ -122,7 +122,7 @@ const configureAppImplementingStripeServer = (app) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify(newOrder),
       });
 
       if (respuesta.ok) {

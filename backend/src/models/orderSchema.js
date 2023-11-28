@@ -6,7 +6,7 @@ const orderSchema = new Schema(
   {
     orderCount: {
       type: Number,
-      default: 1,
+      required: true,
     },
     userId: {
       type: String,

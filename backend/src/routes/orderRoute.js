@@ -14,7 +14,7 @@ const router = express.Router();
  */
 router.post('/orders', async (req, res) => {
   try {
-    const lastOrder = await Order.findOne();
+    const lastOrder = await Order.findOne().sort({ orderCount: -1 });
     const orderCount = lastOrder ? lastOrder.orderCount + 1 : 1;
     const newItem = new Order({
       ...req.body,
@@ -49,7 +49,7 @@ router.get("/orders/user/:userId", async (req, res) => {
   }
 
   try {
-    const orders = await Order.find(query).sort({ createdAt: -1 });
+    const orders = await Order.find(query);
     res.json(orders);
   } catch (err) {
     console.error("Error fetching orders:", err);

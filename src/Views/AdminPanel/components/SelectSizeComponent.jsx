@@ -2,24 +2,31 @@ import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 
 
-function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
-    const [size, setSize] = useState('');
+function SelectSizeComponent({ id, onDelete, setSizeInformation, isEditMode = false, size = '' }) {
+    const [selectedSize, setSelectedSize] = useState(isEditMode ? size : '');
     const [isAdded, setIsAdded] = useState(false);
+
 
     const handleSizeChange = (e) => {
         if (!isAdded) {
-          setSize(e.target.value.slice(0, 20));
+            setSelectedSize(e.target.value.slice(0, 20));
         }
-      };
+    };
 
     const handleAddSize = () => {
         setIsAdded(true);
-        setSizeInformation(prevSizeInformation => [...prevSizeInformation, { id, size }]);
+        setSizeInformation(prevSizeInformation => [...prevSizeInformation, { id, size: selectedSize }]);
     };
+
+    useEffect(() => {
+        if (isEditMode) {
+            handleAddSize();
+        }
+    }, []);
 
     const handleAddProductMessages = () => {
     
-        if (size.length === 0) {
+        if (selectedSize.length === 0) {
           toast.error("Please add the size.", { position: "bottom-right", });
           onDelete(id);
         }
@@ -32,7 +39,7 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation }) {
                 type="text"
                 className="w-full block"
                 placeholder="Ingrese el tamaño"
-                value={size}
+                value={selectedSize}
                 onChange={handleSizeChange}
                 required
                 disabled={isAdded}

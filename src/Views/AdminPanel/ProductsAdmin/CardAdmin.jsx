@@ -59,9 +59,11 @@ const CardAdmin = ({ _id, img, title, price, colorInformation, size, setCartItem
             </div>
         </div>
         <div className="card-buttons">
-          <div className="edit-button">
-            <FaEdit color="white" /> Edit
-          </div>
+          <button className="edit-button">
+            <Link to={`/admin/add-product/${_id}`}>
+              <FaEdit color="white" /> Edit
+            </Link>
+          </button>
           <div className="delete-button">
             <RiDeleteBin6Line color="white" /> Delete
           </div>         

@@ -1,12 +1,18 @@
 import React, {useEffect, useRef, useState} from "react";
 import toast from "react-hot-toast";
 
-function ColorComponent({ id, onDelete, setColorInformation}) {
-    const [colorName, setColorName] = useState('');
-    const [colorValue, setColorValue] = useState('#ffffff');
-    const [image, setImage] = useState('');
+function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false, color = '', hex = '#ffffff', imagePath = '' }) {
+    const [colorName, setColorName] = useState(isEditMode ? color : '');
+    const [colorValue, setColorValue] = useState(isEditMode ? hex : '#ffffff');
+    const [image, setImage] = useState(isEditMode ? imagePath : '');
     const [input, setInput] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        if (isEditMode) {
+            handleAddColor();
+        }
+    }, []);
 
     const handleAddProductMessages = () => {
     
@@ -41,6 +47,10 @@ function ColorComponent({ id, onDelete, setColorInformation}) {
             setImage(trimmedInput);
             setInput("");
         }
+    };
+
+    const handleDelete = () => {
+        onDelete();
     };
 
     const handleAddColor = () => {
@@ -93,7 +103,7 @@ function ColorComponent({ id, onDelete, setColorInformation}) {
                             handleAddProductMessages();
                             }} 
                             className={`text-white w-full block rounded-md p-1 mt-2 ${isDisabled ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isDisabled}>Add</button>
-                <button onClick={onDelete} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isDisabled}>Delete</button>
+                <button onClick={handleDelete} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isDisabled}>Delete</button>
             </div>
             <div className="w-1/4 flex items-center justify-center">
                 {image && <img src={image} alt="" className="w-40 h-full object-cover" />}

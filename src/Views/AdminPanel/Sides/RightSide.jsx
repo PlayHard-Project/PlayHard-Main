@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
@@ -7,18 +7,51 @@ import SelectSizeComponent from "../components/SelectSizeComponent";
 import { Axios } from "axios";
 
 function RightSide({
+   isEditMode = false,
+   colorInformation = [],
+   sizeInformation = [],
+   productImages = [],
   setProductImages,
   setColorInformation,
   setSizeInformation,
   setStockInformation,
-  colorInformation,
-  sizeInformation,
+    stockInformation
 }) {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
   const [colorComponents, setColorComponents] = useState([]);
   const [sizeComponents, setSizeComponents] = useState([]);
   const [stockRows, setStockRows] = useState([]);
+
+  useEffect(() => {
+    if (isEditMode) {
+      const newColorComponents = colorInformation.map(colorInfo => (
+          <ColorComponent
+              key={colorInfo.id}
+              id={colorInfo.id}
+              color={colorInfo.color}
+              hex={colorInfo.hex}
+              imagePath={colorInfo.imagePath}
+              onDelete={() => handleDeleteColorComponent(colorInfo.id)}
+              setColorInformation={setColorInformation}
+              isEditMode={true}
+          />
+      ));
+      setColorComponents(newColorComponents);
+      const newSizeComponents = sizeInformation.map(size => (
+          <SelectSizeComponent
+              key={size.id}
+              id={size.id}
+              size={size.size}
+              onDelete={handleDeleteSizeComponent}
+              setSizeInformation={setSizeInformation}
+              isEditMode={true}
+          />
+      ));
+      setSizeComponents(newSizeComponents);
+      setImages(productImages);
+    }
+  }, [isEditMode, colorInformation, sizeInformation, productImages]);
 
   const handleAddImage = () => {
     const trimmedInput = input.trim();
@@ -196,15 +229,16 @@ function RightSide({
         <label className={"mb-3"}>Stock</label>
         <div className={"flex flex-col gap-2"}>
           {sizeInformation.map((size, sizeIndex) =>
-            colorInformation.map((color) => (
-              <StockItem
-                key={`${color.id}-${size.id}`}
-                color={color}
-                size={size}
-                sizeIndex={sizeIndex}
-                handleQuantityChange={handleQuantityChange}
-              />
-            ))
+              colorInformation.map((color, colorIndex) => (
+                  <StockItem
+                      key={`${color.id}-${size.id}`}
+                      color={color}
+                      size={size}
+                      sizeIndex={sizeIndex}
+                      handleQuantityChange={handleQuantityChange}
+                      initialQuantity={stockInformation[sizeIndex] ? stockInformation[sizeIndex][colorIndex] : 1}
+                  />
+              ))
           )}
         </div>
       </div>

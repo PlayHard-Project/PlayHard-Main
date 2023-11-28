@@ -14,7 +14,7 @@ const router = express.Router();
  */
 router.post('/orders', async (req, res) => {
   try {
-    const lastOrder = await Order.findOne().sort({ orderCount: -1 });
+    const lastOrder = await Order.findOne();
     const orderCount = lastOrder ? lastOrder.orderCount + 1 : 1;
     const newItem = new Order({
       ...req.body,

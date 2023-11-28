@@ -14,9 +14,8 @@ const router = express.Router();
  */
 router.post('/orders', async (req, res) => {
   try {
-    console.log("eee");
-    const orderCount = await Order.countDocuments() + 1;
-    console.log(orderCount);
+    const lastOrder = await Order.findOne().sort({ orderCount: -1 });
+    const orderCount = lastOrder ? lastOrder.orderCount + 1 : 1;
     const newItem = new Order({
       ...req.body,
       orderCount,

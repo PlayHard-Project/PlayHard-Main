@@ -2,6 +2,16 @@ const express = require("express");
 const { Order } = require("../models/orderSchema");
 const router = express.Router();
 
+/**
+ * Endpoint to create a new order in the database.
+ * Increments the global order count and assigns it to the new order.
+ *
+ * @name router.post
+ * @method
+ * @param {string} `/orders` - The path for creating a new order.
+ * @param {Function} (req, res) - Callback function to handle the route.
+ * @returns {void}
+ */
 router.post('/orders', async (req, res) => {
   try {
     console.log("eee");

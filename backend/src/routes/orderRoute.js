@@ -1,6 +1,5 @@
 const express = require("express");
 const { Order } = require("../models/orderSchema");
-const createRoutes = require("./routeHandler");
 const router = express.Router();
 
 /**
@@ -35,6 +34,7 @@ router.get("/orders/user/:userId", async (req, res) => {
 
 router.post('/orders', async (req, res) => {
   try {
+    console.log("eee");
     const orderCount = await Order.countDocuments() + 1;
     const newItem = new Order({
       ...req.body,

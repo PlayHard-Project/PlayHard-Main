@@ -51,6 +51,7 @@ const Login = () => {
     return requirements;
   };
 
+  // Handles all sign in process
   const handleSignIn = async () => {
     const passwordRequirements = validatePassword();
     if (!email) {
@@ -83,9 +84,9 @@ const Login = () => {
       return;
     }
 
-
+    // POST request with the email and password to the backend
     try {
-      const response = await fetch("http://localhost:9000/api/sign-in", {
+      const response = await fetch("https://backend-fullapirest.onrender.com/api/sign-in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,8 +100,7 @@ const Login = () => {
       const responseData = await response.json();
 
       if (responseData.error) {
-        toast.error(responseData.error, {position: "bottom-right",}
-        );
+        toast.error(responseData.error, { position: "bottom-right" });
       } else {
         toast.success(`Sign Up successful for ${email}!`, {
           position: "bottom-right",
@@ -111,7 +111,7 @@ const Login = () => {
           navigate("/");
         }
       }
-    }  catch (error) {
+    } catch (error) {
       console.error("Error during sig-in:", error);
       toast.error("An error occurred during sig-in. Please try again.", {
         position: "bottom-right",

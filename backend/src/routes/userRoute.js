@@ -36,7 +36,6 @@ createRoutes(router, userSchema, 'signup');
  * @param {/string} route - The login route
  * @param {controller} controller - The controller for this route
  */
-
 router.post('/sign-in', signIn);
 
 /**

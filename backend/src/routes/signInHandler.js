@@ -1,7 +1,7 @@
-const User = require('../models/userSchema');
+const User = require("../models/userSchema");
 
-const { tokenSign } = require('../models/middelware/generateToken')
-const { compare } = require('../models/middelware/handleBcrypt')
+const { tokenSign } = require("../middelware/generateToken");
+const { compare } = require("../middelware/handleBcrypt");
 
 /**
  * Handle all login validations and responses.
@@ -11,34 +11,32 @@ const { compare } = require('../models/middelware/handleBcrypt')
  * @returns {json} A token if it was succesful or an error if not.
  */
 const signIn = async (req, res) => {
-    try {
-      const { email, password } = req.body
+  try {
+    const { email, password } = req.body;
 
-      const user = await User.findOne({ email })
-  
-      if (!user) {
-        return res.json({ error: 'Error 404: User not found' });
-      } 
-        const checkPassword = await compare(password, user.password);
-  
-        if (checkPassword) {
-          const tokenSession = await tokenSign(user);
-          res.json({
-            data: user,
-            tokenSession
-          });
-          return;
-        } else {
-          res.json({ error: 'Error 401: Incorrect password' });
-      }
-      
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ error: 'Internal Server Error' });
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.json({ error: "Error 404: User not found" });
     }
+    const checkPassword = await compare(password, user.password);
+
+    if (checkPassword) {
+      const tokenSession = await tokenSign(user);
+      res.json({
+        data: user,
+        tokenSession,
+      });
+      return;
+    } else {
+      res.json({ error: "Error 401: Incorrect password" });
+    }
+  } catch (e) {
+    console.error(e);
+    res.json({ error: "Internal Server Error" });
   }
-  
+};
 
 module.exports = {
-    signIn,
+  signIn,
 };

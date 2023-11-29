@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import {GridLoader} from "react-spinners";
 import "../../css/LogIn/logInStyle.css";
 
 const Login = () => {
+  const [isLogging, setIsLogging] = useState(false);
   const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
   var [email, setEmail] = useState("");
@@ -17,8 +19,9 @@ const Login = () => {
     useState(false);
   const signUpImage =
     "https://res.cloudinary.com/playhardimages/image/upload/v1700626890/SignUpSignInImage.png";
+    
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
 
     if (name === "email") {
       if (!/\s/.test(value)) {
@@ -85,9 +88,7 @@ const Login = () => {
       });
       return;
     }
-
-    console.log('JSON a enviar:', JSON.stringify({ email, password }));
-
+    setIsLogging(true);
     // POST request with the email and password to the backend
     try {
       const response = await fetch(apiBackend+'/sign-in', {
@@ -121,8 +122,20 @@ const Login = () => {
       toast.error("An error occurred during sign-in. Please try again.", {
         position: "bottom-right",
       });
+    } finally {
+      setIsLogging(false);
     }
   };
+
+  if (isLogging) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
+      >
+        <GridLoader color="#023fc5" />
+      </div>
+    );
+  }
 
   return (
     <div className="container container-login">

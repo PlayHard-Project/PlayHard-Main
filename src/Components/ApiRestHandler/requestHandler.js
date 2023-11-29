@@ -1,16 +1,9 @@
 import axios from 'axios';
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
+const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'http://localhost:9000/api/' : 'http://localhost:9000/api/';
 console.log(process.env.REACT_APP_BRANCH);
 
-/**
- * Adds a new element to the server by making a POST request to the specified route.
- * 
- * @param {Object} newElement - The new element to be added.
- * @param {string} route - The API route where the new element will be added.
- * @returns {Promise} A promise that resolves to the response data from the server.
- * @throws Will throw an error if there is an issue adding the new element.
- */
+
 export const addElement = async (newElement, route) => {
   try {
     const response = await axios.post(apiURL + route, newElement);
@@ -21,13 +14,6 @@ export const addElement = async (newElement, route) => {
   }
 };
 
-/**
- * Retrieves all elements from the server by making a GET request to the specified route.
- * 
- * @param {string} route - The API route from which to retrieve all elements.
- * @returns {Promise} A promise that resolves to the response data containing all elements.
- * @throws Will throw an error if there is an issue retrieving all elements.
- */
 export const getElements = async (route) => {
   try {
     const response = await axios.get(apiURL + route);

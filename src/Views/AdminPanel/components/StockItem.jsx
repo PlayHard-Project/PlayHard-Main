@@ -16,7 +16,7 @@ function StockItem({ color, size, handleQuantityChange, sizeIndex, initialQuanti
 
     return (
 
-        <div className="flex justify-between border border-gray-300 rounded">
+        <div className="flex justify-between border-2 border-gray-500 p-2 hover:border-blue-700 rounded-md hover:text-blue-700">
             {handleChange}
             <p className="w-1/3 p-2">Color: {color.color}</p>
             <p className="w-1/3 p-2">Size: {size.size}</p>

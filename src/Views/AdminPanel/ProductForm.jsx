@@ -26,12 +26,12 @@ const ProductForm = ({
   onKeyDown,
 }) => {
   return (
-    <div className="simple-data-container-form">
-      <label htmlFor={id}>{label}</label>
+    <div className="simple-data-container-form w-full border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700">
+      <label className={'hover:text-blue-700'} htmlFor={id}>{label}</label>
       {inputType === "textarea" ? (
         <textarea
           id={id}
-          className="input-add"
+          className="input-add w-full hover:border-blue-700 resize-none"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -41,7 +41,7 @@ const ProductForm = ({
         <input
           type={inputType}
           id={id}
-          className="input-add"
+          className="input-add w-full hover:border-blue-700"
           value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}

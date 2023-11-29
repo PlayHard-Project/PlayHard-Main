@@ -289,7 +289,7 @@ const AddProduct = ({ isEditMode = false}) => {
       try {
         const response = await updateElement(product, 'products');
         console.log(response);
-        navigate("/");
+        navigate("/admin");
       } catch (error) {
         console.error('Error updating the product: ', error);
       }
@@ -321,7 +321,7 @@ const AddProduct = ({ isEditMode = false}) => {
       try {
         const response = await addElement(product, '/products');
         console.log(response);
-        navigate("/");
+        navigate("/admin");
       } catch (error) {
         console.error('Error adding the new product: ', error);
       }
@@ -342,7 +342,7 @@ const AddProduct = ({ isEditMode = false}) => {
 
 
         <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4 rounded p-3">
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 p-4 flex flex-col gap-3">
             <ProductForm
               label="Product Name"
               id="productName"
@@ -358,11 +358,13 @@ const AddProduct = ({ isEditMode = false}) => {
               inputType="textarea"
               placeholder="Enter product description"
             />
-            <BrandsSelect
-              value={selectedBrand}
-              onChange={handleBrandChange}
-              options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
-            />
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <BrandsSelect
+                value={selectedBrand}
+                onChange={handleBrandChange}
+                options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
+              />
+            </div>
             <ProductForm
               label="Price"
               id="price"
@@ -371,49 +373,55 @@ const AddProduct = ({ isEditMode = false}) => {
               onKeyDown={handleKeyDown}
               placeholder="Enter product price"
             />
-            <label htmlFor="categories">Categories</label>
-            <SelectWithAddButton
-              id="category"
-              value={categoryInput}
-              onChange={handleCategoryChange}
-              inputValue={categoryInput}
-              onInputChange={(e) => setCategoryInput(e.target.value)}
-              onAdd={handleAddCategory}
-              options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
-              selectedItems={selectedCategories}
-              onRemoveItem={handleRemoveCategory}
-              placeholder="Select a category"
-            />
-            <label htmlFor="target">Target</label>
-            <SelectWithAddButton
-              id="target"
-              value={targetInput}
-              onChange={handleTargetChange}
-              inputValue={targetInput}
-              onInputChange={(e) => setTargetInput(e.target.value)}
-              onAdd={handleAddTarget}
-              options={["Men", "Woman", "Teenagers", "Kids"]}
-              selectedItems={selectedTarget}
-              onRemoveItem={handleRemoveTarget}
-              placeholder="Select a target"
-            />
-            <label htmlFor="sport">Sport</label>
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="categories">Categories</label>
+              <SelectWithAddButton
+                id="category"
+                value={categoryInput}
+                onChange={handleCategoryChange}
+                inputValue={categoryInput}
+                onInputChange={(e) => setCategoryInput(e.target.value)}
+                onAdd={handleAddCategory}
+                options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
+                selectedItems={selectedCategories}
+                onRemoveItem={handleRemoveCategory}
+                placeholder="Select a category"
+              />
+            </div>
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="target">Target</label>
+              <SelectWithAddButton
+                id="target"
+                value={targetInput}
+                onChange={handleTargetChange}
+                inputValue={targetInput}
+                onInputChange={(e) => setTargetInput(e.target.value)}
+                onAdd={handleAddTarget}
+                options={["Men", "Woman", "Teenagers", "Kids"]}
+                selectedItems={selectedTarget}
+                onRemoveItem={handleRemoveTarget}
+                placeholder="Select a target"
+              />
+            </div>
 
-            <SelectWithAddButton
-              id="sport"
-              value={sportInput}
-              onChange={handlSportChange}
-              inputValue={sportInput}
-              onInputChange={(e) => setSportInput(e.target.value)}
-              onAdd={handleAddSport}
-              options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
-              selectedItems={selectedSports}
-              onRemoveItem={handleRemoveSport}
-              placeholder="Select a sport"
-            />
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="sport">Sport</label>
+              <SelectWithAddButton
+                id="sport"
+                value={sportInput}
+                onChange={handlSportChange}
+                inputValue={sportInput}
+                onInputChange={(e) => setSportInput(e.target.value)}
+                onAdd={handleAddSport}
+                options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
+                selectedItems={selectedSports}
+                onRemoveItem={handleRemoveSport}
+                placeholder="Select a sport"
+              />
+            </div>
           </div>
 
-          <div className={' lg:w-1/2 border-2 border-black rounded p-3'}>
+          <div className={' lg:w-1/2 p-3'}>
             <RightSide setProductImages={setProductImages} setColorInformation={setColorInformation}
                        setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
                        colorInformation={colorInformation} sizeInformation={sizeInformation}
@@ -435,7 +443,7 @@ const AddProduct = ({ isEditMode = false}) => {
             }}
             disabled={isProductAdded}
         >
-          {isEditMode ? 'Edit Product' : 'Add Product'}
+          {isEditMode ? 'Confirm' : 'Add Product'}
         </button>
       </div>
     </div>

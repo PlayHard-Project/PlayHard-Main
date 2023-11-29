@@ -74,7 +74,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
                 <div className="flex items-center gap-3 w-full">
                     <input
                         type="text"
-                        className="w-2/3 block border border-gray-500 rounded p-2 mb-2"
+                        className="w-2/3 block border-2 border-gray-500 p-2 hover:border-blue-700 rounded-md hover:text-blue-700 "
                         placeholder="Color name"
                         value={colorName}
                         onChange={(e) => !isDisabled && setColorName(e.target.value.slice(0, 10))}
@@ -92,7 +92,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
                 <div className="flex items-center gap-3 w-full">
                     <input
                         type="text"
-                        className="w-2/3 block border border-gray-500 rounded p-2"
+                        className="w-2/3 block border-2 border-gray-500 p-2 hover:border-blue-700 rounded-md hover:text-blue-700 mt-1"
                         placeholder="Image URL"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}

@@ -4,26 +4,30 @@ import "../../../css/AdminPanelStyle/MainPage/CardAdmin.css";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const CardAdmin = ({ _id, img, title, price }) => {
+const CardAdmin = ({ product }) => {
   const titleRef = useRef();
   const currency = "$";
 
   useEffect(() => {
     const titleElement = titleRef.current;
 
-    if (title.length > 21) {
+    if (product.name.length > 21) {
       titleElement.style.animationDuration = "3s";
       titleElement.classList.add("overflow-animation");
     } else {
       titleElement.style.animation = "none";
       titleElement.classList.remove("overflow-animation");
     }
-  }, [title]);
+  }, [product.name]);
 
   return (
     <div className="shopping-card-admin">
       <Link to="#" style={{ cursor: "auto" }}>
-        <img src={img} alt={title} className="shopping-card-img-admin" />
+        <img
+          src={product.imagePath[0]}
+          alt={product.name}
+          className="shopping-card-img-admin"
+        />
       </Link>
       <div>
         <div className="flip-card-inner">
@@ -32,15 +36,15 @@ const CardAdmin = ({ _id, img, title, price }) => {
               <div
                 ref={titleRef}
                 className={`shopping-card-title-admin ${
-                  title.length > 21 ? "overflow-animation" : ""
+                  product.name.length > 21 ? "overflow-animation" : ""
                 }`}
               >
-                {title.toUpperCase()}
+                {product.name.toUpperCase()}
               </div>
             </Link>
             <div className="shopping-card-price-admin">
               <div className="price">
-                {currency}. {price}
+                {currency}. {product.price}
               </div>
             </div>
           </div>

@@ -150,12 +150,14 @@ function RightSide({
   };
 
   const handleDeleteSizeComponent = (id) => {
-    setSizeComponents((prevSizeComponents) =>
-      prevSizeComponents.filter((component) => component.props.id !== id)
-    );
-    setSizeInformation((prevSizeInformation) =>
-      prevSizeInformation.filter((sizeInfo) => sizeInfo.id !== id)
-    );
+    const colorComponent = colorComponents.find((component) => component.props.id === id);
+    if (colorComponent) {
+      const updatedColorInformation = colorInformation.filter((colorInfo) => colorInfo.id !== colorComponent.props.id);
+      setColorInformation(updatedColorInformation);
+      setColorComponents((prevColorComponents) =>
+          prevColorComponents.filter((component) => component.props.id !== id)
+      );
+    }
   };
 
   const handleQuantityChange = (color, size, quantity, sizeIndex) => {

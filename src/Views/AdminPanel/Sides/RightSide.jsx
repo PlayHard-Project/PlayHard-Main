@@ -27,16 +27,7 @@ function RightSide({
   useEffect(() => {
     if (isEditMode) {
       const newColorComponents = colorInformation.map(colorInfo => (
-          <ColorComponent
-              key={colorInfo.id}
-              id={colorInfo.id}
-              color={colorInfo.color}
-              hex={colorInfo.hex}
-              imagePath={colorInfo.imagePath}
-              onDelete={() => handleDeleteColorComponent(colorInfo.id)}
-              setColorInformation={setColorInformation}
-              isEditMode={true}
-          />
+          handleAddColorComponentInEditMode(colorInfo.color, colorInfo.hex, colorInfo.imagePath)
       ));
       setColorComponents(newColorComponents);
       const newSizeComponents = sizeInformation.map(size => (
@@ -117,13 +108,38 @@ function RightSide({
     }
   };
 
+  const handleAddColorComponentInEditMode = (colorName, colorValue, image) => {
+    const id = Math.random();
+    if (colorComponents.length < 5) {
+      setColorComponents((prevColorComponents) => [
+        ...prevColorComponents,
+        <ColorComponent
+            key={id}
+            id={id}
+            onDelete={() => handleDeleteColorComponent(id)}
+            setColorInformation={setColorInformation}
+            isEditMode={true}
+            color={colorName}
+            hex={colorValue}
+            imagePath={image}
+        />,
+      ]);
+    } else {
+      toast.error("The maximum number of colors is 5.", {
+        position: "bottom-right",
+      });
+    }
+  };
+
   const handleDeleteColorComponent = (id) => {
-    setColorComponents((prevColorComponents) =>
-      prevColorComponents.filter((component) => component.props.id !== id)
-    );
-    setColorInformation((prevColorInformation) =>
-      prevColorInformation.filter((colorInfo) => colorInfo.id !== id)
-    );
+    const colorComponent = colorComponents.find((component) => component.props.id === id);
+    if (colorComponent) {
+      const updatedColorInformation = colorInformation.filter((colorInfo) => colorInfo.id !== colorComponent.props.id);
+      setColorInformation(updatedColorInformation);
+      setColorComponents((prevColorComponents) =>
+          prevColorComponents.filter((component) => component.props.id !== id)
+      );
+    }
   };
 
   useEffect(() => {

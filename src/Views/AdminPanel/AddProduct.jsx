@@ -38,28 +38,11 @@ const AddProduct = ({ isEditMode = false}) => {
   const [isProductAdded, setIsProductAdded] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  const transformColorInformation = (colorInformation) => {
-    return colorInformation.map(colorInfo => ({
-      id: Math.random(), // Genera un ID aleatorio
-      color: colorInfo.color,
-      hex: colorInfo.hex,
-      imagePath: colorInfo.imagePath
-    }));
-  };
-
-  const transformSizeInformation = (sizeInformation) => {
-    return sizeInformation.map(size => ({
-      id: Math.random(),
-      size: size
-    }));
-  };
 
   useEffect(() => {
     if (isEditMode && productId) {
       getElementByID(productId, '/products')
           .then(product => {
-            const transformedColorInformation = transformColorInformation(product.colorInformation);
-            const transformedSizeInformation = transformSizeInformation(product.size);
             setProductName(product.name);
             setProductDescription(product.description);
             setSelectedBrand(product.brand);
@@ -67,8 +50,8 @@ const AddProduct = ({ isEditMode = false}) => {
             setSelectedCategories(product.categories);
             setSelectedTarget(product.target);
             setSelectedSports(product.sport);
-            setColorInformation(transformedColorInformation);
-            setSizeInformation(transformedSizeInformation);
+            setColorInformation(product.colorInformation);
+            setSizeInformation(product.size);
             setProductImages(product.imagePath);
             setStockInformation(product.inStock);
             setIsDataLoaded(true);

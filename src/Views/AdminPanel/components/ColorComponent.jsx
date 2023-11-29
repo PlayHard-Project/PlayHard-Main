@@ -10,7 +10,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
 
     useEffect(() => {
         if (isEditMode) {
-            setIsDisabled(true);
+            handleAddColor()
         }
     }, []);
 
@@ -50,7 +50,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
     };
 
     const handleDelete = () => {
-        onDelete();
+        onDelete(id);
     };
 
     const handleAddColor = () => {

@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  MdSearch,
-  MdPerson,
-  MdSettings,
-  MdClose,
-  MdMenu,
-} from "react-icons/md";
+import { MdSearch, MdPerson, MdSettings, MdMenu } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "../../css/headerStyle.css";
@@ -42,7 +36,6 @@ const Header = ({
   const [isOptionsModalOpen, setOptionsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 888 });
   const [showCategoriesPopup, setShowCategoriesPopup] = useState(false);
-  const [isAdminModalOpen, setAdminModalOpen] = useState(false);
   const [product, setProduct] = useState();
 
   /**
@@ -52,26 +45,6 @@ const Header = ({
   const toggleMenuAndCategories = (category) => {
     toggleMenu();
     toggleCategories();
-  };
-
-  /**
-   * Function to handle the opening and closing of the admin modal.
-   */
-  const handleAdminModal = () => {
-    if(isAdminModalOpen){
-      setAdminModalOpen(false)
-      return;
-    }
-    setAdminModalOpen((prevOpen) => !prevOpen);
-    setShowSearchPopup(false);
-    setShowMenuPopup(false);
-  };
-
-  /**
-   * Function to handle the closing of the admin modal.
-   */
-  const handleCloseAdminModal = () => {
-    setAdminModalOpen(false);
   };
 
   /**
@@ -137,12 +110,12 @@ const Header = ({
    * Also, closes the categories modal and options modal.
    */
   const toggleMenu = () => {
-    setShowMenuPopup(!showMenuPopup);
+    setShowMenuPopup((prev) => !prev);
     setShowSearchPopup(false);
     handleCloseModal();
     handleCloseCategoriesModal();
     handleCloseOptionsModal();
-  };
+};
 
   /**
    * Toggles the visibility of the categories popup.
@@ -281,6 +254,7 @@ const Header = ({
                     handleCloseCategoriesModal={handleCloseCategoriesModal}
                     handleSecondModal={handleCloseOptionsModal}
                     toggleMenuAndCategories={toggleMenuAndCategories}
+                    handleCloseMenuModal ={toggleMenu}
                 />
             )}
           </div>

@@ -1,80 +1,132 @@
 .setting-title {
-    font-size: 36px;
-    color: #000000;
-    font-family: 'Roboto', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 50px;
-    font-weight: bold;
+  font-size: 36px;
+  color: #000000;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+  font-weight: bold;
 }
 
 .setting-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 span {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .toggle-button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    border: none;
-    font-size: 60px;
-    color: gray;
-    transition: color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  font-size: 60px;
+  color: gray;
+  transition: color 0.3s ease;
 }
 
 .toggle-button.active {
-    color: #72a3ff;
+  color: #72a3ff;
 }
 
 .toggle-icon {
-    margin-left: 170px;
+  margin-left: 170px;
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .active .toggle-icon {
-    animation: pulse 0.3s ease;
+  animation: pulse 0.3s ease;
 }
-  
-  .text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 20px;
-    width: 50%;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 20px;
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
+  width: 50%;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.centered-image {
+  display: block;
+  height: 800px;
+  margin-top: 20px;
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.container-settings {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.span-style{
+    width: 350px;
+    text-align: justify;
+}
+@media only screen and (max-width: 1369px) {
+  .toggle-icon {
+    margin-left: 120px;
   }
-  
-  .centered-image {
-    display: block;
-    width: 60%;
-    height: auto;
-    margin-top: 20px;
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+}
+@media only screen and (max-width: 1345px) {
+  .toggle-icon {
+    margin-left: 100px;
   }
-  
-  .container-settings {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
+}
+@media only screen and (max-width: 1194px) {
+  .toggle-icon {
+    margin-left: 80px;
   }
-  
+}
+@media only screen and (max-width: 1146px) {
+  .toggle-icon {
+    margin-left: 50px;
+  }
+}
+@media only screen and (max-width: 1070px) {
+  .toggle-icon {
+    margin-left: 30px;
+  }
+}
+@media only screen and (max-width: 887px) {
+    .span-style{
+        width: 500px;
+    }
+}
+@media only screen and (max-width: 670px) {
+    .span-style{
+        width: 400px;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .span-style{
+        width: 320px;
+    }
+}
+@media only screen and (max-width: 460px) {
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .toggle-button {
+        margin-top: 10px;
+      }
+}

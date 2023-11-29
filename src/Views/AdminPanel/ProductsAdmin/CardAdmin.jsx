@@ -6,7 +6,13 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
 import BuyCartManagement from "../../../Utilities/BuyCartManagement";
 
-const CardAdmin = ({ product, refreshProducts, setCartItemsQuantity, setSubTotal }) => {
+const CardAdmin = ({
+  product,
+  refreshProducts,
+  setCartItemsQuantity,
+  setSubTotal,
+  setProducts,
+}) => {
   const buyCartManagement = new BuyCartManagement();
   const titleRef = useRef();
   const currency = "$";
@@ -24,13 +30,28 @@ const CardAdmin = ({ product, refreshProducts, setCartItemsQuantity, setSubTotal
   }, [product.name]);
 
   const deleteProduct = async () => {
-    product.isAvailable = false;
-    updateElement(product, "products/");
-    buyCartManagement.deleteProductNoSpecific(product._id);
-    setCartItemsQuantity(buyCartManagement.getProducts().length);
-    const subtotal = await buyCartManagement.getSubTotal();
-    setSubTotal(subtotal);
-    refreshProducts();
+    try {
+      product.isAvailable = false;
+      await updateElement(product, "products/");
+
+      buyCartManagement.deleteProductNoSpecific(product._id);
+      setCartItemsQuantity(buyCartManagement.getProducts().length);
+      const subtotal = await buyCartManagement.getSubTotal();
+      setSubTotal(subtotal);
+
+      await new Promise((resolve) => {
+        setProducts((prevProducts) => {
+          const updatedProducts = prevProducts.filter(
+            (p) => p._id !== product._id
+          );
+          resolve(updatedProducts);
+          return updatedProducts;
+        });
+      });
+      refreshProducts();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
   return (

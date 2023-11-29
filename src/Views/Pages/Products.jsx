@@ -44,10 +44,6 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
     )
   );
 
-  console.log("Page ",{page})
-  console.log("Content:",{content})
-  console.log("Products:",{products})
-
   /**
  * Renders a loading component when there are no products available.
  * @param {Array} products - The array of products to be checked for emptiness.

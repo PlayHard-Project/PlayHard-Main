@@ -20,7 +20,6 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
-  // Fetch products when the component mounts or the page changes
   useEffect(() => {
     if (page > 0) {
       fetchProducts();
@@ -41,18 +40,7 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   };
 
   const content = products.map(
-    ({ _id, imagePath, name, price, colorInformation, size }) => (
-      <CardAdmin
-        _id={_id}
-        img={imagePath[0]}
-        title={name}
-        price={price}
-        colorInformation={colorInformation}
-        size={size}
-        setCartItemsQuantity={setCartItemsQuantity}
-        setSubTotal={setSubTotal}
-      />
-    )
+    (product) => {console.log(product)}
   );
 
   console.log("Page ",{page})
@@ -66,12 +54,7 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
    */
   if (products.length === 0) {
     return (
-        <div
-            className={
-              "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
-            }
-        >
-          {/* Display a loading spinner with the specified color */}
+        <div className={"flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"}>
           <GridLoader color="#023fc5" />
         </div>
     );

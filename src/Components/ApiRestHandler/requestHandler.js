@@ -24,6 +24,23 @@ export const getElements = async (route) => {
   }
 };
 
+/**
+ * Performs a filtered retrieval of elements from a specific route based on the provided parameters.
+ *
+ * @async
+ * @function
+ * @param {string} route - The route on which to perform the filtered retrieval.
+ * @param {Object} params - The parameters used for filtering the elements.
+ * @param {string[]} params.size - An array of sizes for filtering.
+ * @param {string[]} params.target - An array of target demographics for filtering.
+ * @param {string[]} params.sport - An array of sports for filtering.
+ * @param {string[]} params.brand - An array of brands for filtering.
+ * @param {string[]} params.categories - An array of categories for filtering.
+ * @param {number} params.minPrice - The minimum price for filtering.
+ * @param {number} params.maxPrice - The maximum price for filtering.
+ * @returns {Promise<Array>} A promise that resolves with the filtered elements.
+ * @throws {Error} Throws an error if there is an issue performing the filtered retrieval or if no products are found.
+ * **/
 export const getFilteredElements = async (route, params) => {
   try {
     const queryString = Object.keys(params)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import { isLoggedIn, isUserAdmin } from "../../Utilities/auth";
+import { isLoggedIn, isUserAdmin, getUserID } from "../../Utilities/auth";
 import { Link, useNavigate } from "react-router-dom";
 import "../../css/Profile.css";
 
@@ -40,8 +40,9 @@ const Profile = () => {
   };
 
   return (
+    <div className="general-view">
     <div className="container user-profile-container">
-      <h2 className="title">User Profile</h2>
+      <h2 className="title-profile">User Profile</h2>
       <div
           className="user-image"
           style={{
@@ -52,24 +53,24 @@ const Profile = () => {
         </div>
       {userData ? (
         <div className="user-info">
-          <p>User:</p>
+          <p className="user-title">User:</p>
           <div className="username">{userData.name.toUpperCase()}</div>
-          <p>Email:</p>
+          <p className="email-title">Email:</p>
           <div className="email">{userData.email.toUpperCase()}</div>
-          {/*<p>ID: {userData._id}</p>*/}
-          {/*<p>isAdmin: {isUserAdmin() ? "Yes" : "No"}</p>*/}
+          {/*<p>{getUserID()}</p>*/}
           <div className="user-actions">
           <Link to="/history" >
-          <button className="action-button1">View History</button>  
+          <button className="view-history-button">View History</button>  
           </Link>
         
-        <button onClick={handleLogout} className="action-button2">Log Out</button>
+        <button onClick={handleLogout} className="log-out-button">Log Out</button>
         </div>
         </div>
         
       ) : (
         <p>Please Sign-In...</p>
       )}
+    </div>
     </div>
   );
 };

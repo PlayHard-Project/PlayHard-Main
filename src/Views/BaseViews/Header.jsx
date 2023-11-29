@@ -249,7 +249,7 @@ const Header = ({
               subTotal={subTotal}
             />
           </div>
-          <Link to="/settings" className="lg:flex hidden">
+          <Link to="/notImplementedYet" className="lg:flex hidden">
             <MdSettings size={30} color="#72a3ff" className="style-icon" />
           </Link>
         </div>
@@ -308,7 +308,7 @@ const Header = ({
                 Shop Cart
               </Link>
               <Link
-                to="/settings"
+                to="/notImplementedYet"
                 className="relative flex items-center text-link"
                 onClick={toggleMenu}
               >

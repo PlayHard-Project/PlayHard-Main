@@ -94,7 +94,7 @@ function createRoutes(router, model, baseRoute) {
       }
 
       if (req.query.brand) {
-          query.brand = req.query.brand;
+          query.brand = { $in: req.query.brand.split(',') };
       }
 
       if (req.query.categories) {

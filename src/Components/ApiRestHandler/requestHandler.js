@@ -24,6 +24,26 @@ export const getElements = async (route) => {
   }
 };
 
+export const getFilteredElements = async (route, params) => {
+  try {
+    const queryString = Object.keys(params)
+        .map(key => {
+          if (Array.isArray(params[key])) {
+            return `${key}=${params[key].join(',')}`;
+          } else {
+            return `${key}=${params[key]}`;
+          }
+        })
+        .join('&');
+    console.log(`${apiURL}${route}?${queryString}`)
+    const response = await axios.get(`${apiURL}${route}?${queryString}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting filtered elements: ', error);
+    throw error;
+  }
+};
+
 /**
  * Performs a search for elements on a specific route using a search query.
  *

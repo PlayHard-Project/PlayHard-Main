@@ -42,7 +42,9 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const content = products.map((product) => <CardAdmin product={product} />);
+  const content = products.map((product, index) => (
+    <CardAdmin key={index} product={product} />
+  ));
 
   /**
    * Renders a loading component when there are no products available.

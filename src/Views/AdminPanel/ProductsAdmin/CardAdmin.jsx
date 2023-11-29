@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../../css/AdminPanelStyle/MainPage/CardAdmin.css";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
 
 const CardAdmin = ({ product }) => {
   const titleRef = useRef();
@@ -19,6 +20,11 @@ const CardAdmin = ({ product }) => {
       titleElement.classList.remove("overflow-animation");
     }
   }, [product.name]);
+
+  const updateProduct = () => {
+    product.isAvailable = false;
+    updateElement(product, "products/");
+  };
 
   return (
     <div className="shopping-card-admin">
@@ -54,7 +60,7 @@ const CardAdmin = ({ product }) => {
         <div className="edit-button">
           <FaEdit color="white" /> Edit
         </div>
-        <div className="delete-button" onClick={() => console.log("Sssss")}>
+        <div className="delete-button" onClick={updateProduct}>
           <RiDeleteBin6Line color="white" /> Delete
         </div>
       </div>

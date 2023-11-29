@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { isLoggedIn, isUserAdmin } from "../../Utilities/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../css/Profile.css";
 
 const Profile = () => {
@@ -59,7 +59,10 @@ const Profile = () => {
           {/*<p>ID: {userData._id}</p>*/}
           {/*<p>isAdmin: {isUserAdmin() ? "Yes" : "No"}</p>*/}
           <div className="user-actions">
-        <button onClick={handleLogout} className="action-button1">View History</button>
+          <Link to="/history" >
+          <button className="action-button1">View History</button>  
+          </Link>
+        
         <button onClick={handleLogout} className="action-button2">Log Out</button>
         </div>
         </div>

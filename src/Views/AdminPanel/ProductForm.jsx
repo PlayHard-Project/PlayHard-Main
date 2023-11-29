@@ -31,7 +31,7 @@ const ProductForm = ({
       {inputType === "textarea" ? (
         <textarea
           id={id}
-          className="input-add w-full hover:border-blue-700 resize-none"
+          className="input-add__admin w-full hover:border-blue-700 resize-none"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -41,7 +41,7 @@ const ProductForm = ({
         <input
           type={inputType}
           id={id}
-          className="input-add w-full hover:border-blue-700"
+          className="input-add__admin w-full hover:border-blue-700"
           value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}

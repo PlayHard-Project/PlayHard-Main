@@ -59,9 +59,12 @@ const CardAdmin = ({ _id, img, title, price, colorInformation, size, setCartItem
             </div>
         </div>
         <div className="card-buttons">
-          <button className="edit-button">
+          <button className="edit-button flex items-center justify-center">
             <Link to={`/admin/add-product/${_id}`}>
-              <FaEdit color="white" /> Edit
+              <div className={'flex items-center justify-center'}>
+                <FaEdit className={'flex'} color="white" />
+                <p>Edit</p>
+              </div>
             </Link>
           </button>
           <div className="delete-button">

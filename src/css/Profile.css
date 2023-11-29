@@ -1,10 +1,9 @@
 .general-view{
-  background: linear-gradient(to bottom, #8eb6ff, #ffffff);
   margin-bottom: 20px;
 }
 
 .user-profile-container {
-	width: 500px;
+  width: 500px;
   height: 50%;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
   padding-bottom: 50px;
   background-color:white;
-  margin: auto;
+  margin: 10px auto;
 }
 
 .user-image-container {
@@ -22,6 +21,7 @@
 }
 
 .user-image {
+  background: linear-gradient(to bottom, #8eb6ff, #ffffff);
   border: 2px solid black;
   padding: 10px;
   width: 150px;
@@ -33,7 +33,7 @@
   justify-content: center;
   font-family: 'New Romans'; 
   font-size: 80px;
-  color: white;
+  color: black;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -48,7 +48,8 @@
   margin-bottom: 15px;
   font-size: 20px;
   font-weight:bolder;
-  border: 2px solid black;
+  border: 2px solid #888383;
+  border-radius: 10px;
 }
 
 .user-actions {
@@ -64,31 +65,34 @@
 }
 
 .view-history-button {
-  margin: 0 20px;
+  margin: 20px 20px;
   margin-bottom: 20px;
-  background-color: #72a3ff;
-  border: 2px solid black;
-  border-radius: 3px;
-  color: white;
+  background-color: #C3B533;
   font-weight: 500;
   padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: larger;
 }
 
 .view-history-button:hover {
-  background-color: #357ae8;
+  background-color: #d6cf8c;
   transform: scale(1.1);
 }
 
 .log-out-button {
   padding: 10px 20px;
-  margin: 0 20px;
-
-  color: white;
-  border: 2px solid black;
-  background-color: red;
-  border-radius: 3px;
+  margin: 20px 20px;
+  background-color: #e57575;
   font-weight: 500;
   padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: larger;
 }
 
 .log-out-button:hover {
@@ -102,4 +106,5 @@
   font-family: 'Bangers', cursive;    
   text-transform: uppercase;
   letter-spacing: 2px;
+  padding-bottom: 20px;
 }

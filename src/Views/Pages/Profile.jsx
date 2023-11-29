@@ -40,15 +40,10 @@ const Profile = () => {
   };
 
   return (
-    <div className="general-view">
+    <div className="container general-view">
     <div className="container user-profile-container">
       <h2 className="title-profile">User Profile</h2>
-      <div
-          className="user-image"
-          style={{
-            backgroundColor: getRandomColor(),
-          }}
-        >
+      <div className="user-image">
           {userData ? getInitials(userData.name) : ""}
         </div>
       {userData ? (

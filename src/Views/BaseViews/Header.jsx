@@ -15,7 +15,7 @@ import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
-import { isLoggedIn } from "../../Utilities/auth";
+import { isLoggedIn, isUserAdmin } from "../../Utilities/auth";
 
 /**
  * Header component for the website.
@@ -160,18 +160,32 @@ const Header = ({
    */
   useEffect(() => {
     if (isMobile) {
+      handleAdminPermissions();
       handleCloseModal();
       handleCloseOptionsModal();
     }
   }, [isMobile]);
 
-  const paths = [
-    { link: "/", title: "Home" },
-    { link: "/about", title: "About Us" },
-    { link: "/products", title: "Products" },
-    { link: "/contact", title: "Contact Us" },
-    isLoggedIn ? { link: "/admin", title: "Admin" } : {},
-  ];
+  const handleAdminPermissions = () => {
+  if(isLoggedIn() && isUserAdmin()){
+    return [
+      { link: "/", title: "Home" },
+      { link: "/about", title: "About Us" },
+      { link: "/products", title: "Products" },
+      { link: "/contact", title: "Contact Us" },
+      { link: "/admin", title: "Admin" },
+    ];
+  }else if((isLoggedIn() && !isUserAdmin())||(!isLoggedIn())){
+    return [
+      { link: "/", title: "Home" },
+      { link: "/about", title: "About Us" },
+      { link: "/products", title: "Products" },
+      { link: "/contact", title: "Contact Us" },
+    ];
+  }
+  }
+
+  const paths = handleAdminPermissions();
 
   const modalRef = useRef();
   const modalOptionsRef = useRef();

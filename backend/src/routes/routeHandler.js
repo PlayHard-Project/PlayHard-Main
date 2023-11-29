@@ -79,8 +79,40 @@ function createRoutes(router, model, baseRoute) {
    * @returns {void}
    */
   router.get(`/${baseRoute}`, (req, res) => {
+      let query = {};
+
+      if (req.query.size) {
+          query.size = { $in: req.query.size.split(',') };
+      }
+
+      if (req.query.target) {
+          query.target = { $in: req.query.target.split(',') };
+      }
+
+      if (req.query.sport) {
+          query.sport = { $in: req.query.sport.split(',') };
+      }
+
+      if (req.query.brand) {
+          query.brand = req.query.brand;
+      }
+
+      if (req.query.categories) {
+          query.categories = { $in: req.query.categories.split(',') };
+      }
+
+      if (req.query.minPrice || req.query.maxPrice) {
+          query.price = {};
+          if (req.query.minPrice) {
+              query.price.$gte = Number(req.query.minPrice);
+          }
+          if (req.query.maxPrice) {
+              query.price.$lte = Number(req.query.maxPrice);
+          }
+      }
+
       model
-          .find()
+          .find(query)
           .then((data) => res.json(data))
           .catch((err) => res.json({ message: err }));
   });

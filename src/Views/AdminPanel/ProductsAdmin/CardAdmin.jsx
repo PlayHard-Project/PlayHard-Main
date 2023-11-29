@@ -4,8 +4,10 @@ import "../../../css/AdminPanelStyle/MainPage/CardAdmin.css";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
+import BuyCartManagement from "../../../Utilities/BuyCartManagement";
 
-const CardAdmin = ({ product, refreshProducts }) => {
+const CardAdmin = ({ product, refreshProducts, setCartItemsQuantity, setSubTotal }) => {
+  const buyCartManagement = new BuyCartManagement();
   const titleRef = useRef();
   const currency = "$";
 
@@ -21,9 +23,13 @@ const CardAdmin = ({ product, refreshProducts }) => {
     }
   }, [product.name]);
 
-  const updateProduct = () => {
+  const deleteProduct = async () => {
     product.isAvailable = false;
     updateElement(product, "products/");
+    buyCartManagement.deleteProductNoSpecific(product._id);
+    setCartItemsQuantity(buyCartManagement.getProducts().length);
+    const subtotal = await buyCartManagement.getSubTotal();
+    setSubTotal(subtotal);
     refreshProducts();
   };
 
@@ -61,7 +67,7 @@ const CardAdmin = ({ product, refreshProducts }) => {
         <div className="edit-button">
           <FaEdit color="white" /> Edit
         </div>
-        <div className="delete-button" onClick={updateProduct}>
+        <div className="delete-button" onClick={deleteProduct}>
           <RiDeleteBin6Line color="white" /> Delete
         </div>
       </div>

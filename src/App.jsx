@@ -79,7 +79,7 @@ export default function App() {
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
-                <Route path="/admin" element={<AdminPanelView/>}/>
+                <Route path="/admin" element={<AdminPanelView setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} />}/>
             </Routes>
             <Footer />
         </Router>

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
  * @param {function} setCartItemsQuantity - A function to set the quantity of items in the cart.
  * @param {function} setSubTotal - A function to set the subtotal of the cart.
  */
-const AdminPanelView = () => {
+const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -51,6 +51,8 @@ const AdminPanelView = () => {
       key={index}
       product={product}
       refreshProducts={refreshProducts}
+      setCartItemsQuantity={setCartItemsQuantity}
+      setSubTotal={setSubTotal}
     />
   ));
 

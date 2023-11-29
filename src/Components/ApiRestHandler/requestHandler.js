@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
+const apiURL = 'http://localhost:9000/api/';
 console.log(process.env.REACT_APP_BRANCH);
 
 
@@ -10,7 +10,7 @@ export const addElement = async (newElement, route) => {
     return response.data;
   } catch (error) {
     console.error('Error adding the new element: ', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -20,23 +20,28 @@ export const getElements = async (route) => {
     return response.data;
   } catch (error) {
     console.error('Error getting all elements: ', error);
-    throw error; 
+    throw error;
   }
 };
 
 export const getFilteredElements = async (route, params) => {
   try {
     const queryString = Object.keys(params)
-        .map(key => {
-          if (Array.isArray(params[key])) {
-            return `${key}=${params[key].join(',')}`;
-          } else {
-            return `${key}=${params[key]}`;
-          }
-        })
-        .join('&');
+      .map(key => {
+        if (Array.isArray(params[key])) {
+          return `${key}=${params[key].join(',')}`;
+        } else {
+          return `${key}=${params[key]}`;
+        }
+      })
+      .join('&');
     console.log(`${apiURL}${route}?${queryString}`)
     const response = await axios.get(`${apiURL}${route}?${queryString}`);
+
+    if (response.data.length === 0) {
+      throw new Error('No products found with the specified filters');
+    }
+
     return response.data;
   } catch (error) {
     console.error('Error getting filtered elements: ', error);
@@ -70,7 +75,7 @@ export const getElementByID = async (elemenetId, route) => {
     return response.data;
   } catch (error) {
     console.error('Error getting the specified element: ', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -81,7 +86,7 @@ export const updateElement = async (elementToUpdate, route) => {
     return response.data;
   } catch (error) {
     console.error('Error updating the element: ', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -91,7 +96,7 @@ export const removeElement = async (productId, route) => {
     return response.data;
   } catch (error) {
     console.error('Error removing product:', error);
-    throw error; 
+    throw error;
   }
 };
 

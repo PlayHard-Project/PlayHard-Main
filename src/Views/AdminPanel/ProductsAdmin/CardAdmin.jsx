@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
 
-const CardAdmin = ({ product }) => {
+const CardAdmin = ({ product, refreshProducts }) => {
   const titleRef = useRef();
   const currency = "$";
 
@@ -24,6 +24,7 @@ const CardAdmin = ({ product }) => {
   const updateProduct = () => {
     product.isAvailable = false;
     updateElement(product, "products/");
+    refreshProducts();
   };
 
   return (

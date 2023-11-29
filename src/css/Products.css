@@ -4,6 +4,15 @@ Container for all products in the administration and normal area.
 .container-product{
     min-height: 200px;
 }
+
+.container {
+    display: inline-flex;
+}
+
+.sidebar {
+    width: 15%;
+}
+
 .add-product-link {
     position: fixed;
     top: 300;

@@ -65,8 +65,8 @@ if (products.length === 0) {
 
   return (
     <div className="container-product container" >
-      <Sidebar />
-      <CardsContainer content={content} />
+      <Sidebar className="sidebar" />
+      <CardsContainer className="cards-container" content={content} />
     </div>
   );
 };

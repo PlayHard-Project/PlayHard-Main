@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
 import BuyCartManagement from "../../../Utilities/BuyCartManagement";
+import toast from "react-hot-toast";
 
 const CardAdmin = ({
   product,
@@ -48,8 +49,11 @@ const CardAdmin = ({
           return updatedProducts;
         });
       });
+      toast.success("Excellent! The product has been successfully removed.");
+
       refreshProducts();
     } catch (error) {
+      toast.error("Oops! The product has not been removed.");
       console.error("Error deleting product:", error);
     }
   };

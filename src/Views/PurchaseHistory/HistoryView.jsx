@@ -11,7 +11,7 @@ const ShoppingHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [key, setKey] = useState(0);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const idUser = "123";
 
   const handleFilterClick = async () => {
@@ -61,7 +61,11 @@ const ShoppingHistory = () => {
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
             wrapperClassName="datepicker-wrapper"
+            maxDate={new Date()}
+            onKeyDown={(e) => e.preventDefault()}
+            onFocus={(e) => e.target.blur()}
           />
+
           <button
             className="clear-filter-button"
             onClick={handleClearDate}

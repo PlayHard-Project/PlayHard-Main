@@ -230,9 +230,9 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <div className="image-container-signup hidden md:block">
-        <img src={signUpImage} alt="SignUp" className="image-signUp" />
-      </div>
+      <div className="hidden lg:block">
+          <img src={signUpImage} alt="SignUp" className="image-signUp" />
+        </div>
     </div>
   );
 };

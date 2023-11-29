@@ -85,8 +85,6 @@ const Login = () => {
       return;
     }
 
-    console.log('JSON a enviar:', JSON.stringify({ email, password }));
-
     // POST request with the email and password to the backend
     try {
       const response = await fetch(apiBackend+'/sign-in', {
@@ -100,7 +98,6 @@ const Login = () => {
         }),
       });
 
-      // Here throws it is not valid JSON
       const responseData = await response.json();
 
       if (responseData.error) {

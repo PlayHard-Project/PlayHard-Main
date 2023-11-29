@@ -176,6 +176,23 @@ function RightSide({
     });
   };
 
+  useEffect(() => {
+    setStockInformation((prevStockInformation) => {
+      const updatedStockInformation = prevStockInformation.map((size) => [...size]);
+      if (updatedStockInformation.length > sizeInformation.length) {
+        updatedStockInformation.length = sizeInformation.length;
+      }
+      updatedStockInformation.forEach((size, index) => {
+        if (size.length > colorInformation.length) {
+          size.length = colorInformation.length;
+        }
+        updatedStockInformation[index] = size;
+      });
+
+      return updatedStockInformation;
+    });
+  }, [sizeInformation, colorInformation]);
+
   return (
     <div>
       <div className="flex flex-col mb-2">

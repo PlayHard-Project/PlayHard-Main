@@ -11,7 +11,7 @@ const SignUp = () => {
   const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
@@ -90,7 +90,7 @@ const SignUp = () => {
       toast.error("Email cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+    } else if (!/^[^\s@]+@gmail\.com$/.test(email.toLowerCase())) {
       toast.error(
         "Please enter a valid email address. Only Gmail addresses ending in @gmail.com are accepted.",
         {
@@ -124,6 +124,7 @@ const SignUp = () => {
 
     //Created POST request
     try {
+      email = email.toLowerCase();
       const response = await fetch(
         apiBackend+"/signup",
         {
@@ -176,7 +177,6 @@ const SignUp = () => {
       const { tokenSession } = data;
       if (tokenSession) {
         localStorage.setItem("token", tokenSession);
-        console.log("Token set in local storage:", tokenSession);
       }
       navigate("/");
     } catch (error) {

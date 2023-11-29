@@ -10,7 +10,7 @@ import "../../css/LogIn/logInStyle.css";
 const Login = () => {
   const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
@@ -54,6 +54,7 @@ const Login = () => {
 
   // Handles all sign in process
   const handleSignIn = async () => {
+    email = email.toLowerCase();
     const passwordRequirements = validatePassword();
     if (!email) {
       toast.error("Email cannot be empty.", {
@@ -106,7 +107,7 @@ const Login = () => {
       if (responseData.error) {
         toast.error(responseData.error, { position: "bottom-right" });
       } else {
-        toast.success(`Sign Up successful for ${email}!`, {
+        toast.success(`Sign In successful for user: ${email}!`, {
           position: "bottom-right",
         });
         const { tokenSession } = responseData;

@@ -16,7 +16,10 @@ function RightSide({
   setSizeInformation,
   setStockInformation,
     stockInformation,
-    isDataLoaded
+    isDataLoaded,
+
+    colorInformationAux,
+    sizeInformationAux
 }) {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
@@ -26,7 +29,7 @@ function RightSide({
 
   useEffect(() => {
     if (isEditMode) {
-      const newColorComponents = colorInformation.map(colorInfo => (
+      const newColorComponents = colorInformationAux.map(colorInfo => (
           <ColorComponent
               key={colorInfo.id}
               id={colorInfo.id}
@@ -39,7 +42,7 @@ function RightSide({
           />
       ));
       setColorComponents(newColorComponents);
-      const newSizeComponents = sizeInformation.map(size => (
+      const newSizeComponents = sizeInformationAux.map(size => (
           <SelectSizeComponent
               key={size.id}
               id={size.id}
@@ -150,14 +153,12 @@ function RightSide({
   };
 
   const handleDeleteSizeComponent = (id) => {
-    const colorComponent = colorComponents.find((component) => component.props.id === id);
-    if (colorComponent) {
-      const updatedColorInformation = colorInformation.filter((colorInfo) => colorInfo.id !== colorComponent.props.id);
-      setColorInformation(updatedColorInformation);
-      setColorComponents((prevColorComponents) =>
-          prevColorComponents.filter((component) => component.props.id !== id)
-      );
-    }
+    setSizeComponents((prevSizeComponents) =>
+        prevSizeComponents.filter((component) => component.props.id !== id)
+    );
+    setSizeInformation((prevSizeInformation) =>
+        prevSizeInformation.filter((sizeInfo) => sizeInfo.id !== id)
+    );
   };
 
   const handleQuantityChange = (color, size, quantity, sizeIndex) => {

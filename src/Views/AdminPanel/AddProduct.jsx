@@ -38,6 +38,9 @@ const AddProduct = ({ isEditMode = false}) => {
   const [isProductAdded, setIsProductAdded] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
+  const [colorInformationAux, setColorInformationAux] = useState([]);
+  const [sizeInformationAux, setSizeInformationAux] = useState([]);
+
   const transformColorInformation = (colorInformation) => {
     return colorInformation.map(colorInfo => ({
       id: Math.random(), // Genera un ID aleatorio
@@ -67,8 +70,8 @@ const AddProduct = ({ isEditMode = false}) => {
             setSelectedCategories(product.categories);
             setSelectedTarget(product.target);
             setSelectedSports(product.sport);
-            setColorInformation(transformedColorInformation);
-            setSizeInformation(transformedSizeInformation);
+            setColorInformationAux(transformedColorInformation);
+            setSizeInformationAux(transformedSizeInformation);
             setProductImages(product.imagePath);
             setStockInformation(product.inStock);
             setIsDataLoaded(true);
@@ -415,7 +418,8 @@ const AddProduct = ({ isEditMode = false}) => {
                        setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
                        colorInformation={colorInformation} sizeInformation={sizeInformation}
                         isEditMode={isEditMode} productImages={productImages} stockInformation={stockInformation}
-                        isDataLoaded={isDataLoaded}/>
+                        isDataLoaded={isDataLoaded} colorInformationAux={colorInformationAux}
+                       sizeInformationAux={sizeInformationAux}/>
           </div>
         </div>
       <div className="buttons-container">

@@ -10,7 +10,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
 
     useEffect(() => {
         if (isEditMode) {
-            setIsDisabled(true);
+            handleAddColor()
         }
     }, []);
 
@@ -55,7 +55,14 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
 
     const handleAddColor = () => {
         setIsDisabled(true);
-        setColorInformation(prevColorInformation => [...prevColorInformation, {id, color: colorName, hex: colorValue, imagePath: image}]);
+        setColorInformation(prevColorInformation => {
+            const colorExists = prevColorInformation.some(color => color.id === id);
+            if (!colorExists) {
+                return [...prevColorInformation, {id, color: colorName, hex: colorValue, imagePath: image}];
+            } else {
+                return prevColorInformation;
+            }
+        });
     };
 
 

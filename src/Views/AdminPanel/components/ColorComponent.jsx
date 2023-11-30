@@ -15,13 +15,12 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
     }, []);
 
     const handleAddProductMessages = () => {
-    
-        if (colorName.length === 0) {
-          toast.error("Please add the color name.", { position: "bottom-right", });
-          onDelete();
+        if (colorName.trim().length === 0) {
+            toast.error("Please add the color name.", { position: "bottom-right", });
+            onDelete();
         } else if (image.length === 0) {
-          toast.error("Please add the image for the color.", { position: "bottom-right", });
-          onDelete();
+            toast.error("Please add the image for the color.", { position: "bottom-right", });
+            onDelete();
         }
     }
 
@@ -54,11 +53,15 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
     };
 
     const handleAddColor = () => {
+        if (colorName.trim() === '') {
+            handleAddProductMessages();
+            return;
+        }
         setIsDisabled(true);
         setColorInformation(prevColorInformation => {
             const colorExists = prevColorInformation.some(color => color.id === id);
             if (!colorExists) {
-                return [...prevColorInformation, {id, color: colorName, hex: colorValue, imagePath: image}];
+                return [...prevColorInformation, {id, color: colorName.trim(), hex: colorValue, imagePath: image}];
             } else {
                 return prevColorInformation;
             }
@@ -101,11 +104,7 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
                     />
                     <button onClick={handleAddImage} className="text-white bg-blue-500 w-1/3 block rounded-md p-1" disabled={isDisabled}>Add image</button>
                 </div>
-                <button onClick={() => {
-                            handleAddColor();
-                            handleAddProductMessages();
-                            }} 
-                            className={`text-white w-full block rounded-md p-1 mt-2 ${isDisabled ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isDisabled}>Add</button>
+                <button onClick={handleAddColor} className={`text-white w-full block rounded-md p-1 mt-2 ${isDisabled ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isDisabled}>Add</button>
                 <button onClick={handleDelete} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isDisabled}>Delete</button>
             </div>
             <div className="w-1/4 flex items-center justify-center">

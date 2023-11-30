@@ -14,11 +14,15 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation, isEditMode = fa
     };
 
     const handleAddSize = () => {
+        if (selectedSize.trim() === '') {
+            handleAddProductMessages();
+            return;
+        }
         setIsAdded(true);
         setSizeInformation(prevSizeInformation => {
-            const sizeExists = prevSizeInformation.some(prevSize => prevSize.id === id && prevSize.size === selectedSize);
+            const sizeExists = prevSizeInformation.some(prevSize => prevSize.id === id && prevSize.size === selectedSize.trim());
             if (!sizeExists) {
-                return [...prevSizeInformation, { id, size: selectedSize }];
+                return [...prevSizeInformation, { id, size: selectedSize.trim() }];
             }
             return prevSizeInformation;
         });
@@ -31,10 +35,9 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation, isEditMode = fa
     }, []);
 
     const handleAddProductMessages = () => {
-    
-        if (selectedSize.length === 0) {
-          toast.error("Please add the size.", { position: "bottom-right", });
-          onDelete(id);
+        if (selectedSize.trim().length === 0) {
+            toast.error("Please add the size.", { position: "bottom-right", });
+            onDelete(id);
         }
     }
 
@@ -50,7 +53,7 @@ function SelectSizeComponent({ id, onDelete, setSizeInformation, isEditMode = fa
                 required
                 disabled={isAdded}
             />
-            <button onClick={() => {handleAddSize(); handleAddProductMessages();}} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Add</button>
+            <button onClick={handleAddSize} className={`text-white w-full block rounded-md p-1 mt-2 ${isAdded ? 'bg-gray-500' : 'bg-blue-500'}`} disabled={isAdded}>Add</button>
             <button onClick={() => onDelete(id)} className="text-white bg-red-500 w-full block rounded-md p-1 mt-2" disabled={!isAdded}>Delete</button>
         </div>
     );

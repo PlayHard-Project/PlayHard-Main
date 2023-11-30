@@ -193,6 +193,24 @@ function RightSide({
     });
   }, [sizeInformation, colorInformation]);
 
+  useEffect(() => {
+    if (sizeInformation.length > stockInformation.length) {
+      setStockInformation((prevStockInformation) => {
+        const updatedStockInformation = [...prevStockInformation, Array(colorInformation.length).fill(1)];
+        return updatedStockInformation;
+      });
+    }
+  }, [sizeInformation]);
+
+  useEffect(() => {
+    if (colorInformation.length > stockInformation[0]?.length) {
+      setStockInformation((prevStockInformation) => {
+        const updatedStockInformation = prevStockInformation.map((size) => [...size, 1]);
+        return updatedStockInformation;
+      });
+    }
+  }, [colorInformation]);
+
   return (
     <div className={'flex flex-col gap-3'}>
       <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700 '}>

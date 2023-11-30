@@ -13,6 +13,7 @@ const CardAdmin = ({
   setCartItemsQuantity,
   setSubTotal,
   setProducts,
+    _id
 }) => {
   const buyCartManagement = new BuyCartManagement();
   const titleRef = useRef();

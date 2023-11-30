@@ -5,8 +5,10 @@ import ProductEntityForStripe from "../../Entities/ProductEntity";
 import '../../css/CartShop.css';
 import toast from "react-hot-toast";
 import {getElementByID} from "./requestHandler";
+import { getUserID } from "../../Utilities/auth";
 
 export default function GoToCheckout({ disabled }) {
+  const idUser = getUserID();
   const [products, setProducts] = useState([]);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const buyCartManager = new BuyCartManagement();
@@ -31,7 +33,7 @@ export default function GoToCheckout({ disabled }) {
                 "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
             );
 
-            const body = { products: products, userId: "123" };
+            const body = { products: products, userId: idUser };
             const headers = { "Content-Type": "application/json" };
 
             const response = await fetch(

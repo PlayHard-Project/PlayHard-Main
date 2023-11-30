@@ -7,7 +7,7 @@ const SettingView = () => {
   const [isActiveMarketing, setIsActiveMarketing] = useState(false);
   const [storedValue, setStoredValue] = useLocalStorage(
     "sendEmailSettings",
-    false
+    true
   );
   const [isActiveInvoice, setIsActiveInvoice] = useState(storedValue);
   const image =

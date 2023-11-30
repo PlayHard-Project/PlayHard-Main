@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import CardsContainerAdmin from "./ProductsAdmin/CardsContainerAdmin";
 import CardAdmin from "./ProductsAdmin/CardAdmin";
-import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
+import {getElementsLazyLoading, getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
 import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
 import { Link } from "react-router-dom";
+import CardsContainer from "../Products/CardsContainer";
 
 /**
  * AdminPanelView Component
@@ -19,18 +20,24 @@ import { Link } from "react-router-dom";
 const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(1);
 
-  // Fetch products when the component mounts or the page changes
   useEffect(() => {
-    if (page > 0) {
-      fetchProducts();
-    }
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
   }, [page]);
 
   const fetchProducts = async () => {
     try {
-      const newProducts = await getElementsLazyLoading('/products', page);
-      setProducts(newProducts);
+      const response = await getFilteredElementsLazyLoading('/products', {}, page);
+      setProducts(response.data);
+      console.log(response.totalPages);
+      if (pageLimit !== response.totalPages) {
+        setPageLimit(response.totalPages);
+      }
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -81,7 +88,9 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
     <div className="container-product container" >
       <Link to="/admin/add-product" className="add-product-link"> + 
       </Link>
-      <CardsContainerAdmin content={content} />
+      <div className="main-content">
+        <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+      </div>
     </div>
   );
 };

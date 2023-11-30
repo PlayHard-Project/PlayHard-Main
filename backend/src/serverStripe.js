@@ -131,7 +131,7 @@ const configureAppImplementingStripeServer = (app) => {
       if (respuesta.ok) {
         const saveOrder = await respuesta.json();
 
-        if (customer.metadata.isAvailableEmail == "t") {
+        if (customer.metadata.isAvailableEmail == "true") {
           const myInvoice = new Invoice();
           const htmlFile = await myInvoice.generateHTML();
           try {

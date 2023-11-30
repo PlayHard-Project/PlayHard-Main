@@ -47,9 +47,7 @@ export default function GoToCheckout({ disabled }) {
                 throw new Error(`Server returned status ${response.status}`);
             } else {
                 localStorage.setItem("reversible", true);
-                if (buyCartManager.madePurchase()) {
-
-                }
+                buyCartManager.madePurchase()
             }
 
             const session = await response.json();

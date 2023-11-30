@@ -1,6 +1,7 @@
 import axios from 'axios';
+import toast from "react-hot-toast";
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
+const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'http://localhost:9000/api/';
 console.log(process.env.REACT_APP_BRANCH);
 
 
@@ -43,16 +44,8 @@ export const getElements = async (route) => {
  * **/
 export const getFilteredElements = async (route, params) => {
   try {
-    const queryString = Object.keys(params)
-      .map(key => {
-        if (Array.isArray(params[key])) {
-          return `${key}=${params[key].join(',')}`;
-        } else {
-          return `${key}=${params[key]}`;
-        }
-      })
-      .join('&');
-    console.log(`${apiURL}${route}?${queryString}`)
+    const queryString = makeQuery(params);
+    console.log(`${apiURL}${route}?${queryString}`);
     const response = await axios.get(`${apiURL}${route}?${queryString}`);
 
     if (response.data.length === 0) {
@@ -127,6 +120,39 @@ export const getElementsLazyLoading = async (route, page = 1) => {
     return response.data;
   } catch (error) {
     console.error('Error getting all elements: ', error);
+    throw error;
+  }
+};
+
+export const makeQuery = (params) => {
+  return Object.keys(params)
+      .map(key => {
+        if (Array.isArray(params[key])) {
+          return `${key}=${params[key].join(',')}`;
+        } else {
+          return `${key}=${params[key]}`;
+        }
+      })
+      .join('&');
+}
+
+export const getFilteredElementsLazyLoading = async (route, params, page = 1) => {
+  try {
+    const queryString = makeQuery(params);
+    console.log(`${apiURL}${route}?${queryString}`);
+    const response = await axios.get(`${apiURL}${route}?${queryString}&page=${page}&pageSize=${20}`);
+
+    if (response.status === 404) {
+      throw new Error('No elements found with the specified filters');
+    }
+
+    if (response.data.length === 0) {
+      throw new Error('No products found with the specified filters');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error getting filtered elements: ', error);
     throw error;
   }
 };

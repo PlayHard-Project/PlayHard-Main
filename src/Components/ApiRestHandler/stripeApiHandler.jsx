@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
-import useLocalStorage from "../../Utilities/useLocalStorage";
 import "../../css/CartShop.css";
 import { getUserID } from "../../Utilities/auth";
 
@@ -10,8 +9,7 @@ export default function GoToCheckout({ disabled }) {
   const [products, setProducts] = useState([]);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const buyCartManager = new BuyCartManagement();
-  const isActive = useLocalStorage("sendEmailSettings", true);
-  const isActiveString = isActive.toString();
+  const [isActive] = localStorage.getItem("sendEmailSettings");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,12 +33,12 @@ export default function GoToCheckout({ disabled }) {
         const body = {
           products: products,
           userId: "idUser",
-          isAvailableEmail: isActiveString,
+          isAvailableEmail: isActive,
         };
         const headers = { "Content-Type": "application/json" };
 
         const response = await fetch(
-          "https://backend-fullapirest-test.onrender.com/stripe-api/intent-payment",
+          "https://backend-fullapirest.onrender.com/stripe-api/intent-payment",
           {
             method: "POST",
             headers: headers,

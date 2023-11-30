@@ -106,7 +106,6 @@ export default class BuyCartManagement {
    * @param {number} color - Index of the color selected.
    */
   decreaseQuantity(id, size, color) {
-    console.log("Updated on the local storage");
     const products = this.getProducts();
     const existingProduct = products.find(
       (product) =>
@@ -126,7 +125,6 @@ export default class BuyCartManagement {
    * @param {number} color - Index of the color selected.
    */
   incrementQuantity(id, size, color, price) {
-    console.log("Updated on the local storage");
     const products = this.getProducts();
     const existingProduct = products.find(
       (product) =>
@@ -193,8 +191,6 @@ export default class BuyCartManagement {
   async verifyStock(id, size, color, quantityRequired) {
     const product = await getElementByID(id, "products");
     const inStock = product.inStock[size][color];
-    console.log("In stock: " + inStock);
-    console.log("required: " + quantityRequired);
     if (quantityRequired === inStock) {
       return true;
     } else return quantityRequired < inStock;
@@ -207,10 +203,6 @@ export default class BuyCartManagement {
         const inStock =
           productFromDB.inStock[product.size][product.color] >=
           product.quantity;
-        console.log(
-          "From DB" + productFromDB.inStock[product.size][product.color]
-        );
-        console.log("STOCK: " + inStock);
         if (!inStock) toast.error(`${productFromDB.name} out stock.`);
         return inStock;
       })

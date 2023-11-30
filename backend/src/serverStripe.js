@@ -28,7 +28,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest.onrender.com/api/products/${productId}`
+        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -77,10 +77,7 @@ const configureAppImplementingStripeServer = (app) => {
           };
         })
       );
-
-      console.log("customer: " + customer.id);
-      console.log("===== : " + customer.metadata.isAvailableEmail);
-      console.log("eee ppp: " + (customer.metadata.isAvailableEmail == "true"));
+      
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",

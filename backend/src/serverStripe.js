@@ -107,7 +107,18 @@ const configureAppImplementingStripeServer = (app) => {
 
   return res.json(taxRate)
 
-  })
+  });
+
+  app.post("/stripe-api/create-shipping-reate", async (req, res) => {
+
+    const shippingRate = await stripeGateway.shippingRates.create({
+      display_name: 'Shipping',
+      type: 'fixed_amount',
+      fixed_amount: { amount: 1000, currency: 'usd' },
+  });
+
+  return res.json(shippingRate)
+  });
 
   const createOrder = async (customer, data) => {
     const items = JSON.parse(customer.metadata.products);

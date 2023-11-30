@@ -42,12 +42,12 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
                 </div>
                 <div className="cart-detail-row">
                     <span>Shipping Cost</span>
-                    <span>{currency + ((subTotal * 10)/100).toFixed(2)}</span>
+                    <span>{currency + 10}</span>
                 </div>
                 <hr />
                 <div className="cart-detail-row total">
                     <span>Total</span>
-                    <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
+                    <span>{currency + (10+ subTotal).toFixed(2)}</span>
                 </div>
             </div>
 

@@ -29,7 +29,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
+        `http://localhost:9000/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -70,20 +70,24 @@ const configureAppImplementingStripeServer = (app) => {
                 description: product.description,
                 images: product.imagePath,
               },
-              unit_amount:
-                (product.price + (product.price * 10) / 100).toFixed(2) * 100,
+              unit_amount: product.price * 100,
             },
             quantity: productFromBody.quantity,
+            tax_rates: ['txr_1OI96GHsWC39RHnvGUFLtvOE'],
           };
-        })
+        }),
       );
-
       console.log("customer: " + customer.id);
       const session = await stripeGateway.checkout.sessions.create({
+        line_items: lineItems,
+        shipping_options: [
+          {
+            shipping_rate: 'shr_1OI9BLHsWC39RHnvGiGhEXVp',
+          },
+        ],
         payment_method_types: ["card"],
         mode: "payment",
         customer: customer.id,
-        line_items: lineItems,
         success_url: "https://play-hard-dev.vercel.app/success-payment-status",
         cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
@@ -143,7 +147,7 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
+      const respuesta = await fetch("http://localhost:9000/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

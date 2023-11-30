@@ -79,6 +79,7 @@ const configureAppImplementingStripeServer = (app) => {
       );
 
       console.log("customer: " + customer.id);
+      console.log("customer: " + customer.metadata.isAvailableEmail);
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",

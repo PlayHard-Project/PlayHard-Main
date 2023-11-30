@@ -21,6 +21,7 @@ const configureAppImplementingStripeServer = (app) => {
     apiVersion: "2020-08-27",
   });
 
+
   app.use(express.static("public"));
   app.use(express.json());
   app.use(cors());
@@ -93,6 +94,20 @@ const configureAppImplementingStripeServer = (app) => {
       res.status(500).json({ error: "Error creating payment session" });
     }
   });
+
+  app.post("/stripe-api/create-tax-reta", async (req, res) => {
+
+    const taxRate = await stripeGateway.taxRates.create({
+      display_name: 'IVA',
+      description: 'IVA',
+      jurisdiction: 'BO',
+      percentage: 13,
+      inclusive: false,
+  });
+
+  return res.json(taxRate)
+
+  })
 
   const createOrder = async (customer, data) => {
     const items = JSON.parse(customer.metadata.products);
@@ -210,7 +225,8 @@ const configureAppImplementingStripeServer = (app) => {
       response.send().end();
     }
   );
-
+    
+  
   /**
    * Log a success message upon successful connection to the Stripe server.
    * @name console.log

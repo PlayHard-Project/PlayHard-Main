@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
+import {GridLoader} from "react-spinners";
 import "../../css/SignUp/signUpStyle.css";
-import { useNavigate  } from "react-router-dom";
 
 const SignUp = () => {
-  const navigate  = useNavigate ();
+  const [isRegistering, setIsRegistering] = useState(false);
+  const apiBackend = 'https://backend-fullapirest.onrender.com/api';
+  const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
@@ -27,18 +29,12 @@ const SignUp = () => {
           position: "bottom-right",
         });
       }
-      if (
-        value === "" ||
-        /^[^\s@#$%",ç^&*()+={}|<>]+$/i.test(truncatedValue)
-      ) {
+      if (value === "" || /^[^\s@#$%",ç^&*()+={}|<>]+$/i.test(truncatedValue)) {
         setName(truncatedValue);
       } else {
-        toast.error(
-          "The name cannot contain special characters or spaces.",
-          {
-            position: "bottom-right",
-          }
-        );
+        toast.error("The name cannot contain special characters or spaces.", {
+          position: "bottom-right",
+        });
       }
     } else if (name === "email") {
       if (!/\s/.test(value)) {
@@ -78,67 +74,81 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     const passwordRequirements = validatePassword();
-
     if (!name) {
       toast.error("Name cannot be empty.", {
         position: "bottom-right",
       });
+      return;
     } else if (name.trim() === "") {
       toast.error("Name cannot be just spaces.", {
         position: "bottom-right",
       });
+      return;
     } else if (name.length < 6) {
       toast.error("Name must be at least 6 characters long.", {
         position: "bottom-right",
       });
+      return;
     } else if (!email) {
       toast.error("Email cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+      return;
+    } else if (!/^[^\s@]+@gmail\.com$/.test(email.toLowerCase())) {
       toast.error(
         "Please enter a valid email address. Only Gmail addresses ending in @gmail.com are accepted.",
         {
           position: "bottom-right",
         }
       );
+      return;
     } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
       toast.error("Please enter a valid email address.", {
         position: "bottom-right",
       });
+      return;
     } else if (!/^[a-zA-Z0-9]+$/.test(name)) {
       toast.error("Please enter a valid name.", {
         position: "bottom-right",
       });
+      return;
     } else if (!password) {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!passwordRequirements.minLength ||
+      return;
+    } else if (
+      !passwordRequirements.minLength ||
       !passwordRequirements.hasNumber ||
       !passwordRequirements.hasSpecialChar ||
       !passwordRequirements.hasUpperCase ||
       !passwordRequirements.hasLowerCase ||
-      password.includes(" ")) {
+      password.includes(" ")
+    ) {
       toast.error("Please enter a valid password", {
         position: "bottom-right",
       });
+      return;
     }
-
-    //Created POST request 
+    setIsRegistering(true);
+    //Created POST request
     try {
-      const response = await fetch('https://backend-fullapirest.onrender.com/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          isAdmin: "false",
-        }),
-      });
+      email = email.toLowerCase();
+      const response = await fetch(
+        apiBackend+"/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            isAdmin: "false",
+          }),
+        }
+      );
 
       const responseData = await response.json();
 
@@ -148,6 +158,7 @@ const SignUp = () => {
         toast.success(`Sign Up successful for ${name}!`, {
           position: "bottom-right",
         });
+        signInAfterSignUp();
         navigate("/");
       }
     } catch (error) {
@@ -155,8 +166,44 @@ const SignUp = () => {
       toast.error("An error occurred during signup. Please try again.", {
         position: "bottom-right",
       });
+    }finally {
+      setIsRegistering(false);
     }
   };
+
+  // HANDLES LOGIN
+  const signInAfterSignUp = async () => {
+    try {
+      const response = await fetch(apiBackend+'/sign-in', {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const data = await response.json();
+      const { tokenSession } = data;
+      if (tokenSession) {
+        localStorage.setItem("token", tokenSession);
+      }
+      navigate("/");
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
+  if (isRegistering) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
+      >
+        <GridLoader color="#023fc5" />
+      </div>
+    );
+  }
 
   return (
     <div className="container container-sign">
@@ -207,7 +254,11 @@ const SignUp = () => {
               className="toggle-password"
               onClick={toggleShowPassword}
             >
-              {showPassword ? <BiSolidHide style={{ marginLeft: "10px", fontSize: '26px' }} /> : <BiShow style={{ marginLeft: "10px", fontSize: '26px' }} />}
+              {showPassword ? (
+                <BiSolidHide style={{ marginLeft: "10px", fontSize: "26px" }} />
+              ) : (
+                <BiShow style={{ marginLeft: "10px", fontSize: "26px" }} />
+              )}
             </button>
           </div>
           {showPasswordRequirements && (
@@ -239,9 +290,16 @@ const SignUp = () => {
           )}
         </div>
         <button className="button-signup" onClick={handleSignUp}>
-            Sign Up
+          Sign Up
         </button>
-        <div style={{ width: "70%", textAlign: "center", marginTop: "50px", marginBottom: "50px" }}>
+        <div
+          style={{
+            width: "70%",
+            textAlign: "center",
+            marginTop: "50px",
+            marginBottom: "50px",
+          }}
+        >
           or
         </div>
         <div style={{ width: "70%", textAlign: "center", marginTop: "10px" }}>
@@ -260,7 +318,7 @@ const SignUp = () => {
         </div>
         <div style={{ width: "70%", textAlign: "center", marginTop: "10px" }}>
           Have an account?{" "}
-          <Link to="/login" style={{ color: "blue" }}>
+          <Link to="/sign-in" style={{ color: "blue" }}>
             Login
           </Link>
         </div>

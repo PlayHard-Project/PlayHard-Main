@@ -1,4 +1,4 @@
-.container-sign {
+.container-login {
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -6,7 +6,7 @@
     margin-bottom: 10px;
   }
   
-  .title-signUp {
+  .title-login {
     color: #060d67;
     font-size: 30px;
     font-family: "Poppins", sans-serif;
@@ -33,22 +33,13 @@
   
   .input-add {
     padding: 10px;
-    border: 2px solid #888383;
-    border-radius: 5px;
+    border: 2px solid #c2c0c0;
+    border-radius: 12px;
     width: 70%;
     box-sizing: border-box;
     margin-bottom: 30px;
     margin-top: 10px;
   }
-
-.input-add__admin {
-  padding: 10px;
-  border: 2px solid;
-  border-radius: 5px;
-  box-sizing: border-box;
-  margin-bottom: 30px;
-  margin-top: 10px;
-}
   
   .button-signup {
     background-color: #72a3ff;

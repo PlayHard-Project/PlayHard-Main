@@ -9,6 +9,8 @@ import Shop from './Views/Pages/Shop.jsx';
 import About from './Views/Pages/About.jsx';
 import Products from './Views/Pages/Products.jsx';
 import Contact from './Views/Pages/Contact.jsx';
+import SignIn from './Views/LogIn/Login.jsx';
+import Profile from './Views/Pages/Profile.jsx';
 import BuyCartManagement from "./Utilities/BuyCartManagement";
 import FailedPayment from './Views/PaymentStatus/FailedPayment.jsx';
 import SuccesfullPayment from './Views/PaymentStatus/PaymentSuccessful.jsx';
@@ -56,6 +58,7 @@ export default function App() {
     }, []);
 
     return (
+
         <Router>
             <ScrollToTop />
             <Toaster position="bottom-center"/>
@@ -72,13 +75,17 @@ export default function App() {
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/history" element={<HistoryView />} />
-                <Route path="/admin/add-product" element={<AddProduct/>} />
+                <Route path="/admin/add-product/:id" element={<AddProduct isEditMode={true} />} />
+                <Route path="/admin/add-product" element={<AddProduct isEditMode={false} />} />
                 <Route path="/sign-up" element={<SignUp />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/shopcart" element={<ShoppingCartScreen setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} subTotal={subTotal}/>}/>
-                <Route path="/admin" element={<AdminPanelView/>}/>
                 <Route path="/settings" element={<SettingView/>}/>
+                <Route path="/admin" element={<AdminPanelView setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal} />}/>
             </Routes>
             <Footer />
         </Router>
+
     );
 }

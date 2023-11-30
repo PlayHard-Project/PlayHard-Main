@@ -35,7 +35,7 @@ export default function GoToCheckout({ disabled }) {
             const headers = { "Content-Type": "application/json" };
 
             const response = await fetch(
-                "http://localhost:9000/stripe-api/intent-payment",
+                "https://backend-fullapirest.onrender.com/intent-payment",
                 {
                     method: "POST",
                     headers: headers,

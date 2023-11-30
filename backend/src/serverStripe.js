@@ -29,7 +29,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest.onrender.com/api/products/${productId}`
+        `http://localhost:9000/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -147,7 +147,7 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
+      const respuesta = await fetch("http://localhost:9000/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

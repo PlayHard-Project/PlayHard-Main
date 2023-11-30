@@ -7,20 +7,16 @@ import { GoGoal } from "react-icons/go";
 
 const About = () => {
   const [isContactVisible, setIsContactVisible] = useState(false);
-  const headerIcon =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1701087122/About/voa09haeezjlbhmdzs8x.png";
+  const background ="https://res.cloudinary.com/playhardimages/image/upload/v1701327373/About/izhxe2kk5lbvusywja6m.jpg";
+  const gradient = "linear-gradient(to bottom, rgba(14, 83, 150, 0.8), rgba(25, 118, 210, 0.5)), url(" + background + ")";
 
   return (
-    <div className="about-container">
-      <div className="container">
+    <div className="about-container" style={{paddingTop:'5%'}}>
         <div className="container-logo">
-          <h1 className="about-title">About Us</h1>
-          <img
-            src={headerIcon}
-            alt="Icon Main"
-            style={{ margin: "auto", display: "block", width: "30%" }}
-          />
+          <h1 className="about-title" style={{ backgroundImage: `${gradient}, url(${background})`, height:'500px', width:'100%'}} >About Us</h1>
         </div>
+        <div className="container">
+
         <div className="about-text">
           Welcome to PlayHard, your destination for sports fashion and
           accessories that inspire you to push your limits and stand out in
@@ -29,7 +25,7 @@ const About = () => {
           to reflect this with every piece of clothing you choose.
         </div>
         <div className="about-content">
-          <div className="column">
+          <div class="column with-border">
             <GoGoal className="icon"/>
             <h2 className="about-subtitle">Mission</h2>
             <p className="about-subtext">

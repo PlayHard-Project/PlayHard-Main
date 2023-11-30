@@ -1,7 +1,7 @@
 import axios from 'axios';
 import toast from "react-hot-toast";
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'http://localhost:9000/api/';
+const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest-dev.onrender.com/api/';
 
 /**
  * Adds a new element to the server by making a POST request to the specified route.

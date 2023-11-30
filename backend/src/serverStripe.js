@@ -1,5 +1,5 @@
 const { Order } = require("./models/orderSchema");
-const { Invoice } = require('./html_templates/invoice.js');
+const { Invoice } = require("./html_templates/invoice.js");
 
 /**
  * Configuration function to implement Stripe server functionality in an Express application.
@@ -21,15 +21,15 @@ const configureAppImplementingStripeServer = (app) => {
     apiVersion: "2020-08-27",
   });
 
+
   app.use(express.static("public"));
   app.use(express.json());
   app.use(cors());
 
-
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `https://backend-fullapirest-test.onrender.com/api/products/${productId}`
+        `https://backend-fullapirest.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;
@@ -55,6 +55,7 @@ const configureAppImplementingStripeServer = (app) => {
       metadata: {
         userId: req.body.userId,
         products: JSON.stringify(req.body.products),
+        isAvailableEmail: req.body.isAvailableEmail,
       },
     });
 
@@ -70,22 +71,26 @@ const configureAppImplementingStripeServer = (app) => {
                 description: product.description,
                 images: product.imagePath,
               },
-              unit_amount:
-                (product.price + (product.price * 10) / 100).toFixed(2) * 100,
+              unit_amount: product.price.toFixed(2) * 100,
             },
             quantity: productFromBody.quantity,
+            tax_rates: ['txr_1OI96GHsWC39RHnvGUFLtvOE'],
           };
-        })
+        }),
       );
-
-      console.log("customer: " + customer.id);
+  
       const session = await stripeGateway.checkout.sessions.create({
+        line_items: lineItems,
+        shipping_options: [
+          {
+            shipping_rate: 'shr_1OI9BLHsWC39RHnvGiGhEXVp',
+          },
+        ],
         payment_method_types: ["card"],
         mode: "payment",
         customer: customer.id,
-        line_items: lineItems,
-        success_url: "https://play-hard-main.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });
@@ -93,6 +98,31 @@ const configureAppImplementingStripeServer = (app) => {
       console.error("Error creating payment session:", error);
       res.status(500).json({ error: "Error creating payment session" });
     }
+  });
+
+  app.post("/stripe-api/create-tax-reta", async (req, res) => {
+
+    const taxRate = await stripeGateway.taxRates.create({
+      display_name: 'IVA',
+      description: 'IVA',
+      jurisdiction: 'BO',
+      percentage: 13,
+      inclusive: false,
+  });
+
+  return res.json(taxRate)
+
+  });
+
+  app.post("/stripe-api/create-shipping-reate", async (req, res) => {
+
+    const shippingRate = await stripeGateway.shippingRates.create({
+      display_name: 'Shipping',
+      type: 'fixed_amount',
+      fixed_amount: { amount: 1000, currency: 'usd' },
+  });
+
+  return res.json(shippingRate)
   });
 
   const createOrder = async (customer, data) => {
@@ -118,20 +148,38 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const saveOrder = await newOrder.save();
-      console.log("Processed Order: ", saveOrder);
+      const respuesta = await fetch(
+        "https://backend-fullapirest.onrender.com/api/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newOrder),
+        }
+      );
 
-      const myInvoice = new Invoice();
-      const htmlFile = await myInvoice.generateHTML();
-      try {
-        await sendMail(
-          saveOrder.userInformation.email, "Confirmación de Orden", htmlFile);
-          console.log("Email sent successfully");
-      } catch (error) {
-        console.error("Error sending email:", error.message);
+      if (respuesta.ok) {
+        const saveOrder = await respuesta.json();
+
+        if (customer.metadata.isAvailableEmail == "true") {
+          const myInvoice = new Invoice();
+          const htmlFile = await myInvoice.generateHTML();
+          try {
+            await sendMail(
+              saveOrder.userInformation.email,
+              "Confirmación de Orden",
+              htmlFile
+            );
+          } catch (error) {
+            console.error("Error sending the email:", error.message);
+          }
+        }
+      } else {
+        console.error("Error when creating the order:", respuesta.statusText);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error when making the request:", error.message);
     }
   };
 
@@ -194,7 +242,8 @@ const configureAppImplementingStripeServer = (app) => {
       response.send().end();
     }
   );
-
+    
+  
   /**
    * Log a success message upon successful connection to the Stripe server.
    * @name console.log

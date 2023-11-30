@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
   {
+    orderCount: {
+      type: Number,
+      required: true,
+    },
     userId: {
       type: String,
       ref: "User",

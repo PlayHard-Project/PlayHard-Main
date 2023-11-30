@@ -3,7 +3,8 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PurchaseComponent from "./PurchaseComponent";
-import { FaRegTrashAlt, FaCalendarAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaCalendarAlt } from "react-icons/fa"
+import { getUserID, getUsername, getEmail } from "../../Utilities/auth";
 
 import "../../css/PurchaseHistory.css";
 
@@ -11,10 +12,13 @@ const ShoppingHistory = () => {
   const [orders, setOrders] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [key, setKey] = useState(0);
-  const idUser = "123";
+  const [isLoading, setIsLoading] = useState(false); 
+  const idUser = getUserID();
 
   const handleFilterClick = async () => {
     try {
+      setIsLoading(true);
+
       let apiUrl = `https://backend-fullapirest.onrender.com/api/orders/user/${idUser}`;
 
       if (selectedDate) {
@@ -22,12 +26,14 @@ const ShoppingHistory = () => {
         dateWithoutTime.setUTCHours(0, 0, 0, 0);
         apiUrl += `?date=${dateWithoutTime.toISOString()}`;
       }
-      
+
       const response = await axios.get(apiUrl);
       setOrders(response.data);
       setKey((prevKey) => prevKey + 1);
     } catch (error) {
       console.error("Error al obtener las órdenes:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -45,7 +51,10 @@ const ShoppingHistory = () => {
         <div className="header-text">
           <h1>Shopping History</h1>
           <h2>
-            User ID:<span>{idUser}</span>
+            Username:<span>{getUsername()}</span>
+          </h2>
+          <h2>
+            Email:<span>{getEmail()}</span>
           </h2>
         </div>
         <div className="datepicker-container">
@@ -56,7 +65,10 @@ const ShoppingHistory = () => {
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
             wrapperClassName="datepicker-wrapper"
+            maxDate={new Date()}
+            onKeyDown={(e) => e.preventDefault()}
           />
+
           <button
             className="clear-filter-button"
             onClick={handleClearDate}
@@ -67,7 +79,7 @@ const ShoppingHistory = () => {
         </div>
       </section>
       <div className="content-container">
-        {orders.length === 0 ? (
+        {orders.length === 0 && !isLoading && (
           <div className="no-history-message-container">
             <label className="title-no-p"> NO PURCHASES FOUND</label>
             <img
@@ -79,14 +91,14 @@ const ShoppingHistory = () => {
               Oops! There is no purchase made on that date.
             </p>
           </div>
-        ) : (
-          orders.map((order, index) => (
-            <PurchaseComponent
-              key={`${order._id}-${index}`}
-              idOrder={order._id}
-            />
-          ))
         )}
+        {orders.map((order, index) => (
+          <PurchaseComponent
+            key={`${order._id}-${index}`}
+            indexOrder={index}
+            idOrder={order._id}
+          />
+        ))}
       </div>
     </div>
   );

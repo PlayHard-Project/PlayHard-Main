@@ -1,10 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
+const apiURL =
+  process.env.REACT_APP_BRANCH === "test"
+    ? "https://backend-fullapirest.onrender.com/api/"
+    : "https://backend-fullapirest.onrender.com/api/";
 
 /**
  * Adds a new element to the server by making a POST request to the specified route.
- * 
+ *
  * @param {Object} newElement - The new element to be added.
  * @param {string} route - The API route where the new element will be added.
  * @returns {Promise} A promise that resolves to the response data from the server.
@@ -15,14 +18,14 @@ export const addElement = async (newElement, route) => {
     const response = await axios.post(apiURL + route, newElement);
     return response.data;
   } catch (error) {
-    console.error('Error adding the new element: ', error);
+    console.error("Error adding the new element: ", error);
     throw error;
   }
 };
 
 /**
  * Retrieves all elements from the server by making a GET request to the specified route.
- * 
+ *
  * @param {string} route - The API route from which to retrieve all elements.
  * @returns {Promise} A promise that resolves to the response data containing all elements.
  * @throws Will throw an error if there is an issue retrieving all elements.
@@ -33,7 +36,7 @@ export const getElements = async (route) => {
     const response = await axios.get(apiURL + route);
     return response.data;
   } catch (error) {
-    console.error('Error getting all elements: ', error);
+    console.error("Error getting all elements: ", error);
     throw error;
   }
 };
@@ -58,24 +61,24 @@ export const getElements = async (route) => {
 export const getFilteredElements = async (route, params) => {
   try {
     const queryString = Object.keys(params)
-      .map(key => {
+      .map((key) => {
         if (Array.isArray(params[key])) {
-          return `${key}=${params[key].join(',')}`;
+          return `${key}=${params[key].join(",")}`;
         } else {
           return `${key}=${params[key]}`;
         }
       })
-      .join('&');
-    console.log(`${apiURL}${route}?${queryString}`)
+      .join("&");
+    console.log(`${apiURL}${route}?${queryString}`);
     const response = await axios.get(`${apiURL}${route}?${queryString}`);
 
     if (response.data.length === 0) {
-      throw new Error('No products found with the specified filters');
+      throw new Error("No products found with the specified filters");
     }
 
     return response.data;
   } catch (error) {
-    console.error('Error getting filtered elements: ', error);
+    console.error("Error getting filtered elements: ", error);
     throw error;
   }
 };
@@ -92,40 +95,45 @@ export const getFilteredElements = async (route, params) => {
  */
 export const searchElements = async (route, query) => {
   try {
-    const response = await axios.get(`${apiURL}${route}/search`, { params: { search: query } });
+    const response = await axios.get(`${apiURL}${route}/search`, {
+      params: { search: query },
+    });
     return response.data;
   } catch (error) {
-    console.error('Error searching elements: ', error);
+    console.error("Error searching elements: ", error);
     throw error;
   }
 };
 
 export const getElementByID = async (elemenetId, route) => {
   try {
-    const response = await axios.get(apiURL + route + '/' + elemenetId);
+    const response = await axios.get(apiURL + route + "/" + elemenetId);
     return response.data;
   } catch (error) {
-    console.error('Error getting the specified element: ', error);
+    console.error("Error getting the specified element: ", error);
     throw error;
   }
 };
 
 export const updateElement = async (elementToUpdate, route) => {
   try {
-    const response = await axios.put(apiURL + route + '/' + elementToUpdate._id, elementToUpdate);
+    const response = await axios.put(
+      apiURL + route + "/" + elementToUpdate._id,
+      elementToUpdate
+    );
     return response.data;
   } catch (error) {
-    console.error('Error updating the element: ', error);
+    console.error("Error updating the element: ", error);
     throw error;
   }
 };
 
 export const removeElement = async (productId, route) => {
   try {
-    const response = await axios.delete(apiURL + route + '/' + productId);
+    const response = await axios.delete(apiURL + route + "/" + productId);
     return response.data;
   } catch (error) {
-    console.error('Error removing product:', error);
+    console.error("Error removing product:", error);
     throw error;
   }
 };
@@ -139,7 +147,7 @@ export const getElementsLazyLoading = async (route, page = 1) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error getting all elements: ', error);
+    console.error("Error getting all elements: ", error);
     throw error;
   }
 };

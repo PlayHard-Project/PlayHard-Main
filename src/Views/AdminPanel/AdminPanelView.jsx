@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CardsContainerAdmin from "./ProductsAdmin/CardsContainerAdmin";
 import CardAdmin from "./ProductsAdmin/CardAdmin";
-import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
+import {getElementsLazyLoading, getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
 import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
 import { isUserAdmin } from "../../Utilities/auth";
 import { Link } from "react-router-dom";
+import CardsContainer from "../Products/CardsContainer";
 import { useNavigate } from 'react-router-dom';
 
 /**
@@ -22,11 +23,14 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(1);
 
   useEffect(() => {
-    if (page > 0) {
-      fetchProducts();
-    }
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
   }, [page]);
 
   const fetchProducts = async () => {
@@ -34,11 +38,12 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
       navigate("/");
     }
     try {
-      const newProducts = await getElementsLazyLoading(
-        "products/available-products",
-        page
-      );
-      setProducts(newProducts);
+      const response = await getFilteredElementsLazyLoading('/products/available-products', {}, page);
+      setProducts(response.data);
+      console.log(response.totalPages);
+      if (pageLimit !== response.totalPages) {
+        setPageLimit(response.totalPages);
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -46,10 +51,6 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
 
   const refreshProducts = async () => {
     await fetchProducts();
-  };
-
-  const loadMore = () => {
-    setPage((prevPage) => prevPage + 1);
   };
 
   const content = products.map((product, index) => (
@@ -87,7 +88,9 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
         {" "}
         +
       </Link>
-      <CardsContainerAdmin content={content} />
+      <div className="main-content">
+        <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+      </div>
     </div>
   );
 };

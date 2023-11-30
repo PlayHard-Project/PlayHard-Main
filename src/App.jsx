@@ -72,6 +72,7 @@ export default function App() {
                 <Route path="/fail-payment-status" element={<FailedPayment/>}/>
                 <Route path="/success-payment-status" element={<SuccesfullPayment/>}/>
                 <Route path="/products" element={<Products setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
+                <Route path="/products/:query" element={<Products setCartItemsQuantity={setCartItemsQuantity} setSubTotal={setSubTotal}/>} />
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/history" element={<HistoryView />} />

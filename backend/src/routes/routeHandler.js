@@ -57,14 +57,14 @@ function createRoutes(router, model, baseRoute) {
     if (search) {
       const normalizedSearch = search.replace(/[^\w\s]/gi, '').toLowerCase();
       model
-        .find()
-        .then((data) => {
-          const filteredData = data.filter(product =>
-            product.name.replace(/[^\w\s]/gi, '').toLowerCase().includes(normalizedSearch)
-          );
-          res.json(filteredData);
-        })
-        .catch((err) => res.json({ message: err }));
+          .find()
+          .then((data) => {
+            const filteredData = data.filter(product =>
+                product.name.replace(/[^\w\s]/gi, '').toLowerCase().includes(normalizedSearch)
+            );
+            res.json(filteredData);
+          })
+          .catch((err) => res.json({ message: err }));
     } else {
       res.json({ message: 'No search query provided' });
     }
@@ -78,27 +78,27 @@ function createRoutes(router, model, baseRoute) {
    * @param {Function} (req, res) - Callback function to handle the route.
    * @returns {void}
    */
-  router.get(`/${baseRoute}`, (req, res) => {
+  router.get(`/${baseRoute}`, async (req, res) => {
     let query = {};
 
     if (req.query.size) {
-      query.size = { $in: req.query.size.split(',') };
+      query.size = {$in: req.query.size.split(',')};
     }
 
     if (req.query.target) {
-      query.target = { $in: req.query.target.split(',') };
+      query.target = {$in: req.query.target.split(',')};
     }
 
     if (req.query.sport) {
-      query.sport = { $in: req.query.sport.split(',') };
+      query.sport = {$in: req.query.sport.split(',')};
     }
 
     if (req.query.brand) {
-      query.brand = { $in: req.query.brand.split(',') };
+      query.brand = {$in: req.query.brand.split(',')};
     }
 
     if (req.query.categories) {
-      query.categories = { $in: req.query.categories.split(',') };
+      query.categories = {$in: req.query.categories.split(',')};
     }
 
     if (req.query.minPrice || req.query.maxPrice) {
@@ -111,16 +111,24 @@ function createRoutes(router, model, baseRoute) {
       }
     }
 
+    const totalDocuments = await model.countDocuments(query);
+
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 20; // Set a default page size
+    const totalPages = Math.ceil(totalDocuments / pageSize);
+
     model
-      .find(query)
-      .then((data) => {
-        if (data.length === 0) {
-          res.status(404).json({ message: 'No products found with the specified filters' });
-        } else {
-          res.json(data);
-        }
-      })
-      .catch((err) => res.status(500).json({ message: err })); // Manejo de errores generales
+        .find(query)
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .then((data) => {
+          if (data.length === 0) {
+            res.status(404).json({message: 'No products found with the specified filters'});
+          } else {
+            res.json({data, totalPages});
+          }
+        })
+        .catch((err) => res.status(500).json({message: err}));
   });
 
   /**

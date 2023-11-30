@@ -16,11 +16,60 @@ const router = express.Router();
  */
 router.get("/products/available-products", async (req, res) => {
   try {
-    const availableProducts = await Product.find({ isAvailable: true });
-    res.json(availableProducts);
+    let query = {
+      isAvailable: true,
+    };
+
+    if (req.query.size) {
+      query.size = { $in: req.query.size.split(",") };
+    }
+
+    if (req.query.target) {
+      query.target = { $in: req.query.target.split(",") };
+    }
+
+    if (req.query.sport) {
+      query.sport = { $in: req.query.sport.split(",") };
+    }
+
+    if (req.query.brand) {
+      query.brand = { $in: req.query.brand.split(",") };
+    }
+
+    if (req.query.categories) {
+      query.categories = { $in: req.query.categories.split(",") };
+    }
+
+    if (req.query.minPrice || req.query.maxPrice) {
+      query.price = {};
+      if (req.query.minPrice) {
+        query.price.$gte = Number(req.query.minPrice);
+      }
+      if (req.query.maxPrice) {
+        query.price.$lte = Number(req.query.maxPrice);
+      }
+    }
+
+    const totalDocuments = await Product.countDocuments(query);
+
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 20; // Set a default page size
+    const totalPages = Math.ceil(totalDocuments / pageSize);
+
+    Product
+        .find(query)
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .then((data) => {
+          if (data.length === 0) {
+            res.status(404).json({message: 'No products found with the specified filters'});
+          } else {
+            res.json({data, totalPages});
+          }
+        }).catch((err) => res.status(500).json({message: err}));
   } catch (error) {
-    console.error("Error retrieving unavailable products:", error);
-    res.status(500).json({ error: "Error retrieving unavailable products" });
+    console.error("Error retrieving available products:", error);
+    res.status(500).json({ error: "Error retrieving available products" });
   }
 });
 

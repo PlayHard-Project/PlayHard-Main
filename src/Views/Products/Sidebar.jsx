@@ -8,7 +8,7 @@ import { SlArrowDown } from "react-icons/sl";
 import { Range } from 'react-range';
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 
-const Sidebar = ({setParams, query}) => {
+const Sidebar = ({setParams, query, key}) => {
     const [brandsData, setBrandsData] = useState([]);
 
     const [targetFilterDisplayed, setTargetFilterDisplayed] = useState(false);
@@ -72,7 +72,7 @@ const Sidebar = ({setParams, query}) => {
                     sport: selectedSports,
                     categories: selectedCategories,
                     minPrice: minPrice,
-                    maxValue: maxPrice
+                    maxPrice: maxPrice
                 };
                 setParams(builtQuery)
             }

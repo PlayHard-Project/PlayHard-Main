@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import CardsContainer from "../Products/CardsContainer";
 import ShoppingCard from "../Products/ShoppingCard";
 import {getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
@@ -6,6 +6,7 @@ import Sidebar from "../Products/Sidebar";
 import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
 import {useParams} from "react-router-dom";
+import { SlEqualizer } from "react-icons/sl";
 
 const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const { query } = useParams();
@@ -22,6 +23,21 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const [params, setParams] = useState(queryAssembly);
   const [products, setProducts] = useState([]);
   const [pageLimit, setPageLimit] = useState(1);
+
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const [checkboxState, setCheckboxState] = useState({});
+
+  const updateCheckboxState = (checkboxId, isChecked) => {
+      setCheckboxState(prevState => ({
+          ...prevState,
+          [checkboxId]: isChecked,
+      }));
+  };
+
+  const toggleSidebar = () => {
+      setSidebarVisible(!sidebarVisible);
+  };
 
   useEffect(() => {
       console.log("AL INICIO");
@@ -89,8 +105,11 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
 
   return (
       <div className="container-product container">
-        <Sidebar className="sidebar" setParams={setParams} query={query}/>
-        <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+          <SlEqualizer onClick={toggleSidebar} className="filter-button"/>
+          {sidebarVisible && <Sidebar className="sidebar" key={"sidebar"} setParams={setParams} query={query}/>}
+          <div className="main-content">
+              <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+          </div>
       </div>
   );
 };

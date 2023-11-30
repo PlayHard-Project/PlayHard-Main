@@ -4,7 +4,7 @@ Container for all products in the administration and normal area.
 .container-product{
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
 }
 
 .add-product-link {
@@ -31,5 +31,50 @@ Container for all products in the administration and normal area.
         height: 40px;
         width: 40px;
         margin-right: 5px;
+    }
+}
+
+.sidebar {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    min-width: 300px;
+    max-width: 350px;
+    height: max-content;
+}
+
+.main-content {
+    /* Estilos específicos del contenido principal */
+    flex-grow: 1;
+}
+
+.filter-button {
+    position: fixed;
+    width: 35px;
+    height: 35px;
+    align-self: start;
+    top: 120px; /* Alinear en la parte superior */
+    left: 40px; /* Alinear en la parte izquierda */
+    z-index: 110;
+}
+
+@media (max-width: 767px) {
+    .sidebar {
+        margin-top: 70px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        min-width: 100%; /* O ajusta según sea necesario para cubrir el ancho completo */
+        max-width: none; /* Anular el ancho máximo */
+        height: max-content;
+    }
+
+    .filter-button {
+        position: fixed;
+        width: 30px;
+        height: 30px;
+        top: 75px; /* Alinear en la parte superior */
+        left: 20px; /* Alinear en la parte izquierda */
+        z-index: 110;
     }
 }

@@ -121,4 +121,4 @@ Content-Type: application/json
 }
 
 ### 
-GET https://backend-fullapirest.onrender.com/api/products?target=Kids&brand=&sport=&categories=&minPrice=0&maxValue=150 HTTP/1.1
+GET https://backend-fullapirest.onrender.com/api/products?target=Kids&brand=&sport=&categories=&minPrice=0&maxPrice=150 HTTP/1.1

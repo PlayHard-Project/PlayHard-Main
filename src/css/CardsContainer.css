@@ -2,12 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    border-left: 2px solid #72a3ff;
 }
 
 .card-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .pagePicker {

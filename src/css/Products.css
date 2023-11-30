@@ -2,7 +2,9 @@
 Container for all products in the administration and normal area.
 */
 .container-product{
-    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 
 .add-product-link {

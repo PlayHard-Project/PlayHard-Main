@@ -34,11 +34,9 @@ const BrandItem = ({ to, children }) => {
 };
 
 export default function BrandsSection() {
-    const sliderRef = useRef();
+    const sliderRef = useRef(null);
     const [data, setData] = useState([]);
     const [slidesToShow, setSlidesToShow] = useState(9);
-
-    const dataPromise = getElements('/brands');
 
     const handleWindowSizeChange = () => {
         setSlidesToShow(calculateSlidesToShow());
@@ -66,12 +64,14 @@ export default function BrandsSection() {
     };
 
     useEffect(() => {
+        const dataPromise = getElements('/brands');
         dataPromise.then((data) => {
             setData(data);
+            console.log(data);
         });
 
         const interval = setInterval(() => {
-            sliderRef.current.slickNext();
+            sliderRef.current?.slickNext();
         }, 5000);
 
         window.addEventListener('resize', handleWindowSizeChange);
@@ -97,7 +97,7 @@ export default function BrandsSection() {
                 {/* Loading component container with a loading spinner */}
                 <div
                     className={
-                        "flex flex-col items-center justify-center p-3 gap-16 container"
+                        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
                     }
                 >
                     <GridLoader color="#023fc5" />
@@ -114,7 +114,7 @@ export default function BrandsSection() {
             <Slider id="brand-slider" ref={sliderRef} {...sliderSettings}>
                 {data.map((item) => (
                     <div key={item._id} className="logo-container">
-                        <BrandItem to={'brands/' + item.name}>
+                        <BrandItem to={'products/brand=' + item._id}>
                             <img
                                 src={item.imagePath}
                                 className="brand-logo"

@@ -18,7 +18,7 @@ export const addElement = async (newElement, route) => {
 export const getElements = async (route) => {
   try {
     const response = await axios.get(apiURL + route);
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('Error getting all elements: ', error);
     throw error;

@@ -1,28 +1,50 @@
 import React, { useState, useEffect } from "react";
 import CardsContainer from "../Products/CardsContainer";
 import ShoppingCard from "../Products/ShoppingCard";
-import {getElementsLazyLoading, getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
+import {getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
 import Sidebar from "../Products/Sidebar";
 import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
-import toast from "react-hot-toast";
+import {useParams} from "react-router-dom";
 
 const Products = ({ setCartItemsQuantity, setSubTotal }) => {
+  const { query } = useParams();
+  let queryAssembly = {};
+  if (query !== null && query !== undefined) {
+      const splitted = query.split("=");
+      const key = splitted[0];
+      const value = splitted[1];
+      queryAssembly = {[key]:value};
+  } else {
+      queryAssembly = {};
+  }
   const [page, setPage] = useState(1);
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState(queryAssembly);
   const [products, setProducts] = useState([]);
   const [pageLimit, setPageLimit] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchProducts.call();
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+      if (page !== 1) {
+          fetchProducts();
+      }
   }, [page]);
+
+    useEffect(() => {
+        setPage(1);
+        fetchProducts();
+    }, [params]);
 
   const fetchProducts = async () => {
     try {
       const response = await getFilteredElementsLazyLoading('/products', params, page);
       setProducts(response.data);
-      setPageLimit(response.totalPages);
+      if (pageLimit !== response.totalPages) {
+          setPageLimit(response.totalPages);
+      }
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -60,9 +82,8 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
 
   return (
       <div className="container-product container">
-        <Sidebar className="sidebar" />
+        <Sidebar className="sidebar" setParams={setParams} query={query}/>
         <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
-        {loading ? <GridLoader color="#023fc5" /> : <></>}
       </div>
   );
 };

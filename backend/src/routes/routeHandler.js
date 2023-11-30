@@ -114,7 +114,7 @@ function createRoutes(router, model, baseRoute) {
     const totalDocuments = await model.countDocuments(query);
 
     const page = parseInt(req.query.page) || 1;
-    const pageSize = parseInt(req.query.pageSize) || 8; // Set a default page size
+    const pageSize = parseInt(req.query.pageSize) || 20; // Set a default page size
     const totalPages = Math.ceil(totalDocuments / pageSize);
 
     model

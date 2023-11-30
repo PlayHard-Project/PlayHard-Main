@@ -2,9 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    z-index: -2;
     border-left: 2px solid #72a3ff;
-    margin-left: 20%;
 }
 
 .card-container {

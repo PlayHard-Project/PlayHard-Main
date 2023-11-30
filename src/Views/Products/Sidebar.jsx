@@ -4,35 +4,81 @@ import { genderData } from "../../Components/Objects/FiltersByGender";
 import { ageGroupData } from "../../Components/Objects/FiltersByAge";
 import { sportData } from "../../Components/Objects/FiltersBySport";
 import { categoriesData } from "../../Components/Objects/FiltersByCategories";
-import { brandsData } from "../../Components/Objects/FiltersByBrands";
 import { SlArrowRight } from "react-icons/sl";
 import { SlArrowDown } from "react-icons/sl";
 import {getTrackBackground, Range} from 'react-range';
+import {getElements} from "../../Components/ApiRestHandler/requestHandler";
 
-const Sidebar = () => {
-    const [genderFilterDisplayed, setGenderFilterDisplayed] = useState(false)
-    const [ageGroupFilterDisplayed, setAgeGroupFilterDisplayed] = useState(false)
-    const [sportFilterDisplayed, setSportFilterDisplayed] = useState(false)
-    const [categoriesFilterDisplayed, setCategoriesFilterDisplayed] = useState(false)
-    const [brandsFilterDisplayed, setBrandsFilterDisplayed] = useState(false)
+const Sidebar = ({setParams, query}) => {
+    const [brandsData, setBrandsData] = useState([]);
+
+    const [genderFilterDisplayed, setGenderFilterDisplayed] = useState(false);
+    const [ageGroupFilterDisplayed, setAgeGroupFilterDisplayed] = useState(false);
+    const [sportFilterDisplayed, setSportFilterDisplayed] = useState(false);
+    const [categoriesFilterDisplayed, setCategoriesFilterDisplayed] = useState(false);
+    const [brandsFilterDisplayed, setBrandsFilterDisplayed] = useState(false);
 
     const [selectedGenders, setSelectedGenders] = useState([]);
     const [selectedAgeGroups, setSelectedAgeGroups] = useState([]);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedBrands, setSelectedBrands] = useState([]);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(500);
 
-    const [state, setState] = useState({values: [20, 80]});
+    const [state, setState] = useState({values: [0, 500]});
     const currency = "$"
 
+    useEffect(() => {
+        const brands = getElements("/brands");
+        brands.then((brand) => {
+            setBrandsData(brand);
+        });
+
+        if (query !== null && query !== undefined) {
+            const paramsSplitted = query.split("=");
+            if (paramsSplitted.length === 2) {
+                const key = paramsSplitted[0];
+                const value = paramsSplitted[1];
+
+                switch (key) {
+                    case "brand":
+                        setSelectedBrands([value]);
+                        break;
+                    case "target":
+                        setSelectedAgeGroups([value]);
+                        break;
+                    case "categories":
+                        setSelectedCategories([value]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }, [query]);
 
     useEffect(() => {
-        console.log(selectedGenders)
-        console.log(selectedAgeGroups)
-        console.log(selectedSports)
-        console.log(selectedCategories)
-        console.log(selectedBrands)
-    }, [selectedGenders, selectedAgeGroups, selectedSports, selectedCategories, selectedBrands]);
+        buildQuery();
+    }, [selectedGenders, selectedAgeGroups, selectedSports, selectedCategories, selectedBrands, minPrice, maxPrice]);
+
+    const buildQuery = () => {
+        if (selectedGenders.length !== 0
+            || selectedAgeGroups !== 0
+            || selectedBrands !== 0
+            || selectedSports !== 0
+            || selectedCategories !== 0) {
+            const builtQuery = {
+                target: [...selectedGenders, ...selectedAgeGroups],
+                brand: selectedBrands,
+                sport: selectedSports,
+                categories: selectedCategories,
+                minPrice: minPrice,
+                maxValue: maxPrice
+            };
+            setParams(builtQuery)
+        }
+    }
 
     const displayGenderMenu = () => {
         setGenderFilterDisplayed(!genderFilterDisplayed);
@@ -71,7 +117,7 @@ const Sidebar = () => {
                 <div className="filters">
                     <ul>
                         <div className="title-filter" onClick={displayGenderMenu}>
-                            <label>Gender:</label>
+                            <label>Gender</label>
                             {genderFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
                         {genderData.map((gender) => (
@@ -84,7 +130,7 @@ const Sidebar = () => {
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayAgeGroupMenu}>
-                            <label>Age Group:</label>
+                            <label>Age Group</label>
                             {ageGroupFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
                         {ageGroupData.map((ageGroup) => (
@@ -97,7 +143,7 @@ const Sidebar = () => {
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displaySportsMenu}>
-                            <label>Sports & Activities:</label>
+                            <label>Sports & Activities</label>
                             {sportFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
                         {sportData.map((sport) => (
@@ -110,7 +156,7 @@ const Sidebar = () => {
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayCategoriesMenu}>
-                            <label>Categories:</label>
+                            <label>Categories</label>
                             {categoriesFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
                         {categoriesData.map((category) => (
@@ -123,27 +169,33 @@ const Sidebar = () => {
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayBrandsMenu}>
-                            <label>Brands:</label>
+                            <label>Brands</label>
                             {brandsFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
                         {brandsData.map((brand) => (
                             <li className={brandsFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={brand.id} name={brand.id} value={brand.label} type="checkbox"
-                                       onChange={() => handleCheckboxChange(brand.label, setSelectedBrands, selectedBrands)}/>
-                                <label htmlFor={brand.id}>{brand.label}</label>
+                                <input id={brand._id} key={brand._id} name={brand._id} value={brand.name} type="checkbox"
+                                       onChange={() => handleCheckboxChange(brand._id, setSelectedBrands, selectedBrands)}
+                                       checked={selectedBrands.includes(brand._id)}
+                                />
+                                <label htmlFor={brand._id}>{brand.name}</label>
                             </li>
                         ))}
                     </ul>
                     <div className="selector">
                         <br/>
-                        <label>Price:</label>
+                        <label className="title-selector">Price:</label>
                         <br/>
                         <Range
-                            step={0.1}
+                            step={10}
                             min={0}
-                            max={100}
+                            max={500}
                             values={state.values}
-                            onChange={(values) => setState({ values })}
+                            onChange={(values) => {
+                                setState({ values });
+                                setMinPrice(values[0]);
+                                setMaxPrice(values[1]);
+                            }}
                             renderTrack={({ props, children }) => (
                                 <div
                                     {...props}
@@ -152,6 +204,7 @@ const Sidebar = () => {
                                         height: '6px',
                                         width: '100%',
                                         backgroundColor: '#ccc',
+                                        margin: '10px 0 10px 0'
                                     }}
                                 >
                                     {children}

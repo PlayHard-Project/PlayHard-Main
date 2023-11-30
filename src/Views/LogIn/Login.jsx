@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import {GridLoader} from "react-spinners";
 import "../../css/LogIn/logInStyle.css";
 
 const Login = () => {
+  const [isLogging, setIsLogging] = useState(false);
   const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
     useState(false);
   const signUpImage =
     "https://res.cloudinary.com/playhardimages/image/upload/v1700626890/SignUpSignInImage.png";
+    
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
 
     if (name === "email") {
       if (!/\s/.test(value)) {
@@ -54,6 +57,7 @@ const Login = () => {
 
   // Handles all sign in process
   const handleSignIn = async () => {
+    email = email.toLowerCase();
     const passwordRequirements = validatePassword();
     if (!email) {
       toast.error("Email cannot be empty.", {
@@ -84,9 +88,7 @@ const Login = () => {
       });
       return;
     }
-
-    console.log('JSON a enviar:', JSON.stringify({ email, password }));
-
+    setIsLogging(true);
     // POST request with the email and password to the backend
     try {
       const response = await fetch(apiBackend+'/sign-in', {
@@ -106,7 +108,7 @@ const Login = () => {
       if (responseData.error) {
         toast.error(responseData.error, { position: "bottom-right" });
       } else {
-        toast.success(`Sign Up successful for ${email}!`, {
+        toast.success(`Sign In successful for user: ${email}!`, {
           position: "bottom-right",
         });
         const { tokenSession } = responseData;
@@ -120,8 +122,20 @@ const Login = () => {
       toast.error("An error occurred during sign-in. Please try again.", {
         position: "bottom-right",
       });
+    } finally {
+      setIsLogging(false);
     }
   };
+
+  if (isLogging) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
+      >
+        <GridLoader color="#023fc5" />
+      </div>
+    );
+  }
 
   return (
     <div className="container container-login">
@@ -216,9 +230,9 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <div className="image-container-signup hidden md:block">
-        <img src={signUpImage} alt="SignUp" className="image-signUp" />
-      </div>
+      <div className="hidden lg:block">
+          <img src={signUpImage} alt="SignUp" className="image-signUp" />
+        </div>
     </div>
   );
 };

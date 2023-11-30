@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BiSolidHide } from "react-icons/bi";
 import { BiShow } from "react-icons/bi";
+import {GridLoader} from "react-spinners";
 import "../../css/SignUp/signUpStyle.css";
-import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const [isRegistering, setIsRegistering] = useState(false);
   const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
@@ -73,42 +74,49 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     const passwordRequirements = validatePassword();
-
     if (!name) {
       toast.error("Name cannot be empty.", {
         position: "bottom-right",
       });
+      return;
     } else if (name.trim() === "") {
       toast.error("Name cannot be just spaces.", {
         position: "bottom-right",
       });
+      return;
     } else if (name.length < 6) {
       toast.error("Name must be at least 6 characters long.", {
         position: "bottom-right",
       });
+      return;
     } else if (!email) {
       toast.error("Email cannot be empty.", {
         position: "bottom-right",
       });
-    } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+      return;
+    } else if (!/^[^\s@]+@gmail\.com$/.test(email.toLowerCase())) {
       toast.error(
         "Please enter a valid email address. Only Gmail addresses ending in @gmail.com are accepted.",
         {
           position: "bottom-right",
         }
       );
+      return;
     } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
       toast.error("Please enter a valid email address.", {
         position: "bottom-right",
       });
+      return;
     } else if (!/^[a-zA-Z0-9]+$/.test(name)) {
       toast.error("Please enter a valid name.", {
         position: "bottom-right",
       });
+      return;
     } else if (!password) {
       toast.error("Password cannot be empty.", {
         position: "bottom-right",
       });
+      return;
     } else if (
       !passwordRequirements.minLength ||
       !passwordRequirements.hasNumber ||
@@ -120,10 +128,12 @@ const SignUp = () => {
       toast.error("Please enter a valid password", {
         position: "bottom-right",
       });
+      return;
     }
-
+    setIsRegistering(true);
     //Created POST request
     try {
+      email = email.toLowerCase();
       const response = await fetch(
         apiBackend+"/signup",
         {
@@ -156,6 +166,8 @@ const SignUp = () => {
       toast.error("An error occurred during signup. Please try again.", {
         position: "bottom-right",
       });
+    }finally {
+      setIsRegistering(false);
     }
   };
 
@@ -176,13 +188,22 @@ const SignUp = () => {
       const { tokenSession } = data;
       if (tokenSession) {
         localStorage.setItem("token", tokenSession);
-        console.log("Token set in local storage:", tokenSession);
       }
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
     }
   };
+
+  if (isRegistering) {
+    return (
+      <div
+        className="flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
+      >
+        <GridLoader color="#023fc5" />
+      </div>
+    );
+  }
 
   return (
     <div className="container container-sign">

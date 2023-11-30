@@ -54,6 +54,7 @@ const configureAppImplementingStripeServer = (app) => {
       metadata: {
         userId: req.body.userId,
         products: JSON.stringify(req.body.products),
+        isAvailableEmail: req.body.isAvailableEmail,
       },
     });
 
@@ -125,7 +126,7 @@ const configureAppImplementingStripeServer = (app) => {
         body: JSON.stringify(newOrder),
       });
 
-      if (respuesta.ok) {
+      if (respuesta.ok && customer.metadata.isAvailableEmail === "true") {
         const saveOrder = await respuesta.json();
         console.log("Orden procesada:", saveOrder);
 

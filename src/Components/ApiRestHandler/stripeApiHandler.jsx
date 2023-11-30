@@ -37,7 +37,6 @@ export default function GoToCheckout({ disabled }) {
           isAvailableEmail: isActive,
         };
         const headers = { "Content-Type": "application/json" };
-
         const response = await fetch(
           "https://backend-fullapirest.onrender.com/stripe-api/intent-payment",
           {

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { getElementByID } from "../../Components/ApiRestHandler/requestHandler";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { GridLoader } from "react-spinners";
 import CartComponent from "./CartComponent";
 import "../../css/PurchaseComponent.css";
-import { GridLoader } from "react-spinners";
 
-export default function PurchaseComponent({ idOrder }) {
+export default function PurchaseComponent({ idOrder, indexOrder }) {
   const [order, setOrder] = useState(null);
   const [date, setDate] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [scrollContainerVisible, setScrollContainerVisible] = useState(false);
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -49,30 +51,39 @@ export default function PurchaseComponent({ idOrder }) {
         <span>Error loading order.</span>
       ) : (
         <section className="purchase-section">
-          <div className="text-container1">
-            <div className="header-container">
-              <h2 className="header-1">Payment ID:</h2>
+          <div className="header-section">
+            <div>
+              <div className="text-container1">
+                <h2 className="header-title-sub">Order Nº:</h2>
+                <label>{order.orderCount}</label>
+              </div>
+              <div className="text-container1">
+                <h2 className="header-title-sub">Date:</h2>
+                <label>{date}</label>
+              </div>
             </div>
-            <div className="result-container">
-              <label className="result-1">{order._id}</label>
-            </div>
+            <button className="button-arrow"
+              onClick={() => setScrollContainerVisible(!scrollContainerVisible)}
+            >
+              <IoIosArrowDropdownCircle size={30} />
+            </button>
           </div>
-          <div className="text-container1">
-            <h2 className="header-1">Date:</h2>
-            <label className="result-1">{date}</label>
-          </div>
-          <div className="scroll-container">
-            {order.products.map((productFromOrder) => (
+          <div
+            className={`scroll-container ${
+              scrollContainerVisible ? "expanded" : ""
+            }`}
+          >
+            {order.products.map((productFromOrder, index) => (
               <CartComponent
-                key={order.paymentIntentId + productFromOrder.color}
+                key={index}
                 productFromOrder={productFromOrder}
                 color={productFromOrder.color}
               />
             ))}
           </div>
-          <div className="text-container1">
-            <h2 className="header-1">Total cost of all purchases:</h2>
-            <label className="result-1">{"$ " + order.total}</label>
+          <div className="text-container-total">
+            <h2 className="header-title-sub">Total cost of all purchases:</h2>
+            <label>{"$ " + order.total}</label>
           </div>
         </section>
       )}

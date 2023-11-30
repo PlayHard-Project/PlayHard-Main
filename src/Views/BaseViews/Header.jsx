@@ -205,7 +205,7 @@ const Header = ({
                   subTotal={subTotal}
               />
             </div>
-            <Link to="/history" className="lg:flex hidden" >
+            <Link to="/settings" className="lg:flex hidden" >
               <MdSettings size={30} color="#72a3ff" className="style-icon" />
             </Link>
           </div>
@@ -246,7 +246,7 @@ const Header = ({
                   >
                     Shop Cart
                   </Link>
-                  <Link to="/history" className="relative flex items-center text-link" onClick={toggleMenu}>Settings</Link>
+                  <Link to="/settings" className="relative flex items-center text-link" onClick={toggleMenu}>Settings</Link>
                 </div>
             )}
             {showCategoriesPopup && (

@@ -36,7 +36,7 @@ const Footer = () => {
     <footer className="footer container">
       <div className="footer-right">
         <div className="footer-column">
-          <h4 className="footer-title">Get Started</h4>
+          <h1 className="footer-title">Get Started</h1>
           <ul className="footer-links">
             <div>
               <Link to="/" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
@@ -56,7 +56,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-column">
-          <h4 className="footer-title">About Us</h4>
+          <h1 className="footer-title">About Us</h1>
           <ul className="footer-links">
             <li>
               <a href="#">Company information</a>
@@ -69,15 +69,15 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer-column">
-          <h4 className="footer-title">Location</h4>
+          <h1 className="footer-title">Location</h1>
           <ul className="footer-links">
             <li>
               <a href="https://maps.app.goo.gl/YTQ4P8mfNTJneXpG9" target="_blank">69 Melchor Perez St. Cochabamba, Bolivia</a>
             </li>
           </ul>
-          <h4 className="footer-column">
-            <h4 className="footer-title">Follow Us </h4>
-          </h4>
+          <div className="footer-column">
+            <h1 className="footer-title">Follow Us </h1>
+          </div>
           <div className="social-networks">
             <img
               className="social-icon"

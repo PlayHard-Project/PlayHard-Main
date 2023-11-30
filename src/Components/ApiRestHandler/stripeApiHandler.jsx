@@ -32,7 +32,7 @@ export default function GoToCheckout({ disabled }) {
 
         const body = {
           products: products,
-          userId: "idUser",
+          userId: idUser,
           isAvailableEmail: isActive,
         };
         const headers = { "Content-Type": "application/json" };

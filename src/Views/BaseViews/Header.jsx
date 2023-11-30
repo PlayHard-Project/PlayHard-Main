@@ -253,6 +253,7 @@ const Header = ({
               
             ) : (
               <MdPerson size={30} color="#72a3ff" className="style-icon" />
+            )}
             </Link>
             <div ref={modalRef}>
               <ShoppingCartModal

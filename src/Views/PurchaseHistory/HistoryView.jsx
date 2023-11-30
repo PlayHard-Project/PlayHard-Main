@@ -63,7 +63,6 @@ const ShoppingHistory = () => {
             wrapperClassName="datepicker-wrapper"
             maxDate={new Date()}
             onKeyDown={(e) => e.preventDefault()}
-            onFocus={(e) => e.target.blur()}
           />
 
           <button

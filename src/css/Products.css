@@ -6,14 +6,14 @@ Container for all products in the administration and normal area.
 }
 .add-product-link {
     position: fixed;
-    top: 300;
+    bottom: 0;
     right: 0;
     background-color: #70a2ff;
     color: white;
     text-decoration: none;
     font-size: xx-large;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 40px;
     height: 50px;
     width: 50px;

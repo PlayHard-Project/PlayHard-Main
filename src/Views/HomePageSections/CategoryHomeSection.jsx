@@ -59,7 +59,7 @@ const CategoryHomeSection = () => {
             <Slider ref={sliderRef} {...settings}>
                 {data.map((category) => (
                     <div key={category.id} className="slick-slide">
-                        <Link to={`/${category.name}`} key={category.id}>
+                        <Link to={`/products/categories=${category.name}`} key={category.id}>
                             <button className="relative overflow-hidden group">
                                 <img
                                     src={category.imgUrl}

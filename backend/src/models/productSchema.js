@@ -6,6 +6,11 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    isAvailable: {
+        type: Boolean,
+        required: true,
+        default: true,
+    },
     description: {
         type: String,
         required: true

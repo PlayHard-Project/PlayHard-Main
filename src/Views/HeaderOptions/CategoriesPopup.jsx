@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
  * @param {Function} props.handleCloseCategoriesModal - Function to close the categories modal.
  * @param {Function} props.toggleMenuAndCategories - Function to toggle between menu and categories.
  */
-const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, handleSecondModal }) => {
+const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, handleSecondModal, handleCloseMenuModal }) => {
     const [showClothesSubCategories, setShowClothesSubCategories] = useState(false);
     const [showBrandsSubCategories, setShowBrandsSubCategories] = useState(false);
     const [showSportsSubCategories, setShowSportsSubCategories] = useState(false);
@@ -22,7 +22,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
         setShowClothesSubCategories(false);
         setShowBrandsSubCategories(false);
         setShowSportsSubCategories(false);
-    };
+    };    
 
     const clothesSubCategories = [
         { label: "T-Shirts" },
@@ -66,13 +66,17 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
      */
     const handleToggleSubCategories = (category) => {
         toggleAllMenus();
-        if (category === "Clothes") setShowClothesSubCategories(!showClothesSubCategories);
-        else if (category === "Brands") setShowBrandsSubCategories(!showBrandsSubCategories);
-        else if (category === "Sports") setShowSportsSubCategories(!showSportsSubCategories);
-    };
+        if (category === "Clothes") {
+            setShowClothesSubCategories((prev) => !prev);
+        } else if (category === "Brands") {
+            setShowBrandsSubCategories((prev) => !prev);
+        } else if (category === "Sports") {
+            setShowSportsSubCategories((prev) => !prev);
+        }
+    };       
 
     return (
-        <div className="absolute p-2 shadow-lg popup right-4 space-y-1 flex flex-col items-start">
+        <div className="absolute p-2 shadow-lg popup right-4 space-y-1 flex flex-col items-start"  style={{width:'210px', height:'260px'}}>
             <MdArrowBack
                 size={20}
                 color="#72a3ff"
@@ -82,7 +86,6 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <div
                 className="relative flex items-center text-link"
                 onClick={() => {
-                    toggleMenuAndCategories("Clothes");
                     handleToggleSubCategories("Clothes");
                 }}
             >
@@ -92,6 +95,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowClothesSubCategories(false)}
                     handleSecondModal={handleSecondModal}
+                    handleCloseMenuModal={handleCloseMenuModal}
                     handleCategoriesModal={handleCloseCategoriesModal}
                     options={clothesSubCategories}
                     toggleOption={(option) => {
@@ -101,7 +105,12 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <Link to="/categories/Shoes" className="text-link">
                 <div
                     className="relative flex items-center"
-                    onClick={() => toggleMenuAndCategories("Shoes")}
+                    onClick={() => {
+                        handleToggleSubCategories("Shoes");
+                        toggleMenuAndCategories();
+                        handleCloseCategoriesModal();
+                        handleSecondModal();
+                    }}
                 >
                     Shoes
                 </div>
@@ -109,7 +118,12 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <Link to="/categories/Equipment" className="text-link">
                 <div
                     className="relative flex items-center"
-                    onClick={() => toggleMenuAndCategories("Equipment")}
+                    onClick={() => {
+                        handleToggleSubCategories("Equipment");
+                        toggleMenuAndCategories();
+                        handleCloseCategoriesModal();
+                        handleSecondModal();
+                    }}
                 >
                     Equipment
                 </div>
@@ -117,7 +131,12 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <Link to="/categories/Accessories" className="text-link">
                 <div
                     className="relative flex items-center"
-                    onClick={() => toggleMenuAndCategories("Accessories")}
+                    onClick={() => {
+                        handleToggleSubCategories("Accessories");
+                        toggleMenuAndCategories();
+                        handleCloseCategoriesModal();
+                        handleSecondModal();
+                    }}
                 >
                     Accessories
                 </div>
@@ -125,7 +144,6 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <div
                 className="relative flex items-center text-link"
                 onClick={() => {
-                    toggleMenuAndCategories("Brands");
                     handleToggleSubCategories("Brands");
                 }}
             >
@@ -135,6 +153,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowBrandsSubCategories(false)}
                     handleSecondModal={handleSecondModal}
+                    handleCloseMenuModal={handleCloseMenuModal}
                     handleCategoriesModal={handleCloseCategoriesModal}
                     options={brandsSubCategories}
                     toggleOption={(option) => {
@@ -145,7 +164,12 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <Link to="/categories/Offers" className="text-link">
                 <div
                     className="relative flex items-center"
-                    onClick={() => toggleMenuAndCategories("Offers")}
+                    onClick={() => {
+                        handleToggleSubCategories("Offers");
+                        toggleMenuAndCategories();
+                        handleCloseCategoriesModal();
+                        handleSecondModal();
+                    }}
                 >
                     Offers
                 </div>
@@ -153,7 +177,6 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
             <div
                 className="relative flex items-center text-link"
                 onClick={() => {
-                    toggleMenuAndCategories("Sports");
                     handleToggleSubCategories("Sports");
                 }}
             >
@@ -163,6 +186,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                 <SubCategoriesOptions
                     handleCloseModal={() => setShowSportsSubCategories(false)}
                     handleSecondModal={handleSecondModal}
+                    handleCloseMenuModal={handleCloseMenuModal}
                     handleCategoriesModal={handleCloseCategoriesModal}
                     options={sportsSubCategories}
                     toggleOption={(option) => {

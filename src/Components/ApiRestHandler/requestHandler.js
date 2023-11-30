@@ -1,26 +1,78 @@
 import axios from 'axios';
+import toast from "react-hot-toast";
 
-const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
+const apiURL = process.env.REACT_APP_BRANCH === 'test'
+    ? "https://backend-fullapirest.onrender.com/api/"
+    : "https://backend-fullapirest.onrender.com/api/";
 console.log(process.env.REACT_APP_BRANCH);
 
-
+/**
+ * Adds a new element to the server by making a POST request to the specified route.
+ *
+ * @param {Object} newElement - The new element to be added.
+ * @param {string} route - The API route where the new element will be added.
+ * @returns {Promise} A promise that resolves to the response data from the server.
+ * @throws Will throw an error if there is an issue adding the new element.
+ */
 export const addElement = async (newElement, route) => {
   try {
     const response = await axios.post(apiURL + route, newElement);
     return response.data;
   } catch (error) {
-    console.error('Error adding the new element: ', error);
-    throw error; 
+    console.error("Error adding the new element: ", error);
+    throw error;
   }
 };
+
+/**
+ * Retrieves all elements from the server by making a GET request to the specified route.
+ *
+ * @param {string} route - The API route from which to retrieve all elements.
+ * @returns {Promise} A promise that resolves to the response data containing all elements.
+ * @throws Will throw an error if there is an issue retrieving all elements.
+ */
 
 export const getElements = async (route) => {
   try {
     const response = await axios.get(apiURL + route);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error getting all elements: ", error);
+    throw error;
+  }
+};
+
+/**
+ * Performs a filtered retrieval of elements from a specific route based on the provided parameters.
+ *
+ * @async
+ * @function
+ * @param {string} route - The route on which to perform the filtered retrieval.
+ * @param {Object} params - The parameters used for filtering the elements.
+ * @param {string[]} params.size - An array of sizes for filtering.
+ * @param {string[]} params.target - An array of target demographics for filtering.
+ * @param {string[]} params.sport - An array of sports for filtering.
+ * @param {string[]} params.brand - An array of brands for filtering.
+ * @param {string[]} params.categories - An array of categories for filtering.
+ * @param {number} params.minPrice - The minimum price for filtering.
+ * @param {number} params.maxPrice - The maximum price for filtering.
+ * @returns {Promise<Array>} A promise that resolves with the filtered elements.
+ * @throws {Error} Throws an error if there is an issue performing the filtered retrieval or if no products are found.
+ * **/
+export const getFilteredElements = async (route, params) => {
+  try {
+    const queryString = makeQuery(params);
+    console.log(`${apiURL}${route}?${queryString}`);
+    const response = await axios.get(`${apiURL}${route}?${queryString}`);
+
+    if (response.data.length === 0) {
+      throw new Error("No products found with the specified filters");
+    }
+
     return response.data;
   } catch (error) {
-    console.error('Error getting all elements: ', error);
-    throw error; 
+    console.error("Error getting filtered elements: ", error);
+    throw error;
   }
 };
 
@@ -36,42 +88,46 @@ export const getElements = async (route) => {
  */
 export const searchElements = async (route, query) => {
   try {
-    const response = await axios.get(`${apiURL}${route}/search`, { params: { search: query } });
+    const response = await axios.get(`${apiURL}${route}/search`, {
+      params: { search: query },
+    });
     return response.data;
   } catch (error) {
-    console.error('Error searching elements: ', error);
+    console.error("Error searching elements: ", error);
     throw error;
   }
 };
 
 export const getElementByID = async (elemenetId, route) => {
   try {
-    const response = await axios.get(apiURL + route + '/' + elemenetId);
+    const response = await axios.get(apiURL + route + "/" + elemenetId);
     return response.data;
   } catch (error) {
-    console.error('Error getting the specified element: ', error);
-    throw error; 
+    console.error("Error getting the specified element: ", error);
+    throw error;
   }
 };
 
 export const updateElement = async (elementToUpdate, route) => {
   try {
-    console.log(apiURL + route, elementToUpdate._id);
-    const response = await axios.put(apiURL + route + elementToUpdate._id, elementToUpdate);
+    const response = await axios.put(
+      apiURL + route + "/" + elementToUpdate._id,
+      elementToUpdate
+    );
     return response.data;
   } catch (error) {
-    console.error('Error updating the element: ', error);
-    throw error; 
+    console.error("Error updating the element: ", error);
+    throw error;
   }
 };
 
 export const removeElement = async (productId, route) => {
   try {
-    const response = await axios.delete(apiURL + route + '/' + productId);
+    const response = await axios.delete(apiURL + route + "/" + productId);
     return response.data;
   } catch (error) {
-    console.error('Error removing product:', error);
-    throw error; 
+    console.error("Error removing product:", error);
+    throw error;
   }
 };
 
@@ -84,7 +140,40 @@ export const getElementsLazyLoading = async (route, page = 1) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error getting all elements: ', error);
+    console.error("Error getting all elements: ", error);
+    throw error;
+  }
+};
+
+export const makeQuery = (params) => {
+  return Object.keys(params)
+      .map(key => {
+        if (Array.isArray(params[key])) {
+          return `${key}=${params[key].join(',')}`;
+        } else {
+          return `${key}=${params[key]}`;
+        }
+      })
+      .join('&');
+}
+
+export const getFilteredElementsLazyLoading = async (route, params, page = 1) => {
+  try {
+    const queryString = makeQuery(params);
+    console.log(`${apiURL}${route}?${queryString}`);
+    const response = await axios.get(`${apiURL}${route}?${queryString}&page=${page}&pageSize=${20}`);
+
+    if (response.status === 404) {
+      throw new Error('No elements found with the specified filters');
+    }
+
+    if (response.data.length === 0) {
+      throw new Error('No products found with the specified filters');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error getting filtered elements: ', error);
     throw error;
   }
 };

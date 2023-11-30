@@ -9,6 +9,11 @@ const orderSchema = new Schema(
       ref: "User",
       required: true,
     },
+    isAvailableEmail: {
+      type: Boolean,
+      required: true,
+      default: true,
+    }, 
     customerId: {
       type: String,
     },

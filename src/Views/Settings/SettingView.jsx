@@ -4,7 +4,7 @@ import { MdToggleOff, MdToggleOn } from "react-icons/md";
 import "../../css/SettingView.css";
 
 const SettingView = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [isActiveMarketing, setIsActiveMarketing] = useState(false);
   const image =
     "https://res.cloudinary.com/playhardimages/image/upload/v1701149379/sjqmzsjnhdsovluojlgw.png";
@@ -28,6 +28,7 @@ const SettingView = () => {
               onClick={handleToggle}
               className={`toggle-button ${isActive ? "active" : "inactive"}`}
             >
+              {console.log(isActive)}
               {isActive ? (
                 <MdToggleOn className="toggle-icon" />
               ) : (

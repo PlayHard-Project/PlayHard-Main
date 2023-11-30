@@ -4,8 +4,7 @@
  */
 const express = require('express');
 const userSchema = require('../models/userSchema');
-const {createRoutes} = require('./userHandler')
-const {createRoutesSignIn} = require('./signInHandler')
+const {createRoutes, login} = require('./userHandler')
 
 
 /**
@@ -36,7 +35,7 @@ createRoutes(router, userSchema, 'signup');
  * @param {/string} route - The login route
  * @param {controller} controller - The controller for this route
  */
-createRoutesSignIn(router,userSchema,'sign-in');
+router.post('/login', login);
 
 /**
  * Exports the configured Express Router for user-related routes.

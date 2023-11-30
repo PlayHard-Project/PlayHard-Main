@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import ImageCard from "../components/ImageCard";
 import ColorComponent from "../components/ColorComponent";
@@ -7,55 +7,18 @@ import SelectSizeComponent from "../components/SelectSizeComponent";
 import { Axios } from "axios";
 
 function RightSide({
-   isEditMode = false,
-   colorInformation = [],
-   sizeInformation = [],
-   productImages = [],
   setProductImages,
   setColorInformation,
   setSizeInformation,
   setStockInformation,
-    stockInformation,
-    isDataLoaded,
-
-    colorInformationAux,
-    sizeInformationAux
+  colorInformation,
+  sizeInformation,
 }) {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
   const [colorComponents, setColorComponents] = useState([]);
   const [sizeComponents, setSizeComponents] = useState([]);
   const [stockRows, setStockRows] = useState([]);
-
-  useEffect(() => {
-    if (isEditMode) {
-      const newColorComponents = colorInformationAux.map(colorInfo => (
-          <ColorComponent
-              key={colorInfo.id}
-              id={colorInfo.id}
-              color={colorInfo.color}
-              hex={colorInfo.hex}
-              imagePath={colorInfo.imagePath}
-              onDelete={() => handleDeleteColorComponent(colorInfo.id)}
-              setColorInformation={setColorInformation}
-              isEditMode={true}
-          />
-      ));
-      setColorComponents(newColorComponents);
-      const newSizeComponents = sizeInformationAux.map(size => (
-          <SelectSizeComponent
-              key={size.id}
-              id={size.id}
-              size={size.size}
-              onDelete={handleDeleteSizeComponent}
-              setSizeInformation={setSizeInformation}
-              isEditMode={true}
-          />
-      ));
-      setSizeComponents(newSizeComponents);
-      setImages(productImages);
-    }
-  }, [isDataLoaded]);
 
   const handleAddImage = () => {
     const trimmedInput = input.trim();
@@ -110,7 +73,6 @@ function RightSide({
           id={id}
           onDelete={() => handleDeleteColorComponent(id)}
           setColorInformation={setColorInformation}
-          isEditMode={false}
         />,
       ]);
     } else {
@@ -128,10 +90,6 @@ function RightSide({
       prevColorInformation.filter((colorInfo) => colorInfo.id !== id)
     );
   };
-
-  useEffect(() => {
-    console.log(colorInformation)
-  }, [colorInformation]);
 
   const handleAddSizeComponent = () => {
     const id = Math.random();
@@ -154,10 +112,10 @@ function RightSide({
 
   const handleDeleteSizeComponent = (id) => {
     setSizeComponents((prevSizeComponents) =>
-        prevSizeComponents.filter((component) => component.props.id !== id)
+      prevSizeComponents.filter((component) => component.props.id !== id)
     );
     setSizeInformation((prevSizeInformation) =>
-        prevSizeInformation.filter((sizeInfo) => sizeInfo.id !== id)
+      prevSizeInformation.filter((sizeInfo) => sizeInfo.id !== id)
     );
   };
 
@@ -176,76 +134,39 @@ function RightSide({
     });
   };
 
-  useEffect(() => {
-    setStockInformation((prevStockInformation) => {
-      const updatedStockInformation = prevStockInformation.map((size) => [...size]);
-      if (updatedStockInformation.length > sizeInformation.length) {
-        updatedStockInformation.length = sizeInformation.length;
-      }
-      updatedStockInformation.forEach((size, index) => {
-        if (size.length > colorInformation.length) {
-          size.length = colorInformation.length;
-        }
-        updatedStockInformation[index] = size;
-      });
-
-      return updatedStockInformation;
-    });
-  }, [sizeInformation, colorInformation]);
-
-  useEffect(() => {
-    if (sizeInformation.length > stockInformation.length) {
-      setStockInformation((prevStockInformation) => {
-        const updatedStockInformation = [...prevStockInformation, Array(colorInformation.length).fill(1)];
-        return updatedStockInformation;
-      });
-    }
-  }, [sizeInformation]);
-
-  useEffect(() => {
-    if (colorInformation.length > stockInformation[0]?.length) {
-      setStockInformation((prevStockInformation) => {
-        const updatedStockInformation = prevStockInformation.map((size) => [...size, 1]);
-        return updatedStockInformation;
-      });
-    }
-  }, [colorInformation]);
-
   return (
-    <div className={'flex flex-col gap-3'}>
-      <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700 '}>
-        <div className="flex flex-col mb-2">
-          <label>Add reference images (URL)</label>
-          <div className="flex flex-col lg:flex-row gap-3">
-            <input
-              type="text"
-              className="input-add_right lg:w-2/3 block border-2 border-black hover:border-blue-700 rounded-md hover:text-blue-700"
-              placeholder="Image URL"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              required
-            />
-            <button
-              onClick={handleAddImage}
-              className="text-white bg-blue-500 lg:w-1/3 block rounded-md p-3"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap overflow-auto h-64 mb-4 border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700">
-          {images.map((url, index) => (
-            <ImageCard
-              key={index}
-              url={url}
-              onDelete={() => handleDeleteImage(index)}
-            />
-          ))}
+    <div>
+      <div className="flex flex-col mb-2">
+        <label>Add reference images (URL)</label>
+        <div className="flex flex-col lg:flex-row gap-3">
+          <input
+            type="text"
+            className="input-add_right lg:w-2/3 block"
+            placeholder="Image URL"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            required
+          />
+          <button
+            onClick={handleAddImage}
+            className="text-white bg-blue-500 lg:w-1/3 block rounded-md p-3"
+          >
+            Add
+          </button>
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 mb-4 border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700">
+      <div className="flex flex-wrap overflow-auto h-64 mb-4 border-2 border-black rounded p-3">
+        {images.map((url, index) => (
+          <ImageCard
+            key={index}
+            url={url}
+            onDelete={() => handleDeleteImage(index)}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-3 mb-4 border-2 border-black rounded p-3">
         <label>Colors</label>
         <div className="overflow-auto h-44 flex flex-col gap-3">
           {colorComponents}
@@ -258,7 +179,7 @@ function RightSide({
         </button>
       </div>
 
-      <div className="flex flex-col gap-3 mb-4 border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700">
+      <div className="flex flex-col gap-3 mb-4 border-2 border-black rounded p-3">
         <label>Sizes</label>
         <div className="grid lg:grid-cols-4 grid-cols-1 gap-2 overflow-auto h-40">
           {sizeComponents}
@@ -271,20 +192,19 @@ function RightSide({
         </button>
       </div>
 
-      <div className={"overflow-auto h-60 border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700"}>
+      <div className={"border-2 border-black rounded p-3"}>
         <label className={"mb-3"}>Stock</label>
         <div className={"flex flex-col gap-2"}>
           {sizeInformation.map((size, sizeIndex) =>
-              colorInformation.map((color, colorIndex) => (
-                  <StockItem
-                      key={`${color.id}-${size.id}`}
-                      color={color}
-                      size={size}
-                      sizeIndex={sizeIndex}
-                      handleQuantityChange={handleQuantityChange}
-                      initialQuantity={stockInformation[sizeIndex] ? stockInformation[sizeIndex][colorIndex] : 1}
-                  />
-              ))
+            colorInformation.map((color) => (
+              <StockItem
+                key={`${color.id}-${size.id}`}
+                color={color}
+                size={size}
+                sizeIndex={sizeIndex}
+                handleQuantityChange={handleQuantityChange}
+              />
+            ))
           )}
         </div>
       </div>

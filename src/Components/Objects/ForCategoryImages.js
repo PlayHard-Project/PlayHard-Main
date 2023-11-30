@@ -1,7 +1,7 @@
 export const data = [
     {
         id: 1,
-        name: "Men",
+        name: "Man",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699851889/Categories/Man.png"
     },
     {

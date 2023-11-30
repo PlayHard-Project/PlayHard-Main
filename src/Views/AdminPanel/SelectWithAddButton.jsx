@@ -33,10 +33,10 @@ const SelectWithAddButton = ({
   placeholder,
 }) => {
   return (
-    <div className="category-section-general w-full ">
-      <div className="category-section hover:text-blue-700 flex align-middle justify-center">
-        <select id={id} value={value} onChange={onChange} required className={'hover:border-blue-700'}>
-          <option value="" disabled className={'hover:border-blue-700'}>
+    <div className="category-section-general">
+      <div className="category-section">
+        <select id={id} value={value} onChange={onChange} required>
+          <option value="" disabled>
             {placeholder}
           </option>
           {options.map((option) => (
@@ -45,18 +45,26 @@ const SelectWithAddButton = ({
             </option>
           ))}
         </select>
-          <button
-              className="hover:border-blue-700 border-2 w-10 h-10 rounded-3xl flex items-center justify-center text-lg"
-              onClick={onAdd}>
-              +
-          </button>
+        <button
+          onClick={onAdd}
+          style={{
+            borderRadius: "10px",
+            border: "2px solid #888383",
+            height: "44px",
+            width: "40px",
+            marginLeft: "10px",
+            fontSize: "20px",
+          }}
+        >
+          +
+        </button>
       </div>
       <div className="category-section-selected">
-        <div className="selected-categories hover:border-blue-700">
+        <div className="selected-categories">
           {selectedItems.map((item, index) => (
-            <div key={index} className="selected-category border-blue-700">
+            <div key={index} className="selected-category">
               {item}
-                <button className="hover:border-blue-700 rounded-full text-center w-10 h-10 flex items-center justify-center" onClick={() => onRemoveItem(item)}>x</button>
+              <button onClick={() => onRemoveItem(item)}>x</button>
             </div>
           ))}
         </div>

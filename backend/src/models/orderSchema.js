@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
   {
-    orderCount: {
-      type: Number,
-      required: true,
-    },
     userId: {
       type: String,
       ref: "User",
@@ -86,13 +82,9 @@ const orderSchema = new Schema(
     },
     date: {
       type: Date,
-      default: function () {
-        const currentDate = new Date();
-        currentDate.setUTCHours(0, 0, 0, 0);
-        return currentDate;
-      },
+      default: () => new Date().toLocaleString("en-US", { timeZone: "America/La_Paz" }),
       required: true,
-    },
+    }
   },
   { timestamps: true }
 );

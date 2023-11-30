@@ -12,9 +12,9 @@ import { MdArrowBack } from "react-icons/md";
  * @param {Array} props.options - Array of subcategories options.
  * @param {Function} props.toggleOption - Function to toggle a subcategory option.
  */
-const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption, handleSecondModal, handleCategoriesModal, handleCloseMenuModal }) => {
+const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption, handleSecondModal, handleCategoriesModal }) => {
     return (
-        <div className="absolute p-2 shadow-lg popup space-y-1 flex flex-col items-start" style={{ marginTop: '-11px', marginLeft: '-10px', width:'210px', minHeight:'260px' }}>
+        <div className="absolute p-2 shadow-lg popup space-y-1 flex flex-col items-start" style={{ marginTop: '-11px', marginLeft: '-10px' }}>
             <MdArrowBack
                 size={20}
                 color="#72a3ff"
@@ -31,9 +31,8 @@ const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption, handleS
                         onClick={() => {
                             toggleOption(option);
                             handleCloseModal();
-                            handleCategoriesModal();
                             handleSecondModal();
-                            handleCloseMenuModal();
+                            handleCategoriesModal();
                         }}
                     >
                         {option.label}

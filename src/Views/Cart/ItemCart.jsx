@@ -2,7 +2,6 @@ import {useState} from "react";
 import {getElementByID} from '../../Components/ApiRestHandler/requestHandler.js'
 import '../../css/ItemCard.css'
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
-import toast from "react-hot-toast";
 
 const ItemCart = ( props ) => {
     const { productID, size, color, quantity, setCartItemsQuantity, setSubTotal } = props;
@@ -13,7 +12,7 @@ const ItemCart = ( props ) => {
     const [productSize, setProductSize] = useState("---")
     const [productColor, setProductColor] = useState("---")
 
-    const [itemsOnStock, setItemsOnStock] = useState(0);
+    const [itemsOnStock, setItemsOnStock] = useState(1);
     const buyCartManagement = new BuyCartManagement();
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -30,32 +29,39 @@ const ItemCart = ( props ) => {
     let [productQuantity, setProductQuantity] = useState(quantity);
     const currency = "$";
 
-    const incrementQuantity = async () => {
-        if (productQuantity + 1 <= itemsOnStock) {
+    const incrementQuantity = () => {
+        if (true) { //TODO: QUANTITY VALIDATION
             setProductQuantity(productQuantity + 1);
             buyCartManagement.incrementQuantity(productID, size, color);
-            const subtotal = await buyCartManagement.getSubTotal();
-            setSubTotal(subtotal);
+            //setErrorMessage("");
+            const subTotalPromise = buyCartManagement.getSubTotal();
+            subTotalPromise.then((element) => {
+                setSubTotal(element);
+            })
         } else {
-            toast("This product is sold out", {icon: '📉'})
+            //setErrorMessage("No more in stock");
         }
     }
 
-    const decrementQuantity = async () => {
+    const decrementQuantity = () => {
         if (productQuantity - 1 >= 1) {
             setProductQuantity(productQuantity - 1);
             buyCartManagement.decreaseQuantity(productID, size, color);
             setErrorMessage("");
-            const subTotal = await buyCartManagement.getSubTotal();
-            setSubTotal(subTotal);
+            const subTotalPromise = buyCartManagement.getSubTotal();
+            subTotalPromise.then((element) => {
+                setSubTotal(element);
+            })
         }
     }
 
-    const deleteItem = async () => {
-        buyCartManagement.deleteProduct(productID, size, color);
-        setCartItemsQuantity(buyCartManagement.getProducts().length);
-        const subTotal = await buyCartManagement.getSubTotal();
-        setSubTotal(subTotal);
+    const deleteItem = () => {
+        buyCartManagement.deleteProduct(productID, size, color)
+        setCartItemsQuantity(buyCartManagement.getProducts().length)
+        const subTotalPromise = buyCartManagement.getSubTotal();
+        subTotalPromise.then((element) => {
+            setSubTotal(element);
+        });
     }
 
     return (

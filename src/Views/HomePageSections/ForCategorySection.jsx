@@ -11,7 +11,7 @@ const ForCategorySection = () => {
             </div>
             <div className="flex flex-wrap justify-center">
                 {data.map((category) => (
-                    <Link to={`/products/target=${category.name}`} key={category.id} className="m-4 relative overflow-hidden group">
+                    <Link to={`/${category.name}`} key={category.id} className="m-4 relative overflow-hidden group">
                         <img
                             src={category.imgUrl}
                             alt={category.name}

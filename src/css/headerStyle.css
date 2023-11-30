@@ -144,20 +144,6 @@
     margin-left: 12px;
 }
 
-.small-profile{
-    color:black;
-    align-items: center;
-    border: 2px solid #72a3ff;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    justify-content: center;
-    font-size: 15px;
-    display: flex;
-    text-transform: uppercase;
-}
-
 @media only screen and (max-width: 1538px) {
     .search-container {
         width: 340px;

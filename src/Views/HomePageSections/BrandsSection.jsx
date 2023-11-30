@@ -14,7 +14,6 @@ const BrandItem = ({ to, children }) => {
     const handleTouchStart = () => {
         const now = Date.now();
         if (now - lastTap < 300) {
-            console.log("Double Click detected")
             handleDoubleClick();
         } else {
             setLastTap(now);
@@ -23,7 +22,6 @@ const BrandItem = ({ to, children }) => {
 
     const handleDoubleClick = () => {
         navigate(to);
-        console.log(`Redirecting to ${to} on double-click`);
     };
 
     return (

@@ -1,73 +1,102 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../../../css/AdminPanelStyle/MainPage/CardAdmin.css";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { updateElement } from "../../../Components/ApiRestHandler/requestHandler";
+import BuyCartManagement from "../../../Utilities/BuyCartManagement";
+import toast from "react-hot-toast";
 
-/**
- * CardAdmin Component
- * 
- * This component represents a card used in an admin panel, typically for managing products.
- * It displays product information such as an image, title, and price.
- * The title has an overflow animation if its length exceeds a certain limit.
- * The card also provides buttons for editing and deleting the product.
- * 
- * @param {string} _id - The unique identifier for the product.
- * @param {string} img - The URL of the product image.
- * @param {string} title - The title of the product.
- * @param {number} price - The price of the product.
- * @param {string} colorInformation - Additional information about the product color (not used in the component).
- * @param {string} size - Additional information about the product size (not used in the component).
- * @param {function} setCartItemsQuantity - A function to set the quantity of items in the cart (not used in the component).
- * @param {function} setSubTotal - A function to set the subtotal of the cart (not used in the component).
- */
-const CardAdmin = ({ _id, img, title, price, colorInformation, size, setCartItemsQuantity, setSubTotal }) => {
+const CardAdmin = ({
+  product,
+  refreshProducts,
+  setCartItemsQuantity,
+  setSubTotal,
+  setProducts,
+}) => {
+  const buyCartManagement = new BuyCartManagement();
   const titleRef = useRef();
-  const currency = "$"
+  const currency = "$";
 
   useEffect(() => {
     const titleElement = titleRef.current;
-    const titleLength = title.length;
 
-    if (titleLength > 21) {
-      titleElement.style.animationDuration = 3 + "s";
+    if (product.name.length > 21) {
+      titleElement.style.animationDuration = "3s";
       titleElement.classList.add("overflow-animation");
     } else {
       titleElement.style.animation = "none";
       titleElement.classList.remove("overflow-animation");
     }
-  }, []);
+  }, [product.name]);
+
+  const deleteProduct = async () => {
+    try {
+      product.isAvailable = false;
+      await updateElement(product, "products/");
+
+      buyCartManagement.deleteProductNoSpecific(product._id);
+      setCartItemsQuantity(buyCartManagement.getProducts().length);
+      const subtotal = await buyCartManagement.getSubTotal();
+      setSubTotal(subtotal);
+
+      await new Promise((resolve) => {
+        setProducts((prevProducts) => {
+          const updatedProducts = prevProducts.filter(
+            (p) => p._id !== product._id
+          );
+          resolve(updatedProducts);
+          return updatedProducts;
+        });
+      });
+      toast.success("Excellent! The product has been successfully removed.");
+
+      refreshProducts();
+    } catch (error) {
+      toast.error("Oops! The product has not been removed.");
+      console.error("Error deleting product:", error);
+    }
+  };
 
   return (
-    <>
-      <div className="shopping-card-admin">
-        <Link key={_id} style={{cursor: 'auto'}}>
-          <img src={img} alt={title} className="shopping-card-img-admin" />
-        </Link>
-        <div>
-            <div className="flip-card-inner">
-              <div className="shopping-card-flip-front">
-                <Link key={_id} >
-                  <div ref={titleRef} className={`shopping-card-title-admin ${title.length > 21 ? "overflow-animation" : ""}`}>
-                    {title.toUpperCase()}
-                  </div>
-                </Link>
-                <div className="shopping-card-price-admin">
-                  <div className="price">{currency}. {price}</div>
-                </div>
+    <div className="shopping-card-admin">
+      <Link to="#" style={{ cursor: "auto" }}>
+        <img
+          src={product.imagePath[0]}
+          alt={product.name}
+          className="shopping-card-img-admin"
+        />
+      </Link>
+      <div>
+        <div className="flip-card-inner">
+          <div className="shopping-card-flip-front">
+            <Link to="#">
+              <div
+                ref={titleRef}
+                className={`shopping-card-title-admin ${
+                  product.name.length > 21 ? "overflow-animation" : ""
+                }`}
+              >
+                {product.name.toUpperCase()}
+              </div>
+            </Link>
+            <div className="shopping-card-price-admin">
+              <div className="price">
+                {currency}. {product.price}
               </div>
             </div>
-        </div>
-        <div className="card-buttons">
-          <div className="edit-button">
-            <FaEdit color="white" /> Edit
           </div>
-          <div className="delete-button">
-            <RiDeleteBin6Line color="white" /> Delete
-          </div>         
+        </div>
       </div>
+      <div className="card-buttons">
+        <div className="edit-button">
+          <FaEdit color="white" /> Edit
+        </div>
+        <div className="delete-button" onClick={deleteProduct}>
+          <RiDeleteBin6Line color="white" /> Delete
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

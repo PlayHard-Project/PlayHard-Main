@@ -1,6 +1,6 @@
 .modal-content-suboptions-sport {
     position: fixed;
-    top: 33%;
+    top: 36%;
     left:87%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -17,21 +17,21 @@
 
 @media only screen and (max-width: 1339px) {
     .modal-content-suboptions-sport {
-        top: 32%;
+        top: 35%;
     }
 }
 @media only screen and (max-width: 1208px) {
     .modal-content-suboptions-sport {
-        top: 31%;
+        top: 34%;
     }
 }
 @media only screen and (max-width: 1087px) {
     .modal-content-suboptions-sport {
-        top: 30%;
+        top: 33%;
     }
 }
 @media only screen and (max-width: 991px) {
     .modal-content-suboptions-sport {
-        top: 29%;
+        top: 32%;
     }
 }

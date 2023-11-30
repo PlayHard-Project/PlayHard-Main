@@ -1,6 +1,6 @@
 .modal-content-suboptions {
     position: fixed;
-    top: 31%;
+    top: 34%;
     left: 15%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -35,21 +35,21 @@
 
 @media only screen and (max-width: 1339px) {
     .modal-content-suboptions {
-        top: 30%;
+        top: 33%;
     }
 }
 @media only screen and (max-width: 1208px) {
     .modal-content-suboptions {
-        top: 29%;
+        top: 32%;
     }
 }
 @media only screen and (max-width: 1087px) {
     .modal-content-suboptions {
-        top: 28%;
+        top: 31%;
     }
 }
 @media only screen and (max-width: 991px) {
     .modal-content-suboptions {
-        top: 27%;
+        top: 30%;
     }
 }

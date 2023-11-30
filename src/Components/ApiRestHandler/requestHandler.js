@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
-console.log(process.env.REACT_APP_BRANCH);
-
 
 export const addElement = async (newElement, route) => {
   try {
@@ -56,7 +54,6 @@ export const getElementByID = async (elemenetId, route) => {
 
 export const updateElement = async (elementToUpdate, route) => {
   try {
-    console.log(apiURL + route, elementToUpdate._id);
     const response = await axios.put(apiURL + route + elementToUpdate._id, elementToUpdate);
     return response.data;
   } catch (error) {

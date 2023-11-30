@@ -1,5 +1,4 @@
 .about-container {
-    padding: 20px;
     text-align: center;
   }
   
@@ -17,10 +16,11 @@
   
   .about-title {
     font-size: 96px;
-    color: #000000;
+    color: #ffffff;
     font-family: 'Bangers', cursive;    
     text-transform: uppercase;
     letter-spacing: 2px;
+    padding-top: 10%;
   }
   
   .about-text {
@@ -48,6 +48,7 @@
   }
   
   .column {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,15 +63,26 @@
     box-shadow: 1px 1px 5px #4f4e4e5e;
   }
   
+  .column::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 11px;
+    background-color: #72a3ff;
+    transition: width 0.3s ease-in-out;
+    transform: translateX(-50%);
+  }
+  
+  .column:hover::before {
+    width: calc(100% + 2px);
+  }  
+  
   @media (max-width: 1000px) {
     .column {
       flex: 100%;
     }
-  }
-  
-  .column:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #3979f0cc;
   }
   
   .icon {

@@ -1,234 +1,117 @@
 /* Remove focus outline for all elements */
 * {
-    outline: none !important;
+  outline: none !important;
 }
 
 /* Styles for the overlay of the options modal */
 .modal-overlay-options {
-    background: none;
-    position: fixed;
-    top: 12%;
-    left: 73%;
+  background: none;
+  position: fixed;
+  top: 12%;
 }
 
 /* Styles for the content of the options modal */
 .modal-content-options {
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 100%;
-    max-height: 100%;
+  position: fixed;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 200%;
+  max-height: 100%;
 }
 
 /* Styles for the Brands modal content */
 .brands-modal-content {
-    position: absolute;
-    top: 1000px;
-    left: 100px;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    outline: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 210px;
+  position: absolute;
+  top: 1000px;
+  left: 100px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 210px;
 }
 
 /* Styles for the main container of options */
 .modal-container-options {
-    position: fixed;
-    top: 10.1%;
-    right: 0;
-    width: 1595px;
-    height: 7%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    background: linear-gradient(to bottom, rgb(205, 222, 252), rgb(255, 255, 255));
-    clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4.2% 100%);
+  position: fixed;
+  top: 95px;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  background: linear-gradient(
+    to bottom,
+    rgb(205, 222, 252),
+    rgb(255, 255, 255)
+  );
 }
 
 /* Styles for the individual options in the main container */
 .container-options {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .container-options > div {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    border-right: 1px solid #000;
-    transition: color 0.3s;
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #000;
+  transition: color 0.3s;
 }
 
 .container-options > div:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 .container-options > div:hover {
-    color: #18559b;
+  color: #18559b;
 }
 
 .container-options > div > div {
-    font-size: 16px;
-    font-family: 'Montserrat', cursive;
+  font-size: 16px;
+  font-family: "Montserrat", cursive;
 }
 
-/* Media queries for responsiveness */
-@media only screen and (max-width: 1543px) {
-    .modal-container-options {
-        top: 10.1%;
-        width: 88.5%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.8% 100%);
-    }
-}
-@media only screen and (max-width: 1538px) {
-    .modal-container-options {
-        top: 10.1%;
-        width: 87%;
-    }
+/* Resto de tus estilos existentes */
+
+@media only screen and (max-width: 1200px) {
+  .modal-container-options {
+    width: 100%;
+  }
 }
 
-@media only screen and (max-width: 1444px) {
-    .modal-container-options {
-        width: 88.5%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.7% 100%);
-    }
-}
-@media only screen and (max-width: 1400px) {
-    .modal-container-options {
-        width: 91%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4.5% 100%);
-    }
-}
 @media only screen and (max-width: 1342px) {
     .modal-container-options {
-        width: 89%;
-        top: 9.1%;
+      top:85px
     }
-}
-@media only screen and (max-width: 1305px) {
+  }
+
+  @media only screen and (max-width: 1208px) {
     .modal-container-options {
-        width: 87.5%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4% 100%);
+      top:75px
     }
-}
-@media only screen and (max-width: 1296px) {
+  }
+  @media only screen and (max-width: 1193px) {
     .modal-container-options {
-        width: 88%;
+      top:70px
     }
-}
-@media only screen and (max-width: 1216px) {
+  }
+  @media only screen and (max-width: 1088px) {
     .modal-container-options {
-        width: 89.7%;
-        top: 8.1%;
+      top:61px;
     }
-}
-@media only screen and (max-width: 1208px) {
+  }
+
+@media only screen and (max-width: 993px) {
     .modal-container-options {
-        top: 7.9%;
-    }
-}
-@media only screen and (max-width: 1194px) {
-    .modal-container-options {
-        width: 90.5%;
-        top: 7.3%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.6% 100%);
-    }
-}
-@media only screen and (max-width: 1172px) {
-    .modal-container-options {
-        width: 89%;
-        top: 7.1%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3% 100%);
-    }
-}
-@media only screen and (max-width: 1148px) {
-    .modal-container-options {
-        width: 89%;
-        top: 7.1%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3% 100%);
-    }
-}
-@media only screen and (max-width: 1123px) {
-    .modal-container-options {
-        width: 91%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 3.6% 100%);
-    }
-}
-@media only screen and (max-width: 1095px) {
-    .modal-container-options {
-        width: 92.3%;
-        clip-path: polygon(6.2% 0, 100% 0, 100% 100%, 4.5% 100%);
-    }
-}
-@media only screen and (max-width: 1088px) {
-    .modal-container-options {
-        top: 6%;
-    }
-}
-@media only screen and (max-width: 1020px) {
-    .modal-container-options {
-        top: 6.4%;
-    }
-    .container-options{
-        font-size: 10px;
-    }
-}
-@media only screen and (max-width: 992px) {
-    .modal-container-options {
-        top: 5.5%;
-        width: 94%;
-    }
-    .container-options{
-        font-size: 10px;
-    }
-    .container-options > div > div {
-        font-size: 15px;
-    }
-}
-@media only screen and (max-width: 966px) {
-    .modal-container-options {
-        width: 96%;
-    }
-}
-@media only screen and (max-width: 946px) {
-    .modal-container-options {
-        width: 91.5%;
-    }
-}
-@media only screen and (max-width: 936px) {
-    .modal-container-options {
-        width: 95%;
-    }
-}
-@media only screen and (max-width: 922px) {
-    .modal-container-options {
-        width: 97%;
-    }
-}
-@media only screen and (max-width: 902px) {
-    .modal-container-options {
-        width: 94%;
-    }
-    .container-options{
-        font-size: 9px;
-    }
-    .container-options > div {
-        font-size: 2px;
-    }
-}
-@media only screen and (max-width: 888px) {
-    .modal-container-options {
-        width: 95%;
-    }
-    .container-options{
-        font-size: 9px;
-    }
-    .container-options > div {
-        font-size: 2px;
-    }
+        top:58px;
+      }
 }

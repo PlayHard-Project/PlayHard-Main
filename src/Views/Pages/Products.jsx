@@ -18,7 +18,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
 
   const fetchProducts = async () => {
     try {
-      const newProducts = await getElementsLazyLoading('/products', page);
+      const newProducts = await getElementsLazyLoading('products/available-products', page);
       setProducts(newProducts);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -43,10 +43,6 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
       />
     )
   );
-
-  console.log("Page ",{page})
-  console.log("Content:",{content})
-  console.log("Products:",{products})
 
   /**
  * Renders a loading component when there are no products available.

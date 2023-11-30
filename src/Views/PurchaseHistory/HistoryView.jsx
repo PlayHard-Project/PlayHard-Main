@@ -65,7 +65,10 @@ const ShoppingHistory = () => {
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
             wrapperClassName="datepicker-wrapper"
+            maxDate={new Date()}
+            onKeyDown={(e) => e.preventDefault()}
           />
+
           <button
             className="clear-filter-button"
             onClick={handleClearDate}

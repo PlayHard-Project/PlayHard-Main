@@ -7,8 +7,26 @@ import BrandsSection from "../HomePageSections/BrandsSection";
 import ForCategorySection from "../HomePageSections/ForCategorySection";
 import CategoryHomeSection from "../HomePageSections/CategoryHomeSection";
 import OffersSection from '../HomePageSections/OffersSection';
+import {ProductButtonsD} from '../Pages/DeleteButtonsPayments';
 
 export default function Home() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const handleGetProductsClick = () => {
+        setLoading(true);
+
+        getElements('/products')
+            .then((data) => {
+                setProducts(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error al obtener los productos:', error);
+                setLoading(false);
+            });
+    };
+
     return (
         <div className="App container">
             <section>

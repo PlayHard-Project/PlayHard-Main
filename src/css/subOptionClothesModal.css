@@ -33,23 +33,21 @@
     color: #72a3ff;
 }
 
-@media only screen and (max-width: 1339px) {
+@media only screen and (max-width: 1342px) {
     .modal-content-suboptions {
         top: 33%;
+        left: 15%;
     }
 }
 @media only screen and (max-width: 1208px) {
     .modal-content-suboptions {
-        top: 32%;
-    }
-}
-@media only screen and (max-width: 1087px) {
-    .modal-content-suboptions {
         top: 31%;
+        left: 15%;
     }
 }
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1084px) {
     .modal-content-suboptions {
-        top: 30%;
+        top: 29%;
+        left: 15%;
     }
 }

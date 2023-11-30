@@ -11,7 +11,7 @@ export default function Recommendations() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getElements("products/available-products")
+    getElements("/products")
       .then((data) => {
         setProducts(data);
       })
@@ -83,7 +83,7 @@ export default function Recommendations() {
     return (
         <div
             className={
-              "flex flex-col items-center justify-center p-3 gap-16 min-h-screen"
+              "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
             }
         >
           {/* Display a loading spinner with the specified color */}

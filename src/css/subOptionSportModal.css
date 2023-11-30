@@ -1,6 +1,6 @@
 .modal-content-suboptions-sport {
     position: fixed;
-    top: 36%;
+    top: 35.5%;
     left:87%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -15,22 +15,17 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media only screen and (max-width: 1339px) {
-    .modal-content-suboptions-sport {
-        top: 35%;
-    }
-}
-@media only screen and (max-width: 1208px) {
+@media only screen and (max-width: 1342px) {
     .modal-content-suboptions-sport {
         top: 34%;
     }
 }
-@media only screen and (max-width: 1087px) {
+@media only screen and (max-width: 1208px) {
     .modal-content-suboptions-sport {
         top: 33%;
     }
 }
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1084px) {
     .modal-content-suboptions-sport {
         top: 32%;
     }

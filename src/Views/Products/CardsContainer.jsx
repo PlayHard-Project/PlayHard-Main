@@ -1,26 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "../../css/CardsContainer.css";
 
-const CardsContainer = ({ content, pages, setPage }) => {
-    const [activePage, setActivePage] = useState(1);
-    const handleClick = (index) => {
-        setPage(index)
-        setActivePage(index);
-    }
-
-    const pageButtons = Array.from({ length: pages }, (_, index) => (
-        <button key={index + 1} className={`pageButton ${activePage === index + 1 ? 'active' : ''}`} onClick={() => handleClick(index + 1)}>{index + 1}</button>
-    ));
-
+const CardsContainer = ({ content }) => {
     return (
-        <div className="rightSide">
-            <section className="card-container">
-                {content}
-            </section>
-            <div className="pagePicker">
-                {pageButtons}
-            </div>
-        </div>
+        <section className="card-container">
+            {content}
+        </section>
     );
 };
 

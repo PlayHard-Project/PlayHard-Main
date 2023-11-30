@@ -17,7 +17,7 @@ const PaymentStatus = ({ title, description, imageSrc, altText, isSuccess }) => 
               playhard.jala.support@gmail.com
             </a>
           </p>
-          <Link to={"/"}>
+          <Link to={"/home"}>
             <button
               className="sc-btn"
               style={{ background: buttonColor }}

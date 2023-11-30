@@ -1,32 +1,16 @@
 import React from "react";
 import "../../css/Footer.css";
-import { Link } from "react-router-dom";
 
-/**
- * Footer Component
- * 
- * This component represents the footer section of the website, containing links, company information,
- * location details, and social media icons.
- */
 const Footer = () => {
-  /**
-   * Redirects the user to the Facebook page.
-   */
   const redirectToFacebook = () => {
     window.location.href =
       "https://www.facebook.com/profile.php?id=61553708216693&mibextid=ZbWKwL";
   };
 
-  /**
-   * Redirects the user to the Instagram page.
-   */
   const redirectToInstagram = () => {
     window.location.href = "https://www.instagram.com/playhard_store_isc4/";
   };
 
-  /**
-   * Redirects the user to the X page.
-   */
   const redirectToX = () => {
     window.location.href =
       "https://x.com/JalaPlayhard?t=5I1od4ItcbSm6jxte-DWdQ&s=09";
@@ -36,48 +20,43 @@ const Footer = () => {
     <footer className="footer container">
       <div className="footer-right">
         <div className="footer-column">
-          <h1 className="footer-title">Get Started</h1>
+          <h4 className="footer-title">Get Started</h4>
           <ul className="footer-links">
-            <div>
-              <Link to="/" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
-                Home
-              </Link>
-            </div>
-            <div>
-              <Link to="/sign-up" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
-                Sign Up
-              </Link>
-            </div>
-            <div>
-              <Link to="/products" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
-                Catalogue
-             </Link>
-            </div>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Sign Up</a>
+            </li>
+            <li>
+              <a href="#">Catalogue</a>
+            </li>
           </ul>
         </div>
         <div className="footer-column">
-          <h1 className="footer-title">About Us</h1>
+          <h4 className="footer-title">About Us</h4>
           <ul className="footer-links">
             <li>
               <a href="#">Company information</a>
             </li>
-            <div>
-              <Link to="/contact" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
-                Contact Us
-             </Link>
-            </div>
+            <li>
+              <a href="#">Contact us</a>
+            </li>
+            <li>
+              <a href="#">Reviews</a>
+            </li>
           </ul>
         </div>
         <div className="footer-column">
-          <h1 className="footer-title">Location</h1>
+          <h4 className="footer-title">Location</h4>
           <ul className="footer-links">
             <li>
-              <a href="https://maps.app.goo.gl/YTQ4P8mfNTJneXpG9" target="_blank">69 Melchor Perez St. Cochabamba, Bolivia</a>
+              <a href="#">69 Melchor Perez St. Cochabamba, Bolivia</a>
             </li>
           </ul>
-          <div className="footer-column">
-            <h1 className="footer-title">Follow Us </h1>
-          </div>
+          <h4 className="footer-column">
+            <h4 className="footer-title">Follow Us </h4>
+          </h4>
           <div className="social-networks">
             <img
               className="social-icon"

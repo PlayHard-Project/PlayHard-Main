@@ -2,37 +2,38 @@
 import React, { useState } from "react";
 import { MdToggleOff, MdToggleOn } from "react-icons/md";
 import "../../css/SettingView.css";
+import useLocalStorage from "../../Utilities/useLocalStorage";
 
 const SettingView = () => {
-  const [isActive, setIsActive] = useState(true);
-  const [isActiveMarketing, setIsActiveMarketing] = useState(false);
-  const image =
-    "https://res.cloudinary.com/playhardimages/image/upload/v1701149379/sjqmzsjnhdsovluojlgw.png";
+  const [isActiveMarketing, setIsActiveMarketing] = useState(true);
+  const [isActiveInvoice, setIsActiveInvoice] = useState(true);
+  const image = "https://res.cloudinary.com/playhardimages/image/upload/v1701149379/sjqmzsjnhdsovluojlgw.png";
 
-  const handleToggle = () => {
-    setIsActive(!isActive);
+  const handleToggleSendInvoiceEmail = () => {
+    setIsActiveInvoice(!isActiveInvoice);
   };
 
-  const handleToggleMarketingEmail = () => {
+  const handleToggleSendMarketingEmail = () => {
     setIsActiveMarketing(!isActiveMarketing);
   };
 
+  const [storedValue, setStoredValue] = useLocalStorage('sendEmailSettings', false);
+
   return (
-    <div className="container md:flex" style={{height:'930px'}}>
+    <div className="container md:flex" style={{ height: '930px' }}>
       <div className="container-settings">
         <div className="text-container">
           <div className="setting-title">Settings</div>
           <div className="setting-item">
             <span className="span-style">Sent invoice to email: </span>
             <button
-              onClick={handleToggle}
-              className={`toggle-button ${isActive ? "active" : "inactive"}`}
+              onClick={handleToggleSendInvoiceEmail}
+              className={`toggle-button ${storedValue === true ? "active" : "inactive"}`}
             >
-              {console.log(isActive)}
-              {isActive ? (
-                <MdToggleOn className="toggle-icon" />
+              {storedValue === true ? (
+                <MdToggleOn className="toggle-icon" onClick={() => setStoredValue(false)} />
               ) : (
-                <MdToggleOff className="toggle-icon" />
+                <MdToggleOff className="toggle-icon" onClick={() => setStoredValue(true)} />
               )}
             </button>
           </div>
@@ -40,10 +41,8 @@ const SettingView = () => {
           <div className="setting-item">
             <span className="span-style">Receive marketing emails: </span>
             <button
-              onClick={handleToggleMarketingEmail}
-              className={`toggle-button ${
-                isActiveMarketing ? "active" : "inactive"
-              }`}
+              onClick={handleToggleSendMarketingEmail}
+              className={`toggle-button ${isActiveMarketing ? "active" : "inactive"}`}
             >
               {isActiveMarketing ? (
                 <MdToggleOn className="toggle-icon" />
@@ -54,7 +53,7 @@ const SettingView = () => {
           </div>
         </div>
         <div className="hidden lg:block">
-          <img src={image} alt="image" className="centered-image" />
+          <img src={image} alt="cover.png" className="centered-image" />
         </div>
       </div>
     </div>

@@ -4,16 +4,15 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
   {
+    orderCount: {
+      type: Number,
+      required: true,
+    },
     userId: {
       type: String,
       ref: "User",
       required: true,
     },
-    isAvailableEmail: {
-      type: Boolean,
-      required: true,
-      default: true,
-    }, 
     customerId: {
       type: String,
     },

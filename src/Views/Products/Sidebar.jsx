@@ -1,25 +1,22 @@
 import "../../css/Sidebar.css";
-import {useEffect, useState} from "react";
-import { genderData } from "../../Components/Objects/FiltersByGender";
-import { ageGroupData } from "../../Components/Objects/FiltersByAge";
+import { useEffect, useState } from "react";
+import { targetData } from "../../Components/Objects/FiltersByTarget";
 import { sportData } from "../../Components/Objects/FiltersBySport";
 import { categoriesData } from "../../Components/Objects/FiltersByCategories";
 import { SlArrowRight } from "react-icons/sl";
 import { SlArrowDown } from "react-icons/sl";
-import {getTrackBackground, Range} from 'react-range';
-import {getElements} from "../../Components/ApiRestHandler/requestHandler";
+import { Range } from 'react-range';
+import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 
 const Sidebar = ({setParams, query}) => {
     const [brandsData, setBrandsData] = useState([]);
 
-    const [genderFilterDisplayed, setGenderFilterDisplayed] = useState(false);
-    const [ageGroupFilterDisplayed, setAgeGroupFilterDisplayed] = useState(false);
+    const [targetFilterDisplayed, setTargetFilterDisplayed] = useState(false);
     const [sportFilterDisplayed, setSportFilterDisplayed] = useState(false);
     const [categoriesFilterDisplayed, setCategoriesFilterDisplayed] = useState(false);
     const [brandsFilterDisplayed, setBrandsFilterDisplayed] = useState(false);
 
-    const [selectedGenders, setSelectedGenders] = useState([]);
-    const [selectedAgeGroups, setSelectedAgeGroups] = useState([]);
+    const [selectedTarget, setSelectedTarget] = useState([]);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedBrands, setSelectedBrands] = useState([]);
@@ -27,6 +24,7 @@ const Sidebar = ({setParams, query}) => {
     const [maxPrice, setMaxPrice] = useState(500);
 
     const [state, setState] = useState({values: [0, 500]});
+    const [firstLoad, setFirstLoad] = useState(true);
     const currency = "$"
 
     useEffect(() => {
@@ -46,7 +44,7 @@ const Sidebar = ({setParams, query}) => {
                         setSelectedBrands([value]);
                         break;
                     case "target":
-                        setSelectedAgeGroups([value]);
+                        setSelectedTarget([value]);
                         break;
                     case "categories":
                         setSelectedCategories([value]);
@@ -56,32 +54,35 @@ const Sidebar = ({setParams, query}) => {
                 }
             }
         }
-    }, [query]);
+    }, []);
 
     useEffect(() => {
         buildQuery();
-    }, [selectedGenders, selectedAgeGroups, selectedSports, selectedCategories, selectedBrands, minPrice, maxPrice]);
+    }, [selectedTarget, selectedSports, selectedCategories, selectedBrands, minPrice, maxPrice]);
 
     const buildQuery = () => {
-        if (selectedGenders.length !== 0
-            || selectedAgeGroups !== 0
-            || selectedBrands !== 0
-            || selectedSports !== 0
-            || selectedCategories !== 0) {
-            const builtQuery = {
-                target: [...selectedGenders, ...selectedAgeGroups],
-                brand: selectedBrands,
-                sport: selectedSports,
-                categories: selectedCategories,
-                minPrice: minPrice,
-                maxValue: maxPrice
-            };
-            setParams(builtQuery)
+        if (!firstLoad) {
+            if (selectedTarget.length !== 0
+                || selectedBrands !== 0
+                || selectedSports !== 0
+                || selectedCategories !== 0 || minPrice !== 0 || maxPrice !== 500) {
+                const builtQuery = {
+                    target: selectedTarget,
+                    brand: selectedBrands,
+                    sport: selectedSports,
+                    categories: selectedCategories,
+                    minPrice: minPrice,
+                    maxValue: maxPrice
+                };
+                setParams(builtQuery)
+            }
+        } else {
+            setFirstLoad(false)
         }
     }
 
-    const displayGenderMenu = () => {
-        setGenderFilterDisplayed(!genderFilterDisplayed);
+    const displayTargetMenu = () => {
+        setTargetFilterDisplayed(!targetFilterDisplayed);
     }
 
     const handleCheckboxChange = (selectedValue, setSelectedFunction, selectedArray) => {
@@ -93,10 +94,6 @@ const Sidebar = ({setParams, query}) => {
             setSelectedFunction((prevSelected) => [...prevSelected, selectedValue]);
         }
     };
-
-    const displayAgeGroupMenu = () => {
-        setAgeGroupFilterDisplayed(!ageGroupFilterDisplayed);
-    }
 
     const displaySportsMenu = () => {
         setSportFilterDisplayed(!sportFilterDisplayed);
@@ -116,28 +113,17 @@ const Sidebar = ({setParams, query}) => {
                 <label className="main-title">Filtered By:</label>
                 <div className="filters">
                     <ul>
-                        <div className="title-filter" onClick={displayGenderMenu}>
-                            <label>Gender</label>
-                            {genderFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
+                        <div className="title-filter" onClick={displayTargetMenu}>
+                            <label>Target</label>
+                            {targetFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
                         </div>
-                        {genderData.map((gender) => (
-                            <li className={genderFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={gender.id} name={gender.id} value={gender.label} type="checkbox"
-                                       onChange={() => handleCheckboxChange(gender.label, setSelectedGenders, selectedGenders)}/>
-                                <label htmlFor={gender.id}>{gender.label}</label>
-                            </li>
-                        ))}
-                    </ul>
-                    <ul>
-                        <div className="title-filter" onClick={displayAgeGroupMenu}>
-                            <label>Age Group</label>
-                            {ageGroupFilterDisplayed ? <SlArrowDown /> : <SlArrowRight />}
-                        </div>
-                        {ageGroupData.map((ageGroup) => (
-                            <li className={ageGroupFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={ageGroup.id} name={ageGroup.id} value={ageGroup.label} type="checkbox"
-                                       onChange={() => handleCheckboxChange(ageGroup.label, setSelectedAgeGroups, selectedAgeGroups)}/>
-                                <label htmlFor={ageGroup.id}>{ageGroup.label}</label>
+                        {targetData.map((target) => (
+                            <li className={targetFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
+                                <input id={target.id} name={target.id} value={target.label} type="checkbox"
+                                       onChange={() => handleCheckboxChange(target.label, setSelectedTarget, selectedTarget)}
+                                       checked={selectedTarget.includes(target.label)}
+                                />
+                                <label htmlFor={target.id}>{target.label}</label>
                             </li>
                         ))}
                     </ul>
@@ -149,7 +135,9 @@ const Sidebar = ({setParams, query}) => {
                         {sportData.map((sport) => (
                             <li className={sportFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={sport.id} name={sport.id} value={sport.label} type="checkbox"
-                                       onChange={() => handleCheckboxChange(sport.label, setSelectedSports, selectedSports)}/>
+                                       onChange={() => handleCheckboxChange(sport.label, setSelectedSports, selectedSports)}
+                                       checked={selectedSports.includes(sport.label)}
+                                />
                                 <label htmlFor={sport.id}>{sport.label}</label>
                             </li>
                         ))}
@@ -162,7 +150,8 @@ const Sidebar = ({setParams, query}) => {
                         {categoriesData.map((category) => (
                             <li className={categoriesFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={category.id} name={category.id} value={category.label} type="checkbox"
-                                       onChange={() => handleCheckboxChange(category.label, setSelectedCategories, selectedCategories)}/>
+                                       onChange={() => handleCheckboxChange(category.label, setSelectedCategories, selectedCategories)}
+                                       checked={selectedCategories.includes(category.label)}/>
                                 <label htmlFor={category.id}>{category.label}</label>
                             </li>
                         ))}

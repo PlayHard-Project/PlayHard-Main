@@ -24,24 +24,31 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const [pageLimit, setPageLimit] = useState(1);
 
   useEffect(() => {
+      console.log("AL INICIO");
     fetchProducts();
   }, []);
 
   useEffect(() => {
+      console.log("Cuando se actualiza una pagina")
       if (page !== 1) {
           fetchProducts();
       }
   }, [page]);
 
-    useEffect(() => {
-        setPage(1);
-        fetchProducts();
-    }, [params]);
+  useEffect(() => {
+      console.log("cuando se actualiza el parametro")
+      setPage(1);
+      if (params !== {}) {
+          fetchProducts();
+      }
+  }, [params]);
+
 
   const fetchProducts = async () => {
     try {
       const response = await getFilteredElementsLazyLoading('/products', params, page);
       setProducts(response.data);
+      console.log(response.totalPages);
       if (pageLimit !== response.totalPages) {
           setPageLimit(response.totalPages);
       }

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "../../css/LogIn/logInStyle.css";
 
 const Login = () => {
-  const apiBackend = process.env.URL_BACKEND;
+  const apiBackend = 'https://backend-fullapirest.onrender.com/api';
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -85,9 +85,11 @@ const Login = () => {
       return;
     }
 
+    console.log('JSON a enviar:', JSON.stringify({ email, password }));
+
     // POST request with the email and password to the backend
     try {
-      const response = await fetch(apiBackend+"/sign-in", {
+      const response = await fetch(apiBackend+'/sign-in', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,6 +100,7 @@ const Login = () => {
         }),
       });
 
+      // Here throws it is not valid JSON
       const responseData = await response.json();
 
       if (responseData.error) {

@@ -3,16 +3,31 @@ import axios from 'axios';
 const apiURL = process.env.REACT_APP_BRANCH === 'test' ? 'https://backend-fullapirest-test.onrender.com/api/' : 'https://backend-fullapirest.onrender.com/api/';
 console.log(process.env.REACT_APP_BRANCH);
 
-
+/**
+ * Adds a new element to the server by making a POST request to the specified route.
+ * 
+ * @param {Object} newElement - The new element to be added.
+ * @param {string} route - The API route where the new element will be added.
+ * @returns {Promise} A promise that resolves to the response data from the server.
+ * @throws Will throw an error if there is an issue adding the new element.
+ */
 export const addElement = async (newElement, route) => {
   try {
     const response = await axios.post(apiURL + route, newElement);
     return response.data;
   } catch (error) {
     console.error('Error adding the new element: ', error);
-    throw error; 
+    throw error;
   }
 };
+
+/**
+ * Retrieves all elements from the server by making a GET request to the specified route.
+ * 
+ * @param {string} route - The API route from which to retrieve all elements.
+ * @returns {Promise} A promise that resolves to the response data containing all elements.
+ * @throws Will throw an error if there is an issue retrieving all elements.
+ */
 
 export const getElements = async (route) => {
   try {
@@ -20,7 +35,49 @@ export const getElements = async (route) => {
     return response.data;
   } catch (error) {
     console.error('Error getting all elements: ', error);
-    throw error; 
+    throw error;
+  }
+};
+
+/**
+ * Performs a filtered retrieval of elements from a specific route based on the provided parameters.
+ *
+ * @async
+ * @function
+ * @param {string} route - The route on which to perform the filtered retrieval.
+ * @param {Object} params - The parameters used for filtering the elements.
+ * @param {string[]} params.size - An array of sizes for filtering.
+ * @param {string[]} params.target - An array of target demographics for filtering.
+ * @param {string[]} params.sport - An array of sports for filtering.
+ * @param {string[]} params.brand - An array of brands for filtering.
+ * @param {string[]} params.categories - An array of categories for filtering.
+ * @param {number} params.minPrice - The minimum price for filtering.
+ * @param {number} params.maxPrice - The maximum price for filtering.
+ * @returns {Promise<Array>} A promise that resolves with the filtered elements.
+ * @throws {Error} Throws an error if there is an issue performing the filtered retrieval or if no products are found.
+ * **/
+export const getFilteredElements = async (route, params) => {
+  try {
+    const queryString = Object.keys(params)
+      .map(key => {
+        if (Array.isArray(params[key])) {
+          return `${key}=${params[key].join(',')}`;
+        } else {
+          return `${key}=${params[key]}`;
+        }
+      })
+      .join('&');
+    console.log(`${apiURL}${route}?${queryString}`)
+    const response = await axios.get(`${apiURL}${route}?${queryString}`);
+
+    if (response.data.length === 0) {
+      throw new Error('No products found with the specified filters');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error getting filtered elements: ', error);
+    throw error;
   }
 };
 
@@ -50,7 +107,7 @@ export const getElementByID = async (elemenetId, route) => {
     return response.data;
   } catch (error) {
     console.error('Error getting the specified element: ', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -61,7 +118,7 @@ export const updateElement = async (elementToUpdate, route) => {
     return response.data;
   } catch (error) {
     console.error('Error updating the element: ', error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -71,7 +128,7 @@ export const removeElement = async (productId, route) => {
     return response.data;
   } catch (error) {
     console.error('Error removing product:', error);
-    throw error; 
+    throw error;
   }
 };
 

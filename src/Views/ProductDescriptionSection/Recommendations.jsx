@@ -11,7 +11,7 @@ export default function Recommendations() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getElements("/products")
+    getElements("products/available-products")
       .then((data) => {
         setProducts(data);
       })

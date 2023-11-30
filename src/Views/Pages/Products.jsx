@@ -18,7 +18,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
 
   const fetchProducts = async () => {
     try {
-      const newProducts = await getElementsLazyLoading('/products', page);
+      const newProducts = await getElementsLazyLoading('products/available-products', page);
       setProducts(newProducts);
     } catch (error) {
       console.error('Error fetching products:', error);

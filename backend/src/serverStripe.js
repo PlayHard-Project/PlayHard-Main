@@ -84,8 +84,8 @@ const configureAppImplementingStripeServer = (app) => {
         mode: "payment",
         customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-main.vercel.app/success-payment-status",
-        cancel_url: "https://play-hard-main.vercel.app/fail-payment-status",
+        success_url: "https://play-hard-dev.vercel.app/success-payment-status",
+        cancel_url: "https://play-hard-dev.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
       res.json({ id: session.id });
@@ -118,11 +118,18 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const saveOrder = await newOrder.save();
-      console.log("Processed Order: ", saveOrder);
-      console.log(customer.isAvailableEmail);
-      if (customer.isAvailableEmail === "true") {
-        console.log("passed");
+      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newOrder),
+      });
+
+      if (respuesta.ok && customer.metadata.isAvailableEmail === "true") {
+        const saveOrder = await respuesta.json();
+        console.log("Orden procesada:", saveOrder);
+
         const myInvoice = new Invoice();
         const htmlFile = await myInvoice.generateHTML();
         try {
@@ -131,13 +138,17 @@ const configureAppImplementingStripeServer = (app) => {
             "Confirmación de Orden",
             htmlFile
           );
-          console.log("Email sent successfully");
         } catch (error) {
-          console.error("Error sending email:", error.message);
+          console.error(
+            "Error sending the email:",
+            error.message
+          );
         }
+      } else {
+        console.error("Error when creating the order:", respuesta.statusText);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error when making the request:", error.message);
     }
   };
 

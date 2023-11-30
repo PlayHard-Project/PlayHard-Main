@@ -4,6 +4,11 @@
   justify-content: space-between;
 }
 
+.header-text {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 .header-1 h1 {
   font-size: 3rem;
   font-weight: bold;
@@ -23,7 +28,7 @@
 }
 
 .datepicker-container {
-  padding-top: 74px;
+  padding-top: 84px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -64,7 +69,20 @@
   text-align: center;
 }
 
+.text-container2 {
+  margin-top: 5px;
+}
+
 @media (max-width: 670px) {
+  .text-container2 {
+    margin-top: 12px;
+  }
+
+  .header-text {
+    padding-top: 0px;
+    padding-bottom: 5px;
+  }
+
   .header-1 {
     flex-direction: column;
     align-items: flex-start;
@@ -87,25 +105,25 @@
 }
 
 .no-history-icon {
-    width: 250px;
-    margin: 0 auto;
-  }
+  width: 250px;
+  margin: 0 auto;
+}
 
 .no-history-message-container {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-  
-  .no-history-text {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
 
-  .title-no-p {
-    font-size: 2rem;
-    font-weight: bold;
-  }
+.no-history-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.title-no-p {
+  font-size: 2rem;
+  font-weight: bold;
+}

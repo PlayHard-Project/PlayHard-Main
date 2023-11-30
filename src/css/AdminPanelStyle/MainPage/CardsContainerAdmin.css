@@ -48,7 +48,7 @@ Container for each card in the administration area.
   
   .card-buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     padding-top: 20px;
     padding-bottom: 30px;
     background-color: #fff;

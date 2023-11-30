@@ -12,7 +12,7 @@ const CartComponent = ({ productFromOrder, color }) => {
     const fetchOrder = async () => {
       setLoading(true);
       try {
-        const orderC = await getElementByID(productFromOrder.id, "/products");
+        const orderC = await getElementByID(productFromOrder.id, "products");
         setProduct(orderC);
       } catch (e) {
         setError(true);
@@ -26,9 +26,13 @@ const CartComponent = ({ productFromOrder, color }) => {
   return (
     <>
       {loading ? (
-      <div className= {"flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"}>
-        <GridLoader color="#023fc5" />
-      </div>
+        <div
+          className={
+            "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+          }
+        >
+          <GridLoader color="#023fc5" />
+        </div>
       ) : (
         <div className="product-container" key={productFromOrder._id}>
           <section className="image-section">

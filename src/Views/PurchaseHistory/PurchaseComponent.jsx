@@ -73,9 +73,9 @@ export default function PurchaseComponent({ idOrder, indexOrder }) {
               scrollContainerVisible ? "expanded" : ""
             }`}
           >
-            {order.products.map((productFromOrder) => (
+            {order.products.map((productFromOrder, index) => (
               <CartComponent
-                key={order.paymentIntentId + productFromOrder.color}
+                key={index}
                 productFromOrder={productFromOrder}
                 color={productFromOrder.color}
               />

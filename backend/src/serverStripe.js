@@ -29,7 +29,7 @@ const configureAppImplementingStripeServer = (app) => {
   const fetchProductDetails = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:9000/api/products/${productId}`
+        `https://backend-fullapirest.onrender.com/api/products/${productId}`
       );
       const product = await response.json();
       return product;

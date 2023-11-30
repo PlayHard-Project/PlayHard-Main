@@ -79,7 +79,6 @@ const configureAppImplementingStripeServer = (app) => {
       );
 
       console.log("customer: " + customer.id);
-      console.log("customer: " + customer.metadata.isAvailableEmail);
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -133,7 +132,7 @@ const configureAppImplementingStripeServer = (app) => {
       if (respuesta.ok) {
         const saveOrder = await respuesta.json();
 
-        if (customer.metadata.isAvailableEmail === "true") {
+        if (customer.metadata.isAvailableEmail === "t") {
           const myInvoice = new Invoice();
           const htmlFile = await myInvoice.generateHTML();
           try {

@@ -15,7 +15,7 @@ import { SlArrowRight } from "react-icons/sl";
 import CategoriesPopup from "../HeaderOptions/CategoriesPopup";
 import { SlArrowDown } from "react-icons/sl";
 import SearchBar from "../../Utilities/SearchBar/SearchBar";
-import { isLoggedIn, isUserAdmin } from "../../Utilities/auth";
+import { getUsername, isLoggedIn, isUserAdmin } from "../../Utilities/auth";
 
 /**
  * Header component for the website.
@@ -185,8 +185,14 @@ const Header = ({
   }
   }
 
-  const paths = handleAdminPermissions();
+  const getInitials = (name) => {
+    return name
+      .split(" ")
+      .map((part) => part.charAt(0).toUpperCase())
+      .join("");
+  };
 
+  const paths = handleAdminPermissions();
   const modalRef = useRef();
   const modalOptionsRef = useRef();
   const modalAdminRef = useRef();
@@ -243,8 +249,7 @@ const Header = ({
           >
             {isLoggedIn() ? (
               <div className="small-profile">
-              {localStorage.getItem("token") &&
-                localStorage.getItem("token").charAt(0).toUpperCase()}
+              {getInitials(getUsername())}
             </div>
               
             ) : (

@@ -54,6 +54,7 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
       setProducts={setProducts}
       setCartItemsQuantity={setCartItemsQuantity}
       setSubTotal={setSubTotal}
+      _id={product._id}
     />
   ));
 

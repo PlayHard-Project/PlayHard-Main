@@ -13,6 +13,7 @@ const CardAdmin = ({
   setCartItemsQuantity,
   setSubTotal,
   setProducts,
+    _id
 }) => {
   const buyCartManagement = new BuyCartManagement();
   const titleRef = useRef();
@@ -87,14 +88,19 @@ const CardAdmin = ({
             </div>
           </div>
         </div>
+        <div className="card-buttons">
+          <button className="edit-button flex items-center justify-center">
+            <Link to={`/admin/add-product/${_id}`}>
+              <div className={'flex items-center justify-center'}>
+                <FaEdit className={'flex'} color="white" />
+                <p>Edit</p>
+              </div>
+            </Link>
+          </button>
+            <div className="delete-button" onClick={deleteProduct}>
+                <RiDeleteBin6Line color="white" /> Delete
+            </div>
       </div>
-      <div className="card-buttons">
-        <div className="edit-button">
-          <FaEdit color="white" /> Edit
-        </div>
-        <div className="delete-button" onClick={deleteProduct}>
-          <RiDeleteBin6Line color="white" /> Delete
-        </div>
       </div>
     </div>
   );

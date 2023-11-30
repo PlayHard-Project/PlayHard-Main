@@ -114,7 +114,7 @@ export const getElementByID = async (elemenetId, route) => {
 export const updateElement = async (elementToUpdate, route) => {
   try {
     console.log(apiURL + route, elementToUpdate._id);
-    const response = await axios.put(apiURL + route + elementToUpdate._id, elementToUpdate);
+    const response = await axios.put(apiURL + route + '/' + elementToUpdate._id, elementToUpdate);
     return response.data;
   } catch (error) {
     console.error('Error updating the element: ', error);

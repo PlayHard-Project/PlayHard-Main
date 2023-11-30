@@ -74,7 +74,8 @@ export default function App() {
                 <Route path="/notImplementedYet" element={<NotImplementedYet />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/history" element={<HistoryView />} />
-                <Route path="/admin/add-product" element={<AddProduct/>} />
+                <Route path="/admin/add-product/:id" element={<AddProduct isEditMode={true} />} />
+                <Route path="/admin/add-product" element={<AddProduct isEditMode={false} />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />

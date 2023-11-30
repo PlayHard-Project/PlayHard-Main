@@ -1,6 +1,6 @@
 .modal-content-suboptions {
     position: fixed;
-    top: 34%;
+    top: 31%;
     left: 15%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -33,21 +33,23 @@
     color: #72a3ff;
 }
 
-@media only screen and (max-width: 1342px) {
+@media only screen and (max-width: 1339px) {
     .modal-content-suboptions {
-        top: 33%;
-        left: 15%;
+        top: 30%;
     }
 }
 @media only screen and (max-width: 1208px) {
     .modal-content-suboptions {
-        top: 31%;
-        left: 15%;
+        top: 29%;
     }
 }
-@media only screen and (max-width: 1084px) {
+@media only screen and (max-width: 1087px) {
     .modal-content-suboptions {
-        top: 29%;
-        left: 15%;
+        top: 28%;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .modal-content-suboptions {
+        top: 27%;
     }
 }

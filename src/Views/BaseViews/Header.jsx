@@ -172,7 +172,6 @@ const Header = ({
       { link: "/", title: "Home" },
       { link: "/about", title: "About Us" },
       { link: "/products", title: "Products" },
-      { link: "/contact", title: "Contact Us" },
       { link: "/admin", title: "Admin" },
     ];
   }else if((isLoggedIn() && !isUserAdmin())||(!isLoggedIn())){

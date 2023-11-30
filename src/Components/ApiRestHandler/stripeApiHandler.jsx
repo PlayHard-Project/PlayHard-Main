@@ -3,13 +3,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import "../../css/CartShop.css";
 import { getUserID } from "../../Utilities/auth";
+import useLocalStorage from "../../Utilities/useLocalStorage";
 
 export default function GoToCheckout({ disabled }) {
   const idUser = getUserID();
   const [products, setProducts] = useState([]);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const buyCartManager = new BuyCartManagement();
-  const [isActive] = localStorage.getItem("sendEmailSettings");
+  const [isActive] = useLocalStorage("sendEmailSettings", true);
 
   useEffect(() => {
     const fetchData = async () => {

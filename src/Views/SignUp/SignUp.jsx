@@ -153,7 +153,9 @@ const SignUp = () => {
       const responseData = await response.json();
 
       if (responseData.error) {
-        console.log(responseData.error);
+        toast.error(responseData.error, {
+          position: "bottom-right",
+        });
       } else {
         toast.success(`Sign Up successful for ${name}!`, {
           position: "bottom-right",

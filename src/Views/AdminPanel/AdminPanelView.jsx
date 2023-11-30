@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import CardsContainerAdmin from "./ProductsAdmin/CardsContainerAdmin";
 import CardAdmin from "./ProductsAdmin/CardAdmin";
 import { getElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
-import "../../css/Products.css";
-import { GridLoader } from "react-spinners";
+import '../../css/Products.css'
+import {GridLoader} from "react-spinners";
+import { isUserAdmin } from "../../Utilities/auth";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 /**
  * AdminPanelView Component
@@ -17,6 +19,7 @@ import { Link } from "react-router-dom";
  * @param {function} setSubTotal - A function to set the subtotal of the cart.
  */
 const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -27,6 +30,9 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   }, [page]);
 
   const fetchProducts = async () => {
+    if(!isUserAdmin()){
+      navigate("/");
+    }
     try {
       const newProducts = await getElementsLazyLoading(
         "products/available-products",

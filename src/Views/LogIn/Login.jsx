@@ -102,7 +102,6 @@ const Login = () => {
         }),
       });
 
-      // Here throws it is not valid JSON
       const responseData = await response.json();
 
       if (responseData.error) {

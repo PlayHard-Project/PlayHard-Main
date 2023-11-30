@@ -54,6 +54,7 @@ const configureAppImplementingStripeServer = (app) => {
       metadata: {
         userId: req.body.userId,
         products: JSON.stringify(req.body.products),
+        isAvailableEmail: req.body.isAvailableEmail,
       },
     });
 
@@ -76,8 +77,7 @@ const configureAppImplementingStripeServer = (app) => {
           };
         })
       );
-
-      console.log("customer: " + customer.id);
+      
       const session = await stripeGateway.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
@@ -117,31 +117,32 @@ const configureAppImplementingStripeServer = (app) => {
     });
 
     try {
-      const respuesta = await fetch("https://backend-fullapirest.onrender.com/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newOrder),
-      });
+      const respuesta = await fetch(
+        "https://backend-fullapirest.onrender.com/api/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newOrder),
+        }
+      );
 
       if (respuesta.ok) {
         const saveOrder = await respuesta.json();
-        console.log("Orden procesada:", saveOrder);
 
-        const myInvoice = new Invoice();
-        const htmlFile = await myInvoice.generateHTML();
-        try {
-          await sendMail(
-            saveOrder.userInformation.email,
-            "Confirmación de Orden",
-            htmlFile
-          );
-        } catch (error) {
-          console.error(
-            "Error sending the email:",
-            error.message
-          );
+        if (customer.metadata.isAvailableEmail == "true") {
+          const myInvoice = new Invoice();
+          const htmlFile = await myInvoice.generateHTML();
+          try {
+            await sendMail(
+              saveOrder.userInformation.email,
+              "Confirmación de Orden",
+              htmlFile
+            );
+          } catch (error) {
+            console.error("Error sending the email:", error.message);
+          }
         }
       } else {
         console.error("Error when creating the order:", respuesta.statusText);

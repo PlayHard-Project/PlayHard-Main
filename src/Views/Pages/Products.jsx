@@ -40,19 +40,14 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   };
 
   useEffect(() => {
-      console.log("AL INICIO");
     fetchProducts();
   }, []);
 
   useEffect(() => {
-      console.log("Cuando se actualiza una pagina")
-      if (page !== 1) {
-          fetchProducts();
-      }
+      fetchProducts();
   }, [page]);
 
   useEffect(() => {
-      console.log("cuando se actualiza el parametro")
       setPage(1);
       if (params !== {}) {
           fetchProducts();
@@ -62,7 +57,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await getFilteredElementsLazyLoading('/products', params, page);
+      const response = await getFilteredElementsLazyLoading('products/available-products', params, page);
       setProducts(response.data);
       console.log(response.totalPages);
       if (pageLimit !== response.totalPages) {

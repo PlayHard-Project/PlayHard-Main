@@ -3,7 +3,8 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PurchaseComponent from "./PurchaseComponent";
-import { FaRegTrashAlt, FaCalendarAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaCalendarAlt } from "react-icons/fa"
+import { getUserID, getUsername, getEmail } from "../../Utilities/auth";
 
 import "../../css/PurchaseHistory.css";
 
@@ -12,7 +13,7 @@ const ShoppingHistory = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [key, setKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false); 
-  const idUser = "123";
+  const idUser = getUserID();
 
   const handleFilterClick = async () => {
     try {
@@ -50,7 +51,10 @@ const ShoppingHistory = () => {
         <div className="header-text">
           <h1>Shopping History</h1>
           <h2>
-            User ID:<span>{idUser}</span>
+            Username:<span>{getUsername()}</span>
+          </h2>
+          <h2>
+            Email:<span>{getEmail()}</span>
           </h2>
         </div>
         <div className="datepicker-container">
@@ -61,7 +65,10 @@ const ShoppingHistory = () => {
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
             wrapperClassName="datepicker-wrapper"
+            maxDate={new Date()}
+            onKeyDown={(e) => e.preventDefault()}
           />
+
           <button
             className="clear-filter-button"
             onClick={handleClearDate}

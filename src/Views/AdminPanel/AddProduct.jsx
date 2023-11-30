@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import ProductForm from "./ProductForm";
-import { useNavigate  } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import SelectWithAddButton from "./SelectWithAddButton";
 import BrandsSelect from "./BrandsSelect";
 import "../../css/AdminPanelStyle/simpleDataComponentStyle.css";
 import "../../css/AdminPanelStyle/addProductStyle.css";
 import RightSide from "./Sides/RightSide";
-import {addElement} from "../../Components/ApiRestHandler/requestHandler";
+import {addElement, getElementByID, updateElement} from "../../Components/ApiRestHandler/requestHandler";
 
 
 /**
@@ -17,7 +17,8 @@ import {addElement} from "../../Components/ApiRestHandler/requestHandler";
  *
  * @component
  */
-const AddProduct = () => {
+const AddProduct = ({ isEditMode = false}) => {
+  const { id: productId } = useParams();
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [selectedBrand, setSelectedBrand] = useState('654c41ca1754c5a319281642');
@@ -35,10 +36,57 @@ const AddProduct = () => {
   const [stockInformation, setStockInformation] = useState([[]]);
   const navigate  = useNavigate ();
   const [isProductAdded, setIsProductAdded] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  const [colorInformationAux, setColorInformationAux] = useState([]);
+  const [sizeInformationAux, setSizeInformationAux] = useState([]);
+
+  const transformColorInformation = (colorInformation) => {
+    return colorInformation.map(colorInfo => ({
+      id: Math.random(), // Genera un ID aleatorio
+      color: colorInfo.color,
+      hex: colorInfo.hex,
+      imagePath: colorInfo.imagePath
+    }));
+  };
+
+  const transformSizeInformation = (sizeInformation) => {
+    return sizeInformation.map(size => ({
+      id: Math.random(),
+      size: size
+    }));
+  };
+
+  useEffect(() => {
+    if (isEditMode && productId) {
+      getElementByID(productId, '/products')
+          .then(product => {
+            const transformedColorInformation = transformColorInformation(product.colorInformation);
+            const transformedSizeInformation = transformSizeInformation(product.size);
+            setProductName(product.name);
+            setProductDescription(product.description);
+            setSelectedBrand(product.brand);
+            setPrice(product.price);
+            setSelectedCategories(product.categories);
+            setSelectedTarget(product.target);
+            setSelectedSports(product.sport);
+            setColorInformationAux(transformedColorInformation);
+            setSizeInformationAux(transformedSizeInformation);
+            setProductImages(product.imagePath);
+            setStockInformation(product.inStock);
+            setIsDataLoaded(true);
+          })
+          .catch(error => {
+            console.error('Error al obtener el producto: ', error);
+          });
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(isDataLoaded)
+  }, [isDataLoaded]);
 
 
-
-  //Validation for each input.
   const handleProductNameChange = (e) => {
     const inputValue = e.target.value;
     if (inputValue.length <= 35) {
@@ -67,8 +115,6 @@ const AddProduct = () => {
 
   const handlePriceChange = (e) => {
     const enteredValue = e.target.value;
-  
-    // Check if the entered value complies with the required format (up to two digits after the decimal point).
     if (/^\d+(\.\d{0,2})?$/.test(enteredValue) || enteredValue === "") {
       setPrice(enteredValue);
     } else {
@@ -92,10 +138,6 @@ const AddProduct = () => {
       e.preventDefault();
     }
   };
-
-  //validation of aselect more that 1 option.
-  //Add the option into selected options.
-  //Delete the option of selected options.
   
   const handleCategoryChange = (e) => {
     setCategoryInput(e.target.value);
@@ -184,62 +226,105 @@ const AddProduct = () => {
   const handleAddProductMessages = () => {
     const trimmedProductName = productName.trim();
     const trimmedProductDescription = productDescription.trim();
+
     if (trimmedProductName === "" || !trimmedProductName) {
       toast.error("Product name cannot be empty.", { position: "bottom-right", });
+      return false;
     } else if (trimmedProductDescription === "" || !trimmedProductDescription) {
       toast.error("Product description cannot be empty.", { position: "bottom-right", });
+      return false;
     } else if (selectedBrand === "") {
       toast.error("Please select a brand.", { position: "bottom-right", });
+      return false;
     } else if (price === "") {
       toast.error("Price cannot be empty.", { position: "bottom-right", });
+      return false;
     } else if (selectedCategories.length === 0) {
       toast.error("Please add at least one category.", { position: "bottom-right", });
+      return false;
     } else if (selectedTarget.length === 0) {
       toast.error("Please add at least one target.", { position: "bottom-right", });
+      return false;
     } else if (selectedSports.length === 0) {
       toast.error("Please add at least one sport.", { position: "bottom-right", });
+      return false;
     } else if (productImages.length === 0) {
       toast.error("Please add at least one product Image.", { position: "bottom-right", });
+      return false;
     } else if (colorInformation.length === 0) {
       toast.error("Please add at least one color and Image.", { position: "bottom-right", });
+      return false;
     } else if (sizeInformation.length === 0) {
       toast.error("Please add at least one size.", { position: "bottom-right", });
+      return false;
     } else if (stockInformation.length === 0) {
       toast.error("Please add at stock information.", { position: "bottom-right", });
-    } else {
-      toast.success("The product was added!",{position: "bottom-right"})
-      navigate("/");
-      setIsProductAdded(true);
+      return false;
+    }
+
+    return true;
+  }
+
+  const handleUpdateProduct = async () => {
+    if (handleAddProductMessages()) {
+      const product = {
+        _id: productId,
+        name: productName,
+        description: productDescription,
+        price: parseFloat(price),
+        brand: selectedBrandHarcode || null,
+        categories: selectedCategories,
+        target: selectedTarget,
+        sport: selectedSports,
+        size: sizeInformation.map(size => size.size),
+        colorInformation: colorInformation.map(color => ({
+          color: color.color,
+          hex: color.hex,
+          imagePath: color.imagePath
+        })),
+        imagePath: productImages,
+        inStock: stockInformation
+      };
+
+      try {
+        const response = await updateElement(product, 'products');
+        console.log(response);
+        navigate("/admin");
+      } catch (error) {
+        console.error('Error updating the product: ', error);
       }
     }
+  };
 
 
   const handleAddProduct = async () => {
-    const product = {
-      name: productName,
-      description: productDescription,
-      price: parseFloat(price),
-      brand: selectedBrandHarcode || null,
-      categories: selectedCategories,
-      target: selectedTarget,
-      sport: selectedSports,
-      size: sizeInformation.map(size => size.size),
-      colorInformation: colorInformation.map(color => ({
-        color: color.color,
-        hex: color.hex,
-        imagePath: color.imagePath
-      })),
-      imagePath: productImages,
-      inStock: stockInformation
-    };
+    if (handleAddProductMessages()) {
+      setIsProductAdded(true);
+      const product = {
+        name: productName,
+        description: productDescription,
+        price: parseFloat(price),
+        brand: selectedBrandHarcode || null,
+        categories: selectedCategories,
+        target: selectedTarget,
+        sport: selectedSports,
+        size: sizeInformation.map(size => size.size),
+        colorInformation: colorInformation.map(color => ({
+          color: color.color,
+          hex: color.hex,
+          imagePath: color.imagePath
+        })),
+        imagePath: productImages,
+        inStock: stockInformation
+      };
 
-    //HOLADIABLO
-
-    try {
-      const response = await addElement(product, '/products');
-      console.log(response);
-    } catch (error) {
-      console.error('Error adding the new product: ', error);
+      try {
+        const response = await addElement(product, '/products');
+        console.log(response);
+        navigate("/admin");
+      } catch (error) {
+        console.error('Error adding the new product: ', error);
+      }
     }
   };
 
@@ -252,12 +337,12 @@ const AddProduct = () => {
           marginTop: "13px",
         }}
       >
-        Add Product
+        {isEditMode ? 'Edit Product' : 'Add Product'}
       </div>
 
 
         <div className="flex flex-col lg:flex-row lg:gap-2 lg:pb-4 rounded p-3">
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 p-4 flex flex-col gap-3">
             <ProductForm
               label="Product Name"
               id="productName"
@@ -273,11 +358,13 @@ const AddProduct = () => {
               inputType="textarea"
               placeholder="Enter product description"
             />
-            <BrandsSelect
-              value={selectedBrand}
-              onChange={handleBrandChange}
-              options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
-            />
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <BrandsSelect
+                value={selectedBrand}
+                onChange={handleBrandChange}
+                options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
+              />
+            </div>
             <ProductForm
               label="Price"
               id="price"
@@ -286,66 +373,78 @@ const AddProduct = () => {
               onKeyDown={handleKeyDown}
               placeholder="Enter product price"
             />
-            <label htmlFor="categories">Categories</label>
-            <SelectWithAddButton
-              id="category"
-              value={categoryInput}
-              onChange={handleCategoryChange}
-              inputValue={categoryInput}
-              onInputChange={(e) => setCategoryInput(e.target.value)}
-              onAdd={handleAddCategory}
-              options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
-              selectedItems={selectedCategories}
-              onRemoveItem={handleRemoveCategory}
-              placeholder="Select a category"
-            />
-            <label htmlFor="target">Target</label>
-            <SelectWithAddButton
-              id="target"
-              value={targetInput}
-              onChange={handleTargetChange}
-              inputValue={targetInput}
-              onInputChange={(e) => setTargetInput(e.target.value)}
-              onAdd={handleAddTarget}
-              options={["Men", "Woman", "Teenagers", "Kids"]}
-              selectedItems={selectedTarget}
-              onRemoveItem={handleRemoveTarget}
-              placeholder="Select a target"
-            />
-            <label htmlFor="sport">Sport</label>
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="categories">Categories</label>
+              <SelectWithAddButton
+                id="category"
+                value={categoryInput}
+                onChange={handleCategoryChange}
+                inputValue={categoryInput}
+                onInputChange={(e) => setCategoryInput(e.target.value)}
+                onAdd={handleAddCategory}
+                options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
+                selectedItems={selectedCategories}
+                onRemoveItem={handleRemoveCategory}
+                placeholder="Select a category"
+              />
+            </div>
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="target">Target</label>
+              <SelectWithAddButton
+                id="target"
+                value={targetInput}
+                onChange={handleTargetChange}
+                inputValue={targetInput}
+                onInputChange={(e) => setTargetInput(e.target.value)}
+                onAdd={handleAddTarget}
+                options={["Men", "Woman", "Teenagers", "Kids"]}
+                selectedItems={selectedTarget}
+                onRemoveItem={handleRemoveTarget}
+                placeholder="Select a target"
+              />
+            </div>
 
-            <SelectWithAddButton
-              id="sport"
-              value={sportInput}
-              onChange={handlSportChange}
-              inputValue={sportInput}
-              onInputChange={(e) => setSportInput(e.target.value)}
-              onAdd={handleAddSport}
-              options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
-              selectedItems={selectedSports}
-              onRemoveItem={handleRemoveSport}
-              placeholder="Select a sport"
-            />
+            <div className={'border-2 border-black p-3 hover:border-blue-700 rounded-md hover:text-blue-700'}>
+              <label htmlFor="sport">Sport</label>
+              <SelectWithAddButton
+                id="sport"
+                value={sportInput}
+                onChange={handlSportChange}
+                inputValue={sportInput}
+                onInputChange={(e) => setSportInput(e.target.value)}
+                onAdd={handleAddSport}
+                options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
+                selectedItems={selectedSports}
+                onRemoveItem={handleRemoveSport}
+                placeholder="Select a sport"
+              />
+            </div>
           </div>
 
-          <div className={' lg:w-1/2 border-2 border-black rounded p-3'}>
+          <div className={' lg:w-1/2 p-3'}>
             <RightSide setProductImages={setProductImages} setColorInformation={setColorInformation}
                        setSizeInformation={setSizeInformation} setStockInformation={setStockInformation}
-                       colorInformation={colorInformation} sizeInformation={sizeInformation}/>
+                       colorInformation={colorInformation} sizeInformation={sizeInformation}
+                        isEditMode={isEditMode} productImages={productImages} stockInformation={stockInformation}
+                        isDataLoaded={isDataLoaded} colorInformationAux={colorInformationAux}
+                       sizeInformationAux={sizeInformationAux}/>
           </div>
         </div>
-
-
-
-
-
       <div className="buttons-container">
-        <button className="styleButton button-cancel" onClick={() => navigate('/')}>Cancel</button>
-        <button className="styleButton button-add"  onClick={() => {
-                            handleAddProduct();
-                            handleAddProductMessages();
-                            
-                        }} disabled={isProductAdded}>Add Product</button>
+        <button className="styleButton button-cancel" onClick={() => navigate('/admin')}>Cancel</button>
+        <button
+            className="styleButton button-add"
+            onClick={() => {
+              if (isEditMode) {
+                handleUpdateProduct();
+              } else {
+                handleAddProduct();
+              }
+            }}
+            disabled={isProductAdded}
+        >
+          {isEditMode ? 'Confirm' : 'Add Product'}
+        </button>
       </div>
     </div>
   );

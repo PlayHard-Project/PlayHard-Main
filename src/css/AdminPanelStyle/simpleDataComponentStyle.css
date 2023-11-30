@@ -1,7 +1,5 @@
 .simple-data-container {
   width: 100%;
-  border: 2px solid black;
-  border-radius: 10px;
   padding: 50px;
   display: flex;
   flex-direction: column;
@@ -22,8 +20,6 @@ label {
 
 .input-add {
   padding: 10px;
-  border: 2px solid #888383;
-  border-radius: 5px;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 10px;
@@ -31,14 +27,12 @@ label {
 
 .input-add_right {
     padding: 10px;
-    border: 2px solid #888383;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 
 select {
     padding: 10px;
-    border: 2px solid #888383;
+    border: 2px solid;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
@@ -59,8 +53,6 @@ select {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border: 2px solid #888383;
-    border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: 10px;
   }
@@ -82,10 +74,9 @@ select {
 }
 
 .selected-category {
-  background-color: #ffffff;
   padding: 4px 8px;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 2px solid;
   display: flex;
   align-items: center;
   height: 35px;
@@ -93,12 +84,9 @@ select {
 
 .selected-category button {
   margin-left: 8px;
-  color: #000000;
-  border: none;
-  padding: 4px 8px;
   cursor: pointer;
   border-radius: 16px;
-  border: 1px solid #000000;
+  border: 1px solid;
   width: 25px;
   height: 25px;
   font-size: 12px;

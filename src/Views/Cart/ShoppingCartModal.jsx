@@ -83,8 +83,9 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <p className="mr-4 mt-14 font-extrabold justify-center align-middle">The cart is empty</p>
                         ) : (
                             <>
-                                {items.map((item) => (
+                                {items.map((item, index) => (
                                     <ItemCart
+                                        key={index}
                                         productID={item.id}
                                         size={item.size}
                                         color={item.color}
@@ -104,12 +105,12 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                         </div>
                         <div className="cart-detail-row">
                             <span>Shipping Cost</span>
-                            <span>{currency + ((subTotal * 10)/100).toFixed(2)}</span>
+                            <span>{currency + 10}</span>
                         </div>
                         <hr />
                         <div className="cart-detail-row total">
                             <span>Total</span>
-                            <span>{currency + (((subTotal * 10)/100) + subTotal).toFixed(2)}</span>
+                            <span>{currency + (10 + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
                     <GoToCheckout disabled={isCartEmpty}/>

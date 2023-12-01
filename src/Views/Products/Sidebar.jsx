@@ -8,6 +8,7 @@ import { SlArrowDown } from "react-icons/sl";
 import { Range } from 'react-range';
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
 import { FaFilterCircleXmark } from "react-icons/fa6";
+import { SlCheck } from "react-icons/sl";
 
 const Sidebar = ({setParams, query, params}) => {
     const [brandsData, setBrandsData] = useState([]);
@@ -127,6 +128,11 @@ const Sidebar = ({setParams, query, params}) => {
         setSelectedFunction("");
     }
 
+    const handlePriceChange = () => {
+        setMinPrice(state.values[0]);
+        setMaxPrice(state.values[1]);
+    }
+
     return (
         <>
             <section className="sidebar">
@@ -206,8 +212,6 @@ const Sidebar = ({setParams, query, params}) => {
                             values={state.values}
                             onChange={(values) => {
                                 setState({ values });
-                                setMinPrice(values[0]);
-                                setMaxPrice(values[1]);
                             }}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -238,6 +242,7 @@ const Sidebar = ({setParams, query, params}) => {
                         />
                         <label>{state.values[0]}{currency} - {state.values[1]}{currency}</label>
                     </div>
+                    <button className="clear-radio-button flex row-auto items-center" onClick={handlePriceChange}><SlCheck/> Apply</button>
                 </div>
             </section>
         </>

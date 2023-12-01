@@ -1,11 +1,7 @@
-/* 
-Container for all products in the administration and normal area.
-*/
 .container-product{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    min-height: 100%;
 }
 
 .add-product-link {
@@ -69,10 +65,12 @@ Container for all products in the administration and normal area.
     margin-top: 100px;
     margin-bottom: 100px;
 }
+
 .error-icon {
     width: 100px;
     height: 100px;
 }
+
 .error-label {
     font-size: 30px;
 }
@@ -91,6 +89,12 @@ Container for all products in the administration and normal area.
 @media (max-width: 767px) {
     .sidebar {
         margin-top: 70px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        min-width: 100%; /* O ajusta según sea necesario para cubrir el ancho completo */
+        max-width: none; /* Anular el ancho máximo */
+        height: max-content;
     }
 
     .filter-button {
@@ -99,6 +103,27 @@ Container for all products in the administration and normal area.
         height: 30px;
         top: 90px;
         left: 20px;
+        z-index: 110;
+    }
+}
+
+@media (max-width: 350px) {
+    .sidebar {
+        margin-top: 70px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        min-width: 100%; /* O ajusta según sea necesario para cubrir el ancho completo */
+        max-width: none; /* Anular el ancho máximo */
+        height: max-content;
+    }
+
+    .filter-button {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 60px;
+        left: 10px;
         z-index: 110;
     }
 }

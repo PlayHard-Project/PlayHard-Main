@@ -1,5 +1,4 @@
 import axios from 'axios';
-import toast from "react-hot-toast";
 
 const apiURL = process.env.REACT_APP_BRANCH === 'test'
     ? "https://backend-fullapirest.onrender.com/api/"

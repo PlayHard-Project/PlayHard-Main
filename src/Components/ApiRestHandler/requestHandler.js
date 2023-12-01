@@ -1,9 +1,8 @@
 import axios from 'axios';
-import toast from "react-hot-toast";
 
 const apiURL = process.env.REACT_APP_BRANCH === 'test'
-    ? "https://backend-fullapirest.onrender.com/api/"
-    : "https://backend-fullapirest.onrender.com/api/";
+    ? "http://localhost:9000/api/"
+    : "http://localhost:9000/api/";
 console.log(process.env.REACT_APP_BRANCH);
 
 /**
@@ -111,7 +110,7 @@ export const getElementByID = async (elemenetId, route) => {
 export const updateElement = async (elementToUpdate, route) => {
   try {
     const response = await axios.put(
-      apiURL + route + "/" + elementToUpdate._id,
+      apiURL + route + elementToUpdate._id,
       elementToUpdate
     );
     return response.data;

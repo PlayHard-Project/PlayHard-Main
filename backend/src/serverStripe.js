@@ -71,7 +71,7 @@ const configureAppImplementingStripeServer = (app) => {
                 description: product.description,
                 images: product.imagePath,
               },
-              unit_amount: product.price.toFixed(2) * 100,
+              unit_amount: parseFloat((product.price.toFixed(2) * 100).toFixed(0)),
             },
             quantity: productFromBody.quantity,
             tax_rates: ['txr_1OI96GHsWC39RHnvGUFLtvOE'],

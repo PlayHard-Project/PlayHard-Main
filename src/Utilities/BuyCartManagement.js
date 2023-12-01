@@ -149,7 +149,7 @@ export default class BuyCartManagement {
     let promises = [];
 
     products.forEach((product) => {
-      const elementPromise = getElementByID(product.id, "/products");
+      const elementPromise = getElementByID(product.id, "products");
       promises.push(elementPromise);
 
       elementPromise.then((item) => {

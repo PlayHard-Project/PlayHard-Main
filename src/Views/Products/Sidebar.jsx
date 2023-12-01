@@ -16,10 +16,10 @@ const Sidebar = ({setParams, query, key}) => {
     const [categoriesFilterDisplayed, setCategoriesFilterDisplayed] = useState(false);
     const [brandsFilterDisplayed, setBrandsFilterDisplayed] = useState(false);
 
-    const [selectedTarget, setSelectedTarget] = useState([]);
-    const [selectedSports, setSelectedSports] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedBrands, setSelectedBrands] = useState([]);
+    const [selectedTarget, setSelectedTarget] = useState("");
+    const [selectedSports, setSelectedSports] = useState("");
+    const [selectedCategories, setSelectedCategories] = useState("");
+    const [selectedBrands, setSelectedBrands] = useState("");
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(500);
 
@@ -41,13 +41,13 @@ const Sidebar = ({setParams, query, key}) => {
 
                 switch (key) {
                     case "brand":
-                        setSelectedBrands([value]);
+                        setSelectedBrands(value);
                         break;
                     case "target":
-                        setSelectedTarget([value]);
+                        setSelectedTarget(value);
                         break;
                     case "categories":
-                        setSelectedCategories([value]);
+                        setSelectedCategories(value);
                         break;
                     default:
                         break;
@@ -88,11 +88,7 @@ const Sidebar = ({setParams, query, key}) => {
     const handleCheckboxChange = (selectedValue, setSelectedFunction, selectedArray) => {
         const isSelected = selectedArray.includes(selectedValue);
 
-        if (isSelected) {
-            setSelectedFunction((prevSelected) => prevSelected.filter((value) => value !== selectedValue));
-        } else {
-            setSelectedFunction((prevSelected) => [...prevSelected, selectedValue]);
-        }
+        setSelectedFunction(selectedValue);
     };
 
     const displaySportsMenu = () => {
@@ -107,6 +103,10 @@ const Sidebar = ({setParams, query, key}) => {
         setBrandsFilterDisplayed(!brandsFilterDisplayed);
     }
 
+    const clearRadioButtons = (setSelectedFunction) => {
+        setSelectedFunction("");
+    }
+
     return (
         <>
             <section className="sidebar">
@@ -119,13 +119,14 @@ const Sidebar = ({setParams, query, key}) => {
                         </div>
                         {targetData.map((target) => (
                             <li className={targetFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={target.id} name={target.id} value={target.label} type="checkbox"
+                                <input id={target.id} name={target.id} value={target.label} type="radio"
                                        onChange={() => handleCheckboxChange(target.label, setSelectedTarget, selectedTarget)}
                                        checked={selectedTarget.includes(target.label)}
                                 />
                                 <label htmlFor={target.id}>{target.label}</label>
                             </li>
                         ))}
+                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displaySportsMenu}>
@@ -134,13 +135,14 @@ const Sidebar = ({setParams, query, key}) => {
                         </div>
                         {sportData.map((sport) => (
                             <li className={sportFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={sport.id} name={sport.id} value={sport.label} type="checkbox"
+                                <input id={sport.id} name={sport.id} value={sport.label} type="radio"
                                        onChange={() => handleCheckboxChange(sport.label, setSelectedSports, selectedSports)}
                                        checked={selectedSports.includes(sport.label)}
                                 />
                                 <label htmlFor={sport.id}>{sport.label}</label>
                             </li>
                         ))}
+                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayCategoriesMenu}>
@@ -149,12 +151,13 @@ const Sidebar = ({setParams, query, key}) => {
                         </div>
                         {categoriesData.map((category) => (
                             <li className={categoriesFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={category.id} name={category.id} value={category.label} type="checkbox"
+                                <input id={category.id} name={category.id} value={category.label} type="radio"
                                        onChange={() => handleCheckboxChange(category.label, setSelectedCategories, selectedCategories)}
                                        checked={selectedCategories.includes(category.label)}/>
                                 <label htmlFor={category.id}>{category.label}</label>
                             </li>
                         ))}
+                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayBrandsMenu}>
@@ -163,13 +166,14 @@ const Sidebar = ({setParams, query, key}) => {
                         </div>
                         {brandsData.map((brand) => (
                             <li className={brandsFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
-                                <input id={brand._id} key={brand._id} name={brand._id} value={brand.name} type="checkbox"
+                                <input id={brand._id} key={brand._id} name={brand._id} value={brand.name} type="radio"
                                        onChange={() => handleCheckboxChange(brand._id, setSelectedBrands, selectedBrands)}
                                        checked={selectedBrands.includes(brand._id)}
                                 />
                                 <label htmlFor={brand._id}>{brand.name}</label>
                             </li>
                         ))}
+                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
                     </ul>
                     <div className="selector">
                         <br/>

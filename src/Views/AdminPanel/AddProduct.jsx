@@ -382,7 +382,7 @@ const AddProduct = ({ isEditMode = false}) => {
                 inputValue={categoryInput}
                 onInputChange={(e) => setCategoryInput(e.target.value)}
                 onAdd={handleAddCategory}
-                options={[ "Accesories", "Equipment", "Hoodies", "Jackets", "Jersey", "Pants", "Shoes", "Shorts", "Socks", "T-shirt", "Underwear" ]}
+                options={[ "Accessories", "Equipment", "Hoodies", "Jackets", "Jersey", "Pants", "Shoes", "Shorts", "Socks", "T-shirt", "Underwear" ]}
                 selectedItems={selectedCategories}
                 onRemoveItem={handleRemoveCategory}
                 placeholder="Select a category"

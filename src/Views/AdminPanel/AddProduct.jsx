@@ -287,7 +287,7 @@ const AddProduct = ({ isEditMode = false}) => {
       };
 
       try {
-        const response = await updateElement(product, 'products');
+        const response = await updateElement(product, 'products/');
         console.log(response);
         navigate("/admin");
       } catch (error) {

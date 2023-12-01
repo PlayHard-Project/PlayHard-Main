@@ -362,7 +362,7 @@ const AddProduct = ({ isEditMode = false}) => {
               <BrandsSelect
                 value={selectedBrand}
                 onChange={handleBrandChange}
-                options={[ "Adidas", "Asics", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Champion", "Wilson",]}
+                options={[ "Adidas", "Asics", "Champion", "Fila", "Givenchy", "New Balance", "Nike", "Puma", "Under Armour", "Vans", "Wilson" ]}
               />
             </div>
             <ProductForm
@@ -382,7 +382,7 @@ const AddProduct = ({ isEditMode = false}) => {
                 inputValue={categoryInput}
                 onInputChange={(e) => setCategoryInput(e.target.value)}
                 onAdd={handleAddCategory}
-                options={[ "T-shirt", "Shoes", "Accessory", "Pants", "Jersey", "Hoodies", "Jackets", "Shorts", "Socks", "Equipment", "Offers", ]}
+                options={[ "Accessories", "Equipment", "Hoodies", "Jackets", "Jersey", "Pants", "Shoes", "Shorts", "Socks", "T-shirt", "Underwear" ]}
                 selectedItems={selectedCategories}
                 onRemoveItem={handleRemoveCategory}
                 placeholder="Select a category"
@@ -397,7 +397,7 @@ const AddProduct = ({ isEditMode = false}) => {
                 inputValue={targetInput}
                 onInputChange={(e) => setTargetInput(e.target.value)}
                 onAdd={handleAddTarget}
-                options={["Men", "Woman", "Teenagers", "Kids"]}
+                options={[ "Kids", "Men", "Teenagers", "Women"]}
                 selectedItems={selectedTarget}
                 onRemoveItem={handleRemoveTarget}
                 placeholder="Select a target"
@@ -413,7 +413,7 @@ const AddProduct = ({ isEditMode = false}) => {
                 inputValue={sportInput}
                 onInputChange={(e) => setSportInput(e.target.value)}
                 onAdd={handleAddSport}
-                options={[ "Basketball", "Soccer", "Yoga", "Gym", "Tennis", "Cycling", "Swimming", "Golf", ]}
+                options={[ "American Football", "Baseball" ,"Basketball", "Golf", "Soccer", "Skateboarding", "Tennis", "Training", "Volleyball", "Yoga" ]}
                 selectedItems={selectedSports}
                 onRemoveItem={handleRemoveSport}
                 placeholder="Select a sport"

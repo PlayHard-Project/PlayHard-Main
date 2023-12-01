@@ -117,7 +117,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   return (
       <div className="container-product container">
           <SlEqualizer onClick={toggleSidebar} className="filter-button"/>
-          {sidebarVisible && <Sidebar className="sidebar" key={"sidebar"} setParams={setParams} query={query}/>}
+          {sidebarVisible && <Sidebar className="sidebar" key={"sidebar"} setParams={setParams} query={query} params={params}/>}
           <div className="main-content">
               <CardsContainer className="cards-container" content={notFound ? notFoundContent : content} pages={pageLimit} setPage={setPage}/>
           </div>

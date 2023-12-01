@@ -77,12 +77,17 @@ ul li label {
 }
 
 .clear-radio-button {
-  background-color: #ccc;
+  background-color: #72A3FF;
   padding:5px;
   border-radius: 8px;
   margin-top: 5px;
+  color: white;
 }
 
 .clear-radio-button:hover {
   box-shadow: 0 5px 5px lightblue;
+}
+
+.apply-button {
+  font-weight: bold;
 }

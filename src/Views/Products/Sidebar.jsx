@@ -242,7 +242,7 @@ const Sidebar = ({setParams, query, params}) => {
                         />
                         <label>{state.values[0]}{currency} - {state.values[1]}{currency}</label>
                     </div>
-                    <button className="clear-radio-button flex row-auto items-center" onClick={handlePriceChange}><SlCheck/> Apply</button>
+                    <button className="clear-radio-button flex row-auto items-center apply-button" onClick={handlePriceChange}><SlCheck className="mr-1"/> Apply</button>
                 </div>
             </section>
         </>

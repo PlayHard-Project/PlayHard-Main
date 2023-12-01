@@ -7,6 +7,8 @@ import '../../css/Products.css'
 import {GridLoader} from "react-spinners";
 import {useParams} from "react-router-dom";
 import { SlEqualizer } from "react-icons/sl";
+import { TbFaceIdError } from "react-icons/tb";
+import toast from "react-hot-toast";
 
 const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const { query } = useParams();
@@ -25,6 +27,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const [pageLimit, setPageLimit] = useState(1);
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const [checkboxState, setCheckboxState] = useState({});
 
@@ -58,13 +61,19 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const fetchProducts = async () => {
     try {
       const response = await getFilteredElementsLazyLoading('products/available-products', params, page);
-      setProducts(response.data);
-      console.log(response.totalPages);
-      if (pageLimit !== response.totalPages) {
-          setPageLimit(response.totalPages);
+      if (typeof response === 'string') {
+          setNotFound(true);
+          setPageLimit(1);
+          toast.error(response);
+      } else {
+          setNotFound(false);
+          setProducts(response.data);
+          if (pageLimit !== response.totalPages) {
+              setPageLimit(response.totalPages);
+          }
       }
     } catch (error) {
-      console.error('Error fetching products:', error);
+      toast.error('Error fetching products:', error.message)
     }
   };
 
@@ -81,6 +90,13 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
               setSubTotal={setSubTotal}
           />
       )
+  );
+
+  const notFoundContent = (
+      <div className="not-found-view">
+          <TbFaceIdError className="error-icon"/>
+          <label className="error-label">No Products Found</label>
+      </div>
   );
 
   /**
@@ -103,7 +119,7 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
           <SlEqualizer onClick={toggleSidebar} className="filter-button"/>
           {sidebarVisible && <Sidebar className="sidebar" key={"sidebar"} setParams={setParams} query={query}/>}
           <div className="main-content">
-              <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+              <CardsContainer className="cards-container" content={notFound ? notFoundContent : content} pages={pageLimit} setPage={setPage}/>
           </div>
       </div>
   );

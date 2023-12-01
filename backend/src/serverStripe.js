@@ -21,7 +21,6 @@ const configureAppImplementingStripeServer = (app) => {
     apiVersion: "2020-08-27",
   });
 
-
   app.use(express.static("public"));
   app.use(express.json());
   app.use(cors());
@@ -71,25 +70,29 @@ const configureAppImplementingStripeServer = (app) => {
                 description: product.description,
                 images: product.imagePath,
               },
-              unit_amount: parseFloat((product.price.toFixed(2) * 100).toFixed(0)),
+              unit_amount: parseFloat(
+                (product.price.toFixed(2) * 100).toFixed(0)
+              ),
             },
             quantity: productFromBody.quantity,
-            tax_rates: ['txr_1OI96GHsWC39RHnvGUFLtvOE'],
+            tax_rates: ["txr_1OI96GHsWC39RHnvGUFLtvOE"],
           };
-        }),
+        })
       );
-  
+
       const session = await stripeGateway.checkout.sessions.create({
         line_items: lineItems,
         shipping_options: [
           {
-            shipping_rate: 'shr_1OI9BLHsWC39RHnvGiGhEXVp',
+            shipping_rate: "shr_1OI9BLHsWC39RHnvGiGhEXVp",
           },
         ],
         payment_method_types: ["card"],
         mode: "payment",
+        customer: customer.id,
         line_items: lineItems,
-        success_url: "https://play-hard-testv2.vercel.app/success-payment-status",
+        success_url:
+          "https://play-hard-testv2.vercel.app/success-payment-status",
         cancel_url: "https://play-hard-testv2.vercel.app/fail-payment-status",
         billing_address_collection: "required",
       });
@@ -101,28 +104,25 @@ const configureAppImplementingStripeServer = (app) => {
   });
 
   app.post("/stripe-api/create-tax-reta", async (req, res) => {
-
     const taxRate = await stripeGateway.taxRates.create({
-      display_name: 'IVA',
-      description: 'IVA',
-      jurisdiction: 'BO',
+      display_name: "IVA",
+      description: "IVA",
+      jurisdiction: "BO",
       percentage: 13,
       inclusive: false,
-  });
+    });
 
-  return res.json(taxRate)
-
+    return res.json(taxRate);
   });
 
   app.post("/stripe-api/create-shipping-reate", async (req, res) => {
-
     const shippingRate = await stripeGateway.shippingRates.create({
-      display_name: 'Shipping',
-      type: 'fixed_amount',
-      fixed_amount: { amount: 1000, currency: 'usd' },
-  });
+      display_name: "Shipping",
+      type: "fixed_amount",
+      fixed_amount: { amount: 1000, currency: "usd" },
+    });
 
-  return res.json(shippingRate)
+    return res.json(shippingRate);
   });
 
   const createOrder = async (customer, data) => {
@@ -242,8 +242,7 @@ const configureAppImplementingStripeServer = (app) => {
       response.send().end();
     }
   );
-    
-  
+
   /**
    * Log a success message upon successful connection to the Stripe server.
    * @name console.log

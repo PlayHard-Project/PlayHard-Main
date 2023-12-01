@@ -5,38 +5,42 @@
 export const sportData = [
     {
         id: "sport1",
-        label: "Basketball",
+        label: "American Football",
     },
     {
         id: "sport2",
-        label: "Soccer",
+        label: "Baseball",
     },
     {
         id: "sport3",
-        label: "Volleyball",
+        label: "Basketball",
     },
     {
         id: "sport4",
-        label: "Yoga",
+        label: "Golf",
     },
     {
         id: "sport5",
-        label: "Gym & Training",
+        label: "Soccer",
     },
     {
         id: "sport6",
-        label: "Tennis",
+        label: "Skateboarding",
     },
     {
         id: "sport7",
-        label: "Cycling",
+        label: "Tennis",
     },
     {
         id: "sport8",
-        label: "Swimming",
+        label: "Training",
     },
     {
         id: "sport9",
-        label: "Golf",
+        label: "Volleyball",
+    },
+    {
+        id: "sport10",
+        label: "Yoga",
     }
 ];

@@ -115,10 +115,10 @@ const SearchBar = ({setProduct, isRedirect}) => {
      */
     return (
         <div className="relative" ref={ref}>
-            <div className="flex items-center search-container">
+            <div className="flex items-center search-container-little">
                 <input
                     type="text"
-                    className="search-input"
+                    className="search-input-little"
                     placeholder="Search"
                     maxLength={100}
                     value={input}
@@ -128,7 +128,7 @@ const SearchBar = ({setProduct, isRedirect}) => {
                     {isLoading ? (
                         <GridLoader color="#023fc5" size={3} className={'m-3'} />
                     ) : (
-                        <MdSearch size={24} color="#72a3ff" />
+                        <MdSearch size={24} style={{padding:'2px'}} color="#72a3ff" />
                     )}
                 </button>
             </div>

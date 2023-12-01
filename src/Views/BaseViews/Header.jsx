@@ -273,7 +273,7 @@ const Header = ({
                   <div className="relative flex items-center text-link" onClick={toggleCategories}>
                     Categories <SlArrowRight size={10} color="#72a3ff" strokeWidth={200} style={{ marginLeft: '70px' }} />
                   </div>
-                  <Link to="/sign-up" className="relative flex items-center text-link" onClick={toggleMenu}>Sign Up</Link>
+                  <Link to="/sign-in" className="relative flex items-center text-link" onClick={toggleMenu}>Login</Link>
                   <Link
                       to="/shopcart"
                       className="relative flex items-center text-link"

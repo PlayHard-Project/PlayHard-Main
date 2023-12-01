@@ -58,9 +58,11 @@ const Footer = () => {
         <div className="footer-column">
           <h1 className="footer-title">About Us</h1>
           <ul className="footer-links">
-            <li>
-              <a href="#">Company information</a>
-            </li>
+            <div>
+              <Link to="/about" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
+                Company information
+             </Link>
+            </div>
             <div>
               <Link to="/contact" style={{color: 'white', textDecoration: 'none', borderBottom: '2px solid transparent', transition: 'border-color 0.3s'}} onMouseOver={(e) => e.target.style.borderBottom = '2px solid white'} onMouseOut={(e) => e.target.style.borderBottom = '2px solid transparent'}>
                 Contact Us

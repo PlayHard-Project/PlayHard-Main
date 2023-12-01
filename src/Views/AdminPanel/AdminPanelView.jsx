@@ -1,46 +1,53 @@
 import React, { useState, useEffect } from "react";
 import CardsContainerAdmin from "./ProductsAdmin/CardsContainerAdmin";
 import CardAdmin from "./ProductsAdmin/CardAdmin";
-import {getElementsLazyLoading, getFilteredElementsLazyLoading} from "../../Components/ApiRestHandler/requestHandler";
-import '../../css/Products.css'
-import {GridLoader} from "react-spinners";
+import { getFilteredElementsLazyLoading } from "../../Components/ApiRestHandler/requestHandler";
+import '../../css/Products.css';
+import { GridLoader } from "react-spinners";
 import { isUserAdmin } from "../../Utilities/auth";
 import { Link } from "react-router-dom";
 import CardsContainer from "../Products/CardsContainer";
 import { useNavigate } from 'react-router-dom';
 
-/**
- * AdminPanelView Component
- *
- * This component represents the main view for the admin panel, displaying a list of products.
- * It fetches products using lazy loading and renders them as cards using the CardAdmin component.
- * Provides a "Load More" button to fetch additional products.
- *
- * @param {function} setCartItemsQuantity - A function to set the quantity of items in the cart.
- * @param {function} setSubTotal - A function to set the subtotal of the cart.
- */
 const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(1);
+  const [showButton, setShowButton] = useState(true);
+  const [transformY, setTransformY] = useState(0);
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const triggerHeight = 200;
+
+    setShowButton(scrollY > 0);
+
+    if (scrollY > triggerHeight) {
+      const translateY = Math.min((scrollY - triggerHeight) / 4, 350);
+      setTransformY(translateY);
+    } else {
+      setTransformY(0);
+    }
+  };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+    window.addEventListener("scroll", handleScroll);
 
-  useEffect(() => {
-    fetchProducts();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [page]);
 
   const fetchProducts = async () => {
-    if(!isUserAdmin()){
+    if (!isUserAdmin()) {
       navigate("/");
     }
+
     try {
       const response = await getFilteredElementsLazyLoading('/products/available-products', {}, page);
       setProducts(response.data);
-      console.log(response.totalPages);
       if (pageLimit !== response.totalPages) {
         setPageLimit(response.totalPages);
       }
@@ -65,18 +72,9 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
     />
   ));
 
-  /**
-   * Renders a loading component when there are no products available.
-   * @param {Array} products - The array of products to be checked for emptiness.
-   * @returns {JSX.Element} - The JSX representing the loading component.
-   */
   if (products.length === 0) {
     return (
-      <div
-        className={
-          "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen"
-        }
-      >
+      <div className="flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container min-h-screen">
         <GridLoader color="#023fc5" />
       </div>
     );
@@ -84,12 +82,11 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
 
   return (
     <div className="container-product container">
-      <Link to="/admin/add-product" className="add-product-link">
-        {" "}
-        +
-      </Link>
       <div className="main-content">
-        <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage}/>
+        <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage} />
+        <Link to="/admin/add-product" className={`add-product-link ${showButton ? 'show' : ''}`} style={{ transform: `translateY(${-transformY}px)` }}>
+          +
+        </Link>
       </div>
     </div>
   );

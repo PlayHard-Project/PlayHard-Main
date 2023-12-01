@@ -75,3 +75,14 @@ ul li label {
 .title-selector {
   padding-bottom: 100px;
 }
+
+.clear-radio-button {
+  background-color: #ccc;
+  padding:5px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.clear-radio-button:hover {
+  box-shadow: 0 5px 5px lightblue;
+}

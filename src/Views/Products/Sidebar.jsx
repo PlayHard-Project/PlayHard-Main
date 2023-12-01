@@ -7,8 +7,9 @@ import { SlArrowRight } from "react-icons/sl";
 import { SlArrowDown } from "react-icons/sl";
 import { Range } from 'react-range';
 import { getElements } from "../../Components/ApiRestHandler/requestHandler";
+import { FaFilterCircleXmark } from "react-icons/fa6";
 
-const Sidebar = ({setParams, query, key}) => {
+const Sidebar = ({setParams, query, params}) => {
     const [brandsData, setBrandsData] = useState([]);
 
     const [targetFilterDisplayed, setTargetFilterDisplayed] = useState(false);
@@ -43,6 +44,9 @@ const Sidebar = ({setParams, query, key}) => {
                     case "brand":
                         setSelectedBrands(value);
                         break;
+                    case "sport":
+                        setSelectedSports(value);
+                        break;
                     case "target":
                         setSelectedTarget(value);
                         break;
@@ -51,6 +55,29 @@ const Sidebar = ({setParams, query, key}) => {
                         break;
                     default:
                         break;
+                }
+            }
+        } else {
+            if (params !== null && params.length !== 0) {
+                for (const key in params) {
+                    if (params.hasOwnProperty(key)) {
+                        switch (key) {
+                            case "brand":
+                                setSelectedBrands(params[key]);
+                                break;
+                            case "sport":
+                                setSelectedSports(params[key]);
+                                break;
+                            case "target":
+                                setSelectedTarget(params[key]);
+                                break;
+                            case "categories":
+                                setSelectedCategories(params[key]);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -62,20 +89,15 @@ const Sidebar = ({setParams, query, key}) => {
 
     const buildQuery = () => {
         if (!firstLoad) {
-            if (selectedTarget.length !== 0
-                || selectedBrands !== 0
-                || selectedSports !== 0
-                || selectedCategories !== 0 || minPrice !== 0 || maxPrice !== 500) {
-                const builtQuery = {
-                    target: selectedTarget,
-                    brand: selectedBrands,
-                    sport: selectedSports,
-                    categories: selectedCategories,
-                    minPrice: minPrice,
-                    maxPrice: maxPrice
-                };
-                setParams(builtQuery)
-            }
+            const builtQuery = {
+                target: selectedTarget,
+                brand: selectedBrands,
+                sport: selectedSports,
+                categories: selectedCategories,
+                minPrice: minPrice,
+                maxPrice: maxPrice
+            };
+            setParams(builtQuery)
         } else {
             setFirstLoad(false)
         }
@@ -85,9 +107,7 @@ const Sidebar = ({setParams, query, key}) => {
         setTargetFilterDisplayed(!targetFilterDisplayed);
     }
 
-    const handleCheckboxChange = (selectedValue, setSelectedFunction, selectedArray) => {
-        const isSelected = selectedArray.includes(selectedValue);
-
+    const handleCheckboxChange = (selectedValue, setSelectedFunction) => {
         setSelectedFunction(selectedValue);
     };
 
@@ -120,13 +140,13 @@ const Sidebar = ({setParams, query, key}) => {
                         {targetData.map((target) => (
                             <li className={targetFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={target.id} name={target.id} value={target.label} type="radio"
-                                       onChange={() => handleCheckboxChange(target.label, setSelectedTarget, selectedTarget)}
+                                       onChange={() => handleCheckboxChange(target.label, setSelectedTarget)}
                                        checked={selectedTarget.includes(target.label)}
                                 />
                                 <label htmlFor={target.id}>{target.label}</label>
                             </li>
                         ))}
-                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
+                        <button className="clear-radio-button" title="Clean the target filters" onClick={() => clearRadioButtons(setSelectedTarget)}><FaFilterCircleXmark /></button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displaySportsMenu}>
@@ -136,13 +156,13 @@ const Sidebar = ({setParams, query, key}) => {
                         {sportData.map((sport) => (
                             <li className={sportFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={sport.id} name={sport.id} value={sport.label} type="radio"
-                                       onChange={() => handleCheckboxChange(sport.label, setSelectedSports, selectedSports)}
+                                       onChange={() => handleCheckboxChange(sport.label, setSelectedSports)}
                                        checked={selectedSports.includes(sport.label)}
                                 />
                                 <label htmlFor={sport.id}>{sport.label}</label>
                             </li>
                         ))}
-                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
+                        <button className="clear-radio-button" title="Clean the sports filters" onClick={() => clearRadioButtons(setSelectedSports)}><FaFilterCircleXmark /></button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayCategoriesMenu}>
@@ -152,12 +172,12 @@ const Sidebar = ({setParams, query, key}) => {
                         {categoriesData.map((category) => (
                             <li className={categoriesFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={category.id} name={category.id} value={category.label} type="radio"
-                                       onChange={() => handleCheckboxChange(category.label, setSelectedCategories, selectedCategories)}
+                                       onChange={() => handleCheckboxChange(category.label, setSelectedCategories)}
                                        checked={selectedCategories.includes(category.label)}/>
                                 <label htmlFor={category.id}>{category.label}</label>
                             </li>
                         ))}
-                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
+                        <button className="clear-radio-button" title="Clean the categories filters" onClick={() => clearRadioButtons(setSelectedCategories)}><FaFilterCircleXmark /></button>
                     </ul>
                     <ul>
                         <div className="title-filter" onClick={displayBrandsMenu}>
@@ -167,13 +187,13 @@ const Sidebar = ({setParams, query, key}) => {
                         {brandsData.map((brand) => (
                             <li className={brandsFilterDisplayed ? "li-displayed" : "li-no-displayed"}>
                                 <input id={brand._id} key={brand._id} name={brand._id} value={brand.name} type="radio"
-                                       onChange={() => handleCheckboxChange(brand._id, setSelectedBrands, selectedBrands)}
+                                       onChange={() => handleCheckboxChange(brand._id, setSelectedBrands)}
                                        checked={selectedBrands.includes(brand._id)}
                                 />
                                 <label htmlFor={brand._id}>{brand.name}</label>
                             </li>
                         ))}
-                        <button onClick={() => clearRadioButtons(setSelectedBrands)}>Clear</button>
+                        <button className="clear-radio-button" title="Clean the brands filters" onClick={() => clearRadioButtons(setSelectedBrands)}><FaFilterCircleXmark /></button>
                     </ul>
                     <div className="selector">
                         <br/>

@@ -5,6 +5,7 @@ Container for all products in the administration and normal area.
     display: flex;
     flex-direction: row;
     justify-content: center;
+    min-height: 700px;
 }
 
 .add-product-link {

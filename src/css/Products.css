@@ -49,12 +49,12 @@ Container for all products in the administration and normal area.
 }
 
 .filter-button {
-    position: fixed;
+    position: absolute;
     width: 35px;
     height: 35px;
     align-self: start;
-    top: 120px; /* Alinear en la parte superior */
-    left: 40px; /* Alinear en la parte izquierda */
+    top: 120px;
+    left: 80px;
     z-index: 110;
 }
 
@@ -78,6 +78,17 @@ Container for all products in the administration and normal area.
     font-size: 30px;
 }
 
+@media (max-width: 1000px) {
+    .filter-button {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 100px;
+        left: 60px;
+        z-index: 110;
+    }
+}
+
 @media (max-width: 767px) {
     .sidebar {
         margin-top: 70px;
@@ -90,11 +101,11 @@ Container for all products in the administration and normal area.
     }
 
     .filter-button {
-        position: fixed;
+        position: absolute;
         width: 30px;
         height: 30px;
-        top: 75px; /* Alinear en la parte superior */
-        left: 20px; /* Alinear en la parte izquierda */
+        top: 90px;
+        left: 20px;
         z-index: 110;
     }
 }

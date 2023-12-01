@@ -160,20 +160,10 @@ export const makeQuery = (params) => {
 export const getFilteredElementsLazyLoading = async (route, params, page = 1) => {
   try {
     const queryString = makeQuery(params);
-    console.log(`${apiURL}${route}?${queryString}`);
     const response = await axios.get(`${apiURL}${route}?${queryString}&page=${page}&pageSize=${20}`);
-
-    if (response.status === 404) {
-      throw new Error('No elements found with the specified filters');
-    }
-
-    if (response.data.length === 0) {
-      throw new Error('No products found with the specified filters');
-    }
 
     return response.data;
   } catch (error) {
-    console.error('Error getting filtered elements: ', error);
-    throw error;
+    return error.message || 'Unknown error occurred';
   }
 };

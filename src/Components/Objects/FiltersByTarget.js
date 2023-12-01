@@ -5,26 +5,18 @@
 export const targetData = [
     {
         id: "target1",
-        label: "Adults",
-    },
-    {
-        id: "target2",
-        label: "Teenagers",
-    },
-    {
-        id: "target3",
-        label: "Youths",
-    },
-    {
-        id: "target4",
         label: "Kids",
     },
     {
-        id: "target5",
+        id: "target2",
         label: "Men",
     },
     {
-        id: "target6",
+        id: "target3",
+        label: "Teenagers",
+    },
+    {
+        id: "target4",
         label: "Women",
     }
 ];

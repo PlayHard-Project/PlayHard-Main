@@ -124,26 +124,6 @@
     text-align: center;
 }
 
-.search-container-little {
-    display: flex;
-    align-items: center;
-    border: 2px solid #72a3ff;
-    border-radius: 25px;
-    right: 0;
-    width: 250px;
-    height: 30px;
-}
-
-.search-input-little {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 16px;
-    border-radius: 50px;
-    color: black;
-    margin-left: 12px;
-}
-
 .small-profile{
     color:black;
     align-items: center;
@@ -393,5 +373,11 @@
     }
     .header{
         margin-top: -80px;
+    }
+}
+
+@media only screen and (max-width: 887px) {
+    .search-container {
+        width: 250px;
     }
 }

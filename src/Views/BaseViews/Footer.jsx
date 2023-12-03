@@ -74,7 +74,7 @@ const Footer = () => {
           <h1 className="footer-title">Location</h1>
           <ul className="footer-links">
             <li>
-              <a href="https://maps.app.goo.gl/YTQ4P8mfNTJneXpG9" target="_blank">69 Melchor Perez St. Cochabamba, Bolivia</a>
+              <a href="https://maps.app.goo.gl/NEWYCopkEGDkM62F8" target="_blank">69 Melchor Perez St. Cochabamba, Bolivia</a>
             </li>
           </ul>
           <div className="footer-column">

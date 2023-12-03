@@ -6,7 +6,8 @@ const CardsContainer = ({ content, pages, setPage }) => {
     const handleClick = (index) => {
         setPage(index)
         setActivePage(index);
-    }
+        window.scrollTo(0,0);
+    }   
 
     const pageButtons = Array.from({ length: pages }, (_, index) => (
         <button key={index + 1} className={`pageButton ${activePage === index + 1 ? 'active' : ''}`} onClick={() => handleClick(index + 1)}>{index + 1}</button>

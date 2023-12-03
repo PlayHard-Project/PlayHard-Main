@@ -57,6 +57,10 @@ function ColorComponent({ id, onDelete, setColorInformation, isEditMode = false,
             handleAddProductMessages();
             return;
         }
+        if (image.trim() === '') {
+            toast.error("Please add an image first.", { position: "bottom-right", });
+            return;
+        }
         setIsDisabled(true);
         setColorInformation(prevColorInformation => {
             const colorExists = prevColorInformation.some(color => color.id === id);

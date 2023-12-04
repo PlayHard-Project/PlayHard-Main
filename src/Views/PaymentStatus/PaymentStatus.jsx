@@ -6,9 +6,9 @@ const PaymentStatus = ({ title, description, imageSrc, altText, isSuccess }) => 
   const buttonColor = isSuccess ? "green" : "red";
 
   return (
-    <div className="container">
+    <div className="container xl:h-screen xl:flex xl:justify-center xl:items-center">
       <div className="sc-container">
-        <div className="text-container">
+        <div className="text-container_payment">
           <label className="title">{title}</label>
           <p>{description}</p>
           <p>

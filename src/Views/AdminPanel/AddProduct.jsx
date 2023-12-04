@@ -239,6 +239,9 @@ const AddProduct = ({ isEditMode = false}) => {
     } else if (price === "") {
       toast.error("Price cannot be empty.", { position: "bottom-right", });
       return false;
+    } else if (price == 0) {
+      toast.error("Price cannot be 0.", { position: "bottom-right", });
+      return false;
     } else if (selectedCategories.length === 0) {
       toast.error("Please add at least one category.", { position: "bottom-right", });
       return false;

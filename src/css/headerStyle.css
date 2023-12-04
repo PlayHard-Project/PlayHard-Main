@@ -296,9 +296,6 @@
 }
 
 @media only screen and (max-width: 1039px) {
-    .search-container{
-        width: 210px;
-    }
     .header .text {
         margin-right: -3px;
         margin-left: -3px;
@@ -337,7 +334,7 @@
         width: 50px;
     }
     .search-container {
-        width: 200px;
+        width: 220px;
         padding-right: 5px;
         margin-right: -10px;
     }
@@ -347,11 +344,7 @@
         font-size: 13px;
     }
 }
-@media only screen and (max-width: 936px) {
-    .search-container {
-        width: 150px;
-    }
-}
+
 @media only screen and (max-width: 907px) {
     .header .background-shape {
         height: 55px;
@@ -360,11 +353,6 @@
     .custom-rectangle{
         height: 60px;
         width: 50px;
-    }
-    .search-container {
-        width: 150px;
-        padding-right: 5px;
-        margin-right: -6px;
     }
     .header .text {
         margin-right: -6px;

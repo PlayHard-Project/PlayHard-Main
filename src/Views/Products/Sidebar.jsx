@@ -36,11 +36,9 @@ const Sidebar = ({setParams, query, params}) => {
         });
 
         if (query !== null && query !== undefined) {
-            const paramsSplitted = query.split("=");
-            if (paramsSplitted.length === 2) {
-                const key = paramsSplitted[0];
-                const value = paramsSplitted[1];
-
+            const paramPairs = query.split("$");
+            paramPairs.forEach(paramPairs => {
+                const [key, value] = paramPairs.split("=");
                 switch (key) {
                     case "brand":
                         setSelectedBrands(value);
@@ -57,7 +55,7 @@ const Sidebar = ({setParams, query, params}) => {
                     default:
                         break;
                 }
-            }
+            });
         } else {
             if (params !== null && params.length !== 0) {
                 for (const key in params) {

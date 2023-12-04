@@ -1,7 +1,7 @@
 export const data = [
     {
         id: 1,
-        name: "T-shirts",
+        name: "T-shirt",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847867/Categories/T-shirts.png"
     },
     {
@@ -11,8 +11,8 @@ export const data = [
     },
     {
         id: 3,
-        name: "Tops",
-        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847867/Categories/Tops.png"
+        name: "Underwear",
+        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701659918/Group_88_1_au0jsm.png"
     },
     {
         id: 4,
@@ -31,17 +31,27 @@ export const data = [
     },
     {
         id: 7,
-        name: "Tights",
-        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847869/Categories/Tights.png"
-    },
-    {
-        id: 8,
         name: "Socks",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847867/Categories/Socks.png"
     },
     {
-        id: 9,
+        id: 8,
         name: "Shoes",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847869/Categories/Shoes.png"
+    },
+    {
+        id: 9,
+        name: "Equipment",
+        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660452/Jerseys_ichxtp.png"
+    },
+    {
+        id: 10,
+        name: "Jersey",
+        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660451/Equipment_y5wa96.png"
+    },
+    {
+        id: 11,
+        name: "Accessories",
+        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660452/Accessories_l7cjav.png"
     }
 ];

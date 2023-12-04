@@ -38,8 +38,9 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
                     <p className="w-full mt-14 font-extrabold text-center" style={{padding:"25%"}} >The cart is empty</p>
                 ) : (
                     <>
-                        {items.map((item) => (
+                        {items.map((item, index) => (
                             <ItemCart
+                                key={index}
                                 productID={item.id}
                                 size={item.size}
                                 color={item.color}
@@ -68,7 +69,7 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
                 </div>
             </div>
 
-            <GoToCheckout disabled={isCartEmpty}/>
+            <GoToCheckout disabled={isCartEmpty} products={items}/>
         </div>
     );
 };

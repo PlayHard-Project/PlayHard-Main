@@ -62,7 +62,7 @@ export default class BuyCartManagement {
    * This method clear all information on the localStorage. All products deleted from the cart.
    */
   clearCart() {
-    localStorage.clear();
+    localStorage.removeItem("buyCart");
   }
 
   /**
@@ -73,6 +73,7 @@ export default class BuyCartManagement {
    * @param {number} color - Index of the color selected.
    */
   deleteProduct(id, size, color, price) {
+    console.log(this.getProducts());
     let products = this.getProducts();
     products = products.filter(
       (product) =>
@@ -84,6 +85,7 @@ export default class BuyCartManagement {
         )
     );
     localStorage.setItem("buyCart", JSON.stringify(products));
+    console.log(this.getProducts());
   }
 
   /**

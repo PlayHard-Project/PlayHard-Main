@@ -37,8 +37,8 @@ const About = () => {
           to reflect this with every piece of clothing you choose.
         </div>
         <div className="about-content">
-          <div class="column with-border">
-            <GoGoal className="icon" />
+          <div className="column with-border">
+            <GoGoal className="icon"/>
             <h2 className="about-subtitle">Mission</h2>
             <p className="about-subtext">
               At PlayHard, we are committed to providing our customers with the

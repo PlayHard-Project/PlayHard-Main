@@ -3,7 +3,6 @@ import axios from 'axios';
 const apiURL = process.env.REACT_APP_BRANCH === 'test'
     ? "https://backend-fullapirest.onrender.com/api/"
     : "https://backend-fullapirest.onrender.com/api/";
-console.log(process.env.REACT_APP_BRANCH);
 
 /**
  * Adds a new element to the server by making a POST request to the specified route.
@@ -61,7 +60,6 @@ export const getElements = async (route) => {
 export const getFilteredElements = async (route, params) => {
   try {
     const queryString = makeQuery(params);
-    console.log(`${apiURL}${route}?${queryString}`);
     const response = await axios.get(`${apiURL}${route}?${queryString}`);
 
     if (response.data.length === 0) {

@@ -193,23 +193,6 @@ const Header = ({
                 {path.title}
               </Link>
             ))}
-            <div ref={modalOptionsRef}>
-              <ModalAdminOptions
-                sectionText={"Categories"}
-                onRequestOpen={handleOptionsModal}
-                isOpen={isOptionsModalOpen}
-                onRequestClose={handleCloseOptionsModal}
-                modalRef={modalOptionsRef}
-                options={[
-                  { label: "Clothes", icon: <SlArrowDown strokeWidth={100} /> },
-                  { label: "Shoes", icon: " " },
-                  { label: "Equipment", icon: " " },
-                  { label: "Accessories", icon: " " },
-                  { label: "Brands", icon: <SlArrowDown strokeWidth={100} /> },
-                  { label: "Sports", icon: <SlArrowDown strokeWidth={100} /> },
-                ]}
-              />
-            </div>
           </div>
         </div>
         <div className="lg:flex hidden space-x-4 items-center">

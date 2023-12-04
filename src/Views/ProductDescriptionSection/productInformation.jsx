@@ -95,9 +95,6 @@ function ProductInformation({ productID, setCartItemsQuantity, setSubTotal }) {
 
       <div className={"flex flex-col gap-4 lg:w-2/4"}>
         <div>
-          <span className={"text-blue-300 font-semibold"}>
-            Code: {productID}
-          </span>
           <h2 className={"text-3xl font-bold"}>{product.name}</h2>
         </div>
         <p className={"overflow-auto text-gray-700"}>{product.description}</p>

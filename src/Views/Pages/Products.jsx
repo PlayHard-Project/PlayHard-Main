@@ -29,15 +29,6 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
-  const [checkboxState, setCheckboxState] = useState({});
-
-  const updateCheckboxState = (checkboxId, isChecked) => {
-      setCheckboxState(prevState => ({
-          ...prevState,
-          [checkboxId]: isChecked,
-      }));
-  };
-
   const toggleSidebar = () => {
       setSidebarVisible(!sidebarVisible);
   };

@@ -115,7 +115,7 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                                 {['Clothes', 'Brands', 'Sports'].includes(option.label) ? (
                                     <div>{option.label}</div>
                                 ) : (
-                                    <Link to={`/categories/${option.label}`} style={{ fontSize: '16px', fontFamily: 'Montserrat, cursive' }}>
+                                    <Link to={`/products/categories=${option.label}`} style={{ fontSize: '16px', fontFamily: 'Montserrat, cursive' }}>
                                         {option.label}
                                     </Link>
                                 )}
@@ -132,7 +132,7 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                 <SubOptionsClothesModal
                     isOpen={selectedOption === 'Clothes' && subOptionsClothesModalOpen}
                     onRequestClose={() => {setSelectedOption(null); setSubOptionsClothesModalOpen(false)}}
-                    options={['T-Shrits', 'Jerseys', 'Hoodies', 'Jackets', 'Shorts', 'Pants', 'Socks']}
+                    options={['T-shirt', 'Jersey', 'Hoodies', 'Jackets', 'Shorts', 'Pants', 'Socks', 'Shoes', 'Underwear']}
                 />
             )}
             {selectedOption === 'Brands' && (
@@ -142,14 +142,25 @@ const ModalAdminOptions = ({ isOpen, options, onClose, modalRef, sectionText, on
                         setSelectedOption(null);
                         setSubOptionsBrandsModalOpen(false);
                     }}
-                    options={['Adidas', 'Asics', 'Fila', 'Givenchy', 'New Balance', 'Nike', 'Puma', 'Under Armour', 'Vans', 'Champion', 'Wilson']}
+                    options={[['Adidas', '654c3e2460c78adccb61fbc4'], ['Asics', '654c3e2460c78adccb61fbd4'],
+                        ['Fila', '654c3e2460c78adccb61fbd6'], ['Givenchy', '654c3e2460c78adccb61fbc6'],
+                        ['New Balance', '654c3e2460c78adccb61fbc8'], ['Nike', '654c3e2460c78adccb61fbca'],
+                        ['Puma', '654c3e2460c78adccb61fbcc'], ['Under Armour', '654c3e2460c78adccb61fbce'],
+                        ['Vans', '654c3e2460c78adccb61fbd0'], ['Champion', '654c3e2460c78adccb61fbd2'],
+                        ['Wilson', '654c41ca1754c5a319281642']]}
                 />
             )}
             {selectedOption === 'Sports' && (
                 <SubOptionsSportsModal
                     isOpen={selectedOption === 'Sports' && subOptionsSportsModalOpen}
                     onRequestClose={() => {setSelectedOption(null); setSubOptionsSportsModalOpen(false)}}
-                    options={['Basketball', 'Soccer', 'Yoga', 'Gym', 'Tennis', 'Cycling', 'Swimming', 'Golf']}
+                    options={['Training', 'Skateboarding', 'Soccer', 'Tennis',
+                        'Yoga',
+                        'Golf',
+                        'Baseball',
+                        'American Football',
+                        'Basketball',
+                        'Volleyball']}
                 />
             )}
         </div>

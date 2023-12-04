@@ -31,31 +31,26 @@ export const data = [
     },
     {
         id: 7,
-        name: "Tights", //DELETE
-        imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847869/Categories/Tights.png"
-    },
-    {
-        id: 8,
         name: "Socks",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847867/Categories/Socks.png"
     },
     {
-        id: 9,
+        id: 8,
         name: "Shoes",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/v1699847869/Categories/Shoes.png"
     },
     {
-        id: 10,
+        id: 9,
         name: "Equipment",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660452/Jerseys_ichxtp.png"
     },
     {
-        id: 11,
+        id: 10,
         name: "Jersey",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660451/Equipment_y5wa96.png"
     },
     {
-        id: 12,
+        id: 11,
         name: "Accessories",
         imgUrl: "https://res.cloudinary.com/playhardimages/image/upload/t_ForHomePage/v1701660452/Accessories_l7cjav.png"
     }

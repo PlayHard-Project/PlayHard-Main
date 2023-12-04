@@ -102,7 +102,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     }}
                 />
             )}
-            <Link to="/categories/Shoes" className="text-link">
+            <Link to="/products/categories=Shoes" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -115,7 +115,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     Shoes
                 </div>
             </Link>
-            <Link to="/categories/Equipment" className="text-link">
+            <Link to="/products/categories=Equipment" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -128,7 +128,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     Equipment
                 </div>
             </Link>
-            <Link to="/categories/Accessories" className="text-link">
+            <Link to="/products/categories=Accessories" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -160,20 +160,6 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     }}
                 />
             )}
-
-            <Link to="/categories/Offers" className="text-link">
-                <div
-                    className="relative flex items-center"
-                    onClick={() => {
-                        handleToggleSubCategories("Offers");
-                        toggleMenuAndCategories();
-                        handleCloseCategoriesModal();
-                        handleSecondModal();
-                    }}
-                >
-                    Offers
-                </div>
-            </Link>
             <div
                 className="relative flex items-center text-link"
                 onClick={() => {

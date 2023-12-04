@@ -206,7 +206,6 @@ const Header = ({
                   { label: "Equipment", icon: " " },
                   { label: "Accessories", icon: " " },
                   { label: "Brands", icon: <SlArrowDown strokeWidth={100} /> },
-                  { label: "Offers", icon: " " },
                   { label: "Sports", icon: <SlArrowDown strokeWidth={100} /> },
                 ]}
               />

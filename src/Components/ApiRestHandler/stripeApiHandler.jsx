@@ -27,6 +27,8 @@ export default function GoToCheckout({ disabled }) {
 
       const verification = await buyCartManager.verifyGeneralStock();
       if (verification) {
+        localStorage.setItem("reversible", true);
+        buyCartManager.madePurchase();
         const stripe = await loadStripe(
           "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
         );
@@ -48,9 +50,6 @@ export default function GoToCheckout({ disabled }) {
 
         if (!response.ok) {
           throw new Error(`Server returned status ${response.status}`);
-        } else {
-          localStorage.setItem("reversible", true);
-          buyCartManager.madePurchase()
         }
 
         const session = await response.json();

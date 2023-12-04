@@ -26,7 +26,7 @@ const SearchResultItem = ({ product, setInput, setProduct, isRedirect}) => {
                         onClick={handleClick}>
                     <img src={product.imagePath[0]} alt={product.name} className="w-10 h-10 object-cover mr-2" />
                     <span className="flex-grow text-black">{product.name}</span>
-                    <span className={'text-black'}>{product.price}</span>
+                    <span className={'text-black'}>${product.price}</span>
                 </button>
             </Link>
         );
@@ -36,7 +36,7 @@ const SearchResultItem = ({ product, setInput, setProduct, isRedirect}) => {
                     onClick={handleClick}>
                 <img src={product.imagePath[0]} alt={product.name} className="w-10 h-10 object-cover mr-2" />
                 <span className="flex-grow text-black">{product.name}</span>
-                <span className={'text-black'}>{product.price}</span>
+                <span className={'text-black'}> {product.price}</span>
             </button>
         );
     }

@@ -3,6 +3,7 @@ import "../../css/CartShop.css";
 import BuyCartManagement from "../../Utilities/BuyCartManagement";
 import GoToCheckout  from "../../Components/ApiRestHandler/stripeApiHandler";
 import ItemCart from "./ItemCart";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => {
     const currency = "$";
@@ -10,15 +11,31 @@ const ShoppingCartScreen = ({ setCartItemsQuantity, setSubTotal, subTotal }) => 
     const buyCartManagement = new BuyCartManagement();
     const items = buyCartManagement.getProducts();
     const isCartEmpty = setCartItemsQuantity === 0;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleWindowSizeChange = () => {
+            if (window.innerWidth <= 888) {
+                navigate("/");
+            }
+        };
+
+        window.addEventListener("resize", handleWindowSizeChange);
+
+        return () => {
+            window.removeEventListener("resize", handleWindowSizeChange);
+        };
+    }, [navigate]);
+    
 
     return (
         <div className="CartShopContainer container mb-16">
             <div className="modal-header">
-                <div className="title-cart-screen">My Cart</div>
+                <div className="w-full text-center" style={{fontSize:'20px', fontFamily: "Montserrat"}}>My Cart</div>
             </div>
             <div className="scrollable-section">
                 {items.length === 0 ? (
-                    <p className="mr-4 mt-14 font-extrabold justify-center align-middle">The cart is empty</p>
+                    <p className="w-full mt-14 font-extrabold text-center" style={{padding:"25%"}} >The cart is empty</p>
                 ) : (
                     <>
                         {items.map((item, index) => (

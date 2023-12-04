@@ -82,6 +82,7 @@ const Contact = () => {
               id="name"
               name="name"
               value={name}
+              maxLength={100}
               onChange={(e) => setName(e.target.value)}
               required
             />
@@ -95,6 +96,7 @@ const Contact = () => {
               id="email"
               name="email"
               value={email}
+              maxLength={100}
               onChange={(e) => setEmail(e.target.value)}
               required
             />

@@ -109,11 +109,11 @@ const SearchBar = ({setProduct, isRedirect}) => {
         };
     }, []);
 
-    /**
+     /**
      * Renders the search bar component.
      * @returns {JSX.Element} JSX element representing the search bar.
      */
-    return (
+     return (
         <div className="relative" ref={ref}>
             <div className="flex items-center search-container">
                 <input

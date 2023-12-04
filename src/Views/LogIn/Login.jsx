@@ -168,9 +168,6 @@ const Login = () => {
             }}
           >
             <label htmlFor="password">Password*</label>
-            <Link to="/forgot-password" style={{ color: "blue" }}>
-              Forgot password
-            </Link>
           </div>
           <div className="password-input-container">
             <input

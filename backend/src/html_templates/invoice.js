@@ -40,7 +40,7 @@ class Invoice {
     try {
       const idOrder = await fetchLastInsertID("orders");
       const order = await fetchProductDetails("orders", idOrder);
-      const total = await this.calculateTotal(order).;
+      const total = await this.calculateTotal(order);
 
       const inputDate = order.date;
       const dateObject = new Date(inputDate);

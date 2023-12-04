@@ -40,9 +40,7 @@ class Invoice {
     try {
       const idOrder = await fetchLastInsertID("orders");
       const order = await fetchProductDetails("orders", idOrder);
-      const totalWithTwoDecimals = await this.calculateTotal(order);
-      const total = parseFloat(totalWithTwoDecimals).toFixed(2);
-
+      const total = await this.calculateTotal(order).;
 
       const inputDate = order.date;
       const dateObject = new Date(inputDate);
@@ -70,7 +68,7 @@ class Invoice {
         productDetails.colorInformation[order.products[index].color].color
       }</td>
       <td>${"$ " + productDetails.price}</td>
-      <td>${"$ " + parseFloat(order.products[index].quantity * productDetails.price).toFixed(2)}</td>
+      <td>${"$ " + order.products[index].quantity * productDetails.price}</td>
     </tr>
   `
         )

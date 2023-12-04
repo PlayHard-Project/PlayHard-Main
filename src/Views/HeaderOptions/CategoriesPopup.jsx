@@ -25,38 +25,41 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
     };    
 
     const clothesSubCategories = [
-        { label: "T-Shirts" },
-        { label: "Jerseys" },
-        { label: "Hoodies" },
-        { label: "Jackets" },
-        { label: "Shorts" },
-        { label: "Pants" },
-        { label: "Socks" },
+        { label: "T-shirt", route: `products/categories=T-shirt` },
+        { label: "Jersey", route: `products/categories=Jersey` },
+        { label: "Hoodies ", route: `products/categories=Hoodies` },
+        { label: "Jackets", route: `products/categories=Jackets` },
+        { label: "Shorts", route: `products/categories=Shorts` },
+        { label: "Pants", route: `products/categories=Pants` },
+        { label: "Socks", route: `products/categories=Socks` },
+        { label: "Underwear", route: `products/categories=Underwear` },
     ];
 
     const brandsSubCategories = [
-        { label: "Adidas" },
-        { label: "Asics" },
-        { label: "Fila" },
-        { label: "Givenchy" },
-        { label: "New Balance" },
-        { label: "Nike" },
-        { label: "Puma" },
-        { label: "Under Armour" },
-        { label: "Vans" },
-        { label: "Champion" },
-        { label: "Wilson" },
+        { label: "Adidas", route: 'products/brand=654c3e2460c78adccb61fbc4'},
+        { label: "Asics", route: 'products/brand=654c3e2460c78adccb61fbd4' },
+        { label: "Fila", route: 'products/brand=654c3e2460c78adccb61fbd6' },
+        { label: "Givenchy", route: 'products/brand=654c3e2460c78adccb61fbc6' },
+        { label: "New Balance", route: 'products/brand=654c3e2460c78adccb61fbc8' },
+        { label: "Nike", route: 'products/brand=654c3e2460c78adccb61fbca' },
+        { label: "Puma", route: 'products/brand=654c3e2460c78adccb61fbcc' },
+        { label: "Under Armour", route: 'products/brand=654c3e2460c78adccb61fbce' },
+        { label: "Vans", route: 'products/brand=654c3e2460c78adccb61fbd0' },
+        { label: "Champion", route: 'products/brand=654c3e2460c78adccb61fbd2' },
+        { label: "Wilson", route: 'products/brand=654c41ca1754c5a319281642' },
     ];
 
     const sportsSubCategories = [
-        { label: "Basketball" },
-        { label: "Soccer" },
-        { label: "Yoga" },
-        { label: "Gym" },
-        { label: "Tennis" },
-        { label: "Cycling" },
-        { label: "Swimming" },
-        { label: "Golf" },
+        { label: "Training", route: 'products/sport=Training' },
+        { label: "Skateboarding", route: 'products/sport=Skateboarding' },
+        { label: "Soccer", route: 'products/sport=Soccer' },
+        { label: "Tennis", route: 'products/sport=Tennis' },
+        { label: "Yoga", route: 'products/sport=Yoga' },
+        { label: "Golf", route: 'products/sport=Golf' },
+        { label: "Baseball", route: 'products/sport=Baseball' },
+        { label: "American Football", route: 'products/sport=American Football' },
+        { label: "Basketball", route: 'products/sport=Basketball' },
+        { label: "Volleyball", route: 'products/sport=Volleyball' },
     ];
 
     /**
@@ -102,7 +105,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     }}
                 />
             )}
-            <Link to="/categories/Shoes" className="text-link">
+            <Link to="/products/categories=Shoes" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -115,7 +118,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     Shoes
                 </div>
             </Link>
-            <Link to="/categories/Equipment" className="text-link">
+            <Link to="/products/categories=Equipment" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -128,7 +131,7 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     Equipment
                 </div>
             </Link>
-            <Link to="/categories/Accessories" className="text-link">
+            <Link to="/products/categories=Accessories" className="text-link">
                 <div
                     className="relative flex items-center"
                     onClick={() => {
@@ -160,20 +163,6 @@ const CategoriesPopup = ({ handleCloseCategoriesModal, toggleMenuAndCategories, 
                     }}
                 />
             )}
-
-            <Link to="/categories/Offers" className="text-link">
-                <div
-                    className="relative flex items-center"
-                    onClick={() => {
-                        handleToggleSubCategories("Offers");
-                        toggleMenuAndCategories();
-                        handleCloseCategoriesModal();
-                        handleSecondModal();
-                    }}
-                >
-                    Offers
-                </div>
-            </Link>
             <div
                 className="relative flex items-center text-link"
                 onClick={() => {

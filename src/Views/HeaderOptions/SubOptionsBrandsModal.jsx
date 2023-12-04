@@ -2,6 +2,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import "../../css/subOptionBrandsModal.css"
+import {Link} from "react-router-dom";
 
 /**
  * Component for rendering suboptions modal for the Brands category.
@@ -22,9 +23,11 @@ const SubOptionsBrandsModal = ({ isOpen, onRequestClose, options }) => {
         >
             <div className="modal-container-suboptions container-suboptions">
                 {options.map((option, index) => (
-                    <a key={index} href={`/categories/${option}`} className="suboption-link">
-                        {option}
-                    </a>
+                    <Link to={`/products/brand=${option[1]}`} key={index} className="suboption-link">
+                        <label>
+                            {option[0]}
+                        </label>
+                    </Link>
                 ))}
             </div>
         </Modal>

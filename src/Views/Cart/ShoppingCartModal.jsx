@@ -113,7 +113,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <span>{currency + (10 + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
-                    <GoToCheckout disabled={isCartEmpty}/>
+                    <GoToCheckout disabled={isCartEmpty} products={items}/>
                 </div>
             </Modal>
         </div>

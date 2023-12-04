@@ -5,28 +5,24 @@ import "../../css/CartShop.css";
 import { getUserID } from "../../Utilities/auth";
 import useLocalStorage from "../../Utilities/useLocalStorage";
 
-export default function GoToCheckout({ disabled }) {
+export default function GoToCheckout({ disabled, products}) {
   const idUser = getUserID();
-  const [products, setProducts] = useState([]);
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
   const buyCartManager = new BuyCartManagement();
   const [isActive] = useLocalStorage("sendEmailSettings", true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const productsArray = await new BuyCartManagement().getProducts();
-      setProducts(productsArray);
-    };
-    fetchData();
-  }, []);
-
   const makePayment = async () => {
     try {
       setIsPaymentProcessing(true);
-      setProducts(buyCartManager.getProducts);
 
+      if (products.length === 0) {
+        products = buyCartManager.getProducts();
+      }
+      
       const verification = await buyCartManager.verifyGeneralStock();
       if (verification) {
+        localStorage.setItem("reversible", true);
+        buyCartManager.madePurchase();
         const stripe = await loadStripe(
           "pk_test_51OCX2QHsWC39RHnvTHY4jNmDT18JHg9Vh1s0aJmuDtMPPzS4mjcOMU5gvO4Yj6mvPpGQ9yNFjEnxPx0ecl2c6QKo00xIEzm1lX"
         );
@@ -48,9 +44,6 @@ export default function GoToCheckout({ disabled }) {
 
         if (!response.ok) {
           throw new Error(`Server returned status ${response.status}`);
-        } else {
-          localStorage.setItem("reversible", true);
-          buyCartManager.madePurchase()
         }
 
         const session = await response.json();

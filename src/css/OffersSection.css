@@ -10,20 +10,19 @@
 }
 
 .covers-container {
-  padding-left: 0.2rem;
-  padding-right: 0.1rem;
-  padding-bottom: 0.3rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .img-responsive {
   width: 100%;
   height: auto;
   max-width: calc(100% - 10px);
-  max-height: 520px; 
+  max-height: 520px;
   margin-right: 15px;
+  margin-bottom: 15px;
   transition: box-shadow 0.2s;
 }
 

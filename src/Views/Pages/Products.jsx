@@ -78,8 +78,9 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   };
 
   const content = products.map(
-      ({ _id, imagePath, name, price, colorInformation, size }) => (
+      ({ _id, imagePath, name, price, colorInformation, size }, index) => (
           <ShoppingCard
+              key={index}
               _id={_id}
               img={imagePath[0]}
               title={name}

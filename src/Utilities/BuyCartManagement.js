@@ -62,7 +62,7 @@ export default class BuyCartManagement {
    * This method clear all information on the localStorage. All products deleted from the cart.
    */
   clearCart() {
-    localStorage.clear();
+    localStorage.removeItem("buyCart");
   }
 
   /**

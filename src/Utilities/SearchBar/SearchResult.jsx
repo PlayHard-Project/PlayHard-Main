@@ -16,7 +16,7 @@ const SearchResult = ({ products, setInput, setProduct, isRedirect}) => {
      * @returns {JSX.Element} JSX element representing the search results.
      */
     return (
-        <div className="absolute mt-2 w-full bg-white rounded-md shadow-lg">
+        <div className="absolute mt-2 w-full bg-white max-h-96 overflow-scroll rounded-md shadow-lg">
             {products.slice(0, 10).map((product) => (
                 /**
                  * Renders a search result item.

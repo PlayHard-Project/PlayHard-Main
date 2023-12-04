@@ -104,9 +104,7 @@ const Footer = () => {
       </div>
       <div className="copyright-mark">
         <ul className="footer-copyright">
-          <li>
-            <a href="#"> © Copyright Rimel 2023. All right reserved</a>
-          </li>
+            <a> © Copyright Rimel 2023. All right reserved</a>
         </ul>
       </div>
     </footer>

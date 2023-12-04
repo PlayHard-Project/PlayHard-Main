@@ -84,7 +84,7 @@ const AdminPanelView = ({ setCartItemsQuantity, setSubTotal }) => {
     <div className="container-product container">
       <div className="main-content">
         <CardsContainer className="cards-container" content={content} pages={pageLimit} setPage={setPage} />
-        <Link to="/admin/add-product" className={`add-product-link ${showButton ? 'show' : ''}`} style={{ transform: `translateY(${-transformY}px)` }}>
+        <Link to="/admin/add-product" className="add-product-link">
           +
         </Link>
       </div>

@@ -7,16 +7,28 @@ import { GoGoal } from "react-icons/go";
 
 const About = () => {
   const [isContactVisible, setIsContactVisible] = useState(false);
-  const background ="https://res.cloudinary.com/playhardimages/image/upload/v1701327373/About/izhxe2kk5lbvusywja6m.jpg";
-  const gradient = "linear-gradient(to bottom, rgba(14, 83, 150, 0.8), rgba(25, 118, 210, 0.5)), url(" + background + ")";
+  const background =
+    "https://res.cloudinary.com/playhardimages/image/upload/v1701327373/About/izhxe2kk5lbvusywja6m.jpg";
+  const gradient =
+    "linear-gradient(to bottom, rgba(14, 83, 150, 0.8), rgba(25, 118, 210, 0.5)), url(" +
+    background +
+    ")";
 
   return (
-    <div className="about-container" style={{paddingTop:'5%'}}>
-        <div className="container-logo">
-          <h1 className="about-title" style={{ backgroundImage: `${gradient}, url(${background})`, height:'500px', width:'100%'}} >About Us</h1>
-        </div>
-        <div className="container">
-
+    <div className="about-container" style={{ paddingTop: "5%" }}>
+      <div className="container-logo">
+        <h1
+          className="about-title"
+          style={{
+            backgroundImage: `${gradient}, url(${background})`,
+            height: "500px",
+            width: "100%",
+          }}
+        >
+          About Us
+        </h1>
+      </div>
+      <div className="container">
         <div className="about-text">
           Welcome to PlayHard, your destination for sports fashion and
           accessories that inspire you to push your limits and stand out in
@@ -26,7 +38,7 @@ const About = () => {
         </div>
         <div className="about-content">
           <div class="column with-border">
-            <GoGoal className="icon"/>
+            <GoGoal className="icon" />
             <h2 className="about-subtitle">Mission</h2>
             <p className="about-subtext">
               At PlayHard, we are committed to providing our customers with the
@@ -38,7 +50,7 @@ const About = () => {
           </div>
 
           <div className="column">
-              <LiaEye className="icon" />
+            <LiaEye className="icon" />
             <h2 className="about-subtitle">Vision</h2>
             <p className="about-subtext">
               At PlayHard, our vision is to empower individuals to embrace an
@@ -106,8 +118,8 @@ const About = () => {
                 title="Google Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d960.8459716780966!2d-66.17527006430572!3d-17.36641240795634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e3744366e94b57%3A0xd8cae80417605d8e!2sJalasoft!5e0!3m2!1ses!2sbo!4v1701029866667!5m2!1ses!2sbo"
                 width="600"
-                height="438"
-                style={{ marginTop: "100px" }}
+                height="450"
+                style={{ border: 0, marginTop: "100px" }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

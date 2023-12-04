@@ -16,7 +16,9 @@ const fetchProductDetails = async (route, productId) => {
 
 const fetchLastInsertID = async (route) => {
   try {
-    const response = await fetch(`https://backend-fullapirest.onrender.com/api/${route}/last-id/`);
+    const response = await fetch(
+      `https://backend-fullapirest.onrender.com/api/${route}/last-id/`
+    );
     const data = await response.json();
 
     if (response.ok) {
@@ -40,9 +42,7 @@ class Invoice {
     try {
       const idOrder = await fetchLastInsertID("orders");
       const order = await fetchProductDetails("orders", idOrder);
-      const totalWithTwoDecimals = await this.calculateTotal(order);
-      const total = parseFloat(totalWithTwoDecimals).toFixed(2);
-
+      const total = await this.calculateTotal(order);
 
       const inputDate = order.date;
       const dateObject = new Date(inputDate);
@@ -52,7 +52,10 @@ class Invoice {
         dateObject
       );
 
-      const avenue2 = order.shippingAddress.avenue2 === null? " " : ", " + order.shippingAddress.avenue2;
+      const avenue2 =
+        order.shippingAddress.avenue2 === null
+          ? " "
+          : ", " + order.shippingAddress.avenue2;
       const productsDetailsPromises = order.products.map((product) =>
         fetchProductDetails("products", product.id)
       );
@@ -62,17 +65,19 @@ class Invoice {
       const productsHTML = productsDetails
         .map(
           (productDetails, index) => `
-    <tr>
-      <td>${productDetails.name}</td>
-      <td>${order.products[index].quantity}</td>
-      <td>${productDetails.size[order.products[index].size]}</td>
-      <td>${
-        productDetails.colorInformation[order.products[index].color].color
-      }</td>
-      <td>${"$ " + productDetails.price}</td>
-      <td>${"$ " + parseFloat(order.products[index].quantity * productDetails.price).toFixed(2)}</td>
-    </tr>
-  `
+<tr>
+  <td>${productDetails.name}</td>
+  <td>${order.products[index].quantity}</td>
+  <td>${productDetails.size[order.products[index].size]}</td>
+  <td>${productDetails.colorInformation[order.products[index].color].color}</td>
+  <td>${
+    "$ " + productDetails.price.toFixed(2)
+  }</td> <!-- Formatear a 2 decimales -->
+  <td>${
+    "$ " + (order.products[index].quantity * productDetails.price).toFixed(2)
+  }</td>
+</tr>
+`
         )
         .join("");
 
@@ -267,7 +272,9 @@ class Invoice {
                 />
             <div class="gratitude">
                 <section>
-                <p style="color: #000" id="name_user">Hi ${" " + order.userInformation.name + ":"}</p>
+                <p style="color: #000" id="name_user">Hi ${
+                  " " + order.userInformation.name + ":"
+                }</p>
                 <p style="color: #000">Thank you for making your sports purchases at PlayHard</p>
                 </section>
             </div>
@@ -302,7 +309,9 @@ class Invoice {
             <div class="column">
               <div class="data-block">
                 <label class="text-bold">Street || Avenue :</label>
-                <p id="street_id">${" " + order.shippingAddress.avenue1 + avenue2}</p>
+                <p id="street_id">${
+                  " " + order.shippingAddress.avenue1 + avenue2
+                }</p>
               </div>
               <div class="data-block">
                 <label class="text-bold">City:</label>

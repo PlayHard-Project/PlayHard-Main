@@ -49,7 +49,7 @@ router.get("/orders/user/:userId", async (req, res) => {
   }
 
   try {
-    const orders = await Order.find(query);
+    const orders = await Order.find(query).sort({ orderCount: -1 });;
     res.json(orders);
   } catch (err) {
     console.error("Error fetching orders:", err);

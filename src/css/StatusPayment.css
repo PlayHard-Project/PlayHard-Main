@@ -8,6 +8,16 @@
   padding-left: 58px;
   padding-right: 58px;
   padding-top: 20px;
+
+}
+
+.text-container_payment {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .sc-container img {
@@ -70,9 +80,10 @@ p a:hover {
   }
 
   .sc-container,
-  .text-container {
+  .text-container_payment {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .sc-container {
@@ -100,9 +111,10 @@ p a:hover {
   }
 
   .sc-container,
-  .text-container {
+  .text-container_payment {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .sc-container p,
@@ -124,9 +136,10 @@ p a:hover {
   }
 
   .sc-container,
-  .text-container {
+  .text-container_payment {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .sc-container p,
@@ -154,13 +167,15 @@ p a:hover {
 
   .sc-container,
   .sc-container img,
-  .text-container {
+  .text-container_payment {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .sc-container p,
   .sc-btn {
     text-align: center;
+
   }
 }

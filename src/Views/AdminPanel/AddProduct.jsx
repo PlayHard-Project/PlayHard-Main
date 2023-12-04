@@ -6,6 +6,7 @@ import SelectWithAddButton from "./SelectWithAddButton";
 import BrandsSelect from "./BrandsSelect";
 import "../../css/AdminPanelStyle/simpleDataComponentStyle.css";
 import "../../css/AdminPanelStyle/addProductStyle.css";
+import { isUserAdmin } from "../../Utilities/auth";
 import RightSide from "./Sides/RightSide";
 import {addElement, getElementByID, updateElement} from "../../Components/ApiRestHandler/requestHandler";
 
@@ -83,8 +84,10 @@ const AddProduct = ({ isEditMode = false}) => {
   }, []);
 
   useEffect(() => {
-    console.log(isDataLoaded)
-  }, [isDataLoaded]);
+    if (!isUserAdmin()) {
+      navigate("/");
+    }
+  }, []);
 
 
   const handleProductNameChange = (e) => {

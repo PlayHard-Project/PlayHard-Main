@@ -80,7 +80,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                     </div>
                     <div className="scrollable-section">
                         {items.length === 0 ? (
-                            <p className="mr-4 mt-14 font-extrabold justify-center align-middle">The cart is empty</p>
+                            <p className="mr-4 mt-14 font-extrabold" style={{padding:"28%"}}>The cart is empty</p>
                         ) : (
                             <>
                                 {items.map((item, index) => (
@@ -113,7 +113,7 @@ const ShoppingCartModal = ({ isOpen, onRequestClose, modalRef, onRequestOpen, ca
                             <span>{currency + (10 + subTotal).toFixed(2)}</span>
                         </div>
                     </div>
-                    <GoToCheckout disabled={isCartEmpty}/>
+                    <GoToCheckout disabled={isCartEmpty} products={items}/>
                 </div>
             </Modal>
         </div>

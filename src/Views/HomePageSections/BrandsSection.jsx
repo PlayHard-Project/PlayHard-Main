@@ -36,20 +36,6 @@ export default function BrandsSection() {
     const [data, setData] = useState([]);
     const [slidesToShow, setSlidesToShow] = useState(9);
 
-    const handleWindowSizeChange = () => {
-        setSlidesToShow(calculateSlidesToShow());
-    };
-
-    const calculateSlidesToShow = () => {
-        if (window.innerWidth >= 1200) {
-            return 9;
-        } else if (window.innerWidth >= 768) {
-            return 7;
-        } else {
-            return 4;
-        }
-    };
-
     const sliderSettings = {
         dots: false,
         infinite: true,
@@ -59,24 +45,40 @@ export default function BrandsSection() {
         style: { float: 100, paddingRight: 5 },
         swipeToSlide: true,
         arrows: false,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 9,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 7,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 4,
+                },
+            },
+        ],
     };
 
     useEffect(() => {
         const dataPromise = getElements('/brands');
         dataPromise.then((data) => {
             setData(data);
-            console.log(data);
         });
 
         const interval = setInterval(() => {
             sliderRef.current?.slickNext();
         }, 5000);
 
-        window.addEventListener('resize', handleWindowSizeChange);
-
         return () => {
             clearInterval(interval);
-            window.removeEventListener('resize', handleWindowSizeChange);
         };
     }, []);
 
@@ -95,7 +97,7 @@ export default function BrandsSection() {
                 {/* Loading component container with a loading spinner */}
                 <div
                     className={
-                        "flex flex-col justify-center p-3 gap-16 lg:flex-row lg:items-center container"
+                        "flex flex-col items-center justify-center p-3 gap-16 container"
                     }
                 >
                     <GridLoader color="#023fc5" />

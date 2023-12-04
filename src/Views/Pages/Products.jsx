@@ -69,19 +69,21 @@ const Products = ({ setCartItemsQuantity, setSubTotal }) => {
   };
 
   const content = products.map(
-      ({ _id, imagePath, name, price, colorInformation, size }) => (
-          <ShoppingCard
-              _id={_id}
-              img={imagePath[0]}
-              title={name}
-              price={price}
-              colorInformation={colorInformation}
-              size={size}
-              setCartItemsQuantity={setCartItemsQuantity}
-              setSubTotal={setSubTotal}
-          />
-      )
+    ({ _id, imagePath, name, price, colorInformation, size }, index) => (
+      <ShoppingCard
+        key={`${_id}-${index}`}  // Usar una clave única que cambie al cambiar de página
+        _id={_id}
+        img={imagePath[0]}
+        title={name}
+        price={price}
+        colorInformation={colorInformation}
+        size={size}
+        setCartItemsQuantity={setCartItemsQuantity}
+        setSubTotal={setSubTotal}
+      />
+    )
   );
+  
 
   const notFoundContent = (
       <div className="not-found-view">

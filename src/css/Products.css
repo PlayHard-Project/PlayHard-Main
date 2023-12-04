@@ -7,22 +7,20 @@
 
 .add-product-link {
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
-    background-color: #70a2ff;
+    background-color: rgb(60, 88, 141);
     color: white;
     text-decoration: none;
     font-size: xx-large;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-top: 120px;
     margin-right: 40px;
     height: 50px;
     width: 50px;
     text-align: center;
 }
-.add-product-link:hover {
-    background-color: #a9c8ff;
-}
+
 @media only screen and (max-width: 410px) {
     .add-product-link {
         font-size: x-large;
@@ -42,7 +40,6 @@
 }
 
 .main-content {
-    /* Estilos específicos del contenido principal */
     flex-grow: 1;
 }
 
@@ -93,8 +90,8 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        min-width: 100%; /* O ajusta según sea necesario para cubrir el ancho completo */
-        max-width: none; /* Anular el ancho máximo */
+        min-width: 100%;
+        max-width: none;
         height: max-content;
     }
 
@@ -114,8 +111,8 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        min-width: 100%; /* O ajusta según sea necesario para cubrir el ancho completo */
-        max-width: none; /* Anular el ancho máximo */
+        min-width: 100%;
+        max-width: none; 
         height: max-content;
     }
 

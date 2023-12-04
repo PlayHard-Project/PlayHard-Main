@@ -25,8 +25,8 @@ const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption, handleS
                 }}
             />
             {options.map((option, index) => (
-                <Link to={`/categories/${option.label}`} key={index} className="text-link">
-                    <div
+                <Link to={`${option.route}`} key={index} className="text-link">
+                    <label
                         className="relative flex items-center text-link"
                         onClick={() => {
                             toggleOption(option);
@@ -37,7 +37,7 @@ const SubCategoriesOptions = ({ handleCloseModal, options, toggleOption, handleS
                         }}
                     >
                         {option.label}
-                    </div>
+                    </label>
                 </Link>
             ))}
         </div>

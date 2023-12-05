@@ -146,23 +146,22 @@ export default class BuyCartManagement {
   getSubTotal() {
     const products = this.getProducts();
     let subTotal = 0;
-    let promises = [];
 
-    products.forEach((product) => {
-      const elementPromise = getElementByID(product.id, "/products");
-      promises.push(elementPromise);
-
-      elementPromise.then((item) => {
-        subTotal += item.price * product.quantity;
+    const reducePromises = products.reduce((accumulator, product) => {
+      return accumulator.then(() => {
+        return getElementByID(product.id, "/products")
+            .then((item) => {
+              subTotal += item.price * product.quantity;
+            });
       });
-    });
+    }, Promise.resolve());
 
-    return Promise.all(promises)
-      .then(() => subTotal)
-      .catch((error) => {
-        console.error("Error fetching product details:", error);
-        throw error;
-      });
+    return reducePromises
+        .then(() => subTotal)
+        .catch((error) => {
+          console.error("Error fetching product details:", error);
+          throw error;
+        });
   }
 
   /**
